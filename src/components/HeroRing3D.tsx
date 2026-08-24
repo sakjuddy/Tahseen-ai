@@ -35,23 +35,30 @@ export default function HeroRing3D() {
 
     container.appendChild(renderer.domElement);
 
-    // --- 2. Lighting Setup (Text-Cast Directional & Ambient) ---
-    const ambientLight = new THREE.AmbientLight(0x000c0a, 0.55);
+    // --- 2. Lighting Setup (Crisp Electric Cyan & Radiant Brand Teal) ---
+    const ambientLight = new THREE.AmbientLight(0x020712, 1.2);
     scene.add(ambientLight);
 
-    // Primary Radiant Light Emitters
+    // Primary Radiant Electric Teal Light Emitter
     const textKeyLight = new THREE.PointLight(0x00f5d4, 15.0, 50, 1.1);
     textKeyLight.position.set(-6.0, -3.0, 1.2);
     textKeyLight.castShadow = true;
     scene.add(textKeyLight);
 
-    const textDirLight = new THREE.DirectionalLight(0x00e5be, 3.2);
+    // Crisp Cyan Directional Light to eliminate greenish cast
+    const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.8);
     textDirLight.position.set(-6.0, -1.5, 1.5);
     scene.add(textDirLight);
 
-    const rightRimLight = new THREE.PointLight(0x00f5d4, 7.5, 35);
+    // Vibrant Electric Cyan / Teal Rim Light
+    const rightRimLight = new THREE.PointLight(0x06b6d4, 8.5, 35);
     rightRimLight.position.set(6.0, 5.0, 2.0);
     scene.add(rightRimLight);
+
+    // Top Specular Highlight
+    const topHighlight = new THREE.DirectionalLight(0xe0ffff, 2.2);
+    topHighlight.position.set(4.0, 8.0, 6.0);
+    scene.add(topHighlight);
 
     // --- 3. Finalized 3D Split Ring Construction ---
     const heroGroup = new THREE.Group();
@@ -74,7 +81,7 @@ export default function HeroRing3D() {
     const baseRotZ = -0.99;
     heroGroup.rotation.set(baseRotX, baseRotY, baseRotZ);
 
-    // --- Custom Hollow Ring Perimeter Glow Shader ---
+    // --- Custom Hollow Ring Perimeter Glow Shader (Pure Cyan / Teal) ---
     const glowUniforms = {
       glowColor: { value: new THREE.Color(0x00f5d4) },
       intensity: { value: 0.15 },
@@ -130,32 +137,35 @@ export default function HeroRing3D() {
     ringGlowMesh.position.set(0, 0, -0.08);
     heroGroup.add(ringGlowMesh);
 
-    // Materials (Emissive set to 0.0 as requested)
+    // Materials (Fixed: Pure Vibrant Brand Teal & Electric Cyan #00E5BE / #00F5D4)
     const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x0bdac2,
-      emissive: 0x000000,
-      emissiveIntensity: 0.0,
-      roughness: 0.11,
-      metalness: 0.47,
+      color: 0x00f5d4,            // Pure saturated vibrant cyan/teal
+      emissive: 0x003830,
+      emissiveIntensity: 0.25,
+      roughness: 0.12,
+      metalness: 0.45,
       clearcoat: 1.0,
-      reflectivity: 0.88,
+      clearcoatRoughness: 0.06,
+      reflectivity: 0.95,
       side: THREE.DoubleSide,
     });
 
     const shadedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05b8a3,
-      emissive: 0x000000,
-      emissiveIntensity: 0.0,
-      roughness: 0.15,
+      color: 0x00d2b4,            // Rich brand teal
+      emissive: 0x002c25,
+      emissiveIntensity: 0.18,
+      roughness: 0.16,
       metalness: 0.48,
       clearcoat: 0.6,
       side: THREE.DoubleSide,
     });
 
     const sideCapMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05d6cb,
-      roughness: 0.22,
-      metalness: 0.35,
+      color: 0x00f5d4,
+      emissive: 0x00e5be,
+      emissiveIntensity: 0.4,
+      roughness: 0.12,
+      metalness: 0.4,
       side: THREE.DoubleSide,
     });
 
@@ -318,7 +328,7 @@ export default function HeroRing3D() {
     const waveShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         pointTexture: { value: pTexture },
-        color: { value: new THREE.Color(0x26ffdf) },
+        color: { value: new THREE.Color(0x00f5d4) },
       },
       vertexShader: `
         attribute float alpha;
