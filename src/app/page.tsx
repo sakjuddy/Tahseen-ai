@@ -105,26 +105,26 @@ export default function Home() {
 
         </div>
 
-        {/* 3. Bottom 4 Services Row (Centered Layout & Typography) */}
-        <div className="mt-20 sm:mt-28 pt-12 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 text-center justify-items-center relative z-10 max-w-[1440px] mx-auto w-full">
+        {/* 3. Bottom 4 Services Row (Substantially Scaled Up & Centered) */}
+        <div className="mt-24 sm:mt-32 pt-16 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 text-center justify-items-center relative z-10 max-w-[1560px] mx-auto w-full">
           
           {/* Card 1: AI Agents */}
-          <div className="space-y-3.5 group flex flex-col items-center text-center">
-            <div className="w-11 h-11 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 6C13.477 6 9 10.477 9 16C9 19.387 10.686 22.38 13.286 24.19L14 28H24L24.714 24.19C27.314 22.38 29 19.387 29 16C29 10.477 24.523 6 19 6Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M14.5 31.5H23.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <path d="M16 35H22" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
+          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
+            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
+              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 6C13.477 6 9 10.477 9 16C9 19.387 10.686 22.38 13.286 24.19L14 28H24L24.714 24.19C27.314 22.38 29 19.387 29 16C29 10.477 24.523 6 19 6Z" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M14.5 31.5H23.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
+                <path d="M16 35H22" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
                 <circle cx="19" cy="15.5" r="2.5" fill="#00E5BE"/>
-                <line x1="19" y1="1.5" x2="19" y2="3.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="6.5" y1="9" x2="4.5" y2="7.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="31.5" y1="9" x2="33.5" y2="7.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="4.5" y1="18.5" x2="2.5" y2="18.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="33.5" y1="18.5" x2="35.5" y2="18.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
+                <line x1="19" y1="1.5" x2="19" y2="3.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
+                <line x1="6.5" y1="9" x2="4.5" y2="7.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
+                <line x1="31.5" y1="9" x2="33.5" y2="7.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
+                <line x1="4.5" y1="18.5" x2="2.5" y2="18.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
+                <line x1="33.5" y1="18.5" x2="35.5" y2="18.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
               </svg>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight text-center">AI Agents</h3>
-            <p className="text-sm sm:text-[15px] text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">AI Agents</h3>
+            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
               Intelligent agents that <br />
               automate and scale your <br />
               operations.
@@ -132,16 +132,16 @@ export default function Home() {
           </div>
 
           {/* Card 2: Automation */}
-          <div className="space-y-3.5 group flex flex-col items-center text-center">
-            <div className="w-11 h-11 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 4L22.2 7.8C23.5 9.3 25.5 10.1 27.5 9.9L32.2 9.5L33 14.2C33.3 16.2 34.6 17.9 36.5 18.7L37 19L36.5 19.3C34.6 20.1 33.3 21.8 33 23.8L32.2 28.5L27.5 28.1C25.5 27.9 23.5 28.7 22.2 30.2L19 34L15.8 30.2C14.5 28.7 12.5 27.9 10.5 28.1L5.8 28.5L5 23.8C4.7 21.8 3.4 20.1 1.5 19.3L1 19L1.5 18.7C3.4 17.9 4.7 16.2 5 14.2L5.8 9.5L10.5 9.9C12.5 10.1 14.5 9.3 15.8 7.8L19 4Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="19" cy="19" r="5" stroke="#00E5BE" strokeWidth="2.2"/>
+          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
+            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
+              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 4L22.2 7.8C23.5 9.3 25.5 10.1 27.5 9.9L32.2 9.5L33 14.2C33.3 16.2 34.6 17.9 36.5 18.7L37 19L36.5 19.3C34.6 20.1 33.3 21.8 33 23.8L32.2 28.5L27.5 28.1C25.5 27.9 23.5 28.7 22.2 30.2L19 34L15.8 30.2C14.5 28.7 12.5 27.9 10.5 28.1L5.8 28.5L5 23.8C4.7 21.8 3.4 20.1 1.5 19.3L1 19L1.5 18.7C3.4 17.9 4.7 16.2 5 14.2L5.8 9.5L10.5 9.9C12.5 10.1 14.5 9.3 15.8 7.8L19 4Z" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="19" cy="19" r="5" stroke="#00E5BE" strokeWidth="2.4"/>
                 <circle cx="19" cy="19" r="1.5" fill="#00E5BE"/>
               </svg>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight text-center">Automation</h3>
-            <p className="text-sm sm:text-[15px] text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">Automation</h3>
+            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
               Streamline workflows <br />
               and eliminate repetitive <br />
               tasks.
@@ -149,17 +149,17 @@ export default function Home() {
           </div>
 
           {/* Card 3: Consulting */}
-          <div className="space-y-3.5 group flex flex-col items-center text-center">
-            <div className="w-11 h-11 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 19C9 13.477 13.477 9 19 9C24.523 9 29 13.477 29 19C29 21.884 27.781 24.484 25.823 26.315L27 32L21.5 30.2C20.697 30.457 19.86 30.6 19 30.6C13.477 30.6 9 26.123 9 20.6V19Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
+            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
+              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 19C9 13.477 13.477 9 19 9C24.523 9 29 13.477 29 19C29 21.884 27.781 24.484 25.823 26.315L27 32L21.5 30.2C20.697 30.457 19.86 30.6 19 30.6C13.477 30.6 9 26.123 9 20.6V19Z" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M12 11C12 7.5 15 5 19 5C23 5 26 7.5 26 11" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 3"/>
-                <circle cx="19" cy="19" r="3" stroke="#00E5BE" strokeWidth="2"/>
+                <circle cx="19" cy="19" r="3" stroke="#00E5BE" strokeWidth="2.2"/>
                 <circle cx="19" cy="19" r="1.2" fill="#00E5BE"/>
               </svg>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight text-center">Consulting</h3>
-            <p className="text-sm sm:text-[15px] text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">Consulting</h3>
+            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
               AI strategy and roadmap <br />
               aligned with your business <br />
               goals.
@@ -167,23 +167,23 @@ export default function Home() {
           </div>
 
           {/* Card 4: Development */}
-          <div className="space-y-3.5 group flex flex-col items-center text-center">
-            <div className="w-11 h-11 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5H7C5.895 5 5 5.895 5 7V12" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M26 5H31C32.105 5 33 5.895 33 7V12" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M5 26V31C5 32.105 5.895 33 7 33H12" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M33 26V31C33 32.105 32.105 33 31 33H26" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="19" cy="19" r="5" stroke="#00E5BE" strokeWidth="2"/>
+          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
+            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
+              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5H7C5.895 5 5 5.895 5 7V12" stroke="#00E5BE" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M26 5H31C32.105 5 33 5.895 33 7V12" stroke="#00E5BE" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M5 26V31C5 32.105 5.895 33 7 33H12" stroke="#00E5BE" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M33 26V31C33 32.105 32.105 33 31 33H26" stroke="#00E5BE" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="19" cy="19" r="5" stroke="#00E5BE" strokeWidth="2.2"/>
                 <circle cx="19" cy="19" r="2" fill="#00E5BE"/>
-                <line x1="19" y1="10" x2="19" y2="12" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
-                <line x1="19" y1="26" x2="19" y2="28" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
-                <line x1="10" y1="19" x2="12" y2="19" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
-                <line x1="26" y1="19" x2="28" y2="19" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="19" y1="10" x2="19" y2="12" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
+                <line x1="19" y1="26" x2="19" y2="28" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
+                <line x1="10" y1="19" x2="12" y2="19" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
+                <line x1="26" y1="19" x2="28" y2="19" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
               </svg>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight text-center">Development</h3>
-            <p className="text-sm sm:text-[15px] text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">Development</h3>
+            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
               Custom AI solutions <br />
               built for real-world <br />
               impact.
