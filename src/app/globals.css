@@ -3,11 +3,7 @@
 @layer base {
   :root {
     --brand-teal: #00e5be;
-    --brand-cyan: #06b6d4;
-    --brand-blue: #2563eb;
-    --brand-indigo: #6366f1;
-    --brand-bg: #050814;
-    --brand-card: rgba(11, 16, 30, 0.7);
+    --brand-bg: #060913;
   }
 
   html {
@@ -16,7 +12,7 @@
   }
   
   body {
-    background-color: var(--brand-bg);
+    background-color: #060913;
     color: #f3f4f6;
     font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
@@ -29,91 +25,18 @@
   }
 }
 
-/* Luminous Hero Circle & Orb */
-.hero-circle-container {
-  position: absolute;
-  top: 42%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 680px;
-  height: 680px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-@media (min-width: 640px) {
-  .hero-circle-container {
-    width: 840px;
-    height: 840px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-circle-container {
-    width: 980px;
-    height: 980px;
-  }
-}
-
-.hero-circle-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(14, 30, 65, 0.85) 0%, rgba(8, 16, 38, 0.6) 45%, rgba(0, 229, 190, 0.12) 75%, transparent 100%);
-  box-shadow: 0 0 120px 20px rgba(0, 229, 190, 0.15), inset 0 0 100px 10px rgba(0, 229, 190, 0.18);
-  border: 1px solid rgba(0, 229, 190, 0.25);
-}
-
-.hero-circle-ring-outer {
-  position: absolute;
-  inset: -40px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 229, 190, 0.08);
-  box-shadow: 0 0 80px rgba(0, 229, 190, 0.08);
-}
-
-/* Glass Floating Navbar */
-.nav-pill {
-  background: rgba(11, 16, 30, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 35px -5px rgba(0, 0, 0, 0.8);
-}
-
-/* Brand Hero Gradient Text */
-.gradient-text-brand {
-  background: linear-gradient(135deg, #ffffff 0%, #00e5be 45%, #38bdf8 70%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Brand CTA Button */
-.cta-button-brand {
-  background: linear-gradient(135deg, #00d2b4 0%, #0284c7 50%, #4f46e5 100%);
-  box-shadow: 0 0 30px -2px rgba(0, 229, 190, 0.4), 0 0 12px rgba(79, 70, 229, 0.3);
+/* Custom Black Buttons with Teal Border */
+.btn-teal-outline {
+  background-color: #060913;
+  border: 1px solid #00e5be;
+  color: #ffffff;
+  box-shadow: 0 0 15px -3px rgba(0, 229, 190, 0.2);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cta-button-brand:hover {
-  box-shadow: 0 0 45px 5px rgba(0, 229, 190, 0.6), 0 0 20px rgba(79, 70, 229, 0.4);
+.btn-teal-outline:hover {
+  background-color: rgba(0, 229, 190, 0.08);
+  border-color: #00ffd5;
+  box-shadow: 0 0 25px 2px rgba(0, 229, 190, 0.4);
   transform: translateY(-2px);
-}
-
-/* Service Cards */
-.service-card-brand {
-  background: rgba(11, 16, 30, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.service-card-brand:hover {
-  background: rgba(16, 23, 44, 0.85);
-  border-color: rgba(0, 229, 190, 0.35);
-  box-shadow: 0 0 30px -5px rgba(0, 229, 190, 0.2), 0 20px 40px -15px rgba(0, 0, 0, 0.9);
-  transform: translateY(-3px);
 }

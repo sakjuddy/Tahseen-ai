@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, Bot, Zap, Compass, Code } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   const navLinks = [
@@ -13,164 +13,187 @@ export default function Home() {
     { name: "CONTACT", href: "#" },
   ];
 
-  const cards = [
-    {
-      title: "AI Agents",
-      desc: "Intelligent agents that automate and scale your operations.",
-      icon: Bot,
-      iconColor: "text-[#00E5BE] bg-[#00E5BE]/10 border-[#00E5BE]/20",
-    },
-    {
-      title: "Automation",
-      desc: "Streamline workflows and eliminate repetitive tasks.",
-      icon: Zap,
-      iconColor: "text-[#38BDF8] bg-[#38BDF8]/10 border-[#38BDF8]/20",
-    },
-    {
-      title: "Consulting",
-      desc: "AI strategy and roadmap aligned with your business goals.",
-      icon: Compass,
-      iconColor: "text-[#A855F7] bg-[#A855F7]/10 border-[#A855F7]/20",
-    },
-    {
-      title: "Development",
-      desc: "Custom AI solutions built for real-world impact.",
-      icon: Code,
-      iconColor: "text-[#6366F1] bg-[#6366F1]/10 border-[#6366F1]/20",
-    },
-  ];
-
   return (
-    <div className="relative min-h-screen bg-[#050814] text-white flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-hidden">
       
-      {/* 1. Large Glowing Brand Circle in the Hero Section */}
-      <div className="hero-circle-container">
-        <div className="hero-circle-ring-outer" />
-        <div className="hero-circle-glow" />
-      </div>
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
 
-      {/* Ambient background light reflections */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[350px] bg-gradient-to-b from-[#00E5BE]/10 via-transparent to-transparent pointer-events-none -z-10" />
-
-      {/* 2. Top Header / Navbar */}
-      <header className="relative z-20 pt-6 px-4 sm:px-8 max-w-7xl mx-auto w-full flex items-center justify-between">
+      {/* 1. Header / Navbar */}
+      <header className="relative z-20 pt-8 px-6 sm:px-12 max-w-7xl mx-auto w-full flex items-center justify-between">
         
-        {/* Left Official Brand Logo */}
+        {/* Left: Official Brand Logo (Untouched) */}
         <Link href="#" className="flex items-center group">
           <div className="relative h-10 w-48 sm:h-11 sm:w-56 transition-transform duration-200 group-hover:scale-105">
             <Image
               src="/tahseen-logo.png"
-              alt="Tahseen AI - Enhance Your Work"
+              alt="Tahseen AI"
               fill
-              sizes="(max-width: 640px) 192px, 224px"
+              sizes="224px"
               className="object-contain object-left"
               priority
             />
           </div>
         </Link>
 
-        {/* Center Floating Capsule Navbar */}
-        <nav className="hidden md:flex items-center gap-1 px-5 py-2 rounded-full nav-pill">
-          {navLinks.map((link, idx) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`px-4 py-1.5 text-xs font-semibold tracking-wider rounded-full transition-all duration-200 ${
-                idx === 0
-                  ? "text-white bg-white/10"
-                  : "text-gray-400 hover:text-white hover:bg-white/5"
-              }`}
-            >
-              {link.name}
-            </a>
-          ))}
-        </nav>
+        {/* Right: Nav Links & LET'S TALK Button */}
+        <div className="flex items-center gap-6 sm:gap-8">
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-gray-300">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="hover:text-white transition-colors duration-200"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
 
-        {/* Right CTA Button */}
-        <div className="flex items-center">
           <a
             href="#"
-            className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-wider uppercase text-white rounded-full bg-gradient-to-r from-[#00D2B4] via-[#0284C7] to-[#4F46E5] hover:from-[#00E5BE] hover:to-[#6366F1] shadow-lg shadow-[#00E5BE]/20 hover:shadow-[#00E5BE]/40 transition-all duration-300 transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-wider uppercase rounded-full btn-teal-outline"
           >
-            <span className="flex items-center gap-1.5">
-              Let&apos;s Talk
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </span>
+            <span>LET&apos;S TALK</span>
           </a>
         </div>
 
       </header>
 
-      {/* 3. Hero Section (Centered) */}
-      <main className="relative z-10 my-auto pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full text-center">
+      {/* 2. Hero Section (Left-Aligned Text + Right 3D Emblem Circle) */}
+      <main className="relative z-10 my-auto pt-10 pb-12 px-6 sm:px-12 max-w-7xl mx-auto w-full">
         
-        {/* Top Tag Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0d1527] border border-[#00E5BE]/30 text-[#00E5BE] text-[11px] font-bold tracking-widest uppercase shadow-xl mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
-          <span>AI SOLUTIONS THAT ENHANCE YOUR WORK</span>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+          
+          {/* Left Hero Column */}
+          <div className="lg:col-span-6 space-y-6 sm:space-y-8 text-left z-10">
+            
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+              AI Solutions That <br />
+              <span className="text-[#00E5BE]">Enhance</span> Your Work
+            </h1>
 
-        {/* Main Headline */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto">
-          AI Solutions That <br />
-          <span className="gradient-text-brand">Enhance Your Work</span>
-        </h1>
+            {/* Subtitle */}
+            <p className="text-sm sm:text-base text-gray-300 max-w-md font-normal leading-relaxed">
+              We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently.
+            </p>
 
-        {/* Subtitle */}
-        <p className="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-normal leading-relaxed mt-6 mb-10">
-          We build agents and automation systems that help businesses work smarter, faster, and more efficiently.
-        </p>
-
-        {/* Primary CTA Button */}
-        <div className="flex items-center justify-center mb-16 sm:mb-20">
-          <a
-            href="#"
-            className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase text-white rounded-full cta-button-brand group"
-          >
-            <span>LET&apos;S BUILD TOGETHER</span>
-            <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
-        </div>
-
-        {/* 4. 4 Core Service Cards Grid (Matching Reference Image) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
-          {cards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <div
-                key={card.title}
-                className="service-card-brand rounded-2xl p-6 flex flex-col justify-between group"
+            {/* Primary CTA Button (Black with Teal Border) */}
+            <div className="pt-2">
+              <a
+                href="#"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-full btn-teal-outline group"
               >
-                <div>
-                  {/* Card Icon */}
-                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-5 ${card.iconColor}`}>
-                    <Icon className="w-6 h-6" />
-                  </div>
+                <span>LET&apos;S BUILD TOGETHER</span>
+                <ArrowRight className="w-4 h-4 ml-2.5 text-[#00E5BE] group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
 
-                  {/* Title & Description */}
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#00E5BE] transition-colors">
-                    {card.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed font-normal">
-                    {card.desc}
-                  </p>
-                </div>
+          </div>
 
-                {/* Bottom Action Icon */}
-                <div className="pt-6 mt-4 flex items-center justify-end text-gray-500 group-hover:text-[#00E5BE] transition-colors">
-                  <div className="w-8 h-8 rounded-full bg-white/5 group-hover:bg-[#00E5BE]/20 flex items-center justify-center transition-colors">
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {/* Right Hero Column: 3D Brand Emblem Ring with Teal Particle Mesh Wave */}
+          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end">
+            <div className="relative w-full max-w-[550px] aspect-[4/3] flex items-center justify-center">
+              <Image
+                src="/hero-3d-emblem.png"
+                alt="Tahseen AI 3D Emblem and Neural Mesh"
+                fill
+                sizes="(max-width: 1024px) 100vw, 550px"
+                className="object-contain object-center scale-110 lg:scale-125 pointer-events-none"
+                priority
+              />
+            </div>
+          </div>
+
+        </div>
+
+        {/* 3. Bottom 4 Services Row (Clean Geometric Iconography) */}
+        <div className="mt-16 sm:mt-24 pt-12 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+          
+          {/* Card 1: AI Agents */}
+          <div className="space-y-3">
+            <div className="w-9 h-9 flex items-center justify-center">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="4" y="4" width="24" height="24" rx="4" stroke="#00E5BE" strokeWidth="2" />
+                <rect x="9" y="9" width="14" height="14" rx="2" transform="rotate(45 16 16)" stroke="#00E5BE" strokeWidth="1.5" />
+                <circle cx="16" cy="16" r="2.5" fill="#00E5BE" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-white">AI Agents</h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Intelligent agents that automate and scale your operations.
+            </p>
+          </div>
+
+          {/* Card 2: Automation */}
+          <div className="space-y-3">
+            <div className="w-9 h-9 flex items-center justify-center">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <polygon points="16,3 28,10 28,22 16,29 4,22 4,10" stroke="#00E5BE" strokeWidth="2" strokeLinejoin="round" />
+                <circle cx="16" cy="16" r="3" fill="#00E5BE" />
+                <line x1="16" y1="13" x2="16" y2="6" stroke="#00E5BE" strokeWidth="1.5" />
+                <line x1="13.5" y1="17.5" x2="7.5" y2="21" stroke="#00E5BE" strokeWidth="1.5" />
+                <line x1="18.5" y1="17.5" x2="24.5" y2="21" stroke="#00E5BE" strokeWidth="1.5" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-white">Automation</h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Streamline workflows and eliminate repetitive tasks.
+            </p>
+          </div>
+
+          {/* Card 3: Consulting */}
+          <div className="space-y-3">
+            <div className="w-9 h-9 flex items-center justify-center">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="4" y="7" width="24" height="18" rx="4" stroke="#00E5BE" strokeWidth="2" />
+                <circle cx="14" cy="16" r="4.5" stroke="#00E5BE" strokeWidth="2" />
+                <circle cx="14" cy="16" r="1.5" fill="#00E5BE" />
+                <circle cx="23" cy="12" r="1.5" fill="#00E5BE" />
+                <circle cx="7" cy="4" r="1.5" stroke="#00E5BE" strokeWidth="1.5" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-white">Consulting</h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              AI strategy and roadmap aligned with your business goals.
+            </p>
+          </div>
+
+          {/* Card 4: Development */}
+          <div className="space-y-3">
+            <div className="w-9 h-9 flex items-center justify-center">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="4" stroke="#00E5BE" strokeWidth="2" />
+                <circle cx="16" cy="16" r="1.5" fill="#00E5BE" />
+                {/* 8 Radiating node dots */}
+                <circle cx="16" cy="4" r="1.5" fill="#00E5BE" />
+                <circle cx="16" cy="28" r="1.5" fill="#00E5BE" />
+                <circle cx="4" cy="16" r="1.5" fill="#00E5BE" />
+                <circle cx="28" cy="16" r="1.5" fill="#00E5BE" />
+                <circle cx="7.5" cy="7.5" r="1.5" fill="#00E5BE" />
+                <circle cx="24.5" cy="24.5" r="1.5" fill="#00E5BE" />
+                <circle cx="24.5" cy="7.5" r="1.5" fill="#00E5BE" />
+                <circle cx="7.5" cy="24.5" r="1.5" fill="#00E5BE" />
+                {/* Connector lines */}
+                <line x1="16" y1="6" x2="16" y2="12" stroke="#00E5BE" strokeWidth="1.5" />
+                <line x1="16" y1="20" x2="16" y2="26" stroke="#00E5BE" strokeWidth="1.5" />
+                <line x1="6" y1="16" x2="12" y2="16" stroke="#00E5BE" strokeWidth="1.5" />
+                <line x1="20" y1="16" x2="26" y2="16" stroke="#00E5BE" strokeWidth="1.5" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-bold text-white">Development</h3>
+            <p className="text-xs text-gray-400 leading-relaxed">
+              Custom AI solutions built for real-world impact.
+            </p>
+          </div>
+
         </div>
 
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 py-6 text-center text-xs text-gray-500 font-mono">
+      <footer className="relative z-10 py-6 text-center text-xs text-gray-600 font-mono">
         © {new Date().getFullYear()} Tahseen AI. All rights reserved.
       </footer>
 
