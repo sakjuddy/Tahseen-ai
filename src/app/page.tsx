@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import HeroRing3D from "@/components/HeroRing3D";
 
 export default function Home() {
   const navLinks = [
@@ -92,17 +93,10 @@ export default function Home() {
 
           </div>
 
-          {/* Right Hero Column: 3D Brand Emblem Ring with Teal Particle Mesh Wave */}
+          {/* Right Hero Column: Interactive 3D Brand Ring Component */}
           <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end">
-            <div className="relative w-full max-w-[550px] aspect-[4/3] flex items-center justify-center">
-              <Image
-                src="/hero-3d-emblem.png"
-                alt="Tahseen AI 3D Emblem and Neural Mesh"
-                fill
-                sizes="(max-width: 1024px) 100vw, 550px"
-                className="object-contain object-center scale-110 lg:scale-125 pointer-events-none"
-                priority
-              />
+            <div className="relative w-full max-w-[620px] aspect-[4/3] flex items-center justify-center">
+              <HeroRing3D />
             </div>
           </div>
 
