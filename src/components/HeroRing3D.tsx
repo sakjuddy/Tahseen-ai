@@ -49,7 +49,7 @@ export default function HeroRing3D() {
     textDirLight.position.set(-6.0, -1.9, 1.1);
     scene.add(textDirLight);
 
-    // --- 3. 3D Split Ring Construction (Exact Saved Specs) ---
+    // --- 3. Finalized 3D Split Ring Construction ---
     const heroGroup = new THREE.Group();
     heroGroup.position.set(0.15, 0.1, 0);
     heroGroup.scale.setScalar(0.9);
@@ -169,79 +169,105 @@ export default function HeroRing3D() {
     const ring = createSplitRing();
     heroGroup.add(ring);
 
-    // --- 4. Background Animated Particle Wave Grid (Spans wide across screen) ---
-    const rows = 32;
-    const cols = 72;
-    const particleCount = rows * cols;
-    const particleGeom = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const originalY = new Float32Array(particleCount);
+    // --- 4. Brighter Digital Particle Wave with Smooth Edge Fading ---
+    const rows = 45;
+    const cols = 90;
+    const totalParticles = rows * cols;
 
-    let pIndex = 0;
+    const waveGeom = new THREE.BufferGeometry();
+    const positions = new Float32Array(totalParticles * 3);
+    const originalY = new Float32Array(totalParticles);
+    const alphas = new Float32Array(totalParticles);
+    const sizes = new Float32Array(totalParticles);
+
+    let pIdx = 0;
+    const gridWidth = 52.0;
+    const gridDepth = 28.0;
+
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        const u = (j / cols - 0.5) * 48; // Expanded width coverage
-        const w = (i / rows - 0.5) * 26;
-        const v = Math.sin(j * 0.2) * 1.6 + Math.cos(i * 0.28) * 1.1 - 2.8;
+        const uNorm = (j / (cols - 1)) * 2.0 - 1.0;
+        const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
 
-        positions[pIndex * 3] = u;
-        positions[pIndex * 3 + 1] = v;
-        positions[pIndex * 3 + 2] = w - 4;
+        const x = uNorm * (gridWidth * 0.5);
+        const z = vNorm * (gridDepth * 0.5) - 3.8;
 
-        originalY[pIndex] = v;
-        pIndex++;
+        const fadeX = Math.cos(uNorm * Math.PI * 0.5);
+        const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
+        const edgeFade = Math.pow(Math.max(0.0, fadeX), 1.8) * Math.pow(Math.max(0.0, fadeZ), 1.35);
+
+        const baseY = (Math.sin(j * 0.2) * 1.5 + Math.cos(i * 0.28) * 1.0 - 2.8) * edgeFade;
+
+        positions[pIdx * 3] = x;
+        positions[pIdx * 3 + 1] = baseY;
+        positions[pIdx * 3 + 2] = z;
+
+        originalY[pIdx] = baseY;
+        // Enhanced luminous brightness multiplier
+        alphas[pIdx] = edgeFade * 0.95;
+        sizes[pIdx] = Math.max(0.05, edgeFade * 0.42);
+
+        pIdx++;
       }
     }
-    particleGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-    const canvasTexture = document.createElement("canvas");
-    canvasTexture.width = 32;
-    canvasTexture.height = 32;
-    const ctx = canvasTexture.getContext("2d");
-    if (ctx) {
-      const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 15);
-      grad.addColorStop(0, "rgba(11, 218, 194, 1)");
-      grad.addColorStop(0.4, "rgba(5, 184, 163, 0.6)");
-      grad.addColorStop(1, "rgba(0, 0, 0, 0)");
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(16, 16, 15, 0, Math.PI * 2);
-      ctx.fill();
+    waveGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    waveGeom.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
+    waveGeom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+
+    // High-Luminance Radial Glow Particle Texture
+    const pCanvas = document.createElement("canvas");
+    pCanvas.width = 64;
+    pCanvas.height = 64;
+    const pCtx = pCanvas.getContext("2d");
+    if (pCtx) {
+      const pGrad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 30);
+      pGrad.addColorStop(0, "rgba(255, 255, 255, 1.0)");    // Brilliant white hot-spot core
+      pGrad.addColorStop(0.2, "rgba(0, 245, 212, 1.0)");   // Saturated vibrant teal
+      pGrad.addColorStop(0.5, "rgba(6, 182, 212, 0.85)");  // Glowing electric cyan
+      pGrad.addColorStop(0.8, "rgba(0, 180, 216, 0.3)");   // Soft outer aura
+      pGrad.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+      pCtx.fillStyle = pGrad;
+      pCtx.beginPath();
+      pCtx.arc(32, 32, 30, 0, Math.PI * 2);
+      pCtx.fill();
     }
 
-    const pTexture = new THREE.CanvasTexture(canvasTexture);
-    const particleMat = new THREE.PointsMaterial({
-      size: 0.32,
-      map: pTexture,
+    const pTexture = new THREE.CanvasTexture(pCanvas);
+
+    // Custom Shader Material with Brightness Boost
+    const waveShaderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        pointTexture: { value: pTexture },
+        color: { value: new THREE.Color(0x26ffdf) },
+      },
+      vertexShader: `
+        attribute float alpha;
+        attribute float size;
+        varying float vAlpha;
+        void main() {
+          vAlpha = alpha;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = size * (420.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 color;
+        uniform sampler2D pointTexture;
+        varying float vAlpha;
+        void main() {
+          vec4 texColor = texture2D(pointTexture, gl_PointCoord);
+          gl_FragColor = vec4(color * 1.15, vAlpha * texColor.a);
+        }
+      `,
       transparent: true,
-      opacity: 0.65,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     });
 
-    const particleSystem = new THREE.Points(particleGeom, particleMat);
-    scene.add(particleSystem);
-
-    const lineIndices: number[] = [];
-    for (let i = 0; i < rows; i++) {
-      for (let j = 0; j < cols; j++) {
-        const current = i * cols + j;
-        if (j < cols - 1) lineIndices.push(current, current + 1);
-        if (i < rows - 1) lineIndices.push(current, current + cols);
-      }
-    }
-    const lineGeom = new THREE.BufferGeometry();
-    lineGeom.setAttribute("position", particleGeom.getAttribute("position"));
-    lineGeom.setIndex(lineIndices);
-
-    const lineMat = new THREE.LineBasicMaterial({
-      color: 0x05b8a3,
-      transparent: true,
-      opacity: 0.16,
-      blending: THREE.AdditiveBlending,
-    });
-    const waveLines = new THREE.LineSegments(lineGeom, lineMat);
-    scene.add(waveLines);
+    const waveParticleSystem = new THREE.Points(waveGeom, waveShaderMaterial);
+    scene.add(waveParticleSystem);
 
     // --- 5. Smooth Cursor Parallax Tracking ---
     let mouseX = 0;
@@ -277,19 +303,30 @@ export default function HeroRing3D() {
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Background wave grid animation
-      const posArray = particleGeom.attributes.position.array as Float32Array;
+      // Background wave grid animation with edge-modulated amplitude
+      const posArray = waveGeom.attributes.position.array as Float32Array;
       let idx = 0;
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
+          const uNorm = (j / (cols - 1)) * 2.0 - 1.0;
+          const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
+
+          const fadeX = Math.cos(uNorm * Math.PI * 0.5);
+          const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
+          const edgeFade =
+            Math.pow(Math.max(0.0, fadeX), 1.8) *
+            Math.pow(Math.max(0.0, fadeZ), 1.35);
+
           const wave =
-            Math.sin(j * 0.2 + elapsedTime * 1.1) * 0.75 +
-            Math.cos(i * 0.28 + elapsedTime * 0.85) * 0.55;
+            (Math.sin(j * 0.2 + elapsedTime * 1.1) * 0.75 +
+              Math.cos(i * 0.28 + elapsedTime * 0.85) * 0.55) *
+            edgeFade;
+
           posArray[idx * 3 + 1] = originalY[idx] + wave;
           idx++;
         }
       }
-      particleGeom.attributes.position.needsUpdate = true;
+      waveGeom.attributes.position.needsUpdate = true;
 
       // Parallax rotation & subtle organic floating
       const targetRotX = baseRotX + mouseY * 0.25;
@@ -315,6 +352,9 @@ export default function HeroRing3D() {
       cancelAnimationFrame(animationFrameId);
 
       renderer.dispose();
+      waveGeom.dispose();
+      waveShaderMaterial.dispose();
+      pTexture.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
