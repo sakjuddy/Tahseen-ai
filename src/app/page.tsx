@@ -78,9 +78,11 @@ export default function Home() {
               <span className="text-[#00E5BE]">Enhance</span> Your Work
             </h1>
 
-            {/* Subtitle: Inter Regular / Light with Relaxed Line-Height */}
+            {/* Subtitle: Inter Regular / Light broken into 3 clean lines matching spec */}
             <p className="text-sm sm:text-base text-gray-300 max-w-md font-normal leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently.
+              We build AI agents and automation systems <br />
+              that help businesses work smarter, faster, <br />
+              and more efficiently.
             </p>
 
             {/* Primary CTA Button */}
