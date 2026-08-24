@@ -55,11 +55,11 @@ export default function Home() {
       {/* 2. Top Header / Navbar */}
       <header className="relative z-20 pt-6 px-4 sm:px-8 max-w-7xl mx-auto w-full flex items-center justify-between">
         
-        {/* Left Official Brand Logo (Crisp, Elegant Vector) */}
+        {/* Left Official Brand Logo */}
         <Link href="#" className="flex items-center group">
           <div className="relative h-10 w-48 sm:h-11 sm:w-56 transition-transform duration-200 group-hover:scale-105">
             <Image
-              src="/tahseen-logo.svg"
+              src="/tahseen-logo.png"
               alt="Tahseen AI - Enhance Your Work"
               fill
               sizes="(max-width: 640px) 192px, 224px"
