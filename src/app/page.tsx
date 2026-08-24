@@ -23,7 +23,7 @@ export default function Home() {
       {/* 1. Header / Navbar */}
       <header className="relative z-20 pt-8 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
         
-        {/* Left: Official Brand Logo (Untouched) */}
+        {/* Left: Official Brand Logo */}
         <Link href="#" className="flex items-center group">
           <div className="relative h-10 w-48 sm:h-11 sm:w-56 transition-transform duration-200 group-hover:scale-105">
             <Image
@@ -37,7 +37,7 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* Right: Nav Links & LET'S TALK Button (Rectangle) */}
+        {/* Right: Nav Links & LET'S TALK Button */}
         <div className="flex items-center gap-6 sm:gap-8">
           <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-gray-300">
             {navLinks.map((link) => (
@@ -61,26 +61,29 @@ export default function Home() {
 
       </header>
 
-      {/* 2. Hero Section (Wide Screen Spanning Left to Right) */}
+      {/* 2. Hero Section (Full-Span 3D Wave Underneath Text & Brand Ring) */}
       <main className="relative z-10 my-auto pt-6 pb-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+        {/* Full-width 3D Canvas Layer */}
+        <HeroRing3D />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center min-h-[460px] sm:min-h-[540px] lg:min-h-[620px] pointer-events-none">
           
-          {/* Left Hero Column */}
-          <div className="lg:col-span-5 xl:col-span-5 space-y-6 sm:space-y-8 text-left z-10">
+          {/* Left Hero Column: Text overlaps the particle wave directly */}
+          <div className="lg:col-span-6 xl:col-span-5 space-y-6 sm:space-y-8 text-left pointer-events-auto">
             
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
+            {/* Headline with subtle shadow for high readability over the particle wave */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.1] drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]">
               AI Solutions That <br />
               <span className="text-[#0bdac2]">Enhance</span> Your Work
             </h1>
 
             {/* Subtitle */}
-            <p className="text-sm sm:text-base text-gray-300 max-w-md font-normal leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-300 max-w-md font-normal leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently.
             </p>
 
-            {/* Primary CTA Button (Rectangle Box with Teal Border) */}
+            {/* Primary CTA Button */}
             <div className="pt-2">
               <a
                 href="#"
@@ -93,17 +96,13 @@ export default function Home() {
 
           </div>
 
-          {/* Right Hero Column: Interactive 3D Brand Ring Component (Expanded Wide) */}
-          <div className="lg:col-span-7 xl:col-span-7 relative flex items-center justify-center lg:justify-end w-full">
-            <div className="relative w-full max-w-[850px] aspect-[4/3] lg:aspect-[16/10] flex items-center justify-center">
-              <HeroRing3D />
-            </div>
-          </div>
+          {/* Right Hero Column: Spacer holding visual alignment for the 3D ring */}
+          <div className="hidden lg:block lg:col-span-6 xl:col-span-7" />
 
         </div>
 
-        {/* 3. Bottom 4 Services Row (Clean Geometric Iconography) */}
-        <div className="mt-16 sm:mt-24 pt-12 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+        {/* 3. Bottom 4 Services Row */}
+        <div className="mt-16 sm:mt-24 pt-12 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left relative z-10">
           
           {/* Card 1: AI Agents */}
           <div className="space-y-3">
@@ -160,7 +159,6 @@ export default function Home() {
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                 <circle cx="16" cy="16" r="4" stroke="#00E5BE" strokeWidth="2" />
                 <circle cx="16" cy="16" r="1.5" fill="#00E5BE" />
-                {/* 8 Radiating node dots */}
                 <circle cx="16" cy="4" r="1.5" fill="#00E5BE" />
                 <circle cx="16" cy="28" r="1.5" fill="#00E5BE" />
                 <circle cx="4" cy="16" r="1.5" fill="#00E5BE" />
@@ -169,7 +167,6 @@ export default function Home() {
                 <circle cx="24.5" cy="24.5" r="1.5" fill="#00E5BE" />
                 <circle cx="24.5" cy="7.5" r="1.5" fill="#00E5BE" />
                 <circle cx="7.5" cy="24.5" r="1.5" fill="#00E5BE" />
-                {/* Connector lines */}
                 <line x1="16" y1="6" x2="16" y2="12" stroke="#00E5BE" strokeWidth="1.5" />
                 <line x1="16" y1="20" x2="16" y2="26" stroke="#00E5BE" strokeWidth="1.5" />
                 <line x1="6" y1="16" x2="12" y2="16" stroke="#00E5BE" strokeWidth="1.5" />

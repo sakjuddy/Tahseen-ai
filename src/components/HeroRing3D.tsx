@@ -14,12 +14,12 @@ export default function HeroRing3D() {
     const scene = new THREE.Scene();
 
     const camera = new THREE.PerspectiveCamera(
-      38,
+      36,
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
-    camera.position.set(0, 0, 9.2);
+    camera.position.set(0, 0, 10.5);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -40,19 +40,26 @@ export default function HeroRing3D() {
     scene.add(ambientLight);
 
     // Primary Radiant Light Emitter
-    const textKeyLight = new THREE.PointLight(0x5deee0, 13.5, 45, 1.1);
-    textKeyLight.position.set(-6.0, -3.4, 0.6);
+    const textKeyLight = new THREE.PointLight(0x5deee0, 14.0, 50, 1.1);
+    textKeyLight.position.set(-6.0, -3.0, 1.2);
     textKeyLight.castShadow = true;
     scene.add(textKeyLight);
 
-    const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.0);
-    textDirLight.position.set(-6.0, -1.9, 1.1);
+    const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.2);
+    textDirLight.position.set(-6.0, -1.5, 1.5);
     scene.add(textDirLight);
 
-    // --- 3. Finalized 3D Split Ring Construction ---
+    // Top Right Rim Highlight
+    const rightRimLight = new THREE.PointLight(0x0bdac2, 6.0, 35);
+    rightRimLight.position.set(6.0, 5.0, 2.0);
+    scene.add(rightRimLight);
+
+    // --- 3. Finalized 3D Split Ring Construction (Positioned on Right) ---
     const heroGroup = new THREE.Group();
-    heroGroup.position.set(0.15, 0.1, 0);
-    heroGroup.scale.setScalar(0.9);
+    // Responsive X Position: on desktop, align to right side; on mobile, center
+    const isDesktop = window.innerWidth >= 1024;
+    heroGroup.position.set(isDesktop ? 2.9 : 0, isDesktop ? 0.1 : 0.8, 0);
+    heroGroup.scale.setScalar(isDesktop ? 0.95 : 0.75);
     scene.add(heroGroup);
 
     const baseRotX = -0.59;
@@ -169,9 +176,9 @@ export default function HeroRing3D() {
     const ring = createSplitRing();
     heroGroup.add(ring);
 
-    // --- 4. Brighter Digital Particle Wave with Smooth Edge Fading ---
-    const rows = 45;
-    const cols = 90;
+    // --- 4. Digital Particle Wave Spanning Full Hero Width (Under Left Text to Right) ---
+    const rows = 48;
+    const cols = 110;
     const totalParticles = rows * cols;
 
     const waveGeom = new THREE.BufferGeometry();
@@ -181,8 +188,9 @@ export default function HeroRing3D() {
     const sizes = new Float32Array(totalParticles);
 
     let pIdx = 0;
-    const gridWidth = 52.0;
-    const gridDepth = 28.0;
+    // Extra wide width so the wave extends across entire text side
+    const gridWidth = 64.0;
+    const gridDepth = 32.0;
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
@@ -190,20 +198,21 @@ export default function HeroRing3D() {
         const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
 
         const x = uNorm * (gridWidth * 0.5);
-        const z = vNorm * (gridDepth * 0.5) - 3.8;
+        const z = vNorm * (gridDepth * 0.5) - 3.5;
 
+        // Smooth Edge Falloff: Gentle fade at far left/right boundaries
         const fadeX = Math.cos(uNorm * Math.PI * 0.5);
         const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
-        const edgeFade = Math.pow(Math.max(0.0, fadeX), 1.8) * Math.pow(Math.max(0.0, fadeZ), 1.35);
+        const edgeFade = Math.pow(Math.max(0.0, fadeX), 1.6) * Math.pow(Math.max(0.0, fadeZ), 1.3);
 
-        const baseY = (Math.sin(j * 0.2) * 1.5 + Math.cos(i * 0.28) * 1.0 - 2.8) * edgeFade;
+        // Wave elevation positioned right behind & under the text
+        const baseY = (Math.sin(j * 0.18) * 1.5 + Math.cos(i * 0.25) * 1.1 - 1.8) * edgeFade;
 
         positions[pIdx * 3] = x;
         positions[pIdx * 3 + 1] = baseY;
         positions[pIdx * 3 + 2] = z;
 
         originalY[pIdx] = baseY;
-        // Enhanced luminous brightness multiplier
         alphas[pIdx] = edgeFade * 0.95;
         sizes[pIdx] = Math.max(0.05, edgeFade * 0.42);
 
@@ -222,10 +231,10 @@ export default function HeroRing3D() {
     const pCtx = pCanvas.getContext("2d");
     if (pCtx) {
       const pGrad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 30);
-      pGrad.addColorStop(0, "rgba(255, 255, 255, 1.0)");    // Brilliant white hot-spot core
-      pGrad.addColorStop(0.2, "rgba(0, 245, 212, 1.0)");   // Saturated vibrant teal
-      pGrad.addColorStop(0.5, "rgba(6, 182, 212, 0.85)");  // Glowing electric cyan
-      pGrad.addColorStop(0.8, "rgba(0, 180, 216, 0.3)");   // Soft outer aura
+      pGrad.addColorStop(0, "rgba(255, 255, 255, 1.0)");
+      pGrad.addColorStop(0.2, "rgba(0, 245, 212, 1.0)");
+      pGrad.addColorStop(0.5, "rgba(6, 182, 212, 0.85)");
+      pGrad.addColorStop(0.8, "rgba(0, 180, 216, 0.3)");
       pGrad.addColorStop(1, "rgba(0, 0, 0, 0.0)");
       pCtx.fillStyle = pGrad;
       pCtx.beginPath();
@@ -235,7 +244,6 @@ export default function HeroRing3D() {
 
     const pTexture = new THREE.CanvasTexture(pCanvas);
 
-    // Custom Shader Material with Brightness Boost
     const waveShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         pointTexture: { value: pTexture },
@@ -286,10 +294,16 @@ export default function HeroRing3D() {
     // --- 6. Resize Observer ---
     const handleResize = () => {
       if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const desktop = width >= 1024;
+      heroGroup.position.set(desktop ? 2.9 : 0, desktop ? 0.1 : 0.8, 0);
+      heroGroup.scale.setScalar(desktop ? 0.95 : 0.75);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
@@ -303,7 +317,7 @@ export default function HeroRing3D() {
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Background wave grid animation with edge-modulated amplitude
+      // Undulating wave animation extending under text
       const posArray = waveGeom.attributes.position.array as Float32Array;
       let idx = 0;
       for (let i = 0; i < rows; i++) {
@@ -314,12 +328,12 @@ export default function HeroRing3D() {
           const fadeX = Math.cos(uNorm * Math.PI * 0.5);
           const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
           const edgeFade =
-            Math.pow(Math.max(0.0, fadeX), 1.8) *
-            Math.pow(Math.max(0.0, fadeZ), 1.35);
+            Math.pow(Math.max(0.0, fadeX), 1.6) *
+            Math.pow(Math.max(0.0, fadeZ), 1.3);
 
           const wave =
-            (Math.sin(j * 0.2 + elapsedTime * 1.1) * 0.75 +
-              Math.cos(i * 0.28 + elapsedTime * 0.85) * 0.55) *
+            (Math.sin(j * 0.18 + elapsedTime * 1.1) * 0.75 +
+              Math.cos(i * 0.25 + elapsedTime * 0.85) * 0.55) *
             edgeFade;
 
           posArray[idx * 3 + 1] = originalY[idx] + wave;
@@ -329,16 +343,18 @@ export default function HeroRing3D() {
       waveGeom.attributes.position.needsUpdate = true;
 
       // Parallax rotation & subtle organic floating
-      const targetRotX = baseRotX + mouseY * 0.25;
+      const targetRotX = baseRotX + mouseY * 0.22;
       const targetRotY =
-        baseRotY + mouseX * 0.25 + Math.sin(elapsedTime * 0.5) * 0.03;
+        baseRotY + mouseX * 0.22 + Math.sin(elapsedTime * 0.5) * 0.03;
       const targetRotZ = baseRotZ + Math.cos(elapsedTime * 0.6) * 0.02;
 
       heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.06;
       heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.06;
       heroGroup.rotation.z += (targetRotZ - heroGroup.rotation.z) * 0.06;
 
-      heroGroup.position.y = 0.1 + Math.sin(elapsedTime * 1.2) * 0.08;
+      const isDesk = container.clientWidth >= 1024;
+      const basePosY = isDesk ? 0.1 : 0.8;
+      heroGroup.position.y = basePosY + Math.sin(elapsedTime * 1.2) * 0.08;
 
       renderer.render(scene, camera);
     };
@@ -364,7 +380,7 @@ export default function HeroRing3D() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full min-h-[460px] sm:min-h-[560px] lg:min-h-[640px] xl:min-h-[720px] flex items-center justify-center pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
     />
   );
 }
