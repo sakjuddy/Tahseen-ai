@@ -21,7 +21,7 @@ export default function Home() {
       <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       {/* 1. Header / Navbar */}
-      <header className="relative z-20 pt-8 px-6 sm:px-12 max-w-7xl mx-auto w-full flex items-center justify-between">
+      <header className="relative z-20 pt-8 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
         
         {/* Left: Official Brand Logo (Untouched) */}
         <Link href="#" className="flex items-center group">
@@ -61,18 +61,18 @@ export default function Home() {
 
       </header>
 
-      {/* 2. Hero Section (Left-Aligned Text + Right 3D Emblem Circle) */}
-      <main className="relative z-10 my-auto pt-10 pb-12 px-6 sm:px-12 max-w-7xl mx-auto w-full">
+      {/* 2. Hero Section (Wide Screen Spanning Left to Right) */}
+      <main className="relative z-10 my-auto pt-6 pb-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           
           {/* Left Hero Column */}
-          <div className="lg:col-span-6 space-y-6 sm:space-y-8 text-left z-10">
+          <div className="lg:col-span-5 xl:col-span-5 space-y-6 sm:space-y-8 text-left z-10">
             
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
               AI Solutions That <br />
-              <span className="text-[#00E5BE]">Enhance</span> Your Work
+              <span className="text-[#0bdac2]">Enhance</span> Your Work
             </h1>
 
             {/* Subtitle */}
@@ -87,15 +87,15 @@ export default function Home() {
                 className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group"
               >
                 <span>LET&apos;S BUILD TOGETHER</span>
-                <ArrowRight className="w-4 h-4 ml-2.5 text-[#00E5BE] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-2.5 text-[#0bdac2] group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
 
           </div>
 
-          {/* Right Hero Column: Interactive 3D Brand Ring Component */}
-          <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end">
-            <div className="relative w-full max-w-[620px] aspect-[4/3] flex items-center justify-center">
+          {/* Right Hero Column: Interactive 3D Brand Ring Component (Expanded Wide) */}
+          <div className="lg:col-span-7 xl:col-span-7 relative flex items-center justify-center lg:justify-end w-full">
+            <div className="relative w-full max-w-[850px] aspect-[4/3] lg:aspect-[16/10] flex items-center justify-center">
               <HeroRing3D />
             </div>
           </div>

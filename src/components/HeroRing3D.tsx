@@ -29,28 +29,29 @@ export default function HeroRing3D() {
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.45;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     container.appendChild(renderer.domElement);
 
     // --- 2. Lighting Setup (Text-Cast Directional & Ambient) ---
-    const ambientLight = new THREE.AmbientLight(0x000806, 0.45);
+    const ambientLight = new THREE.AmbientLight(0x000c0a, 0.55);
     scene.add(ambientLight);
 
-    const textKeyLight = new THREE.PointLight(0x5deee0, 7.0, 40, 1.2);
+    // Primary Radiant Light Emitter
+    const textKeyLight = new THREE.PointLight(0x5deee0, 13.5, 45, 1.1);
     textKeyLight.position.set(-6.0, -3.4, 0.6);
     textKeyLight.castShadow = true;
     scene.add(textKeyLight);
 
-    const textDirLight = new THREE.DirectionalLight(0x38bdf8, 2.2);
+    const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.0);
     textDirLight.position.set(-6.0, -1.9, 1.1);
     scene.add(textDirLight);
 
     // --- 3. 3D Split Ring Construction (Exact Saved Specs) ---
     const heroGroup = new THREE.Group();
-    heroGroup.position.set(0.1, 0.1, 0);
+    heroGroup.position.set(0.15, 0.1, 0);
     heroGroup.scale.setScalar(0.9);
     scene.add(heroGroup);
 
@@ -61,9 +62,9 @@ export default function HeroRing3D() {
 
     // Materials
     const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05ad9a,
-      emissive: 0x05ad9a,
-      emissiveIntensity: 0.15,
+      color: 0x0bdac2,
+      emissive: 0x0bdac2,
+      emissiveIntensity: 0.18,
       roughness: 0.11,
       metalness: 0.47,
       clearcoat: 1.0,
@@ -72,12 +73,12 @@ export default function HeroRing3D() {
     });
 
     const shadedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x16796d,
-      emissive: 0x16796d,
-      emissiveIntensity: 0.06,
-      roughness: 0.18,
-      metalness: 0.52,
-      clearcoat: 0.5,
+      color: 0x05b8a3,
+      emissive: 0x05b8a3,
+      emissiveIntensity: 0.08,
+      roughness: 0.15,
+      metalness: 0.48,
+      clearcoat: 0.6,
       side: THREE.DoubleSide,
     });
 
@@ -168,9 +169,9 @@ export default function HeroRing3D() {
     const ring = createSplitRing();
     heroGroup.add(ring);
 
-    // --- 4. Background Animated Particle Wave Grid ---
-    const rows = 28;
-    const cols = 56;
+    // --- 4. Background Animated Particle Wave Grid (Spans wide across screen) ---
+    const rows = 32;
+    const cols = 72;
     const particleCount = rows * cols;
     const particleGeom = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
@@ -179,9 +180,9 @@ export default function HeroRing3D() {
     let pIndex = 0;
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        const u = (j / cols - 0.5) * 36;
-        const w = (i / rows - 0.5) * 20;
-        const v = Math.sin(j * 0.22) * 1.5 + Math.cos(i * 0.32) * 1.0 - 2.8;
+        const u = (j / cols - 0.5) * 48; // Expanded width coverage
+        const w = (i / rows - 0.5) * 26;
+        const v = Math.sin(j * 0.2) * 1.6 + Math.cos(i * 0.28) * 1.1 - 2.8;
 
         positions[pIndex * 3] = u;
         positions[pIndex * 3 + 1] = v;
@@ -199,8 +200,8 @@ export default function HeroRing3D() {
     const ctx = canvasTexture.getContext("2d");
     if (ctx) {
       const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 15);
-      grad.addColorStop(0, "rgba(0, 245, 212, 1)");
-      grad.addColorStop(0.4, "rgba(0, 158, 149, 0.6)");
+      grad.addColorStop(0, "rgba(11, 218, 194, 1)");
+      grad.addColorStop(0.4, "rgba(5, 184, 163, 0.6)");
       grad.addColorStop(1, "rgba(0, 0, 0, 0)");
       ctx.fillStyle = grad;
       ctx.beginPath();
@@ -234,7 +235,7 @@ export default function HeroRing3D() {
     lineGeom.setIndex(lineIndices);
 
     const lineMat = new THREE.LineBasicMaterial({
-      color: 0x009e95,
+      color: 0x05b8a3,
       transparent: true,
       opacity: 0.16,
       blending: THREE.AdditiveBlending,
@@ -282,8 +283,8 @@ export default function HeroRing3D() {
       for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
           const wave =
-            Math.sin(j * 0.22 + elapsedTime * 1.1) * 0.75 +
-            Math.cos(i * 0.3 + elapsedTime * 0.85) * 0.55;
+            Math.sin(j * 0.2 + elapsedTime * 1.1) * 0.75 +
+            Math.cos(i * 0.28 + elapsedTime * 0.85) * 0.55;
           posArray[idx * 3 + 1] = originalY[idx] + wave;
           idx++;
         }
@@ -323,7 +324,7 @@ export default function HeroRing3D() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full min-h-[420px] sm:min-h-[500px] lg:min-h-[560px] flex items-center justify-center pointer-events-none"
+      className="relative w-full h-full min-h-[460px] sm:min-h-[560px] lg:min-h-[640px] xl:min-h-[720px] flex items-center justify-center pointer-events-none"
     />
   );
 }
