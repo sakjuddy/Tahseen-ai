@@ -37,9 +37,9 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* Right: Nav Links & LET'S TALK Button (Scaled Up) */}
-        <div className="flex items-center gap-8 sm:gap-10">
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-sm sm:text-[15px] font-semibold tracking-wider text-gray-200">
+        {/* Right: Nav Links & LET'S TALK Button (More Space & Breathing Room) */}
+        <div className="flex items-center gap-10 sm:gap-12 lg:gap-14 xl:gap-16">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-12 xl:gap-14 text-sm sm:text-[15px] font-semibold tracking-wider text-gray-200">
             {navLinks.map((link) => (
               <a
                 key={link.name}
