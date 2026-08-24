@@ -55,14 +55,14 @@ export default function Home() {
       {/* 2. Top Header / Navbar */}
       <header className="relative z-20 pt-6 px-4 sm:px-8 max-w-7xl mx-auto w-full flex items-center justify-between">
         
-        {/* Left Brand Logo (3D glossy depth effect) */}
+        {/* Left Official Brand Logo */}
         <Link href="#" className="flex items-center group">
-          <div className="relative h-12 w-48 sm:h-14 sm:w-56 filter drop-shadow-[0_4px_16px_rgba(0,229,190,0.25)] hover:drop-shadow-[0_8px_24px_rgba(0,229,190,0.45)] transition-all duration-300 transform-gpu hover:-translate-y-0.5 hover:scale-[1.03]">
+          <div className="relative h-12 w-52 sm:h-14 sm:w-64 transition-transform duration-200 group-hover:scale-105">
             <Image
               src="/tahseen-logo.png"
-              alt="Tahseen AI"
+              alt="Tahseen AI - Enhance Your Work"
               fill
-              sizes="224px"
+              sizes="(max-width: 640px) 208px, 256px"
               className="object-contain object-left"
               priority
             />
