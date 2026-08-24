@@ -21,7 +21,7 @@ export default function Home() {
       <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
 
       {/* 1. Header / Navbar */}
-      <header className="relative z-20 pt-8 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
+      <header className="relative z-20 pt-6 sm:pt-8 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
         
         {/* Left: Official Brand Logo */}
         <Link href="#" className="flex items-center group">
@@ -69,16 +69,16 @@ export default function Home() {
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center min-h-[460px] sm:min-h-[540px] lg:min-h-[620px] pointer-events-none">
           
-          {/* Left Hero Column: Text overlaps the particle wave directly */}
+          {/* Left Hero Column: Exact Typography from Brand Spec */}
           <div className="lg:col-span-6 xl:col-span-5 space-y-6 sm:space-y-8 text-left pointer-events-auto">
             
-            {/* Headline with subtle shadow for high readability over the particle wave */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white leading-[1.1] drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]">
+            {/* Primary Headline: SF Pro Display Bold with #00E5BE Highlight */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]">
               AI Solutions That <br />
-              <span className="text-[#0bdac2]">Enhance</span> Your Work
+              <span className="text-[#00E5BE]">Enhance</span> Your Work
             </h1>
 
-            {/* Subtitle */}
+            {/* Subtitle: Inter Regular / Light with Relaxed Line-Height */}
             <p className="text-sm sm:text-base text-gray-300 max-w-md font-normal leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently.
             </p>
@@ -90,7 +90,7 @@ export default function Home() {
                 className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group"
               >
                 <span>LET&apos;S BUILD TOGETHER</span>
-                <ArrowRight className="w-4 h-4 ml-2.5 text-[#0bdac2] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-2.5 text-[#00E5BE] group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
 
