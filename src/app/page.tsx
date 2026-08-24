@@ -20,31 +20,31 @@ export default function Home() {
       {/* Background ambient lighting */}
       <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
 
-      {/* 1. Header / Navbar */}
-      <header className="relative z-20 pt-6 sm:pt-8 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
+      {/* 1. Header / Navbar (Increased Scale & Prominence) */}
+      <header className="relative z-20 pt-8 sm:pt-10 pb-4 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
         
-        {/* Left: Official Brand Logo */}
+        {/* Left: Official Brand Logo (Scaled Up) */}
         <Link href="#" className="flex items-center group">
-          <div className="relative h-10 w-48 sm:h-11 sm:w-56 transition-transform duration-200 group-hover:scale-105">
+          <div className="relative h-12 w-56 sm:h-14 sm:w-64 transition-transform duration-200 group-hover:scale-105">
             <Image
               src="/tahseen-logo.png"
               alt="Tahseen AI"
               fill
-              sizes="224px"
+              sizes="(max-width: 640px) 224px, 256px"
               className="object-contain object-left"
               priority
             />
           </div>
         </Link>
 
-        {/* Right: Nav Links & LET'S TALK Button */}
-        <div className="flex items-center gap-6 sm:gap-8">
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-gray-300">
+        {/* Right: Nav Links & LET'S TALK Button (Scaled Up) */}
+        <div className="flex items-center gap-8 sm:gap-10">
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-sm sm:text-[15px] font-semibold tracking-wider text-gray-200">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="hover:text-white transition-colors duration-200"
+                className="hover:text-[#00E5BE] transition-colors duration-200"
               >
                 {link.name}
               </a>
@@ -53,7 +53,7 @@ export default function Home() {
 
           <a
             href="#"
-            className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-wider uppercase rounded-lg btn-teal-outline"
+            className="inline-flex items-center justify-center px-7 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline"
           >
             <span>LET&apos;S TALK</span>
           </a>
