@@ -15,50 +15,52 @@ export default function Home() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip">
       
       {/* Background ambient lighting */}
       <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
 
-      {/* 1. Header / Navbar (Increased Scale & Prominence) */}
-      <header className="relative z-20 pt-8 sm:pt-10 pb-4 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
-        
-        {/* Left: Official Brand Logo (Scaled Up) */}
-        <Link href="#" className="flex items-center group">
-          <div className="relative h-12 w-56 sm:h-14 sm:w-64 transition-transform duration-200 group-hover:scale-105">
-            <Image
-              src="/tahseen-logo.png"
-              alt="Tahseen AI"
-              fill
-              sizes="(max-width: 640px) 224px, 256px"
-              className="object-contain object-left"
-              priority
-            />
+      {/* 1. Sticky Header / Navbar (Moves with Scroll with Frosted Blur) */}
+      <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
+        <div className="py-4 sm:py-5 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
+          
+          {/* Left: Official Brand Logo */}
+          <Link href="#" className="flex items-center group">
+            <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-200 group-hover:scale-105">
+              <Image
+                src="/tahseen-logo.png"
+                alt="Tahseen AI"
+                fill
+                sizes="(max-width: 640px) 208px, 240px"
+                className="object-contain object-left"
+                priority
+              />
+            </div>
+          </Link>
+
+          {/* Right: Nav Links & LET'S TALK Button */}
+          <div className="flex items-center gap-8 sm:gap-10 lg:gap-12 xl:gap-14">
+            <nav className="hidden md:flex items-center gap-8 lg:gap-10 xl:gap-12 text-sm sm:text-[15px] font-semibold tracking-wider text-gray-200">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="hover:text-[#00E5BE] transition-colors duration-200"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
+
+            <a
+              href="#"
+              className="inline-flex items-center justify-center px-7 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline"
+            >
+              <span>LET&apos;S TALK</span>
+            </a>
           </div>
-        </Link>
 
-        {/* Right: Nav Links & LET'S TALK Button (More Space & Breathing Room) */}
-        <div className="flex items-center gap-10 sm:gap-12 lg:gap-14 xl:gap-16">
-          <nav className="hidden md:flex items-center gap-10 lg:gap-12 xl:gap-14 text-sm sm:text-[15px] font-semibold tracking-wider text-gray-200">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="hover:text-[#00E5BE] transition-colors duration-200"
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
-          <a
-            href="#"
-            className="inline-flex items-center justify-center px-7 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline"
-          >
-            <span>LET&apos;S TALK</span>
-          </a>
         </div>
-
       </header>
 
       {/* 2. Hero Section (Full-Span 3D Wave Underneath Text & Brand Ring) */}
