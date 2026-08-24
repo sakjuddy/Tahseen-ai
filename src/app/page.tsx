@@ -36,7 +36,7 @@ export default function Home() {
           </div>
         </Link>
 
-        {/* Right: Nav Links & LET'S TALK Button */}
+        {/* Right: Nav Links & LET'S TALK Button (Rectangle) */}
         <div className="flex items-center gap-6 sm:gap-8">
           <nav className="hidden md:flex items-center gap-6 lg:gap-8 text-xs font-semibold tracking-wider text-gray-300">
             {navLinks.map((link) => (
@@ -52,7 +52,7 @@ export default function Home() {
 
           <a
             href="#"
-            className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-wider uppercase rounded-full btn-teal-outline"
+            className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-wider uppercase rounded-lg btn-teal-outline"
           >
             <span>LET&apos;S TALK</span>
           </a>
@@ -79,11 +79,11 @@ export default function Home() {
               We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently.
             </p>
 
-            {/* Primary CTA Button (Black with Teal Border) */}
+            {/* Primary CTA Button (Rectangle Box with Teal Border) */}
             <div className="pt-2">
               <a
                 href="#"
-                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-full btn-teal-outline group"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group"
               >
                 <span>LET&apos;S BUILD TOGETHER</span>
                 <ArrowRight className="w-4 h-4 ml-2.5 text-[#00E5BE] group-hover:translate-x-1 transition-transform" />
