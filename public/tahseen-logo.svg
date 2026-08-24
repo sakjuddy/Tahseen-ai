@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- 3D Teal Ribbon Gradients -->
+    <linearGradient id="tealGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5BE" />
+      <stop offset="50%" stop-color="#00B89E" />
+      <stop offset="100%" stop-color="#007A68" />
+    </linearGradient>
+    <linearGradient id="tealGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00FFA3" />
+      <stop offset="60%" stop-color="#00D2B4" />
+      <stop offset="100%" stop-color="#00594C" />
+    </linearGradient>
+    <linearGradient id="tealHighlight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#008A74" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+  </defs>
+
+  <!-- 1. The 3D Circular Ribbon Loop Emblem (Left) -->
+  <g transform="translate(8, 7)">
+    <!-- Top-Right Arc with 3D gradient -->
+    <path d="M 28 3 A 25 25 0 0 1 52 33 L 42 35 A 15 15 0 0 0 28 13 Z" fill="url(#tealGrad1)" />
+    
+    <!-- Bottom-Left Arc with 3D gradient -->
+    <path d="M 28 53 A 25 25 0 0 1 4 23 L 14 21 A 15 15 0 0 0 28 43 Z" fill="url(#tealGrad2)" />
+
+    <!-- Top-Left Inner Fold Shadow -->
+    <path d="M 4 23 A 25 25 0 0 1 28 3 L 28 13 A 15 15 0 0 0 14 21 Z" fill="url(#tealHighlight)" opacity="0.9" />
+    
+    <!-- Bottom-Right Outer Fold Shadow -->
+    <path d="M 52 33 A 25 25 0 0 1 28 53 L 28 43 A 15 15 0 0 0 42 35 Z" fill="url(#tealGrad1)" />
+
+    <!-- 3D Overlap Shading accents -->
+    <path d="M 26 3 L 30 13 L 28 13 L 24 3 Z" fill="#004238" opacity="0.4" />
+    <path d="M 30 53 L 26 43 L 28 43 L 32 53 Z" fill="#004238" opacity="0.4" />
+  </g>
+
+  <!-- 2. Vertical Divider Bar -->
+  <line x1="74" y1="12" x2="74" y2="58" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- 3. Typography: TAHSEEN <AI> (Clean, Sleek, Geometric) -->
+  <g transform="translate(88, 14)">
+    <!-- Stylized Geometric TAHSEEN -->
+    <g fill="#FFFFFF">
+      <!-- T -->
+      <path d="M 0 3 H 13 V 6 H 8 V 23 H 5 V 6 H 0 Z" />
+      
+      <!-- A (Futuristic apex without low crossbar) -->
+      <path d="M 16 23 L 22.5 3 H 25.5 L 32 23 H 28.6 L 24 8.5 L 19.4 23 Z" />
+      
+      <!-- H -->
+      <path d="M 35 3 H 38 V 11.5 H 46 V 3 H 49 V 23 H 46 V 14.5 H 38 V 23 H 35 Z" />
+      
+      <!-- S -->
+      <path d="M 52 18.5 C 52 21.5 54.5 23 58.5 23 C 63.5 23 66 21 66 17.5 C 66 12.5 59.5 12 59.5 9 C 59.5 7.5 60.8 6 63 6 C 65 6 66 7 66.2 8.5 H 69.2 C 69 5.5 66.5 3 63 3 C 58.5 3 56.5 5.5 56.5 8.5 C 56.5 13.5 63 14 63 17 C 63 18.8 61.5 20 58.5 20 C 56 20 55 18.8 54.8 17.5 Z" />
+      
+      <!-- E (Three sleek horizontal parallel bars) -->
+      <path d="M 72 3 H 84 V 6 H 72 Z M 72 11.5 H 82 V 14.5 H 72 Z M 72 20 H 84 V 23 H 72 Z" />
+      
+      <!-- E (Three sleek horizontal parallel bars) -->
+      <path d="M 87 3 H 99 V 6 H 87 Z M 87 11.5 H 97 V 14.5 H 87 Z M 87 20 H 99 V 23 H 87 Z" />
+      
+      <!-- N -->
+      <path d="M 102 3 H 105 L 115 17.5 V 3 H 118 V 23 H 115 L 105 8.5 V 23 H 102 Z" />
+    </g>
+
+    <!-- < (Teal chevron) -->
+    <path d="M 129 5 L 123 13 L 129 21" stroke="#00E5BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+    <!-- AI (Crisp White) -->
+    <g fill="#FFFFFF" transform="translate(133, 0)">
+      <!-- A -->
+      <path d="M 0 23 L 6.5 3 H 9.5 L 16 23 H 12.6 L 8 8.5 L 3.4 23 Z" />
+      <!-- I -->
+      <path d="M 19 3 H 22 V 23 H 19 Z" />
+    </g>
+
+    <!-- > (Teal chevron) -->
+    <path d="M 160 5 L 166 13 L 160 21" stroke="#00E5BE" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+  </g>
+
+  <!-- 4. Slogan: ENHANCE YOUR WORK (Clean, Tracked, Highly Legible) -->
+  <text x="90" y="49" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="8.5" font-weight="600" letter-spacing="0.24em" fill="#CBD5E1">ENHANCE YOUR WORK</text>
+</svg>
