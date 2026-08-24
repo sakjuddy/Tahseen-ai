@@ -18,39 +18,39 @@ export default function Home() {
       title: "AI Agents",
       desc: "Intelligent agents that automate and scale your operations.",
       icon: Bot,
-      iconColor: "text-cyan-400 bg-cyan-500/10 border-cyan-500/20",
+      iconColor: "text-[#00E5BE] bg-[#00E5BE]/10 border-[#00E5BE]/20",
     },
     {
       title: "Automation",
       desc: "Streamline workflows and eliminate repetitive tasks.",
       icon: Zap,
-      iconColor: "text-blue-400 bg-blue-500/10 border-blue-500/20",
+      iconColor: "text-[#38BDF8] bg-[#38BDF8]/10 border-[#38BDF8]/20",
     },
     {
       title: "Consulting",
       desc: "AI strategy and roadmap aligned with your business goals.",
       icon: Compass,
-      iconColor: "text-purple-400 bg-purple-500/10 border-purple-500/20",
+      iconColor: "text-[#A855F7] bg-[#A855F7]/10 border-[#A855F7]/20",
     },
     {
       title: "Development",
       desc: "Custom AI solutions built for real-world impact.",
       icon: Code,
-      iconColor: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
+      iconColor: "text-[#6366F1] bg-[#6366F1]/10 border-[#6366F1]/20",
     },
   ];
 
   return (
     <div className="relative min-h-screen bg-[#050814] text-white flex flex-col justify-between overflow-hidden">
       
-      {/* 1. Large Glowing Circle in the Hero Section */}
+      {/* 1. Large Glowing Brand Circle in the Hero Section */}
       <div className="hero-circle-container">
         <div className="hero-circle-ring-outer" />
         <div className="hero-circle-glow" />
       </div>
 
-      {/* Background ambient light reflections */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[350px] bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent pointer-events-none -z-10" />
+      {/* Ambient background light reflections */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[350px] bg-gradient-to-b from-[#00E5BE]/10 via-transparent to-transparent pointer-events-none -z-10" />
 
       {/* 2. Top Header / Navbar */}
       <header className="relative z-20 pt-6 px-4 sm:px-8 max-w-7xl mx-auto w-full flex items-center justify-between">
@@ -90,7 +90,7 @@ export default function Home() {
         <div className="flex items-center">
           <a
             href="#"
-            className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-wider uppercase text-white rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 transform hover:-translate-y-0.5"
+            className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-wider uppercase text-white rounded-full bg-gradient-to-r from-[#00D2B4] via-[#0284C7] to-[#4F46E5] hover:from-[#00E5BE] hover:to-[#6366F1] shadow-lg shadow-[#00E5BE]/20 hover:shadow-[#00E5BE]/40 transition-all duration-300 transform hover:-translate-y-0.5"
           >
             <span className="flex items-center gap-1.5">
               Let&apos;s Talk
@@ -105,15 +105,15 @@ export default function Home() {
       <main className="relative z-10 my-auto pt-16 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full text-center">
         
         {/* Top Tag Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0d1527] border border-cyan-500/30 text-cyan-300 text-[11px] font-bold tracking-widest uppercase shadow-xl mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0d1527] border border-[#00E5BE]/30 text-[#00E5BE] text-[11px] font-bold tracking-widest uppercase shadow-xl mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
           <span>AI SOLUTIONS THAT ENHANCE YOUR WORK</span>
         </div>
 
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl mx-auto">
           AI Solutions That <br />
-          <span className="gradient-text">Enhance Your Work</span>
+          <span className="gradient-text-brand">Enhance Your Work</span>
         </h1>
 
         {/* Subtitle */}
@@ -125,7 +125,7 @@ export default function Home() {
         <div className="flex items-center justify-center mb-16 sm:mb-20">
           <a
             href="#"
-            className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase text-white rounded-full cta-button group"
+            className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase text-white rounded-full cta-button-brand group"
           >
             <span>LET&apos;S BUILD TOGETHER</span>
             <ArrowUpRight className="w-4 h-4 ml-2 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -139,7 +139,7 @@ export default function Home() {
             return (
               <div
                 key={card.title}
-                className="service-card rounded-2xl p-6 flex flex-col justify-between group"
+                className="service-card-brand rounded-2xl p-6 flex flex-col justify-between group"
               >
                 <div>
                   {/* Card Icon */}
@@ -148,7 +148,7 @@ export default function Home() {
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#00E5BE] transition-colors">
                     {card.title}
                   </h3>
                   <p className="text-sm text-gray-400 leading-relaxed font-normal">
@@ -157,8 +157,8 @@ export default function Home() {
                 </div>
 
                 {/* Bottom Action Icon */}
-                <div className="pt-6 mt-4 flex items-center justify-end text-gray-500 group-hover:text-cyan-400 transition-colors">
-                  <div className="w-8 h-8 rounded-full bg-white/5 group-hover:bg-cyan-500/20 flex items-center justify-center transition-colors">
+                <div className="pt-6 mt-4 flex items-center justify-end text-gray-500 group-hover:text-[#00E5BE] transition-colors">
+                  <div className="w-8 h-8 rounded-full bg-white/5 group-hover:bg-[#00E5BE]/20 flex items-center justify-center transition-colors">
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </div>
@@ -169,7 +169,7 @@ export default function Home() {
 
       </main>
 
-      {/* Footer spacer */}
+      {/* Footer */}
       <footer className="relative z-10 py-6 text-center text-xs text-gray-500 font-mono">
         © {new Date().getFullYear()} Tahseen AI. All rights reserved.
       </footer>
