@@ -7,7 +7,7 @@ import { Mail, MapPin, ArrowRight, HeartHandshake } from "lucide-react";
 export default function Footer() {
   return (
     <footer className="relative z-10 bg-[#04060d] border-t border-white/[0.06] pt-16 sm:pt-20 pb-12 text-gray-400 font-sans">
-      <div className="max-w-[1680px] mx-auto px-6 sm:px-12 lg:px-16 space-y-16">
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 space-y-16">
         
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10 items-start">

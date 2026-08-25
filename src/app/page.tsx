@@ -256,7 +256,7 @@ export default function Home() {
 
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
-        <div className="py-3 sm:py-3.5 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
+        <div className="py-3 sm:py-3.5 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full flex items-center justify-between">
           
           {/* Left: Official Brand Logo (Scrolls to Top / Home) */}
           <Link
@@ -313,7 +313,7 @@ export default function Home() {
       </header>
 
       {/* 2. Hero Section (Home Anchor) */}
-      <main id="home" className="relative z-10 pt-2 sm:pt-4 pb-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+      <main id="home" className="relative z-10 pt-2 sm:pt-4 pb-12 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full">
         
         {/* Full-width 3D Canvas Layer */}
         <HeroRing3D />
@@ -356,7 +356,7 @@ export default function Home() {
         </div>
 
         {/* 3. Bottom 4 Services Row (Enhanced Interactive Hover Effects) */}
-        <div id="services" className="mt-24 sm:mt-32 pt-16 scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 text-center justify-items-center relative z-10 max-w-[1560px] mx-auto w-full">
+        <div id="services" className="mt-24 sm:mt-32 pt-16 scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 text-center justify-items-center relative z-10 max-w-[1400px] mx-auto w-full">
           
           {/* Card 1: AI Agents */}
           <div className="w-full p-6 sm:p-7 rounded-2xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] cursor-default">
@@ -453,7 +453,7 @@ export default function Home() {
       </main>
 
       {/* 4. Social Proof & National Impact Strip */}
-      <section id="about" className="relative z-10 py-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+      <section id="about" className="relative z-10 py-12 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full scroll-mt-28">
         <div className="rounded-3xl bg-white/[0.02] hover:bg-white/[0.03] border border-white/[0.06] hover:border-[#00E5BE]/30 backdrop-blur-md p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,229,190,0.06)]">
           <div className="space-y-1.5 max-w-xl">
             <div className="flex items-center justify-center md:justify-start gap-2 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
@@ -478,7 +478,7 @@ export default function Home() {
       </section>
 
       {/* 5. Comprehensive Insights Section (Interactive Hover Telemetry) */}
-      <section id="insights" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+      <section id="insights" className="relative z-10 py-20 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full scroll-mt-28">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
             <Activity className="w-3.5 h-3.5" />
@@ -603,7 +603,7 @@ export default function Home() {
       </section>
 
       {/* 6. Comprehensive AI Solutions Section */}
-      <section id="solutions" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+      <section id="solutions" className="relative z-10 py-20 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full scroll-mt-28">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
             EFFORTLESS DEPLOYMENT & REAL-TIME OVERSIGHT
@@ -633,7 +633,7 @@ export default function Home() {
       </section>
 
       {/* 7. Flexible Service Packages */}
-      <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+      <section className="relative z-10 py-20 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
             TRANSPARENT ENGAGEMENT, MEASURABLE RESULTS
@@ -700,7 +700,7 @@ export default function Home() {
       </section>
 
       {/* 8. Interactive Testimonial Carousel ("What Our Clients Say") */}
-      <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+      <section className="relative z-10 py-20 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
           <div className="space-y-3 max-w-2xl text-left">
             <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase flex items-center gap-2">
@@ -847,7 +847,7 @@ export default function Home() {
       </section>
 
       {/* 10. Final High-Impact CTA Banner & Contact Routing */}
-      <section id="contact" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+      <section id="contact" className="relative z-10 py-20 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full scroll-mt-28">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-10 sm:p-16 text-center space-y-8 shadow-[0_0_60px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 hover:shadow-[0_0_80px_rgba(0,229,190,0.25)] transition-all duration-500">
           <div className="space-y-4 max-w-2xl mx-auto">
             <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">

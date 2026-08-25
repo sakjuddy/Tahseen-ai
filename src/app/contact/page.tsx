@@ -48,7 +48,7 @@ export default function ContactPage() {
 
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
-        <div className="py-3 sm:py-3.5 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
+        <div className="py-3 sm:py-3.5 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full flex items-center justify-between">
           
           {/* Left: Official Brand Logo */}
           <Link href="/" className="flex items-center group cursor-pointer">
@@ -92,7 +92,7 @@ export default function ContactPage() {
       </header>
 
       {/* 2. Main Contact Form & Details Section */}
-      <main className="relative z-10 py-12 sm:py-20 px-6 sm:px-12 lg:px-16 max-w-[1560px] mx-auto w-full flex-1">
+      <main className="relative z-10 py-12 sm:py-20 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full flex-1">
         
         {/* Header Title */}
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16 sm:mb-20">
