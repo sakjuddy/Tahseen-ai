@@ -7,12 +7,27 @@ import HeroRing3D from "@/components/HeroRing3D";
 
 export default function Home() {
   const navLinks = [
-    { name: "HOME", href: "#" },
-    { name: "SERVICES", href: "#" },
-    { name: "SOLUTIONS", href: "#" },
-    { name: "ABOUT US", href: "#" },
-    { name: "CONTACT", href: "#" },
+    { name: "HOME", href: "#home" },
+    { name: "SERVICES", href: "#services" },
+    { name: "SOLUTIONS", href: "#services" },
+    { name: "ABOUT US", href: "#home" },
+    { name: "CONTACT", href: "#services" },
   ];
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.replace("#", "");
+      if (targetId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        const elem = document.getElementById(targetId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip">
@@ -24,8 +39,12 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
         <div className="py-3 sm:py-3.5 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
           
-          {/* Left: Official Brand Logo */}
-          <Link href="#" className="flex items-center group">
+          {/* Left: Official Brand Logo (Scrolls to Top / Home) */}
+          <Link
+            href="#home"
+            onClick={(e) => handleSmoothScroll(e, "#home")}
+            className="flex items-center group cursor-pointer"
+          >
             <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-200 group-hover:scale-105">
               <Image
                 src="/tahseen-logo.png"
@@ -45,7 +64,8 @@ export default function Home() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="hover:text-[#00E5BE] transition-colors duration-200"
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
+                  className="hover:text-[#00E5BE] transition-colors duration-200 cursor-pointer"
                 >
                   {link.name}
                 </a>
@@ -53,8 +73,9 @@ export default function Home() {
             </nav>
 
             <a
-              href="#"
-              className="inline-flex items-center justify-center px-7 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline"
+              href="#services"
+              onClick={(e) => handleSmoothScroll(e, "#services")}
+              className="inline-flex items-center justify-center px-7 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>LET&apos;S TALK</span>
             </a>
@@ -63,8 +84,8 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2. Hero Section (Tightened Spacing with Navbar) */}
-      <main className="relative z-10 pt-2 sm:pt-4 pb-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+      {/* 2. Hero Section (Home Anchor) */}
+      <main id="home" className="relative z-10 pt-2 sm:pt-4 pb-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         
         {/* Full-width 3D Canvas Layer */}
         <HeroRing3D />
@@ -87,11 +108,12 @@ export default function Home() {
               and more efficiently.
             </p>
 
-            {/* Primary CTA Button */}
+            {/* Primary CTA Button (Smooth scrolls to Services) */}
             <div className="pt-2">
               <a
-                href="#"
-                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group"
+                href="#services"
+                onClick={(e) => handleSmoothScroll(e, "#services")}
+                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group cursor-pointer"
               >
                 <span>LET&apos;S BUILD TOGETHER</span>
                 <ArrowRight className="w-4 h-4 ml-2.5 text-[#00E5BE] group-hover:translate-x-1 transition-transform" />
@@ -105,8 +127,8 @@ export default function Home() {
 
         </div>
 
-        {/* 3. Bottom 4 Services Row (Substantially Scaled Up & Centered) */}
-        <div className="mt-24 sm:mt-32 pt-16 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 text-center justify-items-center relative z-10 max-w-[1560px] mx-auto w-full">
+        {/* 3. Bottom 4 Services Row (Services Anchor with Scroll Margin) */}
+        <div id="services" className="mt-24 sm:mt-32 pt-16 scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 text-center justify-items-center relative z-10 max-w-[1560px] mx-auto w-full">
           
           {/* Card 1: AI Agents */}
           <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
@@ -153,7 +175,7 @@ export default function Home() {
             <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
               <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 19C9 13.477 13.477 9 19 9C24.523 9 29 13.477 29 19C29 21.884 27.781 24.484 25.823 26.315L27 32L21.5 30.2C20.697 30.457 19.86 30.6 19 30.6C13.477 30.6 9 26.123 9 20.6V19Z" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 11C12 7.5 15 5 19 5C23 5 26 7.5 26 11" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 3"/>
+                <path d="M12 11C12 7.5 15 5 19 5C23 5 26 7.5 26 11" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="1 3"/>
                 <circle cx="19" cy="19" r="3" stroke="#00E5BE" strokeWidth="2.2"/>
                 <circle cx="19" cy="19" r="1.2" fill="#00E5BE"/>
               </svg>
