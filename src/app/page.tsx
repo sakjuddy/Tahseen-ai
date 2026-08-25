@@ -206,12 +206,15 @@ export default function Home() {
     },
   ];
 
+  // Extended duplicate testimonials for seamless continuous looping without empty gaps
+  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+
   // Auto advance carousel
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       setCarouselIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5500);
+    }, 4500);
     return () => clearInterval(interval);
   }, [isPaused, testimonials.length]);
 
@@ -734,7 +737,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Carousel Viewport */}
+        {/* Carousel Viewport (Continuous Seamless Loop) */}
         <div
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -746,7 +749,7 @@ export default function Home() {
               transform: `translateX(-${carouselIndex * (100 / (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3))}%)`,
             }}
           >
-            {testimonials.map((t, idx) => (
+            {extendedTestimonials.map((t, idx) => (
               <div
                 key={idx}
                 className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] flex-shrink-0 p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,229,190,0.1)] group"
