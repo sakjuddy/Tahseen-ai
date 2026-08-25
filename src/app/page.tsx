@@ -25,6 +25,8 @@ import {
   LineChart,
   Lock,
   ExternalLink,
+  Users,
+  HelpCircle,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
@@ -1004,38 +1006,113 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. Final High-Impact CTA Banner & Contact Routing */}
-      <section id="contact" className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-7 sm:p-10 text-center space-y-5 shadow-[0_0_40px_rgba(0,229,190,0.12)] hover:border-[#00E5BE]/60 transition-all duration-500">
-          <div className="space-y-2 max-w-lg mx-auto">
-            <span className="text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
-              TAKE THE NEXT STEP
-            </span>
-            <h2 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight">
-              Build Your AI-Powered Solution <span className="text-[#00E5BE]">Now</span>
-            </h2>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              Automate lead generation, customer engagement, and business workflows with Saudi Arabia&apos;s leading AI transformation partner.
-            </p>
+      {/* 10. High-Impact CTA & Telemetry Banner (Matching Design Spec) */}
+      <section id="contact" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-8 sm:p-12 lg:p-14 shadow-[0_0_50px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 transition-all duration-500">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            
+            {/* Left Column: Headline, Trust Badge & Action Buttons */}
+            <div className="lg:col-span-6 space-y-6 text-left">
+              {/* Trust Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-semibold text-gray-300">
+                <Users className="w-3.5 h-3.5 text-[#00E5BE]" />
+                <span>Trusted by 10k + businesses</span>
+              </div>
+
+              {/* Title */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.12]">
+                Build AI-Powered <br />
+                Solution Now!
+              </h2>
+
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-md">
+                Automate lead generation and customer engagement in diverse and dynamic real-world settings
+              </p>
+
+              {/* Dual Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-1">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#6366F1] text-white hover:bg-[#4F46E5] transition-all shadow-[0_6px_20px_rgba(99,102,241,0.4)] hover:-translate-y-0.5 cursor-pointer"
+                >
+                  <span>Get Started</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#1E293B] border border-white/10 text-white hover:bg-[#334155] transition-all shadow-lg cursor-pointer gap-2"
+                >
+                  <HelpCircle className="w-4 h-4 text-gray-400" />
+                  <span>Learn More</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column: Layered Dashboard & Monthly Performance Chart Widget */}
+            <div className="lg:col-span-6 relative">
+              
+              {/* Layer 1: Background Balance Card */}
+              <div className="rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl p-6 shadow-2xl space-y-4">
+                <div className="flex items-center gap-3 text-left">
+                  <span className="text-lg font-bold text-white tracking-tight">Balance</span>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00E5BE]/15 border border-[#00E5BE]/30 text-[#00E5BE] text-[11px] font-bold">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span>On track</span>
+                  </span>
+                </div>
+
+                {/* Layer 2: Overlapping High-Contrast Chart Card */}
+                <div className="rounded-xl bg-[#060913]/95 border border-white/10 p-5 shadow-2xl space-y-4 text-left sm:translate-x-3 sm:translate-y-1">
+                  <div>
+                    <div className="text-[11px] text-gray-400 font-medium">Total Spent</div>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono mt-0.5">$682.5</div>
+                  </div>
+
+                  {/* Horizontal Threshold Guideline */}
+                  <div className="relative pt-2">
+                    <div className="w-full border-b border-dashed border-[#6366F1]/50 absolute top-4 left-0" />
+                    
+                    {/* Monthly Bar Chart (Jan - Oct) */}
+                    <div className="flex items-end justify-between gap-1.5 sm:gap-2 h-28 pt-4">
+                      {[
+                        { m: "Jan", h: "35%", active: false },
+                        { m: "Feb", h: "75%", active: false },
+                        { m: "Mar", h: "55%", active: false },
+                        { m: "Apr", h: "65%", active: false },
+                        { m: "May", h: "50%", active: false },
+                        { m: "Jun", h: "95%", active: true },
+                        { m: "Jul", h: "45%", active: false },
+                        { m: "Aug", h: "75%", active: false },
+                        { m: "Sep", h: "30%", active: false },
+                        { m: "Oct", h: "60%", active: false },
+                      ].map((bar) => (
+                        <div key={bar.m} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                          <div
+                            style={{ height: bar.h }}
+                            className={`w-full rounded-md transition-all duration-300 ${
+                              bar.active
+                                ? "bg-[#6366F1] shadow-[0_0_15px_rgba(99,102,241,0.8)] scale-y-105"
+                                : "bg-white/10 group-hover:bg-white/20"
+                            }`}
+                          />
+                          <span className={`text-[9px] font-mono ${bar.active ? "text-[#6366F1] font-bold" : "text-gray-500"}`}>
+                            {bar.m}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_16px_rgba(0,229,190,0.4)] hover:-translate-y-0.5 cursor-pointer"
-            >
-              <Mail className="w-3.5 h-3.5 mr-1.5" />
-              <span>LET&apos;S TALK / CONTACT US</span>
-            </Link>
-
-            <a
-              href="#home"
-              onClick={(e) => handleSmoothScroll(e, "#home")}
-              className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
-            >
-              <span>BACK TO TOP ↑</span>
-            </a>
-          </div>
         </div>
       </section>
 
