@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -290,10 +290,8 @@ export default function Home() {
     },
   ];
 
-  // Extended duplicate testimonials for seamless continuous looping without empty gaps
   const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
-  // Auto advance carousel
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
@@ -539,142 +537,142 @@ export default function Home() {
 
       </main>
 
-      {/* 4. Social Proof & National Impact Strip */}
-      <section id="about" className="relative z-10 py-8 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
-        <div className="rounded-2xl bg-white/[0.02] hover:bg-white/[0.03] border border-white/[0.06] hover:border-[#00E5BE]/30 backdrop-blur-md p-5 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left transition-all duration-300">
-          <div className="space-y-1 max-w-lg">
-            <div className="flex items-center justify-center md:justify-start gap-1.5 text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
-              <Sparkles className="w-3 h-3 animate-pulse" />
+      {/* 4. Social Proof & National Impact Strip (Distinct Elevated Section Island) */}
+      <section id="about" className="relative z-10 py-12 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
+        <div className="rounded-3xl bg-gradient-to-r from-white/[0.03] via-white/[0.015] to-transparent border border-white/10 hover:border-[#00E5BE]/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left transition-all duration-300 shadow-[0_10px_35px_rgba(0,0,0,0.3)]">
+          <div className="space-y-2 max-w-xl">
+            <div className="flex items-center justify-center md:justify-start gap-1.5 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
               <span>Pioneering Saudi AI Innovation</span>
             </div>
-            <h4 className="text-sm sm:text-base font-bold text-white">
+            <h4 className="text-lg sm:text-xl font-bold text-white tracking-tight">
               Adopted by leading enterprises across Saudi Arabia & SMEs
             </h4>
-            <p className="text-[11px] text-gray-400">
+            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
               Transforming operations with custom AI agents, automated sales pipelines, and bespoke intelligence.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] hover:scale-105 transition-transform duration-200">
-            <HeartHandshake className="w-4 h-4 flex-shrink-0" />
-            <div className="text-left text-[11px] font-medium">
+          <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] hover:scale-105 transition-transform duration-200">
+            <HeartHandshake className="w-5 h-5 flex-shrink-0" />
+            <div className="text-left text-xs font-medium">
               <span className="font-bold text-white">Social Impact:</span> We donate 1% of proceeds to the <span className="underline decoration-[#00E5BE]">Ehsan Platform (منصة إحسان)</span>.
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Comprehensive Insights Section */}
-      <section id="insights" className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
-        <div className="text-center space-y-2.5 max-w-xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
-            <Activity className="w-3 h-3" />
+      {/* 5. Comprehensive Insights Section (Distinct Boundary with Streaming Pill Cloud) */}
+      <section id="insights" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.07] bg-gradient-to-b from-white/[0.015] via-transparent to-transparent">
+        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+            <Activity className="w-3.5 h-3.5" />
             <span>LIVE OVERSIGHT & REAL-TIME ANALYTICS</span>
           </div>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Comprehensive Insights That Drive <span className="text-[#00E5BE]">Growth</span>
           </h2>
-          <p className="text-xs text-gray-300 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
             Track every campaign, automated agent, and customer interaction in real time to refine engagement strategies and eliminate guesswork.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
           
           {/* Card 1: Real-Time Oversight */}
-          <div className="p-6 sm:p-7 rounded-2xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_8px_30px_rgba(0,229,190,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-3.5">
-              <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
-                <TrendingUp className="w-4 h-4" />
+          <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-6 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div className="space-y-4">
+              <div className="w-11 h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
+                <TrendingUp className="w-5 h-5" />
               </div>
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold text-[#00E5BE] tracking-widest uppercase">LIVE OVERSIGHT</span>
-                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">Real-Time Insights</h3>
-                <p className="text-xs text-gray-300 leading-relaxed">
+              <div className="space-y-1.5">
+                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">LIVE OVERSIGHT</span>
+                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">Real-Time Insights</h3>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
                   Monitor your campaigns and customer touchpoints in real time to ensure maximum operational effectiveness and identify optimization opportunities instantly.
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-2 gap-2.5 pt-1">
                 {["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"].map((item) => (
-                  <div key={item} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-[10px] font-medium text-gray-200 hover:text-white transition-all cursor-default">
-                    <CheckCircle2 className="w-2.5 h-2.5 text-[#00E5BE] flex-shrink-0" />
+                  <div key={item} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2.5">
-              <div className="flex items-center justify-between text-[10px] border-b border-white/[0.06] pb-2">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
+            <div className="p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-3">
+              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2.5">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-pulse" />
                   <span className="font-bold text-white">Live Agent Telemetry</span>
                 </div>
                 <span className="text-[#00E5BE] font-mono font-semibold">99.98% Uptime</span>
               </div>
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-sm font-bold text-white">~0.4s</div>
-                  <div className="text-[8px] text-gray-400 uppercase tracking-wider">Latency</div>
+              <div className="grid grid-cols-3 gap-2.5 text-center">
+                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-base sm:text-lg font-bold text-white">~0.4s</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Latency</div>
                 </div>
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-sm font-bold text-[#00E5BE]">3.2X</div>
-                  <div className="text-[8px] text-gray-400 uppercase tracking-wider">Conversion</div>
+                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-base sm:text-lg font-bold text-[#00E5BE]">3.2X</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Conversion</div>
                 </div>
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-sm font-bold text-white">24/7</div>
-                  <div className="text-[8px] text-gray-400 uppercase tracking-wider">Active</div>
+                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-base sm:text-lg font-bold text-white">24/7</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Active</div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Card 2: Actionable Data */}
-          <div className="p-6 sm:p-7 rounded-2xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_8px_30px_rgba(0,229,190,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-3.5">
-              <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
-                <BarChart3 className="w-4 h-4" />
+          <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-6 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div className="space-y-4">
+              <div className="w-11 h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
+                <BarChart3 className="w-5 h-5" />
               </div>
-              <div className="space-y-1">
-                <span className="text-[10px] font-bold text-[#00E5BE] tracking-widest uppercase">STRATEGIC EFFICIENCY</span>
-                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">Actionable Data</h3>
-                <p className="text-xs text-gray-300 leading-relaxed">
+              <div className="space-y-1.5">
+                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">STRATEGIC EFFICIENCY</span>
+                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">Actionable Data</h3>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
                   Leverage analytics to enhance team workflows, boost engagement, and make data-driven decisions that reduce overhead and increase marketing ROI.
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 pt-1">
+              <div className="grid grid-cols-2 gap-2.5 pt-1">
                 {["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"].map((item) => (
-                  <div key={item} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-[10px] font-medium text-gray-200 hover:text-white transition-all cursor-default">
-                    <CheckCircle2 className="w-2.5 h-2.5 text-[#00E5BE] flex-shrink-0" />
+                  <div key={item} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2">
-              <div className="flex items-center justify-between text-[10px] border-b border-white/[0.06] pb-2">
+            <div className="p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2.5">
+              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2.5">
                 <span className="font-bold text-white">Workflow Efficiency Gain</span>
                 <span className="text-[#00E5BE] font-mono font-semibold">+45% Gain</span>
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <div>
-                  <div className="flex justify-between text-[9px] text-gray-400 mb-0.5">
+                  <div className="flex justify-between text-[10px] text-gray-400 mb-1">
                     <span>Manual Task Reduction</span>
                     <span className="text-[#00E5BE] font-bold">42%</span>
                   </div>
-                  <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[42%]" />
                   </div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-[9px] text-gray-400 mb-0.5">
+                  <div className="flex justify-between text-[10px] text-gray-400 mb-1">
                     <span>Lead Response Speed</span>
                     <span className="text-[#00E5BE] font-bold">85%</span>
                   </div>
-                  <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[85%]" />
                   </div>
                 </div>
@@ -683,29 +681,69 @@ export default function Home() {
           </div>
 
         </div>
+
+        {/* Dual-Row Value Pill Cloud (Matching Reference Mockup) */}
+        <div className="mt-16 pt-10 border-t border-white/[0.06] space-y-3.5 overflow-hidden">
+          {/* Row 1 */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            {[
+              "Real-Time Reports",
+              "Personalized Engagement",
+              "Customer Retention",
+              "Seamless Integrations",
+              "Real-Time Reports",
+            ].map((pill, idx) => (
+              <div
+                key={idx}
+                className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/10 border border-white/10 hover:border-[#00E5BE]/40 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105"
+              >
+                {pill}
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2 (Offset) */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            {[
+              "Increased Efficiency",
+              "Cost-Effective",
+              "Smart Spending",
+              "Data-Driven Decisions",
+              "Increased Efficiency",
+            ].map((pill, idx) => (
+              <div
+                key={idx}
+                className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/10 border border-white/10 hover:border-[#00E5BE]/40 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105"
+              >
+                {pill}
+              </div>
+            ))}
+          </div>
+        </div>
+
       </section>
 
-      {/* 6. Sticky Interactive Scroll-Down Solutions Showcase (Compact Refined Scale) */}
-      <section id="solutions" className="relative z-10 py-12 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      {/* 6. Sticky Interactive Solutions Showcase (Distinct Container Separation) */}
+      <section id="solutions" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* Left Column: Sticky Title & Step Navigator */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-4 text-left">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[9px] font-bold tracking-widest uppercase">
-                <Sparkles className="w-2.5 h-2.5" />
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-5 text-left">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+                <Sparkles className="w-3 h-3" />
                 <span>BUILT FOR HIGH-ASSURANCE SCALE</span>
               </div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 AI Solutions Built for <span className="text-[#00E5BE]">Your Industry</span>
               </h2>
-              <p className="text-xs text-gray-300 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
                 Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations.
               </p>
             </div>
 
             {/* Step Navigation Pill Selector */}
-            <div className="space-y-1.5 pt-1">
+            <div className="space-y-2 pt-2">
               {showcaseSolutions.map((sol, idx) => (
                 <button
                   key={sol.step}
@@ -714,17 +752,17 @@ export default function Home() {
                     const elem = document.getElementById(`solution-step-${idx}`);
                     if (elem) elem.scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
-                  className={`w-full p-2.5 rounded-lg border text-left transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                  className={`w-full p-3 rounded-xl border text-left transition-all duration-300 flex items-center justify-between cursor-pointer ${
                     activeSolution === idx
-                      ? "bg-white/[0.04] border-[#00E5BE] text-white shadow-[0_0_15px_rgba(0,229,190,0.12)]"
+                      ? "bg-white/[0.04] border-[#00E5BE] text-white shadow-[0_0_20px_rgba(0,229,190,0.15)]"
                       : "bg-transparent border-white/[0.06] text-gray-400 hover:border-white/20 hover:text-gray-200"
                   }`}
                 >
-                  <div className="flex items-center gap-2.5">
-                    <span className={`font-mono text-[11px] font-bold ${activeSolution === idx ? "text-[#00E5BE]" : "text-gray-500"}`}>
+                  <div className="flex items-center gap-3">
+                    <span className={`font-mono text-xs font-bold ${activeSolution === idx ? "text-[#00E5BE]" : "text-gray-500"}`}>
                       {sol.step}
                     </span>
-                    <span className="text-[11px] font-bold">{sol.title}</span>
+                    <span className="text-xs font-bold">{sol.title}</span>
                   </div>
                   {activeSolution === idx && (
                     <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
@@ -733,65 +771,65 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="pt-1">
+            <div className="pt-2">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
               >
                 <span>CONSULT ON CUSTOM WORKFLOWS</span>
-                <ArrowRight className="w-3 h-3" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
 
           {/* Right Column: Scrollable Solution Showcase Cards */}
-          <div className="lg:col-span-7 space-y-5">
+          <div className="lg:col-span-7 space-y-6">
             {showcaseSolutions.map((sol, idx) => (
               <div
                 key={sol.step}
                 id={`solution-step-${idx}`}
                 onMouseEnter={() => setActiveSolution(idx)}
-                className={`p-4 sm:p-5 rounded-2xl border transition-all duration-500 space-y-3 text-left ${
+                className={`p-6 sm:p-7 rounded-3xl border transition-all duration-500 space-y-4 text-left ${
                   activeSolution === idx
-                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_10px_35px_rgba(0,229,190,0.12)] -translate-y-0.5"
+                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_16px_50px_rgba(0,229,190,0.15)] -translate-y-1"
                     : "bg-white/[0.02] border-white/[0.08] hover:border-white/20"
                 }`}
               >
                 {/* Card Header: Step Index & Badge */}
-                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-sm font-extrabold text-[#00E5BE]">{sol.step}</span>
-                    <span className="font-mono text-[10px] text-gray-500">/ {sol.total}</span>
-                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-1.5">{sol.tag}</span>
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-base font-extrabold text-[#00E5BE]">{sol.step}</span>
+                    <span className="font-mono text-xs text-gray-500">/ {sol.total}</span>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-2">{sol.tag}</span>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[9px] font-bold">
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold">
                     {sol.badge}
                   </span>
                 </div>
 
                 {/* Title & Description */}
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
                       {sol.icon}
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">{sol.title}</h3>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{sol.title}</h3>
                   </div>
-                  <p className="text-xs text-gray-300 leading-relaxed font-normal">{sol.desc}</p>
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">{sol.desc}</p>
                 </div>
 
                 {/* Metrics Row */}
-                <div className="grid grid-cols-3 gap-2 pt-0.5">
+                <div className="grid grid-cols-3 gap-2.5 pt-1">
                   {sol.metrics.map((m) => (
-                    <div key={m.label} className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05] text-center">
-                      <div className="text-xs sm:text-sm font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
-                      <div className="text-[8px] text-gray-400 font-medium tracking-tight mt-0.5">{m.label}</div>
+                    <div key={m.label} className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-center">
+                      <div className="text-sm font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
+                      <div className="text-[9px] text-gray-400 font-medium tracking-tight mt-0.5">{m.label}</div>
                     </div>
                   ))}
                 </div>
 
                 {/* Interactive Simulated UI Mockup */}
-                <div className="pt-1">
+                <div className="pt-2">
                   {sol.mockup}
                 </div>
               </div>
@@ -801,66 +839,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Flexible Service Packages */}
-      <section className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full">
-        <div className="text-center space-y-2.5 max-w-xl mx-auto mb-10">
-          <span className="text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
+      {/* 7. Flexible Service Packages (Distinct Background Separation) */}
+      <section id="pricing" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.06] bg-gradient-to-b from-[#08121a]/30 to-transparent">
+        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-16">
+          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
             TRANSPARENT ENGAGEMENT, MEASURABLE RESULTS
           </span>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Flexible Plans for <span className="text-[#00E5BE]">Companies & SMEs</span>
           </h2>
-          <p className="text-xs text-gray-300 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
             Choose the engagement model that fits your operational goals and scale seamlessly as you grow.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {plans.map((plan) => (
             <div
               key={plan.title}
-              className={`relative rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
+              className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
                 plan.popular
-                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_30px_rgba(0,229,190,0.15)] lg:-translate-y-1 hover:shadow-[0_0_40px_rgba(0,229,190,0.25)]"
-                  : "bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.06] hover:border-[#00E5BE]/40 hover:-translate-y-0.5"
+                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_35px_rgba(0,229,190,0.18)] lg:-translate-y-1.5 hover:shadow-[0_0_45px_rgba(0,229,190,0.3)]"
+                  : "bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.06] hover:border-[#00E5BE]/40 hover:-translate-y-1"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[9px] font-extrabold tracking-widest uppercase shadow-[0_0_10px_rgba(0,229,190,0.5)]">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[10px] font-extrabold tracking-widest uppercase shadow-[0_0_12px_rgba(0,229,190,0.5)]">
                   {plan.tag}
                 </div>
               )}
 
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div>
-                  <span className="text-[10px] font-bold text-[#00E5BE] tracking-wider uppercase">{plan.subtitle}</span>
-                  <h3 className="text-lg sm:text-xl font-bold text-white mt-0.5">{plan.title}</h3>
-                  <p className="text-[11px] text-gray-300 mt-1 leading-relaxed">{plan.desc}</p>
+                  <span className="text-[11px] font-bold text-[#00E5BE] tracking-wider uppercase">{plan.subtitle}</span>
+                  <h3 className="text-2xl font-bold text-white mt-1">{plan.title}</h3>
+                  <p className="text-xs text-gray-300 mt-1.5 leading-relaxed">{plan.desc}</p>
                 </div>
 
                 <div className="h-px bg-white/10" />
 
-                <ul className="space-y-2.5">
+                <ul className="space-y-3">
                   {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2 text-xs text-gray-200">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0 mt-0.5" />
+                    <li key={feat} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-200">
+                      <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-5 mt-4 border-t border-white/5">
+              <div className="pt-6 mt-5 border-t border-white/5">
                 <Link
                   href="/contact"
-                  className={`w-full inline-flex items-center justify-center py-2.5 text-xs font-bold tracking-widest uppercase rounded-lg transition-all cursor-pointer ${
+                  className={`w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl transition-all cursor-pointer ${
                     plan.popular
-                      ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_14px_rgba(0,229,190,0.4)]"
+                      ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_16px_rgba(0,229,190,0.4)]"
                       : "btn-teal-outline"
                   }`}
                 >
                   <span>GET STARTED</span>
-                  <ArrowRight className="w-3 h-3 ml-1.5" />
+                  <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                 </Link>
               </div>
             </div>
@@ -869,16 +907,16 @@ export default function Home() {
       </section>
 
       {/* 8. Interactive Testimonial Carousel */}
-      <section className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full">
-        <div className="text-center space-y-2.5 max-w-xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
-            <Sparkles className="w-3 h-3" />
+      <section className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
+        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+            <Sparkles className="w-3.5 h-3.5" />
             <span>TESTED & TRUSTED NATIONWIDE</span>
           </div>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight text-center">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight text-center">
             What Our <span className="text-[#00E5BE]">Clients</span> Say
           </h2>
-          <p className="text-xs text-gray-300 leading-relaxed font-normal text-center">
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal text-center">
             Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI.
           </p>
         </div>
@@ -890,7 +928,7 @@ export default function Home() {
           className="relative overflow-hidden"
         >
           <div
-            className="flex transition-transform duration-700 ease-out gap-4 sm:gap-5"
+            className="flex transition-transform duration-700 ease-out gap-5 sm:gap-6"
             style={{
               transform: `translateX(-${carouselIndex * (100 / (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3))}%)`,
             }}
@@ -898,30 +936,30 @@ export default function Home() {
             {extendedTestimonials.map((t, idx) => (
               <div
                 key={idx}
-                className="w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] flex-shrink-0 p-6 rounded-2xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,229,190,0.1)] group"
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 p-7 rounded-3xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] group"
               >
-                <div className="space-y-3">
+                <div className="space-y-3.5">
                   <div className="flex items-center justify-between">
-                    <div className="w-7 h-7 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
-                      <Quote className="w-3 h-3" />
+                    <div className="w-8 h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                      <Quote className="w-3.5 h-3.5" />
                     </div>
                     <div className="flex items-center gap-0.5 text-[#00E5BE]">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-2.5 h-2.5 fill-[#00E5BE]" />
+                        <Star key={i} className="w-3 h-3 fill-[#00E5BE]" />
                       ))}
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-200 group-hover:text-white leading-relaxed font-normal italic transition-colors">
+                  <p className="text-xs sm:text-sm text-gray-200 group-hover:text-white leading-relaxed font-normal italic transition-colors">
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-white/[0.06] space-y-1">
-                  <div className="font-bold text-white text-xs group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
-                  <div className="text-[10px] text-gray-400 font-medium">{t.role}</div>
-                  <div className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-[#00E5BE]/10 text-[#00E5BE] text-[9px] font-semibold">
-                    <CheckCircle2 className="w-2 h-2" />
+                <div className="pt-4 border-t border-white/[0.06] space-y-1.5">
+                  <div className="font-bold text-white text-sm group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
+                  <div className="text-[11px] text-gray-400 font-medium">{t.role}</div>
+                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-semibold">
+                    <CheckCircle2 className="w-2.5 h-2.5" />
                     <span>{t.metrics}</span>
                   </div>
                 </div>
@@ -931,25 +969,25 @@ export default function Home() {
         </div>
 
         {/* Carousel Pagination Dots & Arrow Controls */}
-        <div className="flex items-center justify-center gap-4 mt-8">
+        <div className="flex items-center justify-center gap-4 mt-10">
           <button
             onClick={handlePrev}
             aria-label="Previous testimonial"
-            className="w-8 h-8 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+            className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             {testimonials.map((_, dotIdx) => (
               <button
                 key={dotIdx}
                 onClick={() => setCarouselIndex(dotIdx)}
                 aria-label={`Jump to slide ${dotIdx + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   carouselIndex === dotIdx
-                    ? "w-5 bg-[#00E5BE] shadow-[0_0_8px_rgba(0,229,190,0.8)]"
-                    : "w-1.5 bg-white/20 hover:bg-white/40"
+                    ? "w-6 bg-[#00E5BE] shadow-[0_0_10px_rgba(0,229,190,0.8)]"
+                    : "w-2 bg-white/20 hover:bg-white/40"
                 }`}
               />
             ))}
@@ -958,46 +996,46 @@ export default function Home() {
           <button
             onClick={handleNext}
             aria-label="Next testimonial"
-            className="w-8 h-8 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+            className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </section>
 
-      {/* 9. Interactive FAQ Section */}
-      <section className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[960px] mx-auto w-full">
-        <div className="text-center space-y-2.5 max-w-xl mx-auto mb-10">
-          <span className="text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
+      {/* 9. Interactive FAQ Section (Distinct Clean Section) */}
+      <section className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1080px] mx-auto w-full border-t border-white/[0.07]">
+        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-14">
+          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
             YOUR QUERIES, SIMPLIFIED
           </span>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Frequently Asked <span className="text-[#00E5BE]">Questions</span>
           </h2>
-          <p className="text-xs text-gray-300 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
             Find clear answers to common questions about Tahseen AI&apos;s capabilities and integration process.
           </p>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3.5">
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 overflow-hidden transition-all duration-200"
+              className="rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 overflow-hidden transition-all duration-200"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-4 text-left flex items-center justify-between gap-3 font-bold text-xs sm:text-sm text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
+                className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-4 h-4 text-[#00E5BE] flex-shrink-0 transition-transform duration-300 ${
                     openFaq === idx ? "rotate-180" : ""
                   }`}
                 />
               </button>
               {openFaq === idx && (
-                <div className="px-4 pb-4 pt-0.5 text-xs text-gray-300 leading-relaxed border-t border-white/[0.04]">
+                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/[0.04]">
                   {faq.a}
                 </div>
               )}
@@ -1007,7 +1045,7 @@ export default function Home() {
       </section>
 
       {/* 10. High-Impact CTA & Telemetry Banner (Matching Design Spec) */}
-      <section id="contact" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
+      <section id="contact" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.08]">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-8 sm:p-12 lg:p-14 shadow-[0_0_50px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 transition-all duration-500">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
