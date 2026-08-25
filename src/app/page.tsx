@@ -24,6 +24,8 @@ import {
   Users,
   HelpCircle,
   Globe,
+  Menu,
+  X,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
@@ -32,6 +34,7 @@ export default function Home() {
   const [lang, setLang] = useState<"ar" | "en">("ar");
   const isAr = lang === "ar";
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -63,6 +66,7 @@ export default function Home() {
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault();
+      setMobileMenuOpen(false);
       const targetId = href.replace("#", "");
       if (targetId === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -86,13 +90,13 @@ export default function Home() {
           desc: "انشر وكلاء أذكياء عبر الواتساب والموقع الإلكتروني والبريد للإجابة على الاستفسارات المعقدة، وحجز الاجتماعات في تقويمك، وتحويل العملاء المؤهلين مباشرة.",
           metrics: [
             { label: "نمو أداء المبيعات", val: "٣ أضعاف" },
-            { label: "سرعة الاستجابة", val: "أقل من ١٠ ثوانٍ" },
+            { label: "سرعة الاستجابة", val: "< ١٠ ثوانٍ" },
             { label: "التوافر والجاهزية", val: "٢٤/٧ / ٣٦٥" },
           ],
           badge: "نظام وكلاء ذكي",
           icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <div className="flex items-center gap-1.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
@@ -101,11 +105,11 @@ export default function Home() {
                 <span className="text-[#00E5BE] text-[9px]">نشط الآن</span>
               </div>
               <div className="space-y-1.5 text-right font-sans">
-                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 text-[11px] leading-snug">
+                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 leading-snug">
                   <span className="text-gray-500 font-mono text-[9px] block">العميل (واتساب):</span>
                   &ldquo;نحتاج أتمتة نظام إدارة علاقات العملاء (CRM) لفروعنا في الرياض.&rdquo;
                 </div>
-                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-[11px] leading-snug">
+                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white leading-snug">
                   <span className="text-[#00E5BE] font-mono text-[9px] block">وكيل تحسين الذكي:</span>
                   &ldquo;أهلاً بك! نطلق أنظمة الأتمتة المخصصة خلال أسبوعين فقط. حجزت لك موعد تدشين غداً الساعة ٢:٠٠ ظهراً. هل تود التأكيد؟&rdquo;
                 </div>
@@ -128,23 +132,23 @@ export default function Home() {
           badge: "تدفقات فورية خالية من التأخير",
           icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-right">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-right">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <span className="text-white font-bold text-[10px]">مسار تدفق البيانات المؤتمت</span>
                 <span className="text-[#00E5BE] text-[9px]">مزامنة مستمرة</span>
               </div>
-              <div className="space-y-1 font-sans text-[11px]">
+              <div className="space-y-1 font-sans">
                 <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">١</span>
-                  <span>استقبال الطلب واستخراج البيانات بالذكاء الاصطناعي (OCR)</span>
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">١</span>
+                  <span className="truncate">استقبال الطلب واستخراج البيانات بالـ AI</span>
                 </div>
                 <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">٢</span>
-                  <span>التحقق الذكي وتقييم المخاطر اللحظي</span>
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">٢</span>
+                  <span className="truncate">التحقق الذكي وتقييم المخاطر اللحظي</span>
                 </div>
                 <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold">✓</span>
-                  <span>مزامنة فورية مع قاعدة البيانات وإشعار الإدارة</span>
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold flex-shrink-0">✓</span>
+                  <span className="truncate">مزامنة فورية مع قاعدة البيانات</span>
                 </div>
               </div>
             </div>
@@ -158,14 +162,14 @@ export default function Home() {
           subtitle: "رؤية كاملة لجميع التفاعلات المؤتمتة وأداء الحملات بدقة عالية.",
           desc: "لوحات تحليلات مباشرة ترصد كفاءة الحملات، ورضا العملاء، ودقة الوكلاء، ونسب التحويل في الوقت الفعلي دون أي تكهنات.",
           metrics: [
-            { label: "متوسط سرعة الاستجابة", val: "~٠.٤ ثانية" },
-            { label: "نسبة توافر النظام", val: "٩٩.٩٨٪" },
-            { label: "الامتثال والتدقيق", val: "١٠٠٪" },
+            { label: "سرعة الاستجابة", val: "~٠.٤ ثانية" },
+            { label: "نسبة التوافر", val: "٩٩.٩٨٪" },
+            { label: "الامتثال", val: "١٠٠٪" },
           ],
           badge: "بيانات بث مباشر",
           icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <span className="text-white font-bold text-[10px]">تحليلات العمليات الحية</span>
                 <span className="text-[#00E5BE] text-[9px]">بث مباشر</span>
@@ -194,26 +198,26 @@ export default function Home() {
           subtitle: "حماية تامة وسرية مطلقة لبيانات ومعلومات مؤسستك الخاصة.",
           desc: "نماذج ذكاء اصطناعي مخصصة وأنظمة استرجاع خاصة مستضافة بالكامل داخل سحابة سعودية سيادية متوافقة مع المتطلبات والتشريعات المحلية.",
           metrics: [
-            { label: "تشفير البيانات", val: "AES-256 / TLS" },
-            { label: "الاستضافة", val: "سحابة سعودية سيادية" },
-            { label: "الالتزام والضمان", val: "اتفاقية SLA صارمة" },
+            { label: "تشفير البيانات", val: "AES-256" },
+            { label: "الاستضافة", val: "سحابة سيادية" },
+            { label: "الضمان", val: "SLA صارم" },
           ],
           badge: "ذكاء اصطناعي سيادي",
           icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-right">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-right">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <span className="text-white font-bold text-[10px]">درع السيادة والأمان</span>
                 <span className="text-[#00E5BE] text-[9px]">محمي ومشفر</span>
               </div>
-              <div className="space-y-1 text-[11px] font-sans">
+              <div className="space-y-1 text-xs font-sans">
                 <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span>بيئة سحابية خاصة معزولة ومنع تسريب البيانات</span>
+                  <span className="text-[10px]">بيئة سحابية خاصة معزولة ومنع تسريب البيانات</span>
                 </div>
                 <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span>توافق كامل مع التشريعات والمعايير في المملكة</span>
+                  <span className="text-[10px]">توافق كامل مع التشريعات والمعايير في المملكة</span>
                 </div>
               </div>
             </div>
@@ -229,14 +233,14 @@ export default function Home() {
           subtitle: "Autonomous multi-channel intelligence that qualifies leads and converts 24/7.",
           desc: "Deploy intelligent agents across WhatsApp, website chat, and email that answer complex inquiries, schedule meetings directly into your calendar, and hand off qualified leads with full context.",
           metrics: [
-            { label: "Sales Performance", val: "3X Boost" },
-            { label: "Lead Response Time", val: "< 10s" },
-            { label: "Active Availability", val: "24/7 / 365" },
+            { label: "Sales Boost", val: "3X Growth" },
+            { label: "Response Time", val: "< 10s" },
+            { label: "Availability", val: "24/7 / 365" },
           ],
           badge: "Agentic AI System",
           icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <div className="flex items-center gap-1.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
@@ -245,11 +249,11 @@ export default function Home() {
                 <span className="text-[#00E5BE] text-[9px]">Active</span>
               </div>
               <div className="space-y-1.5 text-left font-sans">
-                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 text-[11px] leading-snug">
+                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 leading-snug">
                   <span className="text-gray-500 font-mono text-[9px] block">Customer (WhatsApp):</span>
                   &ldquo;We need an automated CRM pipeline for our Riyadh branches.&rdquo;
                 </div>
-                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-[11px] leading-snug">
+                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white leading-snug">
                   <span className="text-[#00E5BE] font-mono text-[9px] block">Tahseen AI:</span>
                   &ldquo;Certainly! Reserved an onboarding slot for tomorrow at 2:00 PM (AST). Confirm?&rdquo;
                 </div>
@@ -265,30 +269,30 @@ export default function Home() {
           subtitle: "Eliminate repetitive manual bottlenecks across cross-functional operations.",
           desc: "Connect your ERP, databases, customer support, and payment gateways with intelligent rules and self-healing automated logic that reduces manual processing by over 40%.",
           metrics: [
-            { label: "Manual Work Reduction", val: "-42%" },
+            { label: "Manual Work Reduced", val: "-42%" },
             { label: "Data Accuracy", val: "99.9%" },
             { label: "Deployment Speed", val: "14 Days" },
           ],
           badge: "Zero-Latency Flows",
           icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-left">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <span className="text-white font-bold text-[10px]">Automated Pipeline</span>
                 <span className="text-[#00E5BE] text-[9px]">Continuous Sync</span>
               </div>
-              <div className="space-y-1 font-sans text-[11px]">
+              <div className="space-y-1 font-sans">
                 <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">1</span>
-                  <span>RFP Ingestion & OCR Entity Parsing</span>
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">1</span>
+                  <span className="truncate">RFP Ingestion & OCR Entity Parsing</span>
                 </div>
                 <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">2</span>
-                  <span>Intelligent Risk & Validation Scoring</span>
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">2</span>
+                  <span className="truncate">Intelligent Risk & Validation Scoring</span>
                 </div>
                 <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold">✓</span>
-                  <span>Auto-Sync to Database & Executive Alert</span>
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold flex-shrink-0">✓</span>
+                  <span className="truncate">Auto-Sync to Database & Executive Alert</span>
                 </div>
               </div>
             </div>
@@ -302,14 +306,14 @@ export default function Home() {
           subtitle: "Complete visibility over every automated interaction and campaign performance.",
           desc: "Live analytics dashboards that track campaign throughput, customer sentiment, agent accuracy, and conversion metrics in real time with zero guesswork.",
           metrics: [
-            { label: "Average Latency", val: "~0.4s" },
-            { label: "System Uptime", val: "99.98%" },
-            { label: "Audit Compliance", val: "100%" },
+            { label: "Latency", val: "~0.4s" },
+            { label: "Uptime", val: "99.98%" },
+            { label: "Compliance", val: "100%" },
           ],
           badge: "Real-Time Telemetry",
           icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <span className="text-white font-bold text-[10px]">Live Throughput</span>
                 <span className="text-[#00E5BE] text-[9px]">Stream</span>
@@ -338,26 +342,26 @@ export default function Home() {
           subtitle: "Keep your proprietary organizational knowledge private, compliant, and protected.",
           desc: "Tailored AI models and private retrieval pipelines hosted inside secure Saudi cloud environments, adhering strictly to regional regulatory and data sovereignty standards.",
           metrics: [
-            { label: "Data Encryption", val: "AES-256 / TLS" },
-            { label: "Hosting", val: "KSA Sovereign" },
-            { label: "Compliance", val: "Strict SLA" },
+            { label: "Encryption", val: "AES-256" },
+            { label: "Hosting", val: "KSA Cloud" },
+            { label: "SLA", val: "Strict" },
           ],
           badge: "Sovereign AI",
           icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-left">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
                 <span className="text-white font-bold text-[10px]">Sovereignty Shield</span>
                 <span className="text-[#00E5BE] text-[9px]">Protected</span>
               </div>
-              <div className="space-y-1 text-[11px] font-sans">
+              <div className="space-y-1 text-xs font-sans">
                 <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span>Isolated Local VPC & Zero Data Leaks</span>
+                  <span className="text-[10px]">Isolated Local VPC & Zero Data Leaks</span>
                 </div>
                 <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span>Full Regulatory Alignment in Saudi Arabia</span>
+                  <span className="text-[10px]">Full Regulatory Alignment in Saudi Arabia</span>
                 </div>
               </div>
             </div>
@@ -473,7 +477,7 @@ export default function Home() {
           quote: "فريقنا الآن يركز على الاستراتيجية بدلاً من المهام المتكررة — تولت تحسين الباقي بكل احترافية.",
           author: "إسماعيل محمد",
           role: "مالك، ديكونيك (Deconec)",
-          metrics: "+١٠٠ ساعة عمل موفرة شهرياً",
+          metrics: "+١٠٠ ساعة موفرة شهرياً",
         },
         {
           quote: "شهدنا مكاسب ملموسة في الكفاءة التشغيلية ورضا العملاء. نوصي بحلول تحسين بشدة لأي منشأة.",
@@ -485,7 +489,7 @@ export default function Home() {
           quote: "قمنا بربط تحسين دون الحاجة لبرمجة معقدة. النتائج كانت فورية — سرعة في العمليات ودقة في تحليلات العملاء.",
           author: "طارق عامر",
           role: "المدير العام، جيتو (Gito)",
-          metrics: "عائد استثمار فوري خلال ٣ أسابيع",
+          metrics: "عائد استثمار فوري في ٣ أسابيع",
         },
         {
           quote: "مسارات الأتمتة سلسة ومبتكرة ووفرت علينا ساعات طويلة. الدعم الفني كان متميزاً ومتواجداً دائماً.",
@@ -655,13 +659,13 @@ export default function Home() {
       className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans"
     >
       {/* Background ambient radial glows */}
-      <div className="absolute top-0 right-1/4 w-[700px] h-[550px] bg-cyan-500/10 rounded-full blur-[170px] pointer-events-none -z-10" />
-      <div className="absolute top-[45%] left-[-150px] w-[600px] h-[600px] bg-[#00E5BE]/5 rounded-full blur-[200px] pointer-events-none -z-10" />
-      <div className="absolute bottom-[10%] right-[-100px] w-[650px] h-[650px] bg-cyan-500/8 rounded-full blur-[200px] pointer-events-none -z-10" />
+      <div className="absolute top-0 right-1/4 w-[350px] sm:w-[700px] h-[350px] sm:h-[550px] bg-cyan-500/10 rounded-full blur-[140px] sm:blur-[170px] pointer-events-none -z-10" />
+      <div className="absolute top-[45%] left-[-100px] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-[#00E5BE]/5 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
+      <div className="absolute bottom-[10%] right-[-80px] w-[320px] sm:w-[650px] h-[320px] sm:h-[650px] bg-cyan-500/8 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
 
-      {/* 1. Sticky Header / Navbar */}
-      <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
-        <div className="py-2.5 sm:py-3 px-6 sm:px-12 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
+      {/* 1. Sticky Header / Navbar (Fully Mobile Optimized) */}
+      <header className="sticky top-0 z-50 w-full bg-[#060913]/90 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
+        <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
           {/* Logo */}
           <Link
@@ -669,21 +673,21 @@ export default function Home() {
             onClick={(e) => handleSmoothScroll(e, "#home")}
             className="flex items-center group cursor-pointer"
           >
-            <div className="relative h-9 w-44 sm:h-10 sm:w-48 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,229,190,0.3)]">
+            <div className="relative h-8 w-36 sm:h-9 sm:w-44 lg:h-10 lg:w-48 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/tahseen-logo.png"
                 alt="Tahseen AI"
                 fill
-                sizes="(max-width: 640px) 176px, 192px"
+                sizes="(max-width: 640px) 144px, 192px"
                 className={`object-contain ${isAr ? "object-right" : "object-left"}`}
                 priority
               />
             </div>
           </Link>
 
-          {/* Right: Nav Links & Language Switcher & LET'S TALK Button */}
-          <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
-            <nav className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8 text-[11px] sm:text-xs font-semibold tracking-wider text-gray-300">
+          {/* Desktop Nav Links & Controls */}
+          <div className="hidden md:flex items-center gap-4 lg:gap-7">
+            <nav className="flex items-center gap-4 lg:gap-7 text-xs font-semibold tracking-wider text-gray-300">
               {navLinks.map((link) =>
                 link.href.startsWith("/") ? (
                   <Link
@@ -719,28 +723,96 @@ export default function Home() {
             {/* Contact Action Button */}
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-5 sm:px-6 py-2 text-[11px] sm:text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
+              className="inline-flex items-center justify-center px-4 sm:px-6 py-2 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>{isAr ? "تحدث معنا" : "LET'S TALK"}</span>
             </Link>
           </div>
 
+          {/* Mobile Right Controls: Language Switcher & Hamburger */}
+          <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={() => setLang(isAr ? "en" : "ar")}
+              aria-label="Toggle language"
+              className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-md bg-white/[0.04] border border-white/10 text-gray-200 hover:text-[#00E5BE]"
+            >
+              <Globe className="w-3 h-3 text-[#00E5BE]" />
+              <span>{isAr ? "EN" : "عربي"}</span>
+            </button>
+
+            <Link
+              href="/contact"
+              className="px-3 py-1.5 text-[10px] font-bold tracking-wider uppercase rounded-md btn-teal-outline"
+            >
+              <span>{isAr ? "تواصل" : "TALK"}</span>
+            </Link>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle mobile menu"
+              className="p-2 rounded-lg bg-white/[0.04] border border-white/10 text-white hover:text-[#00E5BE] transition-colors"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+
         </div>
+
+        {/* Mobile Slide-Down Drawer Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-white/10 bg-[#060913]/98 px-6 py-6 space-y-4 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200">
+            <nav className="flex flex-col space-y-3 text-sm font-bold">
+              {navLinks.map((link) =>
+                link.href.startsWith("/") ? (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="py-2.5 border-b border-white/5 text-gray-200 hover:text-[#00E5BE] transition-colors flex items-center justify-between"
+                  >
+                    <span>{link.name}</span>
+                    <ArrowRight className={`w-3.5 h-3.5 text-gray-500 ${isAr ? "rotate-180" : ""}`} />
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    className="py-2.5 border-b border-white/5 text-gray-200 hover:text-[#00E5BE] transition-colors flex items-center justify-between"
+                  >
+                    <span>{link.name}</span>
+                    <ArrowRight className={`w-3.5 h-3.5 text-gray-500 ${isAr ? "rotate-180" : ""}`} />
+                  </a>
+                )
+              )}
+            </nav>
+
+            <div className="pt-2">
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl bg-[#00E5BE] text-[#060913] shadow-[0_4px_20px_rgba(0,229,190,0.4)]"
+              >
+                <span>{isAr ? "ابدأ مشروعك معنا ←" : "LET'S TALK / CONTACT →"}</span>
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
 
-      {/* 2. Hero Section */}
-      <main id="home" className="relative z-10 pt-2 sm:pt-4 pb-10 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+      {/* 2. Hero Section (Mobile Adaptive) */}
+      <main id="home" className="relative z-10 pt-4 sm:pt-6 pb-10 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full">
         
-        {/* Full-width 3D Canvas Layer */}
+        {/* 3D Canvas Layer */}
         <HeroRing3D mirrored={isAr} />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] pointer-events-none">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[380px] sm:min-h-[460px] lg:min-h-[520px] pointer-events-none">
           
           {/* Left Hero Column */}
           <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-start pointer-events-auto">
             
             {/* Primary Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.2] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.2] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
               {isAr ? (
                 <>
                   حلول ذكاء اصطناعي <br />
@@ -755,7 +827,7 @@ export default function Home() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xs sm:text-[13px] text-gray-300 max-w-md font-normal leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <p className="text-xs sm:text-[13px] text-gray-300 max-w-sm sm:max-w-md font-normal leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
               {isAr
                 ? "نبتكر وكلاء ذكاء اصطناعي وأنظمة أتمتة متقدمة تمكّن الشركات والمؤسسات من العمل بذكاء وسرعة وكفاءة أعلى."
                 : "We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently."}
@@ -766,7 +838,7 @@ export default function Home() {
               <a
                 href="#services"
                 onClick={(e) => handleSmoothScroll(e, "#services")}
-                className="inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group cursor-pointer hover:shadow-[0_0_18px_rgba(0,229,190,0.4)]"
+                className="inline-flex items-center justify-center px-5 py-3 sm:py-2.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group cursor-pointer hover:shadow-[0_0_18px_rgba(0,229,190,0.4)] w-full sm:w-auto text-center"
               >
                 <span>{isAr ? "لنبدأ بالبناء معاً" : "LET'S BUILD TOGETHER"}</span>
                 <ArrowRight className={`w-3.5 h-3.5 mx-2 text-[#00E5BE] group-hover:translate-x-1 transition-transform duration-200 ${isAr ? "rotate-180" : ""}`} />
@@ -775,18 +847,18 @@ export default function Home() {
 
           </div>
 
-          {/* Right Hero Column Spacer */}
+          {/* Right Spacer */}
           <div className="hidden lg:block lg:col-span-6 xl:col-span-7" />
 
         </div>
 
         {/* 3. Bottom 4 Services Row */}
-        <div id="services" className="mt-16 sm:mt-20 pt-10 scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-4 text-center justify-items-center relative z-10 max-w-[1360px] mx-auto w-full">
+        <div id="services" className="mt-12 sm:mt-20 pt-8 sm:pt-10 scroll-mt-24 sm:scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-4 text-center justify-items-center relative z-10 max-w-[1360px] mx-auto w-full">
           
           {/* Card 1: AI Agents */}
           <div className="w-full p-4 sm:p-5 rounded-xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-2.5 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_25px_rgba(0,229,190,0.1)] cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
-              <svg width="28" height="28" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
+              <svg width="26" height="26" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 6C13.477 6 9 10.477 9 16C9 19.387 10.686 22.38 13.286 24.19L14 28H24L24.714 24.19C27.314 22.38 29 19.387 29 16C29 10.477 24.523 6 19 6Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M14.5 31.5H23.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
                 <path d="M16 35H22" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
@@ -810,8 +882,8 @@ export default function Home() {
 
           {/* Card 2: Automation */}
           <div className="w-full p-4 sm:p-5 rounded-xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-2.5 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_25px_rgba(0,229,190,0.1)] cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
-              <svg width="28" height="28" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
+              <svg width="26" height="26" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 4L22.2 7.8C23.5 9.3 25.5 10.1 27.5 9.9L32.2 9.5L33 14.2C33.3 16.2 34.6 17.9 36.5 18.7L37 19L36.5 19.3C34.6 20.1 33.3 21.8 33 23.8L32.2 28.5L27.5 28.1C25.5 27.9 23.5 28.7 22.2 30.2L19 34L15.8 30.2C14.5 28.7 12.5 27.9 10.5 28.1L5.8 28.5L5 23.8C4.7 21.8 3.4 20.1 1.5 19.3L1 19L1.5 18.7C3.4 17.9 4.7 16.2 5 14.2L5.8 9.5L10.5 9.9C12.5 10.1 14.5 9.3 15.8 7.8L19 4Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <circle cx="19" cy="19" r="4.5" stroke="#00E5BE" strokeWidth="2.2"/>
                 <circle cx="19" cy="19" r="1.5" fill="#00E5BE"/>
@@ -829,8 +901,8 @@ export default function Home() {
 
           {/* Card 3: Consulting */}
           <div className="w-full p-4 sm:p-5 rounded-xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-2.5 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_25px_rgba(0,229,190,0.1)] cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
-              <svg width="28" height="28" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
+              <svg width="26" height="26" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 19C9 13.477 13.477 9 19 9C24.523 9 29 13.477 29 19C29 21.884 27.781 24.484 25.823 26.315L27 32L21.5 30.2C20.697 30.457 19.86 30.6 19 30.6C13.477 30.6 9 26.123 9 20.6V19Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M12 11C12 7.5 15 5 19 5C23 5 26 7.5 26 11" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 3"/>
                 <circle cx="19" cy="19" r="2.8" stroke="#00E5BE" strokeWidth="2"/>
@@ -849,18 +921,14 @@ export default function Home() {
 
           {/* Card 4: Development */}
           <div className="w-full p-4 sm:p-5 rounded-xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-2.5 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_25px_rgba(0,229,190,0.1)] cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
-              <svg width="28" height="28" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
+              <svg width="26" height="26" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 5H7C5.895 5 5 5.895 5 7V12" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M26 5H31C32.105 5 33 5.895 33 7V12" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M5 26V31C5 32.105 5.895 33 7 33H12" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M33 26V31C33 32.105 32.105 33 31 33H26" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <circle cx="19" cy="19" r="4.5" stroke="#00E5BE" strokeWidth="2"/>
                 <circle cx="19" cy="19" r="1.6" fill="#00E5BE"/>
-                <line x1="19" y1="10" x2="19" y2="12" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
-                <line x1="19" y1="26" x2="19" y2="28" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
-                <line x1="10" y1="19" x2="12" y2="19" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
-                <line x1="26" y1="19" x2="28" y2="19" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -877,13 +945,13 @@ export default function Home() {
 
       </main>
 
-      {/* 4. Enterprise Social Proof & Partner Logos */}
-      <section id="about" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28">
+      {/* 4. Enterprise Social Proof & Partner Logos (Mobile Wrapped) */}
+      <section id="about" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28">
         
         {/* Centered Heading with Dotted Divider Lines */}
-        <div className="flex items-center justify-center gap-4 sm:gap-8 w-full mb-10">
+        <div className="flex items-center justify-center gap-3 sm:gap-8 w-full mb-8 sm:mb-10">
           <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
-          <h4 className="text-sm sm:text-base md:text-lg font-bold text-gray-200 text-center tracking-tight leading-relaxed max-w-xl">
+          <h4 className="text-xs sm:text-base md:text-lg font-bold text-gray-200 text-center tracking-tight leading-relaxed max-w-xl">
             {isAr ? (
               <>
                 معتمد وموثوق من قِبل كبرى المؤسسات الرائدة <br className="hidden sm:inline" />
@@ -899,38 +967,38 @@ export default function Home() {
           <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
         </div>
 
-        {/* Crisp White/Teal Container Box */}
-        <div className="rounded-2xl sm:rounded-3xl bg-white/[0.96] backdrop-blur-2xl border-2 border-[#00E5BE]/40 p-6 sm:p-8 md:p-10 shadow-[0_12px_40px_rgba(0,229,190,0.18)] flex flex-wrap items-center justify-center gap-10 sm:gap-16 lg:gap-24 transition-all duration-300 hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.28)]">
+        {/* Crisp White/Teal Container Box (Mobile Adaptive) */}
+        <div className="rounded-2xl sm:rounded-3xl bg-white/[0.96] backdrop-blur-2xl border-2 border-[#00E5BE]/40 p-5 sm:p-8 md:p-10 shadow-[0_12px_40px_rgba(0,229,190,0.18)] flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
           
           {/* Logo 1: Zana Cultural Entity */}
-          <div className="relative h-14 w-14 sm:h-16 sm:w-16 transition-transform duration-300 hover:scale-105">
+          <div className="relative h-12 w-12 sm:h-16 sm:w-16 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-1.png"
               alt="Saudi Cultural Entity"
               fill
-              sizes="64px"
+              sizes="(max-width: 640px) 48px, 64px"
               className="object-contain"
             />
           </div>
 
           {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
-          <div className="relative h-12 w-56 sm:h-14 sm:w-64 transition-transform duration-300 hover:scale-105">
+          <div className="relative h-10 w-44 sm:h-14 sm:w-64 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-2.svg"
               alt="Imam Abdulrahman Bin Faisal University"
               fill
-              sizes="256px"
+              sizes="(max-width: 640px) 176px, 256px"
               className="object-contain"
             />
           </div>
 
           {/* Logo 3: ITQAN */}
-          <div className="relative h-12 w-28 sm:h-14 sm:w-32 transition-transform duration-300 hover:scale-105">
+          <div className="relative h-10 w-24 sm:h-14 sm:w-32 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-3.png"
               alt="ITQAN - Driven by Knowledge"
               fill
-              sizes="128px"
+              sizes="(max-width: 640px) 96px, 128px"
               className="object-contain"
             />
           </div>
@@ -940,13 +1008,13 @@ export default function Home() {
       </section>
 
       {/* 5. Comprehensive Insights Section */}
-      <section id="insights" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.07] bg-gradient-to-b from-white/[0.015] via-transparent to-transparent">
-        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+      <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.07] bg-gradient-to-b from-white/[0.015] via-transparent to-transparent">
+        <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-16">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
             <Activity className="w-3.5 h-3.5" />
             <span>{isAr ? "متابعة حية وتحليلات فورية" : "LIVE OVERSIGHT & REAL-TIME ANALYTICS"}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             {isAr ? (
               <>
                 تحليلات شاملة تقود <span className="text-[#00E5BE]">النمو والريادة</span>
@@ -957,26 +1025,26 @@ export default function Home() {
               </>
             )}
           </h2>
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+          <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal">
             {isAr
               ? "تتبّع كل حملة، ووكيل ذكي، وتفاعل مع العملاء بشكل فوري لتطوير استراتيجياتك والتخلص من التخمين."
               : "Track every campaign, automated agent, and customer interaction in real time to refine engagement strategies and eliminate guesswork."}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
           
           {/* Card 1: Real-Time Oversight */}
-          <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-6 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-11 h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
-                <TrendingUp className="w-5 h-5" />
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div className="space-y-3.5">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <div className="space-y-1.5">
-                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
+              <div className="space-y-1">
+                <span className="text-[10px] sm:text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
                   {isAr ? "المتابعة اللحظية" : "LIVE OVERSIGHT"}
                 </span>
-                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
                   {isAr ? "رؤى لحظية مباشرة" : "Real-Time Insights"}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
@@ -986,55 +1054,55 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 {(isAr
                   ? ["الحفاظ على العملاء (+٤٠٪)", "تكامل سلس مع الأنظمة", "تقارير فورية مباشرة", "تفاعل مخصص وذكي"]
                   : ["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"]
                 ).map((item) => (
-                  <div key={item} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
+                  <div key={item} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                    <span>{item}</span>
+                    <span className="truncate">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-3">
-              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2.5">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2.5">
+              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-pulse" />
-                  <span className="font-bold text-white">{isAr ? "بيانات تشغيل الوكلاء الحية" : "Live Agent Telemetry"}</span>
+                  <span className="font-bold text-white text-[11px] sm:text-xs">{isAr ? "بيانات تشغيل الوكلاء الحية" : "Live Agent Telemetry"}</span>
                 </div>
-                <span className="text-[#00E5BE] font-mono font-semibold">{isAr ? "٩٩.٩٨٪ جاهزية النظام" : "99.98% Uptime"}</span>
+                <span className="text-[#00E5BE] font-mono font-semibold text-[11px] sm:text-xs">{isAr ? "٩٩.٩٨٪ توافر" : "99.98% Uptime"}</span>
               </div>
-              <div className="grid grid-cols-3 gap-2.5 text-center">
-                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-base sm:text-lg font-bold text-white">{isAr ? "~٠.٤ ثانية" : "~0.4s"}</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isAr ? "سرعة الاستجابة" : "Latency"}</div>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-sm sm:text-base font-bold text-white">{isAr ? "~٠.٤ ثانية" : "~0.4s"}</div>
+                  <div className="text-[8px] sm:text-[9px] text-gray-400 uppercase">{isAr ? "الاستجابة" : "Latency"}</div>
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-base sm:text-lg font-bold text-[#00E5BE]">{isAr ? "٣.٢ أضعاف" : "3.2X"}</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isAr ? "معدل التحويل" : "Conversion"}</div>
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-sm sm:text-base font-bold text-[#00E5BE]">{isAr ? "٣.٢X" : "3.2X"}</div>
+                  <div className="text-[8px] sm:text-[9px] text-gray-400 uppercase">{isAr ? "التحويل" : "Conversion"}</div>
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-base sm:text-lg font-bold text-white">{isAr ? "٢٤/٧" : "24/7"}</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isAr ? "نشط" : "Active"}</div>
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-sm sm:text-base font-bold text-white">{isAr ? "٢٤/٧" : "24/7"}</div>
+                  <div className="text-[8px] sm:text-[9px] text-gray-400 uppercase">{isAr ? "نشط" : "Active"}</div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Card 2: Actionable Data */}
-          <div className="p-7 sm:p-9 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-6 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="w-11 h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
-                <BarChart3 className="w-5 h-5" />
+          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+            <div className="space-y-3.5">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
+                <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <div className="space-y-1.5">
-                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
+              <div className="space-y-1">
+                <span className="text-[10px] sm:text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
                   {isAr ? "الكفاءة الاستراتيجية" : "STRATEGIC EFFICIENCY"}
                 </span>
-                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
+                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
                   {isAr ? "بيانات قابلة للتنفيذ" : "Actionable Data"}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
@@ -1044,23 +1112,23 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 {(isAr
                   ? ["نشر فعال واقتصادي", "إنفاق مالي ذكي", "قرارات مبنية على البيانات", "زيادة الكفاءة التشغيلية"]
                   : ["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"]
                 ).map((item) => (
-                  <div key={item} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
+                  <div key={item} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                    <span>{item}</span>
+                    <span className="truncate">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2.5">
-              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2.5">
-                <span className="font-bold text-white">{isAr ? "مكاسب كفاءة العمليات" : "Workflow Efficiency Gain"}</span>
-                <span className="text-[#00E5BE] font-mono font-semibold">{isAr ? "+٤٥٪ كفاءة" : "+45% Gain"}</span>
+            <div className="p-3.5 sm:p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2">
+              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2">
+                <span className="font-bold text-white text-[11px] sm:text-xs">{isAr ? "مكاسب كفاءة العمليات" : "Workflow Efficiency Gain"}</span>
+                <span className="text-[#00E5BE] font-mono font-semibold text-[11px] sm:text-xs">{isAr ? "+٤٥٪ كفاءة" : "+45% Gain"}</span>
               </div>
               <div className="space-y-2">
                 <div>
@@ -1068,7 +1136,7 @@ export default function Home() {
                     <span>{isAr ? "تقليص المهام اليدوية" : "Manual Task Reduction"}</span>
                     <span className="text-[#00E5BE] font-bold">{isAr ? "٤٢٪" : "42%"}</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                  <div className="w-full h-1.5 sm:h-2 rounded-full bg-white/10 overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[42%]" />
                   </div>
                 </div>
@@ -1077,7 +1145,7 @@ export default function Home() {
                     <span>{isAr ? "سرعة الاستجابة للعملاء" : "Lead Response Speed"}</span>
                     <span className="text-[#00E5BE] font-bold">{isAr ? "٨٥٪" : "85%"}</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                  <div className="w-full h-1.5 sm:h-2 rounded-full bg-white/10 overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[85%]" />
                   </div>
                 </div>
@@ -1088,18 +1156,17 @@ export default function Home() {
         </div>
 
         {/* Dual-Row Animated Streaming Value Pills */}
-        <div className="mt-16 pt-10 border-t border-white/[0.06] space-y-4 overflow-hidden relative">
-          {/* Edge Vignette Fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#060913] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#060913] to-transparent z-10 pointer-events-none" />
+        <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/[0.06] space-y-3 sm:space-y-4 overflow-hidden relative">
+          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-[#060913] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-[#060913] to-transparent z-10 pointer-events-none" />
 
-          {/* Row 1: Leftward Streaming Marquee */}
+          {/* Row 1 */}
           <div className="overflow-hidden flex">
-            <div className="animate-marquee-left flex items-center gap-3 sm:gap-4 py-1">
+            <div className="animate-marquee-left flex items-center gap-2.5 sm:gap-4 py-1">
               {pillsRow1.map((pill, idx) => (
                 <div
                   key={idx}
-                  className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
+                  className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-[11px] sm:text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
                 >
                   {pill}
                 </div>
@@ -1107,13 +1174,13 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Row 2: Rightward Streaming Marquee */}
+          {/* Row 2 */}
           <div className="overflow-hidden flex">
-            <div className="animate-marquee-right flex items-center gap-3 sm:gap-4 py-1">
+            <div className="animate-marquee-right flex items-center gap-2.5 sm:gap-4 py-1">
               {pillsRow2.map((pill, idx) => (
                 <div
                   key={idx}
-                  className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
+                  className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-[11px] sm:text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
                 >
                   {pill}
                 </div>
@@ -1125,17 +1192,17 @@ export default function Home() {
       </section>
 
       {/* 6. Sticky Interactive Solutions Showcase */}
-      <section id="solutions" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
           {/* Left Column: Sticky Title & Step Navigator */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-5 text-start">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-4 sm:space-y-5 text-start">
+            <div className="space-y-2.5 sm:space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
                 <Sparkles className="w-3 h-3" />
                 <span>{isAr ? "مُصمم للتوسع المؤسسي عالي الكفاءة" : "BUILT FOR HIGH-ASSURANCE SCALE"}</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
                 {isAr ? (
                   <>
                     حلول ذكاء اصطناعي مصممة <span className="text-[#00E5BE]">لقطاعك</span>
@@ -1146,15 +1213,15 @@ export default function Home() {
                   </>
                 )}
               </h2>
-              <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
                 {isAr
                   ? "تصفح حلولنا المتخصصة والمصممة للقضاء على القيود التشغيلية وتسريع نمو المؤسسات السعودية."
                   : "Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations."}
               </p>
             </div>
 
-            {/* Step Navigation Pill Selector */}
-            <div className="space-y-2 pt-2">
+            {/* Step Navigation Pill Selector (Mobile Horizontal Swipe) */}
+            <div className="flex lg:flex-col gap-2 overflow-x-auto no-scrollbar pb-1 pt-1">
               {showcaseSolutions.map((sol, idx) => (
                 <button
                   key={sol.step}
@@ -1163,26 +1230,26 @@ export default function Home() {
                     const elem = document.getElementById(`solution-step-${idx}`);
                     if (elem) elem.scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
-                  className={`w-full p-3 rounded-xl border text-start transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                  className={`flex-shrink-0 lg:w-full p-2.5 sm:p-3 rounded-xl border text-start transition-all duration-300 flex items-center justify-between cursor-pointer ${
                     activeSolution === idx
-                      ? "bg-white/[0.04] border-[#00E5BE] text-white shadow-[0_0_20px_rgba(0,229,190,0.15)]"
+                      ? "bg-white/[0.06] border-[#00E5BE] text-white shadow-[0_0_20px_rgba(0,229,190,0.15)]"
                       : "bg-transparent border-white/[0.06] text-gray-400 hover:border-white/20 hover:text-gray-200"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <span className={`font-mono text-xs font-bold ${activeSolution === idx ? "text-[#00E5BE]" : "text-gray-500"}`}>
                       {sol.step}
                     </span>
-                    <span className="text-xs font-bold">{sol.title}</span>
+                    <span className="text-xs font-bold whitespace-nowrap">{sol.title}</span>
                   </div>
                   {activeSolution === idx && (
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
+                    <div className="hidden lg:block w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
                   )}
                 </button>
               ))}
             </div>
 
-            <div className="pt-2">
+            <div className="pt-1">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
@@ -1194,53 +1261,53 @@ export default function Home() {
           </div>
 
           {/* Right Column: Scrollable Solution Showcase Cards */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6">
             {showcaseSolutions.map((sol, idx) => (
               <div
                 key={sol.step}
                 id={`solution-step-${idx}`}
                 onMouseEnter={() => setActiveSolution(idx)}
-                className={`p-6 sm:p-7 rounded-3xl border transition-all duration-500 space-y-4 text-start ${
+                className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border transition-all duration-500 space-y-4 text-start ${
                   activeSolution === idx
-                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_16px_50px_rgba(0,229,190,0.15)] -translate-y-1"
+                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_16px_50px_rgba(0,229,190,0.15)]"
                     : "bg-white/[0.02] border-white/[0.08] hover:border-white/20"
                 }`}
               >
                 {/* Card Header */}
-                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-base font-extrabold text-[#00E5BE]">{sol.step}</span>
+                    <span className="font-mono text-sm sm:text-base font-extrabold text-[#00E5BE]">{sol.step}</span>
                     <span className="font-mono text-xs text-gray-500">/ {sol.total}</span>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mx-2">{sol.tag}</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-gray-400 uppercase tracking-widest mx-1.5">{sol.tag}</span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold">
+                  <span className="px-2 sm:px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[9px] sm:text-[10px] font-bold">
                     {sol.badge}
                   </span>
                 </div>
 
                 {/* Title & Description */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                <div className="space-y-1.5 sm:space-y-2">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
                       {sol.icon}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{sol.title}</h3>
+                    <h3 className="text-lg sm:text-2xl font-bold text-white tracking-tight">{sol.title}</h3>
                   </div>
                   <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">{sol.desc}</p>
                 </div>
 
                 {/* Metrics Row */}
-                <div className="grid grid-cols-3 gap-2.5 pt-1">
+                <div className="grid grid-cols-3 gap-2 pt-0.5">
                   {sol.metrics.map((m) => (
-                    <div key={m.label} className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-center">
-                      <div className="text-sm font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
-                      <div className="text-[9px] text-gray-400 font-medium tracking-tight mt-0.5">{m.label}</div>
+                    <div key={m.label} className="p-2 sm:p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-center">
+                      <div className="text-xs sm:text-sm font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
+                      <div className="text-[8px] sm:text-[9px] text-gray-400 font-medium tracking-tight mt-0.5 truncate">{m.label}</div>
                     </div>
                   ))}
                 </div>
 
-                {/* Interactive Simulated UI Mockup */}
-                <div className="pt-2">
+                {/* Interactive Mockup */}
+                <div className="pt-1">
                   {sol.mockup}
                 </div>
               </div>
@@ -1251,12 +1318,12 @@ export default function Home() {
       </section>
 
       {/* 7. Flexible Service Packages */}
-      <section id="pricing" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.06] bg-gradient-to-b from-[#08121a]/30 to-transparent">
-        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-16">
-          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
+      <section id="pricing" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.06] bg-gradient-to-b from-[#08121a]/30 to-transparent">
+        <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
+          <span className="text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
             {isAr ? "تعاقد شفاف ونتائج ملموسة" : "TRANSPARENT ENGAGEMENT, MEASURABLE RESULTS"}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             {isAr ? (
               <>
                 باقات مرنة تناسب <span className="text-[#00E5BE]">الشركات والمؤسسات</span>
@@ -1267,49 +1334,49 @@ export default function Home() {
               </>
             )}
           </h2>
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+          <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal">
             {isAr
               ? "اختر نموذج العمل الذي يحقق أهدافك التشغيلية وتوسع بسلاسة مع نمو أعمالك."
               : "Choose the engagement model that fits your operational goals and scale seamlessly as you grow."}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
           {plans.map((plan) => (
             <div
               key={plan.title}
-              className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 group ${
+              className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group ${
                 plan.popular
-                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_35px_rgba(0,229,190,0.18)] lg:-translate-y-1.5 hover:shadow-[0_0_45px_rgba(0,229,190,0.3)]"
-                  : "bg-white/[0.02] hover:bg-gradient-to-b hover:from-[#0c262c] hover:via-[#081c22] hover:to-[#060913] border border-white/[0.08] hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.22)] hover:-translate-y-2 cursor-pointer"
+                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_35px_rgba(0,229,190,0.18)] lg:-translate-y-1.5"
+                  : "bg-white/[0.02] hover:bg-gradient-to-b hover:from-[#0c262c] hover:via-[#081c22] hover:to-[#060913] border border-white/[0.08] hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.22)]"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[10px] font-extrabold tracking-widest uppercase shadow-[0_0_12px_rgba(0,229,190,0.5)]">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[9px] sm:text-[10px] font-extrabold tracking-widest uppercase shadow-[0_0_12px_rgba(0,229,190,0.5)]">
                   {plan.tag}
                 </div>
               )}
 
-              <div className="space-y-5">
+              <div className="space-y-4 sm:space-y-5">
                 <div>
-                  <span className="text-[11px] font-bold text-[#00E5BE] tracking-wider uppercase">{plan.subtitle}</span>
-                  <h3 className="text-2xl font-bold text-white mt-1 transition-colors duration-200 group-hover:text-[#00E5BE]">{plan.title}</h3>
-                  <p className="text-xs text-gray-300 mt-1.5 leading-relaxed">{plan.desc}</p>
+                  <span className="text-[10px] sm:text-[11px] font-bold text-[#00E5BE] tracking-wider uppercase">{plan.subtitle}</span>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mt-1 transition-colors duration-200 group-hover:text-[#00E5BE]">{plan.title}</h3>
+                  <p className="text-xs text-gray-300 mt-1 leading-relaxed">{plan.desc}</p>
                 </div>
 
                 <div className="h-px bg-white/10" />
 
-                <ul className="space-y-3">
+                <ul className="space-y-2.5 sm:space-y-3">
                   {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-200">
-                      <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
+                    <li key={feat} className="flex items-start gap-2 text-xs sm:text-sm text-gray-200">
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-6 mt-5 border-t border-white/5">
+              <div className="pt-5 sm:pt-6 mt-4 sm:mt-5 border-t border-white/5">
                 <Link
                   href="/contact"
                   className={`w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-200 cursor-pointer ${
@@ -1328,13 +1395,13 @@ export default function Home() {
       </section>
 
       {/* 8. Interactive Testimonial Carousel */}
-      <section className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
-        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
+        <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{isAr ? "مُجرب وموثوق على مستوى المملكة" : "TESTED & TRUSTED NATIONWIDE"}</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight text-center">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight text-center">
             {isAr ? (
               <>
                 ماذا يقول <span className="text-[#00E5BE]">عملاؤنا</span>
@@ -1345,7 +1412,7 @@ export default function Home() {
               </>
             )}
           </h2>
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal text-center">
+          <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal text-center">
             {isAr
               ? "آراء وتجارب مباشرة من قادة ومؤسسي الأعمال في السعودية الذين سرّعوا أعمالهم مع تحسين للذكاء الاصطناعي."
               : "Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI."}
@@ -1359,7 +1426,7 @@ export default function Home() {
           className="relative overflow-hidden"
         >
           <div
-            className="flex transition-transform duration-700 ease-out gap-5 sm:gap-6"
+            className="flex transition-transform duration-700 ease-out gap-4 sm:gap-6"
             style={{
               transform: `translateX(${isAr ? "" : "-"}${carouselIndex * (100 / (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3))}%)`,
             }}
@@ -1367,16 +1434,16 @@ export default function Home() {
             {extendedTestimonials.map((t, idx) => (
               <div
                 key={idx}
-                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 p-7 rounded-3xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] group text-start"
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-4 sm:space-y-5 transition-all duration-300 text-start"
               >
-                <div className="space-y-3.5">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="w-8 h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
                       <Quote className="w-3.5 h-3.5" />
                     </div>
                     <div className="flex items-center gap-0.5 text-[#00E5BE]">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 fill-[#00E5BE]" />
+                        <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[#00E5BE]" />
                       ))}
                     </div>
                   </div>
@@ -1386,10 +1453,10 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/[0.06] space-y-1.5">
-                  <div className="font-bold text-white text-sm group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
-                  <div className="text-[11px] text-gray-400 font-medium">{t.role}</div>
-                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-semibold">
+                <div className="pt-3 sm:pt-4 border-t border-white/[0.06] space-y-1">
+                  <div className="font-bold text-white text-xs sm:text-sm group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
+                  <div className="text-[10px] sm:text-[11px] text-gray-400 font-medium">{t.role}</div>
+                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#00E5BE]/10 text-[#00E5BE] text-[9px] sm:text-[10px] font-semibold">
                     <CheckCircle2 className="w-2.5 h-2.5" />
                     <span>{t.metrics}</span>
                   </div>
@@ -1400,25 +1467,25 @@ export default function Home() {
         </div>
 
         {/* Carousel Controls */}
-        <div className="flex items-center justify-center gap-4 mt-10">
+        <div className="flex items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
           <button
             onClick={handlePrev}
             aria-label="Previous testimonial"
-            className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer"
           >
             <ChevronLeft className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {testimonials.map((_, dotIdx) => (
               <button
                 key={dotIdx}
                 onClick={() => setCarouselIndex(dotIdx)}
                 aria-label={`Jump to slide ${dotIdx + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   carouselIndex === dotIdx
-                    ? "w-6 bg-[#00E5BE] shadow-[0_0_10px_rgba(0,229,190,0.8)]"
-                    : "w-2 bg-white/20 hover:bg-white/40"
+                    ? "w-5 sm:w-6 bg-[#00E5BE] shadow-[0_0_10px_rgba(0,229,190,0.8)]"
+                    : "w-1.5 sm:w-2 bg-white/20 hover:bg-white/40"
                 }`}
               />
             ))}
@@ -1427,7 +1494,7 @@ export default function Home() {
           <button
             onClick={handleNext}
             aria-label="Next testimonial"
-            className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer"
           >
             <ChevronRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
           </button>
@@ -1435,12 +1502,12 @@ export default function Home() {
       </section>
 
       {/* 9. Interactive FAQ Section */}
-      <section className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1080px] mx-auto w-full border-t border-white/[0.07]">
-        <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-14">
-          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
+      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1080px] mx-auto w-full border-t border-white/[0.07]">
+        <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
+          <span className="text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
             {isAr ? "استفساراتك بإجابات واضحة" : "YOUR QUERIES, SIMPLIFIED"}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             {isAr ? (
               <>
                 الأسئلة <span className="text-[#00E5BE]">الشائعة</span>
@@ -1451,22 +1518,22 @@ export default function Home() {
               </>
             )}
           </h2>
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+          <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal">
             {isAr
               ? "إجابات شاملة ومباشرة عن إمكانيات تحسين للذكاء الاصطناعي وكيفية تكاملها مع منشأتك."
               : "Find clear answers to common questions about Tahseen AI's capabilities and integration process."}
           </p>
         </div>
 
-        <div className="space-y-3.5">
+        <div className="space-y-3">
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 overflow-hidden transition-all duration-200"
+              className="rounded-xl sm:rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 overflow-hidden transition-all duration-200"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-5 text-start flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
+                className="w-full p-4 sm:p-5 text-start flex items-center justify-between gap-3 font-bold text-xs sm:text-base text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
@@ -1476,7 +1543,7 @@ export default function Home() {
                 />
               </button>
               {openFaq === idx && (
-                <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/[0.04]">
+                <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0.5 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/[0.04]">
                   {faq.a}
                 </div>
               )}
@@ -1486,21 +1553,19 @@ export default function Home() {
       </section>
 
       {/* 10. High-Impact CTA & Telemetry Banner */}
-      <section id="contact" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.08]">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-8 sm:p-12 lg:p-14 shadow-[0_0_50px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 transition-all duration-500">
+      <section id="contact" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08]">
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-6 sm:p-10 lg:p-14 shadow-[0_0_50px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 transition-all duration-500">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Left Column: Headline, Trust Badge & Action Buttons */}
-            <div className="lg:col-span-6 space-y-6 text-start">
-              {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-semibold text-gray-300">
+            {/* Left Column */}
+            <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-start">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[11px] sm:text-xs font-semibold text-gray-300">
                 <Users className="w-3.5 h-3.5 text-[#00E5BE]" />
                 <span>{isAr ? "موثوق من أكثر من ١٠ آلاف جهة عمل" : "Trusted by 10k + businesses"}</span>
               </div>
 
-              {/* Title */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
                 {isAr ? (
                   <>
                     ابنِ حل الذكاء الاصطناعي <br />
@@ -1514,18 +1579,16 @@ export default function Home() {
                 )}
               </h2>
 
-              {/* Subtitle */}
               <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-md">
                 {isAr
                   ? "أتمت توليد العملاء المحتملين والتفاعل الذكي في بيئات العمل الحقيقية والديناميكية."
                   : "Automate lead generation and customer engagement in diverse and dynamic real-world settings"}
               </p>
 
-              {/* Dual Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-1">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.5)] hover:-translate-y-0.5 cursor-pointer"
+                  className="inline-flex items-center justify-center px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.5)] cursor-pointer text-center"
                 >
                   <span>{isAr ? "ابدأ الآن" : "Get Started"}</span>
                   <ArrowRight className={`w-4 h-4 mx-2 text-[#060913] ${isAr ? "rotate-180" : ""}`} />
@@ -1533,7 +1596,7 @@ export default function Home() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#1E293B] border border-white/10 text-white hover:bg-[#334155] transition-all shadow-lg cursor-pointer gap-2"
+                  className="inline-flex items-center justify-center px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#1E293B] border border-white/10 text-white hover:bg-[#334155] transition-all shadow-lg cursor-pointer gap-2 text-center"
                 >
                   <HelpCircle className="w-4 h-4 text-gray-400" />
                   <span>{isAr ? "معرفة المزيد" : "Learn More"}</span>
@@ -1541,32 +1604,27 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Layered Dashboard & Monthly Performance Chart Widget */}
+            {/* Right Column */}
             <div className="lg:col-span-6 relative">
-              
-              {/* Layer 1: Background Balance Card */}
-              <div className="rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl p-6 shadow-2xl space-y-4">
+              <div className="rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl p-4 sm:p-6 shadow-2xl space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-3 text-start">
-                  <span className="text-lg font-bold text-white tracking-tight">{isAr ? "الرصيد والقيمة" : "Balance"}</span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00E5BE]/15 border border-[#00E5BE]/30 text-[#00E5BE] text-[11px] font-bold">
+                  <span className="text-base sm:text-lg font-bold text-white tracking-tight">{isAr ? "الرصيد والقيمة" : "Balance"}</span>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00E5BE]/15 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-[11px] font-bold">
                     <CheckCircle2 className="w-3 h-3" />
                     <span>{isAr ? "على المسار الصحيح" : "On track"}</span>
                   </span>
                 </div>
 
-                {/* Layer 2: Overlapping High-Contrast Chart Card */}
-                <div className="rounded-xl bg-[#060913]/95 border border-white/10 p-5 shadow-2xl space-y-4 text-start sm:translate-x-3 sm:translate-y-1">
+                <div className="rounded-xl bg-[#060913]/95 border border-white/10 p-4 sm:p-5 shadow-2xl space-y-3 text-start sm:translate-x-3 sm:translate-y-1">
                   <div>
-                    <div className="text-[11px] text-gray-400 font-medium">{isAr ? "إجمالي العائد المحقق" : "Total Spent"}</div>
-                    <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono mt-0.5">$682.5K</div>
+                    <div className="text-[10px] sm:text-[11px] text-gray-400 font-medium">{isAr ? "إجمالي العائد المحقق" : "Total Spent"}</div>
+                    <div className="text-xl sm:text-3xl font-extrabold text-white font-mono mt-0.5">$682.5K</div>
                   </div>
 
-                  {/* Horizontal Threshold Guideline */}
-                  <div className="relative pt-2">
-                    <div className="w-full border-b border-dashed border-[#00E5BE]/30 absolute top-4 left-0" />
+                  <div className="relative pt-1 sm:pt-2">
+                    <div className="w-full border-b border-dashed border-[#00E5BE]/30 absolute top-3 left-0" />
                     
-                    {/* Monthly Bar Chart */}
-                    <div className="flex items-end justify-between gap-1.5 sm:gap-2 h-28 pt-4">
+                    <div className="flex items-end justify-between gap-1 sm:gap-2 h-24 sm:h-28 pt-3 sm:pt-4">
                       {[
                         { m: isAr ? "يناير" : "Jan", h: "35%", active: false },
                         { m: isAr ? "فبراير" : "Feb", h: "75%", active: false },
@@ -1579,7 +1637,7 @@ export default function Home() {
                         { m: isAr ? "سبتمبر" : "Sep", h: "30%", active: false },
                         { m: isAr ? "أكتوبر" : "Oct", h: "60%", active: false },
                       ].map((bar) => (
-                        <div key={bar.m} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                        <div key={bar.m} className="flex-1 flex flex-col items-center gap-1 h-full justify-end group">
                           <div
                             style={{ height: bar.h }}
                             className={`w-full rounded-md transition-all duration-300 ${
@@ -1588,7 +1646,7 @@ export default function Home() {
                                 : "bg-white/10 group-hover:bg-white/20"
                             }`}
                           />
-                          <span className={`text-[8px] sm:text-[9px] font-mono ${bar.active ? "text-[#00E5BE] font-bold" : "text-gray-500"}`}>
+                          <span className={`text-[7px] sm:text-[9px] font-mono ${bar.active ? "text-[#00E5BE] font-bold" : "text-gray-500"}`}>
                             {bar.m}
                           </span>
                         </div>
@@ -1598,7 +1656,6 @@ export default function Home() {
                 </div>
 
               </div>
-
             </div>
 
           </div>

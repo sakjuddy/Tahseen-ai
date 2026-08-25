@@ -33,40 +33,39 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.45; // English baseline exposure
+    renderer.toneMappingExposure = 1.45;
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     container.appendChild(renderer.domElement);
 
-    // --- 2. Lighting Setup (Original English Specs) ---
+    // --- 2. Lighting Setup ---
     const ambientLight = new THREE.AmbientLight(0x020712, 1.2);
     scene.add(ambientLight);
 
-    // Primary Radiant Electric Teal Key Light
     const textKeyLight = new THREE.PointLight(0x00f5d4, 15.0, 50, 1.1);
     textKeyLight.position.set(mirrored ? 6.0 : -6.0, -3.0, 1.2);
     textKeyLight.castShadow = true;
     scene.add(textKeyLight);
 
-    // Crisp Cyan Directional Light
     const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.8);
     textDirLight.position.set(mirrored ? 6.0 : -6.0, -1.5, 1.5);
     scene.add(textDirLight);
 
-    // Vibrant Electric Cyan Rim Light
     const rightRimLight = new THREE.PointLight(0x06b6d4, 8.5, 35);
     rightRimLight.position.set(mirrored ? -6.0 : 6.0, 5.0, 2.0);
     scene.add(rightRimLight);
 
-    // Top Specular Highlight
     const topHighlight = new THREE.DirectionalLight(0xe0ffff, 2.2);
     topHighlight.position.set(mirrored ? -4.0 : 4.0, 8.0, 6.0);
     scene.add(topHighlight);
 
-    // --- 3. 3D Ring Construction (Original English Position & Angles) ---
+    // --- 3. 3D Ring Construction (Responsive Mobile Scaling) ---
     const heroGroup = new THREE.Group();
-    const isDesktop = window.innerWidth >= 1024;
+    const width = window.innerWidth;
+    const isDesktop = width >= 1024;
+    const isTablet = width >= 640 && width < 1024;
+    
     const ringBaseX = mirrored ? -2.3 : 2.3;
     const ringBaseY = 1.35;
     const ringBaseZ = 0.0;
@@ -74,10 +73,10 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     heroGroup.position.set(
       isDesktop ? ringBaseX : 0,
-      isDesktop ? ringBaseY : 1.2,
+      isDesktop ? ringBaseY : isTablet ? 0.8 : 0.4,
       ringBaseZ
     );
-    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : 0.65);
+    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : isTablet ? 0.60 : 0.48);
     scene.add(heroGroup);
 
     const baseRotX = -0.59;
@@ -85,7 +84,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const baseRotZ = mirrored ? 0.99 : -0.99;
     heroGroup.rotation.set(baseRotX, baseRotY, baseRotZ);
 
-    // --- Original Custom Hollow Ring Perimeter Glow Shader ---
+    // --- Custom Hollow Ring Perimeter Glow Shader ---
     const glowUniforms = {
       glowColor: { value: new THREE.Color(0x00f5d4) },
       intensity: { value: 0.15 },
@@ -141,7 +140,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     ringGlowMesh.position.set(0, 0, -0.08);
     heroGroup.add(ringGlowMesh);
 
-    // --- Original Materials (Pure Vibrant Brand Teal & Cyan #00F5D4 / #00D2B4) ---
+    // --- Materials ---
     const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
       color: 0x00f5d4,
       emissive: 0x003830,
@@ -196,7 +195,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const gapAngle = 0.06;
     const arcLength = Math.PI - gapAngle;
 
-    // Top Half (Shaded)
+    // Top Half
     const topGeom = new THREE.LatheGeometry(
       profilePoints,
       segments,
@@ -211,7 +210,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     topMesh.receiveShadow = true;
     heroGroup.add(topMesh);
 
-    // Bottom Half (Illuminated)
+    // Bottom Half
     const botGeom = new THREE.LatheGeometry(
       profilePoints,
       segments,
@@ -246,9 +245,9 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     const glowPulseSpeed = 1.7;
 
-    // --- 4. Digital Particle Wave (Original Specs) ---
-    const rows = 48;
+    // --- 4. Digital Particle Wave ---
     const cols = 110;
+    const rows = 48;
     const totalParticles = rows * cols;
 
     const waveGeom = new THREE.BufferGeometry();
@@ -300,7 +299,6 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     waveGeom.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
     waveGeom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
 
-    // High-Luminance Radial Glow Particle Texture
     const pCanvas = document.createElement("canvas");
     pCanvas.width = 64;
     pCanvas.height = 64;
@@ -360,7 +358,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const waveParticleSystem = new THREE.Points(waveGeom, waveShaderMaterial);
     scene.add(waveParticleSystem);
 
-    // --- 5. Cursor Parallax ---
+    // --- 5. Cursor Parallax Tracking ---
     let mouseX = 0;
     let mouseY = 0;
 
@@ -374,23 +372,25 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // --- 6. Resize Observer ---
+    // --- 6. Resize Observer with Adaptive Mobile Viewport ---
     const handleResize = () => {
       if (!container) return;
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-      camera.aspect = width / height;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
       camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
+      renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      const desk = width >= 1024;
+      const desk = w >= 1024;
+      const tab = w >= 640 && w < 1024;
+
       heroGroup.position.set(
         desk ? ringBaseX : 0,
-        desk ? ringBaseY : 1.2,
+        desk ? ringBaseY : tab ? 0.8 : 0.4,
         ringBaseZ
       );
-      heroGroup.scale.setScalar(desk ? ringBaseScale : 0.65);
+      heroGroup.scale.setScalar(desk ? ringBaseScale : tab ? 0.60 : 0.48);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
@@ -404,11 +404,9 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Update uniforms
       waveShaderMaterial.uniforms.uTime.value = elapsedTime;
       glowUniforms.pulseTime.value = elapsedTime * glowPulseSpeed;
 
-      // Parallax rotation
       const targetRotX = baseRotX + mouseY * 0.18;
       const targetRotY =
         baseRotY + mouseX * 0.18 + Math.sin(elapsedTime * 0.5) * 0.02;
@@ -423,7 +421,6 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     animate();
 
-    // --- Cleanup ---
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       resizeObserver.disconnect();
