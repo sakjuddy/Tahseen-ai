@@ -140,9 +140,12 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     ringGlowMesh.position.set(0, 0, -0.08);
     heroGroup.add(ringGlowMesh);
 
-    // --- Materials ---
+    // --- Materials (Switched for Arabic RTL when mirrored) ---
+    const illuminatedColor = mirrored ? 0x00d2b4 : 0x00f5d4;
+    const shadedColor = mirrored ? 0x00f5d4 : 0x00d2b4;
+
     const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x00f5d4,
+      color: illuminatedColor,
       emissive: 0x003830,
       emissiveIntensity: 0.25,
       roughness: 0.12,
@@ -154,7 +157,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     });
 
     const shadedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x00d2b4,
+      color: shadedColor,
       emissive: 0x002c25,
       emissiveIntensity: 0.18,
       roughness: 0.16,
