@@ -45,27 +45,37 @@
   transform: translateY(-2px);
 }
 
-/* Infinite Marquee Animation for Value Pills */
-@keyframes marquee-left {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+/* Truly Continuous Infinite Marquee Animation for Value Pills */
+@keyframes continuous-marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-@keyframes marquee-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0%); }
+@keyframes continuous-marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: marquee-left 30s linear infinite;
+  animation: continuous-marquee-left 35s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: marquee-right 34s linear infinite;
+  animation: continuous-marquee-right 40s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee-left:hover,

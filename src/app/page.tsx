@@ -601,18 +601,14 @@ export default function Home() {
         },
       ];
 
-  const pillsRow1 = isAr
+  const basePillsRow1 = isAr
     ? [
-        "تقارير فورية",
-        "تفاعل مخصص",
+        "تقارير فورية مباشرة",
+        "تفاعل مخصص وذكي",
         "الحفاظ على العملاء",
         "تكامل سلس مع الأنظمة",
         "بث بيانات مباشر",
-        "تقارير فورية",
-        "تفاعل مخصص",
-        "الحفاظ على العملاء",
-        "تكامل سلس مع الأنظمة",
-        "بث بيانات مباشر",
+        "دقة معالجة استثنائية",
       ]
     : [
         "Real-Time Reports",
@@ -620,25 +616,17 @@ export default function Home() {
         "Customer Retention",
         "Seamless Integrations",
         "Live Telemetry Stream",
-        "Real-Time Reports",
-        "Personalized Engagement",
-        "Customer Retention",
-        "Seamless Integrations",
-        "Live Telemetry Stream",
+        "High-Assurance AI",
       ];
 
-  const pillsRow2 = isAr
+  const basePillsRow2 = isAr
     ? [
-        "زيادة الكفاءة",
+        "زيادة الكفاءة التشغيلية",
         "اقتصادي ومجدٍ",
-        "إنفاق ذكي",
+        "إنفاق مالي ذكي",
         "قرارات مدفوعة بالبيانات",
         "سحابة سعودية سيادية",
-        "زيادة الكفاءة",
-        "اقتصادي ومجدٍ",
-        "إنفاق ذكي",
-        "قرارات مدفوعة بالبيانات",
-        "سحابة سعودية سيادية",
+        "تدفقات عمل مؤتمتة",
       ]
     : [
         "Increased Efficiency",
@@ -646,12 +634,11 @@ export default function Home() {
         "Smart Spending",
         "Data-Driven Decisions",
         "Sovereign Saudi Cloud",
-        "Increased Efficiency",
-        "Cost-Effective",
-        "Smart Spending",
-        "Data-Driven Decisions",
-        "Sovereign Saudi Cloud",
+        "Automated Workflows",
       ];
+
+  const pillsRow1 = [...basePillsRow1, ...basePillsRow1];
+  const pillsRow2 = [...basePillsRow2, ...basePillsRow2];
 
   return (
     <div
