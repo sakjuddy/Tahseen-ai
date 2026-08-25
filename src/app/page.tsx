@@ -903,10 +903,10 @@ export default function Home() {
           {plans.map((plan) => (
             <div
               key={plan.title}
-              className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
+              className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 group ${
                 plan.popular
                   ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_35px_rgba(0,229,190,0.18)] lg:-translate-y-1.5 hover:shadow-[0_0_45px_rgba(0,229,190,0.3)]"
-                  : "bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.06] hover:border-[#00E5BE]/40 hover:-translate-y-1"
+                  : "bg-white/[0.02] hover:bg-gradient-to-b hover:from-[#0c262c] hover:via-[#081c22] hover:to-[#060913] border border-white/[0.08] hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.22)] hover:-translate-y-2 cursor-pointer"
               }`}
             >
               {plan.popular && (
@@ -918,7 +918,7 @@ export default function Home() {
               <div className="space-y-5">
                 <div>
                   <span className="text-[11px] font-bold text-[#00E5BE] tracking-wider uppercase">{plan.subtitle}</span>
-                  <h3 className="text-2xl font-bold text-white mt-1">{plan.title}</h3>
+                  <h3 className="text-2xl font-bold text-white mt-1 transition-colors duration-200 group-hover:text-[#00E5BE]">{plan.title}</h3>
                   <p className="text-xs text-gray-300 mt-1.5 leading-relaxed">{plan.desc}</p>
                 </div>
 
@@ -937,10 +937,10 @@ export default function Home() {
               <div className="pt-6 mt-5 border-t border-white/5">
                 <Link
                   href="/contact"
-                  className={`w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl transition-all cursor-pointer ${
+                  className={`w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-200 cursor-pointer ${
                     plan.popular
                       ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_16px_rgba(0,229,190,0.4)]"
-                      : "btn-teal-outline"
+                      : "btn-teal-outline group-hover:bg-[#00E5BE] group-hover:text-[#060913] group-hover:shadow-[0_4px_20px_rgba(0,229,190,0.5)]"
                   }`}
                 >
                   <span>GET STARTED</span>
