@@ -537,29 +537,57 @@ export default function Home() {
 
       </main>
 
-      {/* 4. Social Proof & National Impact Strip (Distinct Elevated Section Island) */}
-      <section id="about" className="relative z-10 py-12 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
-        <div className="rounded-3xl bg-gradient-to-r from-white/[0.03] via-white/[0.015] to-transparent border border-white/10 hover:border-[#00E5BE]/40 backdrop-blur-xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left transition-all duration-300 shadow-[0_10px_35px_rgba(0,0,0,0.3)]">
-          <div className="space-y-2 max-w-xl">
-            <div className="flex items-center justify-center md:justify-start gap-1.5 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
-              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>Pioneering Saudi AI Innovation</span>
-            </div>
-            <h4 className="text-lg sm:text-xl font-bold text-white tracking-tight">
-              Adopted by leading enterprises across Saudi Arabia & SMEs
-            </h4>
-            <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
-              Transforming operations with custom AI agents, automated sales pipelines, and bespoke intelligence.
-            </p>
+      {/* 4. Enterprise Social Proof & Partner Logos (Matching Design Spec) */}
+      <section id="about" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28">
+        
+        {/* Centered Heading with Left & Right Dotted Divider Lines */}
+        <div className="flex items-center justify-center gap-4 sm:gap-8 w-full mb-12">
+          <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
+          <h4 className="text-sm sm:text-base md:text-lg font-bold text-gray-200 text-center tracking-tight leading-relaxed max-w-xl">
+            Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
+            in Saudi Arabia
+          </h4>
+          <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
+        </div>
+
+        {/* 3 Prominent Enterprise Partner Logos */}
+        <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-16 lg:gap-24 opacity-80 hover:opacity-100 transition-opacity">
+          
+          {/* Logo 1: Zana Cultural Entity */}
+          <div className="relative h-16 w-16 sm:h-20 sm:w-20 transition-transform duration-300 hover:scale-105 filter brightness-110">
+            <Image
+              src="/partners/partner-1.png"
+              alt="Saudi Cultural Entity"
+              fill
+              sizes="80px"
+              className="object-contain"
+            />
           </div>
 
-          <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] hover:scale-105 transition-transform duration-200">
-            <HeartHandshake className="w-5 h-5 flex-shrink-0" />
-            <div className="text-left text-xs font-medium">
-              <span className="font-bold text-white">Social Impact:</span> We donate 1% of proceeds to the <span className="underline decoration-[#00E5BE]">Ehsan Platform (منصة إحسان)</span>.
-            </div>
+          {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
+          <div className="relative h-14 w-60 sm:h-16 sm:w-72 transition-transform duration-300 hover:scale-105 filter brightness-110">
+            <Image
+              src="/partners/partner-2.svg"
+              alt="Imam Abdulrahman Bin Faisal University"
+              fill
+              sizes="288px"
+              className="object-contain"
+            />
           </div>
+
+          {/* Logo 3: ITQAN */}
+          <div className="relative h-14 w-32 sm:h-16 sm:w-36 transition-transform duration-300 hover:scale-105 filter brightness-110">
+            <Image
+              src="/partners/partner-3.png"
+              alt="ITQAN - Driven by Knowledge"
+              fill
+              sizes="144px"
+              className="object-contain"
+            />
+          </div>
+
         </div>
+
       </section>
 
       {/* 5. Comprehensive Insights Section (Distinct Boundary with Streaming Pill Cloud) */}
