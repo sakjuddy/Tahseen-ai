@@ -537,11 +537,11 @@ export default function Home() {
 
       </main>
 
-      {/* 4. Enterprise Social Proof & Partner Logos (Matching Design Spec) */}
+      {/* 4. Enterprise Social Proof & Partner Logos (In Crisp White/Teal Box for Maximum Visibility) */}
       <section id="about" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28">
         
         {/* Centered Heading with Left & Right Dotted Divider Lines */}
-        <div className="flex items-center justify-center gap-4 sm:gap-8 w-full mb-12">
+        <div className="flex items-center justify-center gap-4 sm:gap-8 w-full mb-10">
           <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
           <h4 className="text-sm sm:text-base md:text-lg font-bold text-gray-200 text-center tracking-tight leading-relaxed max-w-xl">
             Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
@@ -550,38 +550,38 @@ export default function Home() {
           <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
         </div>
 
-        {/* 3 Prominent Enterprise Partner Logos */}
-        <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-16 lg:gap-24 opacity-80 hover:opacity-100 transition-opacity">
+        {/* Crisp White/Teal Container Box for Maximum Logo Clarity */}
+        <div className="rounded-2xl sm:rounded-3xl bg-white/[0.96] backdrop-blur-2xl border-2 border-[#00E5BE]/40 p-6 sm:p-8 md:p-10 shadow-[0_12px_40px_rgba(0,229,190,0.18)] flex flex-wrap items-center justify-center gap-10 sm:gap-16 lg:gap-24 transition-all duration-300 hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.28)]">
           
           {/* Logo 1: Zana Cultural Entity */}
-          <div className="relative h-16 w-16 sm:h-20 sm:w-20 transition-transform duration-300 hover:scale-105 filter brightness-110">
+          <div className="relative h-14 w-14 sm:h-16 sm:w-16 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-1.png"
               alt="Saudi Cultural Entity"
               fill
-              sizes="80px"
+              sizes="64px"
               className="object-contain"
             />
           </div>
 
           {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
-          <div className="relative h-14 w-60 sm:h-16 sm:w-72 transition-transform duration-300 hover:scale-105 filter brightness-110">
+          <div className="relative h-12 w-56 sm:h-14 sm:w-64 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-2.svg"
               alt="Imam Abdulrahman Bin Faisal University"
               fill
-              sizes="288px"
+              sizes="256px"
               className="object-contain"
             />
           </div>
 
           {/* Logo 3: ITQAN */}
-          <div className="relative h-14 w-32 sm:h-16 sm:w-36 transition-transform duration-300 hover:scale-105 filter brightness-110">
+          <div className="relative h-12 w-28 sm:h-14 sm:w-32 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-3.png"
               alt="ITQAN - Driven by Knowledge"
               fill
-              sizes="144px"
+              sizes="128px"
               className="object-contain"
             />
           </div>
