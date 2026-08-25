@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -20,6 +20,11 @@ import {
   TrendingUp,
   Quote,
   Star,
+  Bot,
+  Workflow,
+  LineChart,
+  Lock,
+  ExternalLink,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
@@ -28,6 +33,7 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [activeSolution, setActiveSolution] = useState(0);
 
   const navLinks = [
     { name: "HOME", href: "#home" },
@@ -53,71 +59,147 @@ export default function Home() {
     }
   };
 
-  const solutions = [
+  const showcaseSolutions = [
     {
-      title: "Campaign Automation",
-      desc: "Create and execute campaigns with ease using AI-driven automation for maximum efficiency and scale.",
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 14L18 4L28 14V26C28 27.1 27.1 28 26 28H6C4.9 28 4 27.1 4 26V14Z" />
-          <path d="M12 18L16 22L22 14" />
-        </svg>
+      step: "01",
+      total: "04",
+      tag: "AUTONOMOUS OPERATIONS",
+      title: "AI Agents for Sales & Marketing",
+      subtitle: "Autonomous multi-channel intelligence that qualifies leads and converts 24/7.",
+      desc: "Deploy intelligent agents across WhatsApp, website chat, and email that answer complex inquiries, schedule meetings directly into your calendar, and hand off qualified leads with full context.",
+      metrics: [
+        { label: "Sales Performance", val: "3X Boost" },
+        { label: "Lead Response Time", val: "< 10s" },
+        { label: "Active Availability", val: "24/7 / 365" },
+      ],
+      badge: "Agentic AI System",
+      icon: <Bot className="w-6 h-6 text-[#00E5BE]" />,
+      mockup: (
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs">
+          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-pulse" />
+              <span className="text-white font-bold">Tahseen Agent • Live Session</span>
+            </div>
+            <span className="text-[#00E5BE]">Active</span>
+          </div>
+          <div className="space-y-2 text-left font-sans">
+            <div className="p-3 rounded-xl bg-white/[0.03] text-gray-300 text-xs">
+              <span className="text-gray-500 font-mono text-[10px] block mb-0.5">Customer (WhatsApp):</span>
+              &ldquo;We need an automated CRM pipeline for our Riyadh branches.&rdquo;
+            </div>
+            <div className="p-3 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-xs">
+              <span className="text-[#00E5BE] font-mono text-[10px] block mb-0.5">Tahseen AI Agent:</span>
+              &ldquo;Certainly! We deploy custom CRM automations in under 2 weeks. I have reserved an onboarding slot for tomorrow at 2:00 PM (AST). Would you like me to confirm?&rdquo;
+            </div>
+          </div>
+        </div>
       ),
     },
     {
-      title: "Personalized Outreach",
-      desc: "Deliver tailored messages to each customer for more impactful, targeted, and engaging communication.",
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="16" cy="11" r="5" />
-          <path d="M6 26C6 21 10.5 18 16 18C21.5 18 26 21 26 26" />
-          <path d="M22 6L25 9L29 4" />
-        </svg>
+      step: "02",
+      total: "04",
+      tag: "WORKFLOW AUTOMATION",
+      title: "End-to-End Enterprise Automation",
+      subtitle: "Eliminate repetitive manual bottlenecks across cross-functional operations.",
+      desc: "Connect your ERP, databases, customer support, and payment gateways with intelligent rules and self-healing automated logic that reduces manual processing by over 40%.",
+      metrics: [
+        { label: "Manual Work Reduction", val: "-42%" },
+        { label: "Data Accuracy", val: "99.9%" },
+        { label: "Deployment Speed", val: "14 Days" },
+      ],
+      badge: "Zero-Latency Flows",
+      icon: <Workflow className="w-6 h-6 text-[#00E5BE]" />,
+      mockup: (
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs text-left">
+          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
+            <span className="text-white font-bold">Automated Pipeline Node</span>
+            <span className="text-[#00E5BE]">Continuous Sync</span>
+          </div>
+          <div className="space-y-2 font-sans text-xs">
+            <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06]">
+              <span className="w-5 h-5 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[10px] font-bold">1</span>
+              <span>RFP Ingestion & OCR Entity Parsing</span>
+            </div>
+            <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06]">
+              <span className="w-5 h-5 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[10px] font-bold">2</span>
+              <span>Intelligent Risk & Validation Scoring</span>
+            </div>
+            <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
+              <span className="w-5 h-5 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[10px] font-bold">✓</span>
+              <span>Auto-Sync to Database & Executive Alert</span>
+            </div>
+          </div>
+        </div>
       ),
     },
     {
-      title: "Data Optimization",
-      desc: "Analyze performance with detailed real-time analytics to fine-tune workflows and boost business results.",
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M4 28H28" />
-          <path d="M8 22V16" />
-          <path d="M14 22V10" />
-          <path d="M20 22V13" />
-          <path d="M26 22V6" />
-        </svg>
+      step: "03",
+      total: "04",
+      tag: "REAL-TIME TELEMETRY",
+      title: "Live Oversight & Actionable Data",
+      subtitle: "Complete visibility over every automated interaction and campaign performance.",
+      desc: "Live analytics dashboards that track campaign throughput, customer sentiment, agent accuracy, and conversion metrics in real time with zero guesswork.",
+      metrics: [
+        { label: "Average Latency", val: "~0.4s" },
+        { label: "System Uptime", val: "99.98%" },
+        { label: "Audit Compliance", val: "100%" },
+      ],
+      badge: "Real-Time Telemetry",
+      icon: <LineChart className="w-6 h-6 text-[#00E5BE]" />,
+      mockup: (
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs">
+          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
+            <span className="text-white font-bold">Throughput Analytics</span>
+            <span className="text-[#00E5BE]">Live Stream</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-center">
+            <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+              <div className="text-base font-bold text-white font-sans">12,480</div>
+              <div className="text-[9px] text-gray-400 uppercase">Requests / Day</div>
+            </div>
+            <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+              <div className="text-base font-bold text-[#00E5BE] font-sans">+45%</div>
+              <div className="text-[9px] text-gray-400 uppercase">Conversion Lift</div>
+            </div>
+          </div>
+          <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+            <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
+          </div>
+        </div>
       ),
     },
     {
-      title: "Seamless Collaboration",
-      desc: "Seamlessly integrate with existing systems and tools to enhance team productivity and cross-unit coordination.",
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="9" cy="16" r="4" />
-          <circle cx="23" cy="16" r="4" />
-          <path d="M13 16H19" />
-          <path d="M16 13V19" />
-        </svg>
-      ),
-    },
-    {
-      title: "Real-Time Oversight",
-      desc: "Monitor customer interactions and operations in real time to adapt strategies dynamically for optimal engagement.",
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="16" cy="16" r="11" />
-          <polyline points="16,9 16,16 21,19" />
-        </svg>
-      ),
-    },
-    {
-      title: "Future-Proof Architecture",
-      desc: "Stay ahead with continuous AI model updates, enterprise security, and built-in adaptability for evolving needs.",
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M16 3L28 8V16C28 23 23 28 16 30C9 28 4 23 4 16V8L16 3Z" />
-          <path d="M12 16L15 19L21 13" />
-        </svg>
+      step: "04",
+      total: "04",
+      tag: "SOVEREIGN ARCHITECTURE",
+      title: "Sovereign AI & Enterprise Security",
+      subtitle: "Keep your proprietary organizational knowledge private, compliant, and protected.",
+      desc: "Tailored AI models and private retrieval pipelines hosted inside secure Saudi cloud environments, adhering strictly to regional regulatory and data sovereignty standards.",
+      metrics: [
+        { label: "Data Encryption", val: "AES-256 / TLS" },
+        { label: "Hosting", val: "KSA Sovereign" },
+        { label: "Compliance", val: "Strict SLA" },
+      ],
+      badge: "Sovereign AI",
+      icon: <Lock className="w-6 h-6 text-[#00E5BE]" />,
+      mockup: (
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs text-left">
+          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
+            <span className="text-white font-bold">Sovereignty Shield</span>
+            <span className="text-[#00E5BE]">Protected</span>
+          </div>
+          <div className="space-y-2 text-xs font-sans">
+            <div className="p-2.5 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+              <span>Isolated Local VPC & Zero Data Leaks</span>
+            </div>
+            <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+              <span>Full Regulatory Alignment in Saudi Arabia</span>
+            </div>
+          </div>
+        </div>
       ),
     },
   ];
@@ -257,7 +339,7 @@ export default function Home() {
       <div className="absolute top-[45%] left-[-150px] w-[600px] h-[600px] bg-[#00E5BE]/5 rounded-full blur-[200px] pointer-events-none -z-10" />
       <div className="absolute bottom-[10%] right-[-100px] w-[650px] h-[650px] bg-cyan-500/8 rounded-full blur-[200px] pointer-events-none -z-10" />
 
-      {/* 1. Sticky Header / Navbar (Brought Slightly Inward Towards Center) */}
+      {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-6 sm:px-12 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
@@ -315,7 +397,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2. Hero Section (Widescreen + Slightly Smaller Refined Proportions) */}
+      {/* 2. Hero Section */}
       <main id="home" className="relative z-10 pt-2 sm:pt-4 pb-10 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         
         {/* Full-width 3D Canvas Layer */}
@@ -326,7 +408,7 @@ export default function Home() {
           {/* Left Hero Column */}
           <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left pointer-events-auto">
             
-            {/* Primary Headline: SF Pro Display Bold with #00E5BE Highlight */}
+            {/* Primary Headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
               AI Solutions That <br />
               <span className="text-[#00E5BE]">Enhance</span> Your Work
@@ -353,12 +435,12 @@ export default function Home() {
 
           </div>
 
-          {/* Right Hero Column: Spacer holding visual alignment for the 3D ring */}
+          {/* Right Hero Column */}
           <div className="hidden lg:block lg:col-span-6 xl:col-span-7" />
 
         </div>
 
-        {/* 3. Bottom 4 Services Row (Slightly Smaller & Cleanly Spaced) */}
+        {/* 3. Bottom 4 Services Row */}
         <div id="services" className="mt-16 sm:mt-20 pt-10 scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-4 text-center justify-items-center relative z-10 max-w-[1360px] mx-auto w-full">
           
           {/* Card 1: AI Agents */}
@@ -497,7 +579,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
           
-          {/* Card 1: Real-Time Oversight & Intelligence */}
+          {/* Card 1: Real-Time Oversight */}
           <div className="p-6 sm:p-7 rounded-2xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_8px_30px_rgba(0,229,190,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-3.5">
               <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
@@ -511,7 +593,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Metric Tags */}
               <div className="grid grid-cols-2 gap-2 pt-1">
                 {["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"].map((item) => (
                   <div key={item} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-[10px] font-medium text-gray-200 hover:text-white transition-all cursor-default">
@@ -522,7 +603,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Live Interactive Telemetry Widget */}
             <div className="p-3.5 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2.5">
               <div className="flex items-center justify-between text-[10px] border-b border-white/[0.06] pb-2">
                 <div className="flex items-center gap-1.5">
@@ -548,7 +628,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 2: Actionable Data & Strategic Efficiency */}
+          {/* Card 2: Actionable Data */}
           <div className="p-6 sm:p-7 rounded-2xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_8px_30px_rgba(0,229,190,0.06)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-3.5">
               <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
@@ -562,7 +642,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Metric Tags */}
               <div className="grid grid-cols-2 gap-2 pt-1">
                 {["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"].map((item) => (
                   <div key={item} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-[10px] font-medium text-gray-200 hover:text-white transition-all cursor-default">
@@ -573,7 +652,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Performance Graphic Simulation */}
             <div className="p-3.5 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2">
               <div className="flex items-center justify-between text-[10px] border-b border-white/[0.06] pb-2">
                 <span className="font-bold text-white">Workflow Efficiency Gain</span>
@@ -605,33 +683,119 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Comprehensive AI Solutions Section */}
-      <section id="solutions" className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
-        <div className="text-center space-y-2.5 max-w-xl mx-auto mb-10">
-          <span className="text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
-            EFFORTLESS DEPLOYMENT & REAL-TIME OVERSIGHT
-          </span>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
-            AI-Powered Solutions Built for <span className="text-[#00E5BE]">Scale</span>
-          </h2>
-          <p className="text-xs text-gray-300 leading-relaxed font-normal">
-            Simplify deployment, optimize data workflows, and deliver automated intelligence across every touchpoint.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {solutions.map((sol) => (
-            <div
-              key={sol.title}
-              className="p-5 sm:p-6 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/50 transition-all duration-300 space-y-3 group hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,229,190,0.1)] cursor-default"
-            >
-              <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                {sol.icon}
+      {/* 6. Sticky Interactive Scroll-Down Solutions Showcase (Modeled after Mozn AI) */}
+      <section id="solutions" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+          
+          {/* Left Column: Sticky Title & Step Navigator */}
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6 text-left">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
+                <Sparkles className="w-3 h-3" />
+                <span>BUILT FOR HIGH-ASSURANCE SCALE</span>
               </div>
-              <h3 className="text-base font-bold text-white tracking-tight group-hover:text-[#00E5BE] transition-colors">{sol.title}</h3>
-              <p className="text-xs text-gray-300 leading-relaxed font-normal group-hover:text-gray-200 transition-colors">{sol.desc}</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                AI Solutions Built for <span className="text-[#00E5BE]">Your Industry</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
+                Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations.
+              </p>
             </div>
-          ))}
+
+            {/* Step Navigation Pill Selector (Interactive Jump & Progress) */}
+            <div className="space-y-2 pt-2">
+              {showcaseSolutions.map((sol, idx) => (
+                <button
+                  key={sol.step}
+                  onClick={() => {
+                    setActiveSolution(idx);
+                    const elem = document.getElementById(`solution-step-${idx}`);
+                    if (elem) elem.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }}
+                  className={`w-full p-3 rounded-xl border text-left transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                    activeSolution === idx
+                      ? "bg-white/[0.04] border-[#00E5BE] text-white shadow-[0_0_20px_rgba(0,229,190,0.15)]"
+                      : "bg-transparent border-white/[0.06] text-gray-400 hover:border-white/20 hover:text-gray-200"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className={`font-mono text-xs font-bold ${activeSolution === idx ? "text-[#00E5BE]" : "text-gray-500"}`}>
+                      {sol.step}
+                    </span>
+                    <span className="text-xs font-bold">{sol.title}</span>
+                  </div>
+                  {activeSolution === idx && (
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
+                  )}
+                </button>
+              ))}
+            </div>
+
+            <div className="pt-2">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
+              >
+                <span>CONSULT ON CUSTOM WORKFLOWS</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column: Scrollable Solution Showcase Cards */}
+          <div className="lg:col-span-7 space-y-8">
+            {showcaseSolutions.map((sol, idx) => (
+              <div
+                key={sol.step}
+                id={`solution-step-${idx}`}
+                onMouseEnter={() => setActiveSolution(idx)}
+                className={`p-7 sm:p-8 rounded-3xl border transition-all duration-500 space-y-6 text-left ${
+                  activeSolution === idx
+                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_16px_50px_rgba(0,229,190,0.15)] -translate-y-1"
+                    : "bg-white/[0.02] border-white/[0.08] hover:border-white/20"
+                }`}
+              >
+                {/* Card Header: Step Index & Badge */}
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-base font-extrabold text-[#00E5BE]">{sol.step}</span>
+                    <span className="font-mono text-xs text-gray-500">/ {sol.total}</span>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-2">{sol.tag}</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold">
+                    {sol.badge}
+                  </span>
+                </div>
+
+                {/* Title & Description */}
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center">
+                      {sol.icon}
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">{sol.title}</h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">{sol.desc}</p>
+                </div>
+
+                {/* Metrics Row */}
+                <div className="grid grid-cols-3 gap-2.5 pt-1">
+                  {sol.metrics.map((m) => (
+                    <div key={m.label} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] text-center">
+                      <div className="text-sm sm:text-base font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
+                      <div className="text-[9px] text-gray-400 font-medium tracking-tight mt-0.5">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Interactive Simulated UI Mockup */}
+                <div className="pt-2">
+                  {sol.mockup}
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
@@ -704,7 +868,6 @@ export default function Home() {
 
       {/* 8. Interactive Testimonial Carousel */}
       <section className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full">
-        {/* Centered Heading & Subheading */}
         <div className="text-center space-y-2.5 max-w-xl mx-auto mb-10">
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
             <Sparkles className="w-3 h-3" />
@@ -718,7 +881,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Carousel Viewport (Continuous Seamless Loop) */}
+        {/* Carousel Viewport */}
         <div
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
