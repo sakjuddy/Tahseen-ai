@@ -64,13 +64,13 @@ export default function HeroRing3D() {
     const heroGroup = new THREE.Group();
     const isDesktop = window.innerWidth >= 1024;
     const ringBaseX = 2.3;
-    const ringBaseY = 0.9;
+    const ringBaseY = 1.35;
     const ringBaseZ = 0.0;
     const ringBaseScale = 0.75;
 
     heroGroup.position.set(
       isDesktop ? ringBaseX : 0,
-      isDesktop ? ringBaseY : 0.8,
+      isDesktop ? ringBaseY : 1.2,
       ringBaseZ
     );
     heroGroup.scale.setScalar(isDesktop ? ringBaseScale : 0.65);
@@ -262,7 +262,7 @@ export default function HeroRing3D() {
     let pIdx = 0;
     const gridWidth = 64.0;
     const gridDepth = 32.0;
-    const waveElevationY = -0.7;
+    const waveElevationY = -0.2;
     const waveAmplitude = 1.2;
     const waveAlphaMax = 1.0;
     const waveBaseSize = 0.3;
@@ -385,7 +385,7 @@ export default function HeroRing3D() {
       const desk = width >= 1024;
       heroGroup.position.set(
         desk ? ringBaseX : 0,
-        desk ? ringBaseY : 0.8,
+        desk ? ringBaseY : 1.2,
         ringBaseZ
       );
       heroGroup.scale.setScalar(desk ? ringBaseScale : 0.65);
