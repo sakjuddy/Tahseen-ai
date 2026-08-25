@@ -22,7 +22,7 @@ export default function Home() {
 
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
-        <div className="py-4 sm:py-5 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
+        <div className="py-3 sm:py-3.5 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full flex items-center justify-between">
           
           {/* Left: Official Brand Logo */}
           <Link href="#" className="flex items-center group">
@@ -63,8 +63,8 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2. Hero Section (Full-Span 3D Wave Underneath Text & Brand Ring) */}
-      <main className="relative z-10 my-auto pt-6 pb-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+      {/* 2. Hero Section (Tightened Spacing with Navbar) */}
+      <main className="relative z-10 pt-2 sm:pt-4 pb-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         
         {/* Full-width 3D Canvas Layer */}
         <HeroRing3D />
