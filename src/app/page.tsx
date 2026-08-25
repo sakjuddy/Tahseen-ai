@@ -682,42 +682,60 @@ export default function Home() {
 
         </div>
 
-        {/* Dual-Row Value Pill Cloud (Matching Reference Mockup) */}
-        <div className="mt-16 pt-10 border-t border-white/[0.06] space-y-3.5 overflow-hidden">
-          {/* Row 1 */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            {[
-              "Real-Time Reports",
-              "Personalized Engagement",
-              "Customer Retention",
-              "Seamless Integrations",
-              "Real-Time Reports",
-            ].map((pill, idx) => (
-              <div
-                key={idx}
-                className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/10 border border-white/10 hover:border-[#00E5BE]/40 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105"
-              >
-                {pill}
-              </div>
-            ))}
+        {/* Dual-Row Animated Streaming Value Pills (Embedded in Comprehensive Insights) */}
+        <div className="mt-16 pt-10 border-t border-white/[0.06] space-y-4 overflow-hidden relative">
+          {/* Edge Vignette Fades */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#060913] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#060913] to-transparent z-10 pointer-events-none" />
+
+          {/* Row 1: Leftward Streaming Marquee */}
+          <div className="overflow-hidden flex">
+            <div className="animate-marquee-left flex items-center gap-3 sm:gap-4 py-1">
+              {[
+                "Real-Time Reports",
+                "Personalized Engagement",
+                "Customer Retention",
+                "Seamless Integrations",
+                "Live Telemetry Stream",
+                "Real-Time Reports",
+                "Personalized Engagement",
+                "Customer Retention",
+                "Seamless Integrations",
+                "Live Telemetry Stream",
+              ].map((pill, idx) => (
+                <div
+                  key={idx}
+                  className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
+                >
+                  {pill}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Row 2 (Offset) */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            {[
-              "Increased Efficiency",
-              "Cost-Effective",
-              "Smart Spending",
-              "Data-Driven Decisions",
-              "Increased Efficiency",
-            ].map((pill, idx) => (
-              <div
-                key={idx}
-                className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/10 border border-white/10 hover:border-[#00E5BE]/40 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105"
-              >
-                {pill}
-              </div>
-            ))}
+          {/* Row 2: Rightward Streaming Marquee */}
+          <div className="overflow-hidden flex">
+            <div className="animate-marquee-right flex items-center gap-3 sm:gap-4 py-1">
+              {[
+                "Increased Efficiency",
+                "Cost-Effective",
+                "Smart Spending",
+                "Data-Driven Decisions",
+                "Sovereign Saudi Cloud",
+                "Increased Efficiency",
+                "Cost-Effective",
+                "Smart Spending",
+                "Data-Driven Decisions",
+                "Sovereign Saudi Cloud",
+              ].map((pill, idx) => (
+                <div
+                  key={idx}
+                  className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
+                >
+                  {pill}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -1073,10 +1091,10 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-4 pt-1">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#6366F1] text-white hover:bg-[#4F46E5] transition-all shadow-[0_6px_20px_rgba(99,102,241,0.4)] hover:-translate-y-0.5 cursor-pointer"
+                  className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.5)] hover:-translate-y-0.5 cursor-pointer"
                 >
                   <span>Get Started</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-4 h-4 ml-2 text-[#060913]" />
                 </Link>
 
                 <Link
@@ -1111,7 +1129,7 @@ export default function Home() {
 
                   {/* Horizontal Threshold Guideline */}
                   <div className="relative pt-2">
-                    <div className="w-full border-b border-dashed border-[#6366F1]/50 absolute top-4 left-0" />
+                    <div className="w-full border-b border-dashed border-[#00E5BE]/30 absolute top-4 left-0" />
                     
                     {/* Monthly Bar Chart (Jan - Oct) */}
                     <div className="flex items-end justify-between gap-1.5 sm:gap-2 h-28 pt-4">
@@ -1132,11 +1150,11 @@ export default function Home() {
                             style={{ height: bar.h }}
                             className={`w-full rounded-md transition-all duration-300 ${
                               bar.active
-                                ? "bg-[#6366F1] shadow-[0_0_15px_rgba(99,102,241,0.8)] scale-y-105"
+                                ? "bg-[#00E5BE] shadow-[0_0_15px_rgba(0,229,190,0.8)] scale-y-105"
                                 : "bg-white/10 group-hover:bg-white/20"
                             }`}
                           />
-                          <span className={`text-[9px] font-mono ${bar.active ? "text-[#6366F1] font-bold" : "text-gray-500"}`}>
+                          <span className={`text-[9px] font-mono ${bar.active ? "text-[#00E5BE] font-bold" : "text-gray-500"}`}>
                             {bar.m}
                           </span>
                         </div>
