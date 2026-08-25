@@ -2,18 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, Sparkles, ArrowRight, HeartHandshake } from "lucide-react";
+import { Mail, MapPin, ArrowRight, HeartHandshake } from "lucide-react";
 
 export default function Footer() {
-  const handleScroll = (href: string) => {
-    if (href.startsWith("#")) {
-      const elem = document.getElementById(href.replace("#", ""));
-      if (elem) {
-        elem.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
   return (
     <footer className="relative z-10 bg-[#04060d] border-t border-white/[0.06] pt-16 sm:pt-20 pb-12 text-gray-400 font-sans">
       <div className="max-w-[1680px] mx-auto px-6 sm:px-12 lg:px-16 space-y-16">
@@ -24,7 +15,7 @@ export default function Footer() {
           {/* Column 1: Brand Info & Mission (4 Cols) */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center group">
-              <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-200 group-hover:scale-105">
+              <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,229,190,0.3)]">
                 <Image
                   src="/tahseen-logo.png"
                   alt="Tahseen AI"
@@ -58,36 +49,23 @@ export default function Footer() {
               Solutions & Platform
             </h4>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="/#services" className="hover:text-[#00E5BE] transition-colors">
-                  Autonomous AI Agents
-                </Link>
-              </li>
-              <li>
-                <Link href="/#services" className="hover:text-[#00E5BE] transition-colors">
-                  Enterprise Workflow Automation
-                </Link>
-              </li>
-              <li>
-                <Link href="/#insights" className="hover:text-[#00E5BE] transition-colors">
-                  Real-Time Insights & Oversight
-                </Link>
-              </li>
-              <li>
-                <Link href="/#solutions" className="hover:text-[#00E5BE] transition-colors">
-                  Campaign & Outreach Automation
-                </Link>
-              </li>
-              <li>
-                <Link href="/#services" className="hover:text-[#00E5BE] transition-colors">
-                  AI Consultation & Strategy
-                </Link>
-              </li>
-              <li>
-                <Link href="/#services" className="hover:text-[#00E5BE] transition-colors">
-                  Full-Stack Web & Mobile Engineering
-                </Link>
-              </li>
+              {[
+                { name: "Autonomous AI Agents", href: "/#services" },
+                { name: "Enterprise Workflow Automation", href: "/#services" },
+                { name: "Real-Time Insights & Oversight", href: "/#insights" },
+                { name: "Campaign & Outreach Automation", href: "/#solutions" },
+                { name: "AI Consultation & Strategy", href: "/#services" },
+                { name: "Full-Stack Web & Mobile Engineering", href: "/#services" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="inline-block hover:text-[#00E5BE] hover:translate-x-1.5 transition-all duration-200"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -97,36 +75,23 @@ export default function Footer() {
               Company
             </h4>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="/#about" className="hover:text-[#00E5BE] transition-colors">
-                  About Tahseen AI
-                </Link>
-              </li>
-              <li>
-                <Link href="/#about" className="hover:text-[#00E5BE] transition-colors">
-                  Our Purpose & Vision
-                </Link>
-              </li>
-              <li>
-                <Link href="/#insights" className="hover:text-[#00E5BE] transition-colors">
-                  Client Success Stories
-                </Link>
-              </li>
-              <li>
-                <Link href="/#solutions" className="hover:text-[#00E5BE] transition-colors">
-                  Security & Sovereign AI
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#00E5BE] transition-colors">
-                  Careers & Partnerships
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#00E5BE] transition-colors">
-                  Contact Us
-                </Link>
-              </li>
+              {[
+                { name: "About Tahseen AI", href: "/#about" },
+                { name: "Our Purpose & Vision", href: "/#about" },
+                { name: "Client Success Stories", href: "/#insights" },
+                { name: "Security & Sovereign AI", href: "/#solutions" },
+                { name: "Careers & Partnerships", href: "/contact" },
+                { name: "Contact Us", href: "/contact" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="inline-block hover:text-[#00E5BE] hover:translate-x-1.5 transition-all duration-200"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -141,9 +106,9 @@ export default function Footer() {
 
             <a
               href="mailto:info@tahseenai.com"
-              className="flex items-center gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-[#00E5BE]/40 transition-colors group"
+              className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/[0.02] hover:bg-[#00E5BE]/10 border border-white/[0.08] hover:border-[#00E5BE]/40 transition-all duration-300 group hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,229,190,0.15)]"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#00E5BE]/10 text-[#00E5BE] flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-xl bg-[#00E5BE]/10 text-[#00E5BE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 <Mail className="w-4 h-4" />
               </div>
               <div className="text-left">
@@ -156,7 +121,7 @@ export default function Footer() {
 
             <Link
               href="/contact"
-              className="w-full inline-flex items-center justify-center py-3 px-4 rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-bold text-xs uppercase tracking-widest transition-all shadow-[0_4px_20px_rgba(0,229,190,0.3)] gap-1.5"
+              className="w-full inline-flex items-center justify-center py-3.5 px-4 rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-bold text-xs uppercase tracking-widest transition-all shadow-[0_4px_20px_rgba(0,229,190,0.3)] hover:shadow-[0_6px_25px_rgba(0,229,190,0.5)] hover:-translate-y-0.5 gap-1.5"
             >
               <span>LET&apos;S TALK</span>
               <ArrowRight className="w-3.5 h-3.5" />

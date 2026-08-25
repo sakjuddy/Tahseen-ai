@@ -227,7 +227,7 @@ export default function Home() {
             onClick={(e) => handleSmoothScroll(e, "#home")}
             className="flex items-center group cursor-pointer"
           >
-            <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-200 group-hover:scale-105">
+            <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,229,190,0.3)]">
               <Image
                 src="/tahseen-logo.png"
                 alt="Tahseen AI"
@@ -247,7 +247,7 @@ export default function Home() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="hover:text-[#00E5BE] transition-colors duration-200 cursor-pointer"
+                    className="hover:text-[#00E5BE] hover:scale-105 transition-all duration-200 cursor-pointer"
                   >
                     {link.name}
                   </Link>
@@ -256,7 +256,7 @@ export default function Home() {
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleSmoothScroll(e, link.href)}
-                    className="hover:text-[#00E5BE] transition-colors duration-200 cursor-pointer"
+                    className="hover:text-[#00E5BE] hover:scale-105 transition-all duration-200 cursor-pointer"
                   >
                     {link.name}
                   </a>
@@ -304,10 +304,10 @@ export default function Home() {
               <a
                 href="#services"
                 onClick={(e) => handleSmoothScroll(e, "#services")}
-                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group cursor-pointer"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group cursor-pointer hover:shadow-[0_0_25px_rgba(0,229,190,0.5)]"
               >
                 <span>LET&apos;S BUILD TOGETHER</span>
-                <ArrowRight className="w-4 h-4 ml-2.5 text-[#00E5BE] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-2.5 text-[#00E5BE] group-hover:translate-x-1.5 transition-transform duration-200" />
               </a>
             </div>
 
@@ -318,13 +318,13 @@ export default function Home() {
 
         </div>
 
-        {/* 3. Bottom 4 Services Row (Services Anchor with Scroll Margin) */}
-        <div id="services" className="mt-24 sm:mt-32 pt-16 scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 text-center justify-items-center relative z-10 max-w-[1560px] mx-auto w-full">
+        {/* 3. Bottom 4 Services Row (Enhanced Interactive Hover Effects) */}
+        <div id="services" className="mt-24 sm:mt-32 pt-16 scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 text-center justify-items-center relative z-10 max-w-[1560px] mx-auto w-full">
           
           {/* Card 1: AI Agents */}
-          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
-            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="w-full p-6 sm:p-7 rounded-2xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] cursor-default">
+            <div className="w-14 h-14 rounded-2xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 group-hover:shadow-[0_0_20px_rgba(0,229,190,0.3)] mx-auto">
+              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 6C13.477 6 9 10.477 9 16C9 19.387 10.686 22.38 13.286 24.19L14 28H24L24.714 24.19C27.314 22.38 29 19.387 29 16C29 10.477 24.523 6 19 6Z" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M14.5 31.5H23.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
                 <path d="M16 35H22" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
@@ -336,8 +336,10 @@ export default function Home() {
                 <line x1="33.5" y1="18.5" x2="35.5" y2="18.5" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round"/>
               </svg>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">AI Agents</h3>
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+              AI Agents
+            </h3>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto group-hover:text-gray-200 transition-colors">
               Intelligent agents that <br />
               automate and scale your <br />
               operations.
@@ -345,16 +347,18 @@ export default function Home() {
           </div>
 
           {/* Card 2: Automation */}
-          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
-            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="w-full p-6 sm:p-7 rounded-2xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] cursor-default">
+            <div className="w-14 h-14 rounded-2xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 group-hover:shadow-[0_0_20px_rgba(0,229,190,0.3)] mx-auto">
+              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19 4L22.2 7.8C23.5 9.3 25.5 10.1 27.5 9.9L32.2 9.5L33 14.2C33.3 16.2 34.6 17.9 36.5 18.7L37 19L36.5 19.3C34.6 20.1 33.3 21.8 33 23.8L32.2 28.5L27.5 28.1C25.5 27.9 23.5 28.7 22.2 30.2L19 34L15.8 30.2C14.5 28.7 12.5 27.9 10.5 28.1L5.8 28.5L5 23.8C4.7 21.8 3.4 20.1 1.5 19.3L1 19L1.5 18.7C3.4 17.9 4.7 16.2 5 14.2L5.8 9.5L10.5 9.9C12.5 10.1 14.5 9.3 15.8 7.8L19 4Z" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
                 <circle cx="19" cy="19" r="5" stroke="#00E5BE" strokeWidth="2.4"/>
                 <circle cx="19" cy="19" r="1.5" fill="#00E5BE"/>
               </svg>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">Automation</h3>
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+              Automation
+            </h3>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto group-hover:text-gray-200 transition-colors">
               Streamline workflows <br />
               and eliminate repetitive <br />
               tasks.
@@ -362,17 +366,19 @@ export default function Home() {
           </div>
 
           {/* Card 3: Consulting */}
-          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
-            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="w-full p-6 sm:p-7 rounded-2xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] cursor-default">
+            <div className="w-14 h-14 rounded-2xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 group-hover:shadow-[0_0_20px_rgba(0,229,190,0.3)] mx-auto">
+              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 19C9 13.477 13.477 9 19 9C24.523 9 29 13.477 29 19C29 21.884 27.781 24.484 25.823 26.315L27 32L21.5 30.2C20.697 30.457 19.86 30.6 19 30.6C13.477 30.6 9 26.123 9 20.6V19Z" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M12 11C12 7.5 15 5 19 5C23 5 26 7.5 26 11" stroke="#00E5BE" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="1 3"/>
                 <circle cx="19" cy="19" r="3" stroke="#00E5BE" strokeWidth="2.2"/>
                 <circle cx="19" cy="19" r="1.2" fill="#00E5BE"/>
               </svg>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">Consulting</h3>
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+              Consulting
+            </h3>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto group-hover:text-gray-200 transition-colors">
               AI strategy and roadmap <br />
               aligned with your business <br />
               goals.
@@ -380,9 +386,9 @@ export default function Home() {
           </div>
 
           {/* Card 4: Development */}
-          <div className="space-y-4 sm:space-y-5 group flex flex-col items-center text-center">
-            <div className="w-14 h-14 flex items-center justify-center text-[#00E5BE] transition-transform duration-200 group-hover:scale-110 mx-auto">
-              <svg width="48" height="48" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="w-full p-6 sm:p-7 rounded-2xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] cursor-default">
+            <div className="w-14 h-14 rounded-2xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 group-hover:shadow-[0_0_20px_rgba(0,229,190,0.3)] mx-auto">
+              <svg width="40" height="40" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 5H7C5.895 5 5 5.895 5 7V12" stroke="#00E5BE" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M26 5H31C32.105 5 33 5.895 33 7V12" stroke="#00E5BE" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M5 26V31C5 32.105 5.895 33 7 33H12" stroke="#00E5BE" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -395,8 +401,10 @@ export default function Home() {
                 <line x1="26" y1="19" x2="28" y2="19" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
               </svg>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight text-center">Development</h3>
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed font-normal max-w-[300px] text-center mx-auto">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+              Development
+            </h3>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal max-w-[260px] text-center mx-auto group-hover:text-gray-200 transition-colors">
               Custom AI solutions <br />
               built for real-world <br />
               impact.
@@ -409,10 +417,10 @@ export default function Home() {
 
       {/* 4. Social Proof & National Impact Strip */}
       <section id="about" className="relative z-10 py-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
-        <div className="rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-          <div className="space-y-1 max-w-xl">
+        <div className="rounded-3xl bg-white/[0.02] hover:bg-white/[0.03] border border-white/[0.06] hover:border-[#00E5BE]/30 backdrop-blur-md p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,229,190,0.06)]">
+          <div className="space-y-1.5 max-w-xl">
             <div className="flex items-center justify-center md:justify-start gap-2 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-4 h-4 animate-pulse" />
               <span>Pioneering Saudi AI Innovation</span>
             </div>
             <h4 className="text-lg sm:text-xl font-bold text-white">
@@ -423,7 +431,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE]">
+          <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] hover:scale-105 hover:bg-[#00E5BE]/15 transition-transform duration-200">
             <HeartHandshake className="w-5 h-5 flex-shrink-0" />
             <div className="text-left text-xs font-medium">
               <span className="font-bold text-white">Social Impact:</span> We donate 1% of proceeds to the <span className="underline decoration-[#00E5BE]">Ehsan Platform (منصة إحسان)</span>.
@@ -432,7 +440,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Comprehensive Insights Section (Real-Time Oversight & Actionable Data) */}
+      {/* 5. Comprehensive Insights Section (Interactive Hover Telemetry) */}
       <section id="insights" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
@@ -450,23 +458,23 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
           
           {/* Card 1: Real-Time Oversight & Intelligence */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 space-y-8 shadow-[0_10px_40px_rgba(0,229,190,0.08)] flex flex-col justify-between">
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-8 shadow-[0_10px_40px_rgba(0,229,190,0.08)] hover:shadow-[0_16px_50px_rgba(0,229,190,0.18)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-5">
-              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,229,190,0.4)] transition-all">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <div className="space-y-2">
                 <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">LIVE OVERSIGHT</span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Real-Time Insights</h3>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-[#00E5BE] transition-colors">Real-Time Insights</h3>
                 <p className="text-sm text-gray-300 leading-relaxed">
                   Monitor your campaigns and customer touchpoints in real time to ensure maximum operational effectiveness and identify optimization opportunities instantly.
                 </p>
               </div>
 
-              {/* Metric Tags */}
+              {/* Metric Tags with Hover Highlights */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 {["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs font-medium text-gray-200">
+                  <div key={item} className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
                     <span>{item}</span>
                   </div>
@@ -475,7 +483,7 @@ export default function Home() {
             </div>
 
             {/* Live Interactive Telemetry Widget Simulation */}
-            <div className="p-5 rounded-2xl bg-[#060913]/90 border border-white/[0.08] space-y-4">
+            <div className="p-5 rounded-2xl bg-[#060913]/90 border border-white/[0.08] group-hover:border-[#00E5BE]/30 space-y-4 transition-all">
               <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-3">
                 <div className="flex items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#00E5BE] animate-pulse" />
@@ -484,15 +492,15 @@ export default function Home() {
                 <span className="text-[#00E5BE] font-mono font-semibold">99.98% Uptime</span>
               </div>
               <div className="grid grid-cols-3 gap-3 text-center">
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                <div className="p-3 rounded-xl bg-white/[0.02] hover:bg-[#00E5BE]/10 border border-white/[0.04] hover:border-[#00E5BE]/30 transition-all">
                   <div className="text-lg sm:text-xl font-bold text-white">~0.4s</div>
                   <div className="text-[10px] text-gray-400 uppercase tracking-wider">Avg Latency</div>
                 </div>
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                <div className="p-3 rounded-xl bg-white/[0.02] hover:bg-[#00E5BE]/10 border border-white/[0.04] hover:border-[#00E5BE]/30 transition-all">
                   <div className="text-lg sm:text-xl font-bold text-[#00E5BE]">3.2X</div>
                   <div className="text-[10px] text-gray-400 uppercase tracking-wider">Conversion</div>
                 </div>
-                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                <div className="p-3 rounded-xl bg-white/[0.02] hover:bg-[#00E5BE]/10 border border-white/[0.04] hover:border-[#00E5BE]/30 transition-all">
                   <div className="text-lg sm:text-xl font-bold text-white">24/7</div>
                   <div className="text-[10px] text-gray-400 uppercase tracking-wider">Active Run</div>
                 </div>
@@ -501,23 +509,23 @@ export default function Home() {
           </div>
 
           {/* Card 2: Actionable Data & Smart Spending */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 space-y-8 shadow-[0_10px_40px_rgba(0,229,190,0.08)] flex flex-col justify-between">
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-8 shadow-[0_10px_40px_rgba(0,229,190,0.08)] hover:shadow-[0_16px_50px_rgba(0,229,190,0.18)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
             <div className="space-y-5">
-              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,229,190,0.4)] transition-all">
                 <BarChart3 className="w-6 h-6" />
               </div>
               <div className="space-y-2">
                 <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">STRATEGIC EFFICIENCY</span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Actionable Data</h3>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-[#00E5BE] transition-colors">Actionable Data</h3>
                 <p className="text-sm text-gray-300 leading-relaxed">
                   Leverage analytics to enhance team workflows, boost engagement, and make data-driven decisions that reduce overhead and increase marketing ROI.
                 </p>
               </div>
 
-              {/* Metric Tags */}
+              {/* Metric Tags with Hover Highlights */}
               <div className="grid grid-cols-2 gap-3 pt-2">
                 {["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"].map((item) => (
-                  <div key={item} className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs font-medium text-gray-200">
+                  <div key={item} className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
                     <span>{item}</span>
                   </div>
@@ -526,19 +534,19 @@ export default function Home() {
             </div>
 
             {/* Performance Graphic Simulation */}
-            <div className="p-5 rounded-2xl bg-[#060913]/90 border border-white/[0.08] space-y-3">
+            <div className="p-5 rounded-2xl bg-[#060913]/90 border border-white/[0.08] group-hover:border-[#00E5BE]/30 space-y-3 transition-all">
               <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-3">
                 <span className="font-bold text-white">Monthly Workflow Efficiency</span>
                 <span className="text-[#00E5BE] font-mono font-semibold">+45% Gain</span>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 <div>
                   <div className="flex justify-between text-[11px] text-gray-400 mb-1">
                     <span>Manual Task Reduction</span>
                     <span className="text-[#00E5BE] font-bold">42%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[42%]" />
+                  <div className="w-full h-2.5 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[42%] transition-all duration-500 group-hover:w-[48%]" />
                   </div>
                 </div>
                 <div>
@@ -546,8 +554,8 @@ export default function Home() {
                     <span>Lead Response Speed</span>
                     <span className="text-[#00E5BE] font-bold">85%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[85%]" />
+                  <div className="w-full h-2.5 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[85%] transition-all duration-500 group-hover:w-[92%]" />
                   </div>
                 </div>
               </div>
@@ -575,13 +583,13 @@ export default function Home() {
           {solutions.map((sol) => (
             <div
               key={sol.title}
-              className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00E5BE]/40 transition-all duration-300 space-y-4 group hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,229,190,0.1)]"
+              className="p-8 rounded-3xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/50 transition-all duration-300 space-y-4 group hover:-translate-y-2 hover:shadow-[0_16px_40px_rgba(0,229,190,0.15)] cursor-default"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/40 group-hover:shadow-[0_0_20px_rgba(0,229,190,0.3)]">
                 {sol.icon}
               </div>
-              <h3 className="text-xl font-bold text-white tracking-tight">{sol.title}</h3>
-              <p className="text-sm text-gray-300 leading-relaxed font-normal">{sol.desc}</p>
+              <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-[#00E5BE] transition-colors">{sol.title}</h3>
+              <p className="text-sm text-gray-300 leading-relaxed font-normal group-hover:text-gray-200 transition-colors">{sol.desc}</p>
             </div>
           ))}
         </div>
@@ -605,14 +613,14 @@ export default function Home() {
           {plans.map((plan) => (
             <div
               key={plan.title}
-              className={`relative rounded-2xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 ${
+              className={`relative rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 ${
                 plan.popular
-                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_40px_rgba(0,229,190,0.2)] lg:-translate-y-2"
-                  : "bg-white/[0.02] border border-white/[0.06] hover:border-white/20"
+                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_40px_rgba(0,229,190,0.2)] lg:-translate-y-2 hover:shadow-[0_0_50px_rgba(0,229,190,0.35)]"
+                  : "bg-white/[0.02] hover:bg-white/[0.035] border border-white/[0.06] hover:border-[#00E5BE]/40 hover:-translate-y-1.5 hover:shadow-[0_12px_36px_rgba(0,229,190,0.1)]"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#00E5BE] text-[#060913] text-[11px] font-extrabold tracking-widest uppercase">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#00E5BE] text-[#060913] text-[11px] font-extrabold tracking-widest uppercase shadow-[0_0_15px_rgba(0,229,190,0.6)]">
                   {plan.tag}
                 </div>
               )}
@@ -639,10 +647,10 @@ export default function Home() {
               <div className="pt-8 mt-6 border-t border-white/5">
                 <Link
                   href="/contact"
-                  className={`w-full inline-flex items-center justify-center py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg transition-all cursor-pointer ${
+                  className={`w-full inline-flex items-center justify-center py-3.5 text-xs font-bold tracking-widest uppercase rounded-xl transition-all cursor-pointer ${
                     plan.popular
-                      ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_20px_rgba(0,229,190,0.4)]"
-                      : "btn-teal-outline"
+                      ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_20px_rgba(0,229,190,0.4)] hover:shadow-[0_6px_25px_rgba(0,229,190,0.6)] hover:-translate-y-0.5"
+                      : "btn-teal-outline hover:shadow-[0_0_20px_rgba(0,229,190,0.3)]"
                   }`}
                 >
                   <span>GET STARTED</span>
@@ -672,13 +680,13 @@ export default function Home() {
           {testimonials.map((t, idx) => (
             <div
               key={idx}
-              className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00E5BE]/30 transition-all duration-300 flex flex-col justify-between space-y-6"
+              className="p-8 rounded-3xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] cursor-default group"
             >
-              <p className="text-sm text-gray-300 leading-relaxed font-normal italic">
+              <p className="text-sm text-gray-300 group-hover:text-white leading-relaxed font-normal italic transition-colors">
                 &ldquo;{t.quote}&rdquo;
               </p>
               <div className="pt-4 border-t border-white/5">
-                <div className="font-bold text-white text-base">{t.author}</div>
+                <div className="font-bold text-white text-base group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
                 <div className="text-xs text-[#00E5BE] font-semibold">{t.role}</div>
               </div>
             </div>
@@ -704,7 +712,7 @@ export default function Home() {
           {faqs.map((faq, idx) => (
             <div
               key={idx}
-              className="rounded-xl bg-white/[0.02] border border-white/[0.06] overflow-hidden transition-colors duration-200"
+              className="rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 overflow-hidden transition-all duration-200"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
@@ -729,7 +737,7 @@ export default function Home() {
 
       {/* 10. Final High-Impact CTA Banner & Contact Routing */}
       <section id="contact" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-10 sm:p-16 text-center space-y-8 shadow-[0_0_60px_rgba(0,229,190,0.15)]">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-10 sm:p-16 text-center space-y-8 shadow-[0_0_60px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 hover:shadow-[0_0_80px_rgba(0,229,190,0.25)] transition-all duration-500">
           <div className="space-y-4 max-w-2xl mx-auto">
             <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
               TAKE THE NEXT STEP
@@ -745,7 +753,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.4)] hover:-translate-y-0.5 cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.4)] hover:shadow-[0_6px_30px_rgba(0,229,190,0.6)] hover:-translate-y-0.5 cursor-pointer"
             >
               <Mail className="w-4 h-4 mr-2.5" />
               <span>LET&apos;S TALK / CONTACT US</span>
@@ -754,7 +762,7 @@ export default function Home() {
             <a
               href="#home"
               onClick={(e) => handleSmoothScroll(e, "#home")}
-              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
+              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-xl btn-teal-outline cursor-pointer hover:shadow-[0_0_25px_rgba(0,229,190,0.4)]"
             >
               <span>BACK TO TOP ↑</span>
             </a>
