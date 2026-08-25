@@ -1,17 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown, CheckCircle2, Sparkles, MessageSquare, Zap, ShieldCheck, HeartHandshake, Mail } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 
 export default function Home() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   const navLinks = [
     { name: "HOME", href: "#home" },
     { name: "SERVICES", href: "#services" },
-    { name: "SOLUTIONS", href: "#services" },
-    { name: "ABOUT US", href: "#home" },
-    { name: "CONTACT", href: "#services" },
+    { name: "SOLUTIONS", href: "#solutions" },
+    { name: "ABOUT US", href: "#about" },
+    { name: "CONTACT", href: "#contact" },
   ];
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -29,11 +32,173 @@ export default function Home() {
     }
   };
 
+  const solutions = [
+    {
+      title: "Campaign Automation",
+      desc: "Create and execute campaigns with ease using AI-driven automation for maximum efficiency and scale.",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 14L18 4L28 14V26C28 27.1 27.1 28 26 28H6C4.9 28 4 27.1 4 26V14Z" />
+          <path d="M12 18L16 22L22 14" />
+        </svg>
+      ),
+    },
+    {
+      title: "Personalized Outreach",
+      desc: "Deliver tailored messages to each customer for more impactful, targeted, and engaging communication.",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="16" cy="11" r="5" />
+          <path d="M6 26C6 21 10.5 18 16 18C21.5 18 26 21 26 26" />
+          <path d="M22 6L25 9L29 4" />
+        </svg>
+      ),
+    },
+    {
+      title: "Data Optimization",
+      desc: "Analyze performance with detailed real-time analytics to fine-tune workflows and boost business results.",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M4 28H28" />
+          <path d="M8 22V16" />
+          <path d="M14 22V10" />
+          <path d="M20 22V13" />
+          <path d="M26 22V6" />
+        </svg>
+      ),
+    },
+    {
+      title: "Seamless Collaboration",
+      desc: "Seamlessly integrate with existing systems and tools to enhance team productivity and cross-unit coordination.",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="9" cy="16" r="4" />
+          <circle cx="23" cy="16" r="4" />
+          <path d="M13 16H19" />
+          <path d="M16 13V19" />
+        </svg>
+      ),
+    },
+    {
+      title: "Real-Time Oversight",
+      desc: "Monitor customer interactions and operations in real time to adapt strategies dynamically for optimal engagement.",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="16" cy="16" r="11" />
+          <polyline points="16,9 16,16 21,19" />
+        </svg>
+      ),
+    },
+    {
+      title: "Future-Proof Architecture",
+      desc: "Stay ahead with continuous AI model updates, enterprise security, and built-in adaptability for evolving needs.",
+      icon: (
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M16 3L28 8V16C28 23 23 28 16 30C9 28 4 23 4 16V8L16 3Z" />
+          <path d="M12 16L15 19L21 13" />
+        </svg>
+      ),
+    },
+  ];
+
+  const plans = [
+    {
+      tag: "STRATEGY & ADOPTION",
+      title: "AI Consulting",
+      subtitle: "Project Based",
+      desc: "AI strategy for operational efficiency, workflow auditing, and executive deployment.",
+      features: [
+        "AI Strategy for efficiency & deployment",
+        "Employee training on modern AI tools",
+        "Measurable employee productivity boost",
+        "Dedicated executive AI advisor",
+        "Continuous progress oversight",
+      ],
+      popular: false,
+    },
+    {
+      tag: "MOST POPULAR",
+      title: "AI Agents & Automation",
+      subtitle: "Project Based",
+      desc: "Autonomous intelligent agents for 24/7 sales, marketing, and workflow automation.",
+      features: [
+        "3X performance over manual sales reps",
+        "Custom live reports & dashboards",
+        "Enterprise-grade security & encryption",
+        "Seamless 3rd-party system integration",
+        "Dedicated account manager & SLA",
+      ],
+      popular: true,
+    },
+    {
+      tag: "ENGINEERING",
+      title: "Web & App Development",
+      subtitle: "Project Based",
+      desc: "Custom full-stack web platforms and mobile applications powered by AI intelligence.",
+      features: [
+        "Full-stack web & mobile app engineering",
+        "Native AI & LLM model integrations",
+        "Advanced real-time analytics engine",
+        "Top-grade cloud infrastructure & security",
+        "24/7 technical maintenance & support",
+      ],
+      popular: false,
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote: "Tahseen streamlined our internal processes — we reduced manual work by over 40% in just weeks.",
+      author: "Ahmed AL-Mutairi",
+      role: "FutureTech",
+    },
+    {
+      quote: "The AI automation was easy to deploy and helped us serve clients faster and more consistently across Saudi Arabia.",
+      author: "Sara Al-Harbi",
+      role: "DataPlus",
+    },
+    {
+      quote: "Our team now focuses on strategy instead of repetitive tasks — Tahseen took care of the rest seamlessly.",
+      author: "Ismael Mohammad",
+      role: "Owner of Deconec",
+    },
+    {
+      quote: "We saw measurable gains in operational efficiency and client satisfaction. Highly recommend Tahseen for any business.",
+      author: "Saleh El Oamry",
+      role: "Owner of Canacio",
+    },
+  ];
+
+  const faqs = [
+    {
+      q: "What is Tahseen AI?",
+      a: "Tahseen AI is a pioneering Saudi Arabian startup poised to redefine B2B operations across SMEs through cutting-edge artificial intelligence, workflow automation, and custom intelligent agent systems.",
+    },
+    {
+      q: "What are Tahseen AI's primary services?",
+      a: "We provide AI Consultation & Strategy, Full-stack Web & Mobile Development, AI Agents for Sales & Marketing, Corporate AI Training & Workshops, AI Chat & Call Centre Solutions, and End-to-End Workflow Automation.",
+    },
+    {
+      q: "Why do I need Tahseen AI solutions?",
+      a: "Tahseen AI delivers unparalleled value by reducing repetitive manual tasks by over 40%, accelerating response times, and deploying scalable autonomous systems tailored specifically to your business goals.",
+    },
+    {
+      q: "Can I customize Tahseen AI to fit my brand?",
+      a: "Absolutely. Every AI agent, workflow, and web platform is fully tailored to match your brand identity, tone of voice, internal databases, and operational requirements.",
+    },
+    {
+      q: "Does Tahseen AI provide services to individuals and startups?",
+      a: "Yes. In addition to enterprise B2B solutions, Tahseen AI provides adaptable, high-impact AI packages tailored for growing startups, entrepreneurs, and professional teams.",
+    },
+  ];
+
   return (
-    <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip">
+    <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans">
       
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none -z-10" />
+      {/* Background ambient radial glows */}
+      <div className="absolute top-0 right-1/4 w-[700px] h-[550px] bg-cyan-500/10 rounded-full blur-[170px] pointer-events-none -z-10" />
+      <div className="absolute top-[45%] left-[-150px] w-[600px] h-[600px] bg-[#00E5BE]/5 rounded-full blur-[200px] pointer-events-none -z-10" />
+      <div className="absolute bottom-[10%] right-[-100px] w-[650px] h-[650px] bg-cyan-500/8 rounded-full blur-[200px] pointer-events-none -z-10" />
 
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
@@ -73,8 +238,8 @@ export default function Home() {
             </nav>
 
             <a
-              href="#services"
-              onClick={(e) => handleSmoothScroll(e, "#services")}
+              href="#contact"
+              onClick={(e) => handleSmoothScroll(e, "#contact")}
               className="inline-flex items-center justify-center px-7 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>LET&apos;S TALK</span>
@@ -216,9 +381,241 @@ export default function Home() {
 
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 py-6 text-center text-xs text-gray-600 font-mono">
-        © {new Date().getFullYear()} Tahseen AI. All rights reserved.
+      {/* 4. Social Proof & National Impact Strip */}
+      <section id="about" className="relative z-10 py-12 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+        <div className="rounded-2xl bg-white/[0.02] border border-white/[0.06] backdrop-blur-md p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div className="space-y-1 max-w-xl">
+            <div className="flex items-center justify-center md:justify-start gap-2 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+              <Sparkles className="w-4 h-4" />
+              <span>Pioneering Saudi AI Innovation</span>
+            </div>
+            <h4 className="text-lg sm:text-xl font-bold text-white">
+              Adopted by leading enterprises across Saudi Arabia & SMEs
+            </h4>
+            <p className="text-xs sm:text-sm text-gray-400">
+              Transforming operations with custom AI agents, automated sales pipelines, and bespoke intelligence.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE]">
+            <HeartHandshake className="w-5 h-5 flex-shrink-0" />
+            <div className="text-left text-xs font-medium">
+              <span className="font-bold text-white">Social Impact:</span> We donate 1% of proceeds to the <span className="underline decoration-[#00E5BE]">Ehsan Platform (منصة إحسان)</span>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Comprehensive AI Solutions Section */}
+      <section id="solutions" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
+          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
+            EFFORTLESS DEPLOYMENT & REAL-TIME OVERSIGHT
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            AI-Powered Solutions Built for <span className="text-[#00E5BE]">Scale</span>
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+            Simplify deployment, optimize data workflows, and deliver automated intelligence across every touchpoint.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {solutions.map((sol) => (
+            <div
+              key={sol.title}
+              className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00E5BE]/40 transition-all duration-300 space-y-4 group hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,229,190,0.1)]"
+            >
+              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                {sol.icon}
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight">{sol.title}</h3>
+              <p className="text-sm text-gray-300 leading-relaxed font-normal">{sol.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 6. Flexible Service Packages */}
+      <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
+          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
+            TRANSPARENT ENGAGEMENT, MEASURABLE RESULTS
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            Flexible Plans for <span className="text-[#00E5BE]">Companies & SMEs</span>
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+            Choose the engagement model that fits your operational goals and scale seamlessly as you grow.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+          {plans.map((plan) => (
+            <div
+              key={plan.title}
+              className={`relative rounded-2xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 ${
+                plan.popular
+                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_40px_rgba(0,229,190,0.2)] lg:-translate-y-2"
+                  : "bg-white/[0.02] border border-white/[0.06] hover:border-white/20"
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#00E5BE] text-[#060913] text-[11px] font-extrabold tracking-widest uppercase">
+                  {plan.tag}
+                </div>
+              )}
+
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-[#00E5BE] tracking-wider uppercase">{plan.subtitle}</span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">{plan.title}</h3>
+                  <p className="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed">{plan.desc}</p>
+                </div>
+
+                <div className="h-px bg-white/10" />
+
+                <ul className="space-y-3.5">
+                  {plan.features.map((feat) => (
+                    <li key={feat} className="flex items-start gap-3 text-xs sm:text-sm text-gray-200">
+                      <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-8 mt-6 border-t border-white/5">
+                <a
+                  href="#contact"
+                  onClick={(e) => handleSmoothScroll(e, "#contact")}
+                  className={`w-full inline-flex items-center justify-center py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg transition-all ${
+                    plan.popular
+                      ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_20px_rgba(0,229,190,0.4)]"
+                      : "btn-teal-outline"
+                  }`}
+                >
+                  <span>GET STARTED</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. What Our Clients Say (Testimonials) */}
+      <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
+          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
+            TRUSTED BY INNOVATORS NATIONWIDE
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            What Our <span className="text-[#00E5BE]">Clients</span> Say
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+            Hear from forward-thinking leaders who have modernized their workflows with Tahseen AI solutions.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {testimonials.map((t, idx) => (
+            <div
+              key={idx}
+              className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#00E5BE]/30 transition-all duration-300 flex flex-col justify-between space-y-6"
+            >
+              <p className="text-sm text-gray-300 leading-relaxed font-normal italic">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="pt-4 border-t border-white/5">
+                <div className="font-bold text-white text-base">{t.author}</div>
+                <div className="text-xs text-[#00E5BE] font-semibold">{t.role}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 8. Interactive FAQ Section */}
+      <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1200px] mx-auto w-full">
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
+          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
+            YOUR QUERIES, SIMPLIFIED
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            Frequently Asked <span className="text-[#00E5BE]">Questions</span>
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+            Find clear answers to common questions about Tahseen AI&apos;s capabilities and integration process.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl bg-white/[0.02] border border-white/[0.06] overflow-hidden transition-colors duration-200"
+            >
+              <button
+                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-white hover:text-[#00E5BE] transition-colors"
+              >
+                <span>{faq.q}</span>
+                <ChevronDown
+                  className={`w-5 h-5 text-[#00E5BE] flex-shrink-0 transition-transform duration-300 ${
+                    openFaq === idx ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {openFaq === idx && (
+                <div className="px-6 pb-6 pt-1 text-sm text-gray-300 leading-relaxed border-t border-white/[0.04]">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 9. Final High-Impact CTA Banner & Contact Anchor */}
+      <section id="contact" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-10 sm:p-16 text-center space-y-8 shadow-[0_0_60px_rgba(0,229,190,0.15)]">
+          <div className="space-y-4 max-w-2xl mx-auto">
+            <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
+              TAKE THE NEXT STEP
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              Build Your AI-Powered Solution <span className="text-[#00E5BE]">Now</span>
+            </h2>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+              Automate lead generation, customer engagement, and business workflows with Saudi Arabia&apos;s leading AI transformation partner.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+            <a
+              href="mailto:info@tahseenai.com"
+              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.4)] hover:-translate-y-0.5"
+            >
+              <Mail className="w-4 h-4 mr-2.5" />
+              <span>CONTACT US: INFO@TAHSEENAI.COM</span>
+            </a>
+
+            <a
+              href="#home"
+              onClick={(e) => handleSmoothScroll(e, "#home")}
+              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline"
+            >
+              <span>BACK TO TOP ↑</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Footer */}
+      <footer className="relative z-10 py-10 border-t border-white/5 text-center text-xs text-gray-500 font-mono space-y-2">
+        <div>© {new Date().getFullYear()} Tahseen AI (مجموعة تحسين للذكاء الاصطناعي). All rights reserved.</div>
+        <div className="text-gray-600">Built with cutting-edge Artificial Intelligence • Riyadh, Saudi Arabia</div>
       </footer>
 
     </div>
