@@ -704,37 +704,18 @@ export default function Home() {
 
       {/* 8. Interactive Testimonial Carousel */}
       <section className="relative z-10 py-14 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-          <div className="space-y-1.5 max-w-lg text-left">
-            <span className="text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase flex items-center gap-1.5">
-              <Sparkles className="w-3 h-3" />
-              <span>TESTED & TRUSTED NATIONWIDE</span>
-            </span>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight">
-              What Our <span className="text-[#00E5BE]">Clients</span> Say
-            </h2>
-            <p className="text-xs text-gray-300 leading-relaxed font-normal">
-              Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI.
-            </p>
+        {/* Centered Heading & Subheading */}
+        <div className="text-center space-y-2.5 max-w-xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
+            <Sparkles className="w-3 h-3" />
+            <span>TESTED & TRUSTED NATIONWIDE</span>
           </div>
-
-          {/* Carousel Arrow Navigation Buttons */}
-          <div className="flex items-center gap-2 self-start md:self-end">
-            <button
-              onClick={handlePrev}
-              aria-label="Previous testimonial"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer"
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={handleNext}
-              aria-label="Next testimonial"
-              className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer"
-            >
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight text-center">
+            What Our <span className="text-[#00E5BE]">Clients</span> Say
+          </h2>
+          <p className="text-xs text-gray-300 leading-relaxed font-normal text-center">
+            Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI.
+          </p>
         </div>
 
         {/* Carousel Viewport (Continuous Seamless Loop) */}
@@ -784,20 +765,38 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Carousel Pagination Dots */}
-        <div className="flex items-center justify-center gap-1.5 mt-6">
-          {testimonials.map((_, dotIdx) => (
-            <button
-              key={dotIdx}
-              onClick={() => setCarouselIndex(dotIdx)}
-              aria-label={`Jump to slide ${dotIdx + 1}`}
-              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                carouselIndex === dotIdx
-                  ? "w-5 bg-[#00E5BE] shadow-[0_0_8px_rgba(0,229,190,0.8)]"
-                  : "w-1.5 bg-white/20 hover:bg-white/40"
-              }`}
-            />
-          ))}
+        {/* Carousel Pagination Dots & Arrow Controls */}
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            onClick={handlePrev}
+            aria-label="Previous testimonial"
+            className="w-8 h-8 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {testimonials.map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                onClick={() => setCarouselIndex(dotIdx)}
+                aria-label={`Jump to slide ${dotIdx + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  carouselIndex === dotIdx
+                    ? "w-5 bg-[#00E5BE] shadow-[0_0_8px_rgba(0,229,190,0.8)]"
+                    : "w-1.5 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={handleNext}
+            aria-label="Next testimonial"
+            className="w-8 h-8 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       </section>
 
