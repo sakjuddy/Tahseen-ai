@@ -140,9 +140,9 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     ringGlowMesh.position.set(0, 0, -0.05);
     heroGroup.add(ringGlowMesh);
 
-    // --- Materials (Exact Colors & Specs) ---
+    // --- Materials (Exact Face Colors & Polish) ---
     const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05ad9a,
+      color: 0x05ad9a, // illuminatedFaceColor: #05ad9a
       emissive: 0x003830,
       emissiveIntensity: 0.35,
       roughness: 0.11,
@@ -154,24 +154,24 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     });
 
     const shadedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x16796d,
+      color: 0x16796d, // shadedFaceColor: #16796d
       emissive: 0x002c25,
       emissiveIntensity: 0.35,
-      roughness: 0.16,
+      roughness: 0.11,
       metalness: 0.47,
-      clearcoat: 0.85,
-      clearcoatRoughness: 0.12,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.06,
       side: THREE.DoubleSide,
     });
 
     const sideCapMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05d6cb,
+      color: 0x05d6cb, // outerSideColor: #05d6cb
       emissive: 0x00e5be,
       emissiveIntensity: 0.35,
       roughness: 0.11,
       metalness: 0.47,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
+      clearcoatRoughness: 0.06,
       side: THREE.DoubleSide,
     });
 
