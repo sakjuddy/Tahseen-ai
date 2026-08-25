@@ -17,20 +17,24 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     // --- 1. Scene & Camera Setup ---
     const scene = new THREE.Scene();
 
+    const initialW = container.clientWidth || window.innerWidth;
+    const initialH = container.clientHeight || 550;
+    const isMobileInitial = initialW < 640;
+
     const camera = new THREE.PerspectiveCamera(
-      36,
-      container.clientWidth / container.clientHeight,
+      isMobileInitial ? 46 : 36,
+      initialW / initialH,
       0.1,
       1000
     );
-    camera.position.set(0, 0, 10.5);
+    camera.position.set(0, 0, isMobileInitial ? 11.5 : 10.5);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
       powerPreference: "high-performance",
     });
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(initialW, initialH);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.45;
@@ -378,22 +382,26 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     // --- 6. Resize Observer with Adaptive Mobile Viewport ---
     const handleResize = () => {
       if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
+      const w = container.clientWidth || window.innerWidth;
+      const h = container.clientHeight || 550;
+      const isMobile = w < 640;
       const desk = w >= 1024;
       const tab = w >= 640 && w < 1024;
 
+      camera.fov = isMobile ? 46 : 36;
+      camera.position.set(0, 0, isMobile ? 11.5 : 10.5);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
       heroGroup.position.set(
         desk ? ringBaseX : 0,
-        desk ? ringBaseY : tab ? 0.8 : 0.4,
+        desk ? ringBaseY : tab ? 0.9 : 0.65,
         ringBaseZ
       );
-      heroGroup.scale.setScalar(desk ? ringBaseScale : tab ? 0.60 : 0.48);
+      heroGroup.scale.setScalar(desk ? ringBaseScale : tab ? 0.65 : 0.55);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);

@@ -793,7 +793,7 @@ export default function Home() {
         {/* 3D Canvas Layer */}
         <HeroRing3D mirrored={isAr} />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[380px] sm:min-h-[460px] lg:min-h-[520px] pointer-events-none">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[460px] sm:min-h-[480px] lg:min-h-[520px] pointer-events-none">
           
           {/* Left Hero Column */}
           <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-start pointer-events-auto">
