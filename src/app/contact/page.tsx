@@ -48,16 +48,16 @@ export default function ContactPage() {
 
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
-        <div className="py-3 sm:py-3.5 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full flex items-center justify-between">
+        <div className="py-2.5 sm:py-3 px-6 sm:px-12 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
           {/* Left: Official Brand Logo */}
           <Link href="/" className="flex items-center group cursor-pointer">
-            <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-200 group-hover:scale-105">
+            <div className="relative h-9 w-44 sm:h-10 sm:w-48 transition-transform duration-200 group-hover:scale-105">
               <Image
                 src="/tahseen-logo.png"
                 alt="Tahseen AI"
                 fill
-                sizes="(max-width: 640px) 208px, 240px"
+                sizes="(max-width: 640px) 176px, 192px"
                 className="object-contain object-left"
                 priority
               />
@@ -65,8 +65,8 @@ export default function ContactPage() {
           </Link>
 
           {/* Right: Nav Links & LET'S TALK Button */}
-          <div className="flex items-center gap-8 sm:gap-10 lg:gap-12 xl:gap-14">
-            <nav className="hidden md:flex items-center gap-8 lg:gap-10 xl:gap-12 text-sm sm:text-[15px] font-semibold tracking-wider text-gray-200">
+          <div className="flex items-center gap-5 sm:gap-7 lg:gap-8 xl:gap-10">
+            <nav className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8 text-[11px] sm:text-xs font-semibold tracking-wider text-gray-200">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -82,7 +82,7 @@ export default function ContactPage() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-7 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
+              className="inline-flex items-center justify-center px-5 sm:px-6 py-2 text-[11px] sm:text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>LET&apos;S TALK</span>
             </Link>
