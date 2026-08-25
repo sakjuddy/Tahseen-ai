@@ -10,6 +10,8 @@ interface FooterProps {
 
 export default function Footer({ lang = "ar" }: FooterProps) {
   const isAr = lang === "ar";
+  const contactHref = isAr ? "/contact" : "/contact?lang=en";
+  const homePrefix = isAr ? "" : "/?lang=en";
 
   const content = {
     ar: {
@@ -37,8 +39,8 @@ export default function Footer({ lang = "ar" }: FooterProps) {
         { name: "رسالتنا ورؤيتنا", href: "/#about" },
         { name: "قصص نجاح العملاء", href: "/#insights" },
         { name: "الأمن والذكاء الاصطناعي السيادي", href: "/#solutions" },
-        { name: "الوظائف والشراكات", href: "/contact" },
-        { name: "اتصل بنا", href: "/contact" },
+        { name: "الوظائف والشراكات", href: contactHref },
+        { name: "اتصل بنا", href: contactHref },
       ],
       colContact: "التواصل المباشر",
       contactDesc: "هل لديك مشروع أو استفسار حول تكامل الأنظمة؟ تواصل مباشرة مع فريقنا الهندسي.",
@@ -62,21 +64,21 @@ export default function Footer({ lang = "ar" }: FooterProps) {
       ),
       colSolutions: "Solutions & Platform",
       solutionsList: [
-        { name: "Autonomous AI Agents", href: "/#services" },
-        { name: "Enterprise Workflow Automation", href: "/#services" },
-        { name: "Real-Time Insights & Oversight", href: "/#insights" },
-        { name: "Campaign & Outreach Automation", href: "/#solutions" },
-        { name: "AI Consultation & Strategy", href: "/#services" },
-        { name: "Full-Stack Web & Mobile Engineering", href: "/#services" },
+        { name: "Autonomous AI Agents", href: `${homePrefix}/#services` },
+        { name: "Enterprise Workflow Automation", href: `${homePrefix}/#services` },
+        { name: "Real-Time Insights & Oversight", href: `${homePrefix}/#insights` },
+        { name: "Campaign & Outreach Automation", href: `${homePrefix}/#solutions` },
+        { name: "AI Consultation & Strategy", href: `${homePrefix}/#services` },
+        { name: "Full-Stack Web & Mobile Engineering", href: `${homePrefix}/#services` },
       ],
       colCompany: "Company",
       companyList: [
-        { name: "About Tahseen AI", href: "/#about" },
-        { name: "Our Purpose & Vision", href: "/#about" },
-        { name: "Client Success Stories", href: "/#insights" },
-        { name: "Security & Sovereign AI", href: "/#solutions" },
-        { name: "Careers & Partnerships", href: "/contact" },
-        { name: "Contact Us", href: "/contact" },
+        { name: "About Tahseen AI", href: `${homePrefix}/#about` },
+        { name: "Our Purpose & Vision", href: `${homePrefix}/#about` },
+        { name: "Client Success Stories", href: `${homePrefix}/#insights` },
+        { name: "Security & Sovereign AI", href: `${homePrefix}/#solutions` },
+        { name: "Careers & Partnerships", href: contactHref },
+        { name: "Contact Us", href: contactHref },
       ],
       colContact: "Direct Contact",
       contactDesc: "Have an RFP, integration question, or need AI consulting? Connect directly with our team.",
@@ -101,7 +103,7 @@ export default function Footer({ lang = "ar" }: FooterProps) {
           
           {/* Column 1: Brand Info & Mission */}
           <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="flex items-center group">
+            <Link href={isAr ? "/" : "/?lang=en"} className="flex items-center group">
               <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,229,190,0.3)]">
                 <Image
                   src="/tahseen-logo.png"
@@ -197,7 +199,7 @@ export default function Footer({ lang = "ar" }: FooterProps) {
             </a>
 
             <Link
-              href="/contact"
+              href={contactHref}
               className="w-full inline-flex items-center justify-center py-3.5 px-4 rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-bold text-xs uppercase tracking-widest transition-all shadow-[0_4px_20px_rgba(0,229,190,0.3)] hover:shadow-[0_6px_25px_rgba(0,229,190,0.5)] hover:-translate-y-0.5 gap-1.5"
             >
               <span>{t.letsTalk}</span>
@@ -214,13 +216,13 @@ export default function Footer({ lang = "ar" }: FooterProps) {
           </div>
 
           <div className="flex items-center gap-6 text-gray-400">
-            <Link href="/#about" className="hover:text-[#00E5BE] transition-colors">
+            <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#00E5BE] transition-colors">
               {t.privacy}
             </Link>
-            <Link href="/#about" className="hover:text-[#00E5BE] transition-colors">
+            <Link href={isAr ? "/#about" : "/?lang=en#about"} className="hover:text-[#00E5BE] transition-colors">
               {t.terms}
             </Link>
-            <Link href="/#insights" className="hover:text-[#00E5BE] transition-colors">
+            <Link href={isAr ? "/#insights" : "/?lang=en#insights"} className="hover:text-[#00E5BE] transition-colors">
               {t.security}
             </Link>
             <span className="text-[#00E5BE] font-semibold">{t.vision}</span>

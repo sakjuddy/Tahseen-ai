@@ -9,6 +9,8 @@ import Footer from "@/components/Footer";
 export default function ContactPage() {
   const [lang, setLang] = useState<"ar" | "en">("ar");
   const isAr = lang === "ar";
+  const homePrefix = isAr ? "" : "/?lang=en";
+  const contactHref = isAr ? "/contact" : "/contact?lang=en";
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -17,32 +19,63 @@ export default function ContactPage() {
     email: "",
     company: "",
     phone: "",
-    service: isAr ? "وكلاء الذكاء الاصطناعي والأتمتة" : "AI Agents & Automation",
+    service: "AI Agents & Automation",
     budget: "$5,000 - $15,000",
     message: "",
   });
+
+  // Sync Language from URL param or LocalStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get("lang");
+      if (urlLang === "en" || urlLang === "ar") {
+        setLang(urlLang as "ar" | "en");
+      } else {
+        const saved = localStorage.getItem("tahseen_lang");
+        if (saved === "en" || saved === "ar") {
+          setLang(saved as "ar" | "en");
+        }
+      }
+    }
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = isAr ? "rtl" : "ltr";
   }, [lang, isAr]);
 
+  const toggleLanguage = () => {
+    const nextLang = isAr ? "en" : "ar";
+    setLang(nextLang);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("tahseen_lang", nextLang);
+      const url = new URL(window.location.href);
+      if (nextLang === "ar") {
+        url.searchParams.delete("lang");
+      } else {
+        url.searchParams.set("lang", "en");
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
   const navLinks = isAr
     ? [
-        { name: "الرئيسية", href: "/#home" },
-        { name: "خدماتنا", href: "/#services" },
-        { name: "التحليلات", href: "/#insights" },
-        { name: "الحلول", href: "/#solutions" },
-        { name: "من نحن", href: "/#about" },
-        { name: "اتصل بنا", href: "/contact" },
+        { name: "الرئيسية", href: `${homePrefix}/#home` },
+        { name: "خدماتنا", href: `${homePrefix}/#services` },
+        { name: "التحليلات", href: `${homePrefix}/#insights` },
+        { name: "الحلول", href: `${homePrefix}/#solutions` },
+        { name: "من نحن", href: `${homePrefix}/#about` },
+        { name: "اتصل بنا", href: contactHref },
       ]
     : [
-        { name: "HOME", href: "/#home" },
-        { name: "SERVICES", href: "/#services" },
-        { name: "INSIGHTS", href: "/#insights" },
-        { name: "SOLUTIONS", href: "/#solutions" },
-        { name: "ABOUT US", href: "/#about" },
-        { name: "CONTACT", href: "/contact" },
+        { name: "HOME", href: `${homePrefix}/#home` },
+        { name: "SERVICES", href: `${homePrefix}/#services` },
+        { name: "INSIGHTS", href: `${homePrefix}/#insights` },
+        { name: "SOLUTIONS", href: `${homePrefix}/#solutions` },
+        { name: "ABOUT US", href: `${homePrefix}/#about` },
+        { name: "CONTACT", href: contactHref },
       ];
 
   const servicesList = isAr
@@ -80,7 +113,7 @@ export default function ContactPage() {
         <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center group cursor-pointer">
+          <Link href={isAr ? "/" : "/?lang=en"} className="flex items-center group cursor-pointer">
             <div className="relative h-8 w-36 sm:h-9 sm:w-44 lg:h-10 lg:w-48 transition-transform duration-200 group-hover:scale-105">
               <Image
                 src="/tahseen-logo.png"
@@ -101,7 +134,7 @@ export default function ContactPage() {
                   key={link.name}
                   href={link.href}
                   className={`transition-colors duration-200 cursor-pointer ${
-                    link.href === "/contact" ? "text-[#00E5BE]" : "hover:text-[#00E5BE]"
+                    link.href === contactHref ? "text-[#00E5BE]" : "hover:text-[#00E5BE]"
                   }`}
                 >
                   {link.name}
@@ -111,7 +144,7 @@ export default function ContactPage() {
 
             {/* Language Toggle Button */}
             <button
-              onClick={() => setLang(isAr ? "en" : "ar")}
+              onClick={toggleLanguage}
               aria-label="Toggle language"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#00E5BE]/40 text-gray-200 hover:text-[#00E5BE] transition-all cursor-pointer"
             >
@@ -120,7 +153,7 @@ export default function ContactPage() {
             </button>
 
             <Link
-              href="/contact"
+              href={contactHref}
               className="inline-flex items-center justify-center px-4 sm:px-6 py-2 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>{isAr ? "تحدث معنا" : "LET'S TALK"}</span>
@@ -130,7 +163,7 @@ export default function ContactPage() {
           {/* Mobile Controls */}
           <div className="flex md:hidden items-center gap-2">
             <button
-              onClick={() => setLang(isAr ? "en" : "ar")}
+              onClick={toggleLanguage}
               aria-label="Toggle language"
               className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-md bg-white/[0.04] border border-white/10 text-gray-200 hover:text-[#00E5BE]"
             >

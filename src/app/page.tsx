@@ -33,6 +33,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   const [lang, setLang] = useState<"ar" | "en">("ar");
   const isAr = lang === "ar";
+  const contactHref = isAr ? "/contact" : "/contact?lang=en";
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -40,10 +41,41 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [activeSolution, setActiveSolution] = useState(0);
 
+  // Sync Language from URL param or LocalStorage on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get("lang");
+      if (urlLang === "en" || urlLang === "ar") {
+        setLang(urlLang as "ar" | "en");
+      } else {
+        const saved = localStorage.getItem("tahseen_lang");
+        if (saved === "en" || saved === "ar") {
+          setLang(saved as "ar" | "en");
+        }
+      }
+    }
+  }, []);
+
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = isAr ? "rtl" : "ltr";
   }, [lang, isAr]);
+
+  const toggleLanguage = () => {
+    const nextLang = isAr ? "en" : "ar";
+    setLang(nextLang);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("tahseen_lang", nextLang);
+      const url = new URL(window.location.href);
+      if (nextLang === "ar") {
+        url.searchParams.delete("lang");
+      } else {
+        url.searchParams.set("lang", "en");
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   const navLinks = isAr
     ? [
@@ -52,7 +84,7 @@ export default function Home() {
         { name: "التحليلات", href: "#insights" },
         { name: "الحلول", href: "#solutions" },
         { name: "من نحن", href: "#about" },
-        { name: "اتصل بنا", href: "/contact" },
+        { name: "اتصل بنا", href: contactHref },
       ]
     : [
         { name: "HOME", href: "#home" },
@@ -60,7 +92,7 @@ export default function Home() {
         { name: "INSIGHTS", href: "#insights" },
         { name: "SOLUTIONS", href: "#solutions" },
         { name: "ABOUT US", href: "#about" },
-        { name: "CONTACT", href: "/contact" },
+        { name: "CONTACT", href: contactHref },
       ];
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -650,7 +682,7 @@ export default function Home() {
       <div className="absolute top-[45%] left-[-100px] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-[#00E5BE]/5 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
       <div className="absolute bottom-[10%] right-[-80px] w-[320px] sm:w-[650px] h-[320px] sm:h-[650px] bg-cyan-500/8 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
 
-      {/* 1. Sticky Header / Navbar (Fully Mobile Optimized) */}
+      {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/90 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
@@ -699,7 +731,7 @@ export default function Home() {
 
             {/* Language Toggle Button */}
             <button
-              onClick={() => setLang(isAr ? "en" : "ar")}
+              onClick={toggleLanguage}
               aria-label="Toggle language"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#00E5BE]/40 text-gray-200 hover:text-[#00E5BE] transition-all cursor-pointer"
             >
@@ -709,7 +741,7 @@ export default function Home() {
 
             {/* Contact Action Button */}
             <Link
-              href="/contact"
+              href={contactHref}
               className="inline-flex items-center justify-center px-4 sm:px-6 py-2 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>{isAr ? "تحدث معنا" : "LET'S TALK"}</span>
@@ -719,7 +751,7 @@ export default function Home() {
           {/* Mobile Right Controls: Language Switcher & Hamburger */}
           <div className="flex md:hidden items-center gap-2">
             <button
-              onClick={() => setLang(isAr ? "en" : "ar")}
+              onClick={toggleLanguage}
               aria-label="Toggle language"
               className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold rounded-md bg-white/[0.04] border border-white/10 text-gray-200 hover:text-[#00E5BE]"
             >
@@ -728,7 +760,7 @@ export default function Home() {
             </button>
 
             <Link
-              href="/contact"
+              href={contactHref}
               className="px-3 py-1.5 text-[10px] font-bold tracking-wider uppercase rounded-md btn-teal-outline"
             >
               <span>{isAr ? "تواصل" : "TALK"}</span>
@@ -776,7 +808,7 @@ export default function Home() {
 
             <div className="pt-2">
               <Link
-                href="/contact"
+                href={contactHref}
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl bg-[#00E5BE] text-[#060913] shadow-[0_4px_20px_rgba(0,229,190,0.4)]"
               >
@@ -787,7 +819,7 @@ export default function Home() {
         )}
       </header>
 
-      {/* 2. Hero Section (Mobile Adaptive) */}
+      {/* 2. Hero Section */}
       <main id="home" className="relative z-10 pt-4 sm:pt-6 pb-10 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full">
         
         {/* 3D Canvas Layer */}
@@ -916,6 +948,10 @@ export default function Home() {
                 <path d="M33 26V31C33 32.105 32.105 33 31 33H26" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <circle cx="19" cy="19" r="4.5" stroke="#00E5BE" strokeWidth="2"/>
                 <circle cx="19" cy="19" r="1.6" fill="#00E5BE"/>
+                <line x1="19" y1="10" x2="19" y2="12" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="19" y1="26" x2="19" y2="28" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="10" y1="19" x2="12" y2="19" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="26" y1="19" x2="28" y2="19" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -932,7 +968,7 @@ export default function Home() {
 
       </main>
 
-      {/* 4. Enterprise Social Proof & Partner Logos (Mobile Wrapped) */}
+      {/* 4. Enterprise Social Proof & Partner Logos */}
       <section id="about" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28">
         
         {/* Centered Heading with Dotted Divider Lines */}
@@ -954,7 +990,7 @@ export default function Home() {
           <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
         </div>
 
-        {/* Crisp White/Teal Container Box (Mobile Adaptive) */}
+        {/* Crisp White/Teal Container Box */}
         <div className="rounded-2xl sm:rounded-3xl bg-white/[0.96] backdrop-blur-2xl border-2 border-[#00E5BE]/40 p-5 sm:p-8 md:p-10 shadow-[0_12px_40px_rgba(0,229,190,0.18)] flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
           
           {/* Logo 1: Zana Cultural Entity */}
@@ -1238,7 +1274,7 @@ export default function Home() {
 
             <div className="pt-1">
               <Link
-                href="/contact"
+                href={contactHref}
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
               >
                 <span>{isAr ? "استشرنا حول تدفقات العمل المخصصة" : "CONSULT ON CUSTOM WORKFLOWS"}</span>
@@ -1365,7 +1401,7 @@ export default function Home() {
 
               <div className="pt-5 sm:pt-6 mt-4 sm:mt-5 border-t border-white/5">
                 <Link
-                  href="/contact"
+                  href={contactHref}
                   className={`w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-200 cursor-pointer ${
                     plan.popular
                       ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_16px_rgba(0,229,190,0.4)]"
@@ -1574,7 +1610,7 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
                 <Link
-                  href="/contact"
+                  href={contactHref}
                   className="inline-flex items-center justify-center px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.5)] cursor-pointer text-center"
                 >
                   <span>{isAr ? "ابدأ الآن" : "Get Started"}</span>
@@ -1582,7 +1618,7 @@ export default function Home() {
                 </Link>
 
                 <Link
-                  href="/contact"
+                  href={contactHref}
                   className="inline-flex items-center justify-center px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#1E293B] border border-white/10 text-white hover:bg-[#334155] transition-all shadow-lg cursor-pointer gap-2 text-center"
                 >
                   <HelpCircle className="w-4 h-4 text-gray-400" />
@@ -1596,7 +1632,7 @@ export default function Home() {
               <div className="rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl p-4 sm:p-6 shadow-2xl space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-3 text-start">
                   <span className="text-base sm:text-lg font-bold text-white tracking-tight">{isAr ? "الرصيد والقيمة" : "Balance"}</span>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00E5BE]/15 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-[11px] font-bold">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00E5BE]/15 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-[11px] font-bold">
                     <CheckCircle2 className="w-3 h-3" />
                     <span>{isAr ? "على المسار الصحيح" : "On track"}</span>
                   </span>
