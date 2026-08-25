@@ -142,8 +142,8 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
 
     // --- Materials (Exact Face Colors & Polish) ---
     const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05ad9a, // illuminatedFaceColor: #05ad9a
-      emissive: 0x003830,
+      color: 0x16796d, // illuminatedFaceColor: #16796d
+      emissive: 0x002c25,
       emissiveIntensity: 0.35,
       roughness: 0.11,
       metalness: 0.47,
@@ -154,8 +154,8 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     });
 
     const shadedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x16796d, // shadedFaceColor: #16796d
-      emissive: 0x002c25,
+      color: 0x05ad9a, // shadedFaceColor: #05ad9a
+      emissive: 0x003830,
       emissiveIntensity: 0.35,
       roughness: 0.11,
       metalness: 0.47,
