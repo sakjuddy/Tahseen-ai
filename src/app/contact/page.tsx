@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -314,11 +315,8 @@ export default function ContactPage() {
 
       </main>
 
-      {/* 3. Footer */}
-      <footer className="relative z-10 py-10 border-t border-white/5 text-center text-xs text-gray-500 font-mono space-y-2">
-        <div>© {new Date().getFullYear()} Tahseen AI (مجموعة تحسين للذكاء الاصطناعي). All rights reserved.</div>
-        <div className="text-gray-600">Built with cutting-edge Artificial Intelligence • Riyadh, Saudi Arabia</div>
-      </footer>
+      {/* 3. Enterprise Footer */}
+      <Footer />
 
     </div>
   );
