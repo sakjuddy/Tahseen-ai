@@ -3,7 +3,22 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, CheckCircle2, Sparkles, MessageSquare, Zap, ShieldCheck, HeartHandshake, Mail } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronDown,
+  CheckCircle2,
+  Sparkles,
+  MessageSquare,
+  Zap,
+  ShieldCheck,
+  HeartHandshake,
+  Mail,
+  Activity,
+  BarChart3,
+  TrendingUp,
+  Cpu,
+  Layers,
+} from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 
 export default function Home() {
@@ -12,9 +27,10 @@ export default function Home() {
   const navLinks = [
     { name: "HOME", href: "#home" },
     { name: "SERVICES", href: "#services" },
+    { name: "INSIGHTS", href: "#insights" },
     { name: "SOLUTIONS", href: "#solutions" },
     { name: "ABOUT US", href: "#about" },
-    { name: "CONTACT", href: "#contact" },
+    { name: "CONTACT", href: "/contact" },
   ];
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -225,25 +241,34 @@ export default function Home() {
           {/* Right: Nav Links & LET'S TALK Button */}
           <div className="flex items-center gap-8 sm:gap-10 lg:gap-12 xl:gap-14">
             <nav className="hidden md:flex items-center gap-8 lg:gap-10 xl:gap-12 text-sm sm:text-[15px] font-semibold tracking-wider text-gray-200">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleSmoothScroll(e, link.href)}
-                  className="hover:text-[#00E5BE] transition-colors duration-200 cursor-pointer"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.href.startsWith("/") ? (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="hover:text-[#00E5BE] transition-colors duration-200 cursor-pointer"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    className="hover:text-[#00E5BE] transition-colors duration-200 cursor-pointer"
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
             </nav>
 
-            <a
-              href="#contact"
-              onClick={(e) => handleSmoothScroll(e, "#contact")}
+            <Link
+              href="/contact"
               className="inline-flex items-center justify-center px-7 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>LET&apos;S TALK</span>
-            </a>
+            </Link>
           </div>
 
         </div>
@@ -406,7 +431,132 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Comprehensive AI Solutions Section */}
+      {/* 5. Comprehensive Insights Section (Real-Time Oversight & Actionable Data) */}
+      <section id="insights" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
+            <Activity className="w-3.5 h-3.5" />
+            <span>LIVE OVERSIGHT & REAL-TIME ANALYTICS</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            Comprehensive Insights That Drive <span className="text-[#00E5BE]">Growth</span>
+          </h2>
+          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+            Track every campaign, automated agent, and customer interaction in real time to refine engagement strategies and eliminate guesswork.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+          
+          {/* Card 1: Real-Time Oversight & Intelligence */}
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 space-y-8 shadow-[0_10px_40px_rgba(0,229,190,0.08)] flex flex-col justify-between">
+            <div className="space-y-5">
+              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                <TrendingUp className="w-6 h-6" />
+              </div>
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">LIVE OVERSIGHT</span>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Real-Time Insights</h3>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  Monitor your campaigns and customer touchpoints in real time to ensure maximum operational effectiveness and identify optimization opportunities instantly.
+                </p>
+              </div>
+
+              {/* Metric Tags */}
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                {["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"].map((item) => (
+                  <div key={item} className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs font-medium text-gray-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Live Interactive Telemetry Widget Simulation */}
+            <div className="p-5 rounded-2xl bg-[#060913]/90 border border-white/[0.08] space-y-4">
+              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#00E5BE] animate-pulse" />
+                  <span className="font-bold text-white">Live AI Agent Telemetry</span>
+                </div>
+                <span className="text-[#00E5BE] font-mono font-semibold">99.98% Uptime</span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-lg sm:text-xl font-bold text-white">~0.4s</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Avg Latency</div>
+                </div>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-lg sm:text-xl font-bold text-[#00E5BE]">3.2X</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Conversion</div>
+                </div>
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                  <div className="text-lg sm:text-xl font-bold text-white">24/7</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Active Run</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Actionable Data & Smart Spending */}
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 space-y-8 shadow-[0_10px_40px_rgba(0,229,190,0.08)] flex flex-col justify-between">
+            <div className="space-y-5">
+              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                <BarChart3 className="w-6 h-6" />
+              </div>
+              <div className="space-y-2">
+                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">STRATEGIC EFFICIENCY</span>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Actionable Data</h3>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  Leverage analytics to enhance team workflows, boost engagement, and make data-driven decisions that reduce overhead and increase marketing ROI.
+                </p>
+              </div>
+
+              {/* Metric Tags */}
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                {["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"].map((item) => (
+                  <div key={item} className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white/[0.03] border border-white/[0.08] text-xs font-medium text-gray-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Performance Graphic Simulation */}
+            <div className="p-5 rounded-2xl bg-[#060913]/90 border border-white/[0.08] space-y-3">
+              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-3">
+                <span className="font-bold text-white">Monthly Workflow Efficiency</span>
+                <span className="text-[#00E5BE] font-mono font-semibold">+45% Gain</span>
+              </div>
+              <div className="space-y-2">
+                <div>
+                  <div className="flex justify-between text-[11px] text-gray-400 mb-1">
+                    <span>Manual Task Reduction</span>
+                    <span className="text-[#00E5BE] font-bold">42%</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[42%]" />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-[11px] text-gray-400 mb-1">
+                    <span>Lead Response Speed</span>
+                    <span className="text-[#00E5BE] font-bold">85%</span>
+                  </div>
+                  <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[85%]" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6. Comprehensive AI Solutions Section */}
       <section id="solutions" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
@@ -436,7 +586,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Flexible Service Packages */}
+      {/* 7. Flexible Service Packages */}
       <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
@@ -486,10 +636,9 @@ export default function Home() {
               </div>
 
               <div className="pt-8 mt-6 border-t border-white/5">
-                <a
-                  href="#contact"
-                  onClick={(e) => handleSmoothScroll(e, "#contact")}
-                  className={`w-full inline-flex items-center justify-center py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg transition-all ${
+                <Link
+                  href="/contact"
+                  className={`w-full inline-flex items-center justify-center py-3.5 text-xs font-bold tracking-widest uppercase rounded-lg transition-all cursor-pointer ${
                     plan.popular
                       ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_20px_rgba(0,229,190,0.4)]"
                       : "btn-teal-outline"
@@ -497,14 +646,14 @@ export default function Home() {
                 >
                   <span>GET STARTED</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
-                </a>
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 7. What Our Clients Say (Testimonials) */}
+      {/* 8. What Our Clients Say (Testimonials) */}
       <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
@@ -536,7 +685,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Interactive FAQ Section */}
+      {/* 9. Interactive FAQ Section */}
       <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1200px] mx-auto w-full">
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
@@ -558,7 +707,7 @@ export default function Home() {
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-white hover:text-[#00E5BE] transition-colors"
+                className="w-full p-6 text-left flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
@@ -577,7 +726,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 9. Final High-Impact CTA Banner & Contact Anchor */}
+      {/* 10. Final High-Impact CTA Banner & Contact Routing */}
       <section id="contact" className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full scroll-mt-28">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-10 sm:p-16 text-center space-y-8 shadow-[0_0_60px_rgba(0,229,190,0.15)]">
           <div className="space-y-4 max-w-2xl mx-auto">
@@ -593,18 +742,18 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-            <a
-              href="mailto:info@tahseenai.com"
-              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.4)] hover:-translate-y-0.5"
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.4)] hover:-translate-y-0.5 cursor-pointer"
             >
               <Mail className="w-4 h-4 mr-2.5" />
-              <span>CONTACT US: INFO@TAHSEENAI.COM</span>
-            </a>
+              <span>LET&apos;S TALK / CONTACT US</span>
+            </Link>
 
             <a
               href="#home"
               onClick={(e) => handleSmoothScroll(e, "#home")}
-              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline"
+              className="inline-flex items-center justify-center px-8 py-4 text-xs sm:text-sm font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
               <span>BACK TO TOP ↑</span>
             </a>
@@ -612,7 +761,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. Footer */}
+      {/* 11. Footer */}
       <footer className="relative z-10 py-10 border-t border-white/5 text-center text-xs text-gray-500 font-mono space-y-2">
         <div>© {new Date().getFullYear()} Tahseen AI (مجموعة تحسين للذكاء الاصطناعي). All rights reserved.</div>
         <div className="text-gray-600">Built with cutting-edge Artificial Intelligence • Riyadh, Saudi Arabia</div>
