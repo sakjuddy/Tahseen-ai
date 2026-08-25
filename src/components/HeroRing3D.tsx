@@ -7,7 +7,7 @@ interface HeroRing3DProps {
   mirrored?: boolean;
 }
 
-export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
+export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,38 +33,38 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.45; // English baseline exposure
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     container.appendChild(renderer.domElement);
 
-    // --- 2. Lighting Setup (Mirrored for Arabic RTL) ---
+    // --- 2. Lighting Setup (Original English Specs) ---
     const ambientLight = new THREE.AmbientLight(0x020712, 1.2);
     scene.add(ambientLight);
 
-    // Key Light: #5deee0, intensity: 7.0
-    const textKeyLight = new THREE.PointLight(0x5deee0, 7.0, 50, 1.1);
-    textKeyLight.position.set(mirrored ? 6.0 : -6.0, -3.4, 0.6);
+    // Primary Radiant Electric Teal Key Light
+    const textKeyLight = new THREE.PointLight(0x00f5d4, 15.0, 50, 1.1);
+    textKeyLight.position.set(mirrored ? 6.0 : -6.0, -3.0, 1.2);
     textKeyLight.castShadow = true;
     scene.add(textKeyLight);
 
-    // Directional Light
+    // Crisp Cyan Directional Light
     const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.8);
     textDirLight.position.set(mirrored ? 6.0 : -6.0, -1.5, 1.5);
     scene.add(textDirLight);
 
-    // Rim Light
+    // Vibrant Electric Cyan Rim Light
     const rightRimLight = new THREE.PointLight(0x06b6d4, 8.5, 35);
     rightRimLight.position.set(mirrored ? -6.0 : 6.0, 5.0, 2.0);
     scene.add(rightRimLight);
 
-    // Top Highlight
+    // Top Specular Highlight
     const topHighlight = new THREE.DirectionalLight(0xe0ffff, 2.2);
     topHighlight.position.set(mirrored ? -4.0 : 4.0, 8.0, 6.0);
     scene.add(topHighlight);
 
-    // --- 3. 3D Ring Construction (Mirrored on X for Arabic) ---
+    // --- 3. 3D Ring Construction (Original English Position & Angles) ---
     const heroGroup = new THREE.Group();
     const isDesktop = window.innerWidth >= 1024;
     const ringBaseX = mirrored ? -2.3 : 2.3;
@@ -85,13 +85,13 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     const baseRotZ = mirrored ? 0.99 : -0.99;
     heroGroup.rotation.set(baseRotX, baseRotY, baseRotZ);
 
-    // --- Custom Hollow Ring Perimeter Glow Shader ---
+    // --- Original Custom Hollow Ring Perimeter Glow Shader ---
     const glowUniforms = {
       glowColor: { value: new THREE.Color(0x00f5d4) },
-      intensity: { value: 1.2 },
-      innerRadius: { value: 0.42 },
-      outerRadius: { value: 0.78 },
-      glowSoftness: { value: 1.6 },
+      intensity: { value: 0.15 },
+      innerRadius: { value: 0.36 },
+      outerRadius: { value: 1.1 },
+      glowSoftness: { value: 3.5 },
       pulseTime: { value: 0.0 },
     };
 
@@ -124,29 +124,30 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
           float alpha = smoothstep(halfWidth, 0.0, distFromMid);
           alpha = pow(alpha, glowSoftness);
           
-          float pulse = 1.0 + sin(pulseTime) * 0.08;
-          vec3 finalColor = glowColor * intensity * pulse * alpha;
-          gl_FragColor = vec4(finalColor, alpha * 0.45 * intensity);
+          float pulse = 1.0 + sin(pulseTime * 2.5) * 0.12;
+          float finalAlpha = alpha * intensity * pulse;
+
+          gl_FragColor = vec4(glowColor, clamp(finalAlpha, 0.0, 1.0));
         }
       `,
       transparent: true,
       blending: THREE.AdditiveBlending,
-      side: THREE.DoubleSide,
       depthWrite: false,
+      side: THREE.DoubleSide,
     });
 
-    const ringGlowGeom = new THREE.PlaneGeometry(6.2, 6.2);
+    const ringGlowGeom = new THREE.PlaneGeometry(8.2, 8.2);
     const ringGlowMesh = new THREE.Mesh(ringGlowGeom, ringGlowShader);
-    ringGlowMesh.position.set(0, 0, -0.05);
+    ringGlowMesh.position.set(0, 0, -0.08);
     heroGroup.add(ringGlowMesh);
 
-    // --- Materials (Exact Face Colors & Polish) ---
+    // --- Original Materials (Pure Vibrant Brand Teal & Cyan #00F5D4 / #00D2B4) ---
     const illuminatedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x16796d, // illuminatedFaceColor: #16796d
-      emissive: 0x002c25,
-      emissiveIntensity: 0.35,
-      roughness: 0.11,
-      metalness: 0.47,
+      color: 0x00f5d4,
+      emissive: 0x003830,
+      emissiveIntensity: 0.25,
+      roughness: 0.12,
+      metalness: 0.45,
       clearcoat: 1.0,
       clearcoatRoughness: 0.06,
       reflectivity: 0.95,
@@ -154,28 +155,25 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     });
 
     const shadedMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05ad9a, // shadedFaceColor: #05ad9a
-      emissive: 0x003830,
-      emissiveIntensity: 0.35,
-      roughness: 0.11,
-      metalness: 0.47,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.06,
+      color: 0x00d2b4,
+      emissive: 0x002c25,
+      emissiveIntensity: 0.18,
+      roughness: 0.16,
+      metalness: 0.48,
+      clearcoat: 0.6,
       side: THREE.DoubleSide,
     });
 
     const sideCapMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x05d6cb, // outerSideColor: #05d6cb
+      color: 0x00f5d4,
       emissive: 0x00e5be,
-      emissiveIntensity: 0.35,
-      roughness: 0.11,
-      metalness: 0.47,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.06,
+      emissiveIntensity: 0.4,
+      roughness: 0.12,
+      metalness: 0.4,
       side: THREE.DoubleSide,
     });
 
-    // --- Exact Profile Lathe Geometry ---
+    // --- Lathe Geometry ---
     const innerR = 1.8;
     const outerR = 2.6;
     const ringDepth = 0.74;
@@ -246,98 +244,112 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     botMesh.add(createCutCap(Math.PI + gapAngle / 2));
     botMesh.add(createCutCap(Math.PI * 2 - gapAngle / 2));
 
-    const glowPulseSpeed = 0.8;
+    const glowPulseSpeed = 1.7;
 
-    // --- 4. Interactive Digital Wave Particle Mesh with Edge Fading ---
-    const cols = 160;
-    const rows = 80;
-    const count = cols * rows;
+    // --- 4. Digital Particle Wave (Original Specs) ---
+    const rows = 48;
+    const cols = 110;
+    const totalParticles = rows * cols;
+
     const waveGeom = new THREE.BufferGeometry();
-
-    const positions = new Float32Array(count * 3);
-    const uvs = new Float32Array(count * 2);
+    const positions = new Float32Array(totalParticles * 3);
+    const alphas = new Float32Array(totalParticles);
+    const sizes = new Float32Array(totalParticles);
 
     let pIdx = 0;
     const gridWidth = 64.0;
     const gridDepth = 32.0;
     const waveElevationY = -0.2;
     const waveAmplitude = 1.2;
+    const waveAlphaMax = 1.0;
+    const waveBaseSize = 0.3;
     const waveSpeed = 0.9;
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
-        const xNorm = j / (cols - 1);
-        const zNorm = i / (rows - 1);
+        const uNorm = (j / (cols - 1)) * 2.0 - 1.0;
+        const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
 
-        const xPos = (xNorm - 0.5) * gridWidth;
-        const zPos = (zNorm - 0.5) * gridDepth - 2.5;
+        const x = uNorm * (gridWidth * 0.5);
+        const z = vNorm * (gridDepth * 0.5) - 3.5;
 
-        positions[pIdx * 3] = xPos;
-        positions[pIdx * 3 + 1] = waveElevationY;
-        positions[pIdx * 3 + 2] = zPos;
+        const fadeX = Math.cos(uNorm * Math.PI * 0.5);
+        const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
+        const edgeFade =
+          Math.pow(Math.max(0.0, fadeX), 1.6) *
+          Math.pow(Math.max(0.0, fadeZ), 1.3);
 
-        uvs[pIdx * 2] = xNorm;
-        uvs[pIdx * 2 + 1] = zNorm;
+        const baseY =
+          (Math.sin(j * 0.18) * waveAmplitude +
+            Math.cos(i * 0.25) * 1.1 +
+            waveElevationY) *
+          edgeFade;
+
+        positions[pIdx * 3] = x;
+        positions[pIdx * 3 + 1] = baseY;
+        positions[pIdx * 3 + 2] = z;
+
+        alphas[pIdx] = edgeFade * waveAlphaMax;
+        sizes[pIdx] = Math.max(0.04, edgeFade * waveBaseSize);
 
         pIdx++;
       }
     }
 
     waveGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    waveGeom.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+    waveGeom.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
+    waveGeom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
 
+    // High-Luminance Radial Glow Particle Texture
     const pCanvas = document.createElement("canvas");
     pCanvas.width = 64;
     pCanvas.height = 64;
-    const pCtx = pCanvas.getContext("2d")!;
-    const grad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    grad.addColorStop(0, "rgba(255, 255, 255, 1.0)");
-    grad.addColorStop(0.35, "rgba(5, 173, 154, 0.9)");
-    grad.addColorStop(0.7, "rgba(0, 180, 160, 0.35)");
-    grad.addColorStop(1, "rgba(0, 0, 0, 0)");
-    pCtx.fillStyle = grad;
-    pCtx.fillRect(0, 0, 64, 64);
-
+    const pCtx = pCanvas.getContext("2d");
+    if (pCtx) {
+      const pGrad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 30);
+      pGrad.addColorStop(0, "rgba(255, 255, 255, 1.0)");
+      pGrad.addColorStop(0.2, "rgba(0, 245, 212, 1.0)");
+      pGrad.addColorStop(0.5, "rgba(6, 182, 212, 0.85)");
+      pGrad.addColorStop(0.8, "rgba(0, 180, 216, 0.3)");
+      pGrad.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+      pCtx.fillStyle = pGrad;
+      pCtx.fillRect(0, 0, 64, 64);
+    }
     const pTexture = new THREE.CanvasTexture(pCanvas);
 
     const waveShaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         pointTexture: { value: pTexture },
-        pointSize: { value: 0.3 },
-        baseAlpha: { value: 1.0 },
+        uTime: { value: 0.0 },
+        uWaveSpeed: { value: waveSpeed },
       },
       vertexShader: `
-        uniform float pointSize;
-        varying vec2 vUv;
+        attribute float alpha;
+        attribute float size;
         varying float vAlpha;
+        uniform float uTime;
+        uniform float uWaveSpeed;
+        
         void main() {
-          vUv = uv;
+          vAlpha = alpha;
           
-          float uNorm = uv.x * 2.0 - 1.0;
-          float vNorm = uv.y * 2.0 - 1.0;
-          
-          float fadeX = cos(uNorm * 3.14159265 * 0.5);
-          float fadeZ = cos(vNorm * 3.14159265 * 0.5);
-          vAlpha = pow(max(0.0, fadeX), 1.6) * pow(max(0.0, fadeZ), 1.3);
+          vec3 pos = position;
+          float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.2) * 0.35 +
+                       cos(pos.z * 0.18 + uTime * uWaveSpeed * 0.8) * 0.25;
+          pos.y += wave * alpha;
 
-          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          gl_PointSize = pointSize * (350.0 / -mvPosition.z);
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = size * (380.0 / -mvPosition.z);
           gl_Position = projectionMatrix * mvPosition;
         }
       `,
       fragmentShader: `
         uniform sampler2D pointTexture;
-        varying vec2 vUv;
         varying float vAlpha;
         void main() {
           vec4 texColor = texture2D(pointTexture, gl_PointCoord);
           if (texColor.a < 0.05) discard;
-          
-          vec3 teal1 = vec3(0.02, 0.68, 0.60); // #05ad9a
-          vec3 cyan2 = vec3(0.36, 0.93, 0.88); // #5deee0
-          vec3 color = mix(teal1, cyan2, vUv.y * 0.7 + vUv.x * 0.3);
-          
-          gl_FragColor = vec4(color * 1.15, vAlpha * texColor.a);
+          gl_FragColor = vec4(texColor.rgb, texColor.a * vAlpha * 0.95);
         }
       `,
       transparent: true,
@@ -348,7 +360,7 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
     const waveParticleSystem = new THREE.Points(waveGeom, waveShaderMaterial);
     scene.add(waveParticleSystem);
 
-    // --- 5. Smooth Cursor Parallax Tracking ---
+    // --- 5. Cursor Parallax ---
     let mouseX = 0;
     let mouseY = 0;
 
@@ -392,36 +404,11 @@ export default function HeroRing3D({ mirrored = true }: HeroRing3DProps) {
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Update ring glow pulse
+      // Update uniforms
+      waveShaderMaterial.uniforms.uTime.value = elapsedTime;
       glowUniforms.pulseTime.value = elapsedTime * glowPulseSpeed;
 
-      const posArray = waveGeom.attributes.position.array as Float32Array;
-      let idx = 0;
-      for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-          const uNorm = (j / (cols - 1)) * 2.0 - 1.0;
-          const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
-
-          const fadeX = Math.cos(uNorm * Math.PI * 0.5);
-          const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
-          const edgeFade =
-            Math.pow(Math.max(0.0, fadeX), 1.6) *
-            Math.pow(Math.max(0.0, fadeZ), 1.3);
-
-          const wave =
-            (Math.sin(j * 0.18 + elapsedTime * waveSpeed * 1.1) *
-              (waveAmplitude * 0.5) +
-              Math.cos(i * 0.25 + elapsedTime * waveSpeed * 0.85) * 0.55 +
-              waveElevationY) *
-            edgeFade;
-
-          posArray[idx * 3 + 1] = wave;
-          idx++;
-        }
-      }
-      waveGeom.attributes.position.needsUpdate = true;
-
-      // Parallax rotation & subtle organic floating
+      // Parallax rotation
       const targetRotX = baseRotX + mouseY * 0.18;
       const targetRotY =
         baseRotY + mouseX * 0.18 + Math.sin(elapsedTime * 0.5) * 0.02;
