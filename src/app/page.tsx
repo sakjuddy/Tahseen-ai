@@ -73,24 +73,24 @@ export default function Home() {
         { label: "Active Availability", val: "24/7 / 365" },
       ],
       badge: "Agentic AI System",
-      icon: <Bot className="w-6 h-6 text-[#00E5BE]" />,
+      icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
       mockup: (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-pulse" />
-              <span className="text-white font-bold">Tahseen Agent • Live Session</span>
+        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+            <div className="flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
+              <span className="text-white font-bold text-[10px]">Tahseen Agent • Live</span>
             </div>
-            <span className="text-[#00E5BE]">Active</span>
+            <span className="text-[#00E5BE] text-[9px]">Active</span>
           </div>
-          <div className="space-y-2 text-left font-sans">
-            <div className="p-3 rounded-xl bg-white/[0.03] text-gray-300 text-xs">
-              <span className="text-gray-500 font-mono text-[10px] block mb-0.5">Customer (WhatsApp):</span>
+          <div className="space-y-1.5 text-left font-sans">
+            <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 text-[11px] leading-snug">
+              <span className="text-gray-500 font-mono text-[9px] block">Customer (WhatsApp):</span>
               &ldquo;We need an automated CRM pipeline for our Riyadh branches.&rdquo;
             </div>
-            <div className="p-3 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-xs">
-              <span className="text-[#00E5BE] font-mono text-[10px] block mb-0.5">Tahseen AI Agent:</span>
-              &ldquo;Certainly! We deploy custom CRM automations in under 2 weeks. I have reserved an onboarding slot for tomorrow at 2:00 PM (AST). Would you like me to confirm?&rdquo;
+            <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-[11px] leading-snug">
+              <span className="text-[#00E5BE] font-mono text-[9px] block">Tahseen AI:</span>
+              &ldquo;Certainly! Reserved an onboarding slot for tomorrow at 2:00 PM (AST). Confirm?&rdquo;
             </div>
           </div>
         </div>
@@ -109,24 +109,24 @@ export default function Home() {
         { label: "Deployment Speed", val: "14 Days" },
       ],
       badge: "Zero-Latency Flows",
-      icon: <Workflow className="w-6 h-6 text-[#00E5BE]" />,
+      icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
       mockup: (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs text-left">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
-            <span className="text-white font-bold">Automated Pipeline Node</span>
-            <span className="text-[#00E5BE]">Continuous Sync</span>
+        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
+          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+            <span className="text-white font-bold text-[10px]">Automated Pipeline</span>
+            <span className="text-[#00E5BE] text-[9px]">Continuous Sync</span>
           </div>
-          <div className="space-y-2 font-sans text-xs">
-            <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-              <span className="w-5 h-5 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[10px] font-bold">1</span>
+          <div className="space-y-1 font-sans text-[11px]">
+            <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
+              <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">1</span>
               <span>RFP Ingestion & OCR Entity Parsing</span>
             </div>
-            <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-              <span className="w-5 h-5 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[10px] font-bold">2</span>
+            <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
+              <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">2</span>
               <span>Intelligent Risk & Validation Scoring</span>
             </div>
-            <div className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
-              <span className="w-5 h-5 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[10px] font-bold">✓</span>
+            <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
+              <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold">✓</span>
               <span>Auto-Sync to Database & Executive Alert</span>
             </div>
           </div>
@@ -146,24 +146,24 @@ export default function Home() {
         { label: "Audit Compliance", val: "100%" },
       ],
       badge: "Real-Time Telemetry",
-      icon: <LineChart className="w-6 h-6 text-[#00E5BE]" />,
+      icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
       mockup: (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
-            <span className="text-white font-bold">Throughput Analytics</span>
-            <span className="text-[#00E5BE]">Live Stream</span>
+        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+            <span className="text-white font-bold text-[10px]">Live Throughput</span>
+            <span className="text-[#00E5BE] text-[9px]">Stream</span>
           </div>
-          <div className="grid grid-cols-2 gap-2 text-center">
-            <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-base font-bold text-white font-sans">12,480</div>
-              <div className="text-[9px] text-gray-400 uppercase">Requests / Day</div>
+          <div className="grid grid-cols-2 gap-1.5 text-center">
+            <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+              <div className="text-sm font-bold text-white font-sans">12,480</div>
+              <div className="text-[8px] text-gray-400 uppercase">Requests / Day</div>
             </div>
-            <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-base font-bold text-[#00E5BE] font-sans">+45%</div>
-              <div className="text-[9px] text-gray-400 uppercase">Conversion Lift</div>
+            <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+              <div className="text-sm font-bold text-[#00E5BE] font-sans">+45%</div>
+              <div className="text-[8px] text-gray-400 uppercase">Conversion Lift</div>
             </div>
           </div>
-          <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+          <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
             <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
           </div>
         </div>
@@ -182,20 +182,20 @@ export default function Home() {
         { label: "Compliance", val: "Strict SLA" },
       ],
       badge: "Sovereign AI",
-      icon: <Lock className="w-6 h-6 text-[#00E5BE]" />,
+      icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
       mockup: (
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#060913]/90 border border-white/10 space-y-3 font-mono text-xs text-left">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-gray-400">
-            <span className="text-white font-bold">Sovereignty Shield</span>
-            <span className="text-[#00E5BE]">Protected</span>
+        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
+          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+            <span className="text-white font-bold text-[10px]">Sovereignty Shield</span>
+            <span className="text-[#00E5BE] text-[9px]">Protected</span>
           </div>
-          <div className="space-y-2 text-xs font-sans">
-            <div className="p-2.5 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+          <div className="space-y-1 text-[11px] font-sans">
+            <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
               <span>Isolated Local VPC & Zero Data Leaks</span>
             </div>
-            <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+            <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
               <span>Full Regulatory Alignment in Saudi Arabia</span>
             </div>
           </div>
@@ -749,9 +749,9 @@ export default function Home() {
                 key={sol.step}
                 id={`solution-step-${idx}`}
                 onMouseEnter={() => setActiveSolution(idx)}
-                className={`p-5 sm:p-6 rounded-2xl border transition-all duration-500 space-y-4 text-left ${
+                className={`p-4 sm:p-5 rounded-2xl border transition-all duration-500 space-y-3 text-left ${
                   activeSolution === idx
-                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_12px_40px_rgba(0,229,190,0.12)] -translate-y-0.5"
+                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_10px_35px_rgba(0,229,190,0.12)] -translate-y-0.5"
                     : "bg-white/[0.02] border-white/[0.08] hover:border-white/20"
                 }`}
               >
