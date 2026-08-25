@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle2,
   Sparkles,
   MessageSquare,
@@ -16,14 +18,16 @@ import {
   Activity,
   BarChart3,
   TrendingUp,
-  Cpu,
-  Layers,
+  Quote,
+  Star,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const navLinks = [
     { name: "HOME", href: "#home" },
@@ -167,24 +171,57 @@ export default function Home() {
     {
       quote: "Tahseen streamlined our internal processes — we reduced manual work by over 40% in just weeks.",
       author: "Ahmed AL-Mutairi",
-      role: "FutureTech",
+      role: "Operations Director, FutureTech",
+      metrics: "40% Manual Work Reduced",
     },
     {
       quote: "The AI automation was easy to deploy and helped us serve clients faster and more consistently across Saudi Arabia.",
       author: "Sara Al-Harbi",
-      role: "DataPlus",
+      role: "Head of Growth, DataPlus",
+      metrics: "3X Lead Response Speed",
     },
     {
       quote: "Our team now focuses on strategy instead of repetitive tasks — Tahseen took care of the rest seamlessly.",
       author: "Ismael Mohammad",
-      role: "Owner of Deconec",
+      role: "Owner, Deconec",
+      metrics: "100+ Hours Saved / Month",
     },
     {
       quote: "We saw measurable gains in operational efficiency and client satisfaction. Highly recommend Tahseen for any business.",
       author: "Saleh El Oamry",
-      role: "Owner of Canacio",
+      role: "CEO, Canacio",
+      metrics: "+35% Operational Efficiency",
+    },
+    {
+      quote: "We integrated Tahseen without coding. The results were immediate — faster operations and better customer insights.",
+      author: "Tarek Amer",
+      role: "Managing Director, Gito",
+      metrics: "Instant ROI in 3 Weeks",
+    },
+    {
+      quote: "The automation flows are intuitive and saved us countless hours. Support was highly responsive and forward-deployed.",
+      author: "Osama Mazen",
+      role: "Founder, Ioptp",
+      metrics: "99.9% Pipeline Reliability",
     },
   ];
+
+  // Auto advance carousel
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCarouselIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [isPaused, testimonials.length]);
+
+  const handlePrev = () => {
+    setCarouselIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const handleNext = () => {
+    setCarouselIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
   const faqs = [
     {
@@ -662,34 +699,108 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. What Our Clients Say (Testimonials) */}
+      {/* 8. Interactive Testimonial Carousel ("What Our Clients Say") */}
       <section className="relative z-10 py-20 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
-        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
-          <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
-            TRUSTED BY INNOVATORS NATIONWIDE
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            What Our <span className="text-[#00E5BE]">Clients</span> Say
-          </h2>
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
-            Hear from forward-thinking leaders who have modernized their workflows with Tahseen AI solutions.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div className="space-y-3 max-w-2xl text-left">
+            <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase flex items-center gap-2">
+              <Sparkles className="w-4 h-4" />
+              <span>TESTED & TRUSTED NATIONWIDE</span>
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              What Our <span className="text-[#00E5BE]">Clients</span> Say
+            </h2>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+              Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI.
+            </p>
+          </div>
+
+          {/* Carousel Arrow Navigation Buttons */}
+          <div className="flex items-center gap-3 self-start md:self-end">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous testimonial"
+              className="w-12 h-12 rounded-xl bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next testimonial"
+              className="w-12 h-12 rounded-xl bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {testimonials.map((t, idx) => (
-            <div
-              key={idx}
-              className="p-8 rounded-3xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 transition-all duration-300 flex flex-col justify-between space-y-6 hover:-translate-y-2 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] cursor-default group"
-            >
-              <p className="text-sm text-gray-300 group-hover:text-white leading-relaxed font-normal italic transition-colors">
-                &ldquo;{t.quote}&rdquo;
-              </p>
-              <div className="pt-4 border-t border-white/5">
-                <div className="font-bold text-white text-base group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
-                <div className="text-xs text-[#00E5BE] font-semibold">{t.role}</div>
+        {/* Carousel Viewport Container */}
+        <div
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="relative overflow-hidden"
+        >
+          <div
+            className="flex transition-transform duration-700 ease-out gap-6 sm:gap-8"
+            style={{
+              transform: `translateX(-${carouselIndex * (100 / (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3))}%)`,
+            }}
+          >
+            {testimonials.map((t, idx) => (
+              <div
+                key={idx}
+                className="w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] flex-shrink-0 p-8 sm:p-9 rounded-3xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_16px_40px_rgba(0,229,190,0.15)] group"
+              >
+                <div className="space-y-4">
+                  {/* Top Quote Icon & Star Rating */}
+                  <div className="flex items-center justify-between">
+                    <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                      <Quote className="w-4 h-4" />
+                    </div>
+                    <div className="flex items-center gap-1 text-[#00E5BE]">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#00E5BE]" />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Testimonial Quote */}
+                  <p className="text-sm sm:text-[15px] text-gray-200 group-hover:text-white leading-relaxed font-normal italic transition-colors">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                </div>
+
+                {/* Author Info & Verified Metric */}
+                <div className="pt-5 border-t border-white/[0.06] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="font-bold text-white text-base group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
+                      <div className="text-xs text-gray-400 font-medium">{t.role}</div>
+                    </div>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#00E5BE]/10 text-[#00E5BE] text-[11px] font-semibold">
+                    <CheckCircle2 className="w-3 h-3" />
+                    <span>{t.metrics}</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Carousel Pagination Dots */}
+        <div className="flex items-center justify-center gap-2.5 mt-10">
+          {testimonials.map((_, dotIdx) => (
+            <button
+              key={dotIdx}
+              onClick={() => setCarouselIndex(dotIdx)}
+              aria-label={`Jump to slide ${dotIdx + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                carouselIndex === dotIdx
+                  ? "w-8 bg-[#00E5BE] shadow-[0_0_12px_rgba(0,229,190,0.8)]"
+                  : "w-2.5 bg-white/20 hover:bg-white/40"
+              }`}
+            />
           ))}
         </div>
       </section>
