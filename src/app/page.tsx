@@ -732,7 +732,7 @@ export default function Home() {
       <main id="home" className="relative z-10 pt-2 sm:pt-4 pb-10 px-6 sm:px-12 lg:px-16 max-w-[1680px] mx-auto w-full">
         
         {/* Full-width 3D Canvas Layer */}
-        <HeroRing3D />
+        <HeroRing3D mirrored={isAr} />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] pointer-events-none">
           
