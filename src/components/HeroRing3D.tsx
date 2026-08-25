@@ -64,23 +64,23 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     topHighlight.position.set(mirrored ? -4.0 : 4.0, 8.0, 6.0);
     scene.add(topHighlight);
 
-    // --- 3. 3D Ring Construction (Responsive Mobile Scaling) ---
+    // --- 3. 3D Ring Construction (Elevated & Refined Scaling) ---
     const heroGroup = new THREE.Group();
     const width = window.innerWidth;
     const isDesktop = width >= 1024;
     const isTablet = width >= 640 && width < 1024;
     
     const ringBaseX = mirrored ? -2.3 : 2.3;
-    const ringBaseY = 1.35;
+    const ringBaseY = 1.45;
     const ringBaseZ = 0.0;
-    const ringBaseScale = 0.75;
+    const ringBaseScale = 0.70;
 
     heroGroup.position.set(
       isDesktop ? ringBaseX : 0,
-      isDesktop ? ringBaseY : isTablet ? 0.8 : 0.4,
+      isDesktop ? ringBaseY : isTablet ? 1.15 : 0.95,
       ringBaseZ
     );
-    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : isTablet ? 0.60 : 0.48);
+    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : isTablet ? 0.56 : 0.44);
     scene.add(heroGroup);
 
     const baseRotX = -0.59;
@@ -263,12 +263,12 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const sizes = new Float32Array(totalParticles);
 
     let pIdx = 0;
-    const gridWidth = 64.0;
-    const gridDepth = 32.0;
-    const waveElevationY = -0.2;
-    const waveAmplitude = 1.2;
+    const gridWidth = 58.0;
+    const gridDepth = 22.0;
+    const waveElevationY = 0.1;
+    const waveAmplitude = 0.95;
     const waveAlphaMax = 1.0;
-    const waveBaseSize = 0.3;
+    const waveBaseSize = 0.26;
     const waveSpeed = 0.9;
 
     for (let i = 0; i < rows; i++) {
@@ -277,17 +277,17 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
         const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
 
         const x = uNorm * (gridWidth * 0.5);
-        const z = vNorm * (gridDepth * 0.5) - 3.5;
+        const z = vNorm * (gridDepth * 0.5) - 3.8;
 
         const fadeX = Math.cos(uNorm * Math.PI * 0.5);
         const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
         const edgeFade =
           Math.pow(Math.max(0.0, fadeX), 1.6) *
-          Math.pow(Math.max(0.0, fadeZ), 1.3);
+          Math.pow(Math.max(0.0, fadeZ), 1.6);
 
         const baseY =
           (Math.sin(j * 0.18) * waveAmplitude +
-            Math.cos(i * 0.25) * 1.1 +
+            Math.cos(i * 0.25) * 0.85 +
             waveElevationY) *
           edgeFade;
 
@@ -296,7 +296,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
         positions[pIdx * 3 + 2] = z;
 
         alphas[pIdx] = edgeFade * waveAlphaMax;
-        sizes[pIdx] = Math.max(0.04, edgeFade * waveBaseSize);
+        sizes[pIdx] = Math.max(0.03, edgeFade * waveBaseSize);
 
         pIdx++;
       }
@@ -388,7 +388,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       const desk = w >= 1024;
       const tab = w >= 640 && w < 1024;
 
-      camera.fov = isMobile ? 46 : 36;
+      camera.fov = isMobile ? 44 : 36;
       camera.position.set(0, 0, isMobile ? 11.5 : 10.5);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
@@ -398,10 +398,10 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
       heroGroup.position.set(
         desk ? ringBaseX : 0,
-        desk ? ringBaseY : tab ? 0.9 : 0.65,
+        desk ? ringBaseY : tab ? 1.15 : 0.95,
         ringBaseZ
       );
-      heroGroup.scale.setScalar(desk ? ringBaseScale : tab ? 0.65 : 0.55);
+      heroGroup.scale.setScalar(desk ? ringBaseScale : tab ? 0.56 : 0.44);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
