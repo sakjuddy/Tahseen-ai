@@ -10,9 +10,6 @@ import {
   ChevronRight,
   CheckCircle2,
   Sparkles,
-  MessageSquare,
-  Zap,
-  ShieldCheck,
   HeartHandshake,
   Mail,
   Activity,
@@ -24,27 +21,44 @@ import {
   Workflow,
   LineChart,
   Lock,
-  ExternalLink,
   Users,
   HelpCircle,
+  Globe,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  const [lang, setLang] = useState<"ar" | "en">("ar");
+  const isAr = lang === "ar";
+
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [activeSolution, setActiveSolution] = useState(0);
 
-  const navLinks = [
-    { name: "HOME", href: "#home" },
-    { name: "SERVICES", href: "#services" },
-    { name: "INSIGHTS", href: "#insights" },
-    { name: "SOLUTIONS", href: "#solutions" },
-    { name: "ABOUT US", href: "#about" },
-    { name: "CONTACT", href: "/contact" },
-  ];
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isAr ? "rtl" : "ltr";
+  }, [lang, isAr]);
+
+  const navLinks = isAr
+    ? [
+        { name: "الرئيسية", href: "#home" },
+        { name: "خدماتنا", href: "#services" },
+        { name: "التحليلات", href: "#insights" },
+        { name: "الحلول", href: "#solutions" },
+        { name: "من نحن", href: "#about" },
+        { name: "اتصل بنا", href: "/contact" },
+      ]
+    : [
+        { name: "HOME", href: "#home" },
+        { name: "SERVICES", href: "#services" },
+        { name: "INSIGHTS", href: "#insights" },
+        { name: "SOLUTIONS", href: "#solutions" },
+        { name: "ABOUT US", href: "#about" },
+        { name: "CONTACT", href: "/contact" },
+      ];
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
@@ -61,234 +75,463 @@ export default function Home() {
     }
   };
 
-  const showcaseSolutions = [
-    {
-      step: "01",
-      total: "04",
-      tag: "AUTONOMOUS OPERATIONS",
-      title: "AI Agents for Sales & Marketing",
-      subtitle: "Autonomous multi-channel intelligence that qualifies leads and converts 24/7.",
-      desc: "Deploy intelligent agents across WhatsApp, website chat, and email that answer complex inquiries, schedule meetings directly into your calendar, and hand off qualified leads with full context.",
-      metrics: [
-        { label: "Sales Performance", val: "3X Boost" },
-        { label: "Lead Response Time", val: "< 10s" },
-        { label: "Active Availability", val: "24/7 / 365" },
-      ],
-      badge: "Agentic AI System",
-      icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
-      mockup: (
-        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
-          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-            <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
-              <span className="text-white font-bold text-[10px]">Tahseen Agent • Live</span>
+  const showcaseSolutions = isAr
+    ? [
+        {
+          step: "٠١",
+          total: "٠٤",
+          tag: "العمليات الذاتية",
+          title: "وكلاء الذكاء الاصطناعي للمبيعات والتسويق",
+          subtitle: "ذكاء اصطناعي تفاعلي متعدد القنوات لتأهيل العملاء وإغلاق الصفقات على مدار الساعة.",
+          desc: "انشر وكلاء أذكياء عبر الواتساب والموقع الإلكتروني والبريد للإجابة على الاستفسارات المعقدة، وحجز الاجتماعات في تقويمك، وتحويل العملاء المؤهلين مباشرة.",
+          metrics: [
+            { label: "نمو أداء المبيعات", val: "٣ أضعاف" },
+            { label: "سرعة الاستجابة", val: "أقل من ١٠ ثوانٍ" },
+            { label: "التوافر والجاهزية", val: "٢٤/٧ / ٣٦٥" },
+          ],
+          badge: "نظام وكلاء ذكي",
+          icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
+                  <span className="text-white font-bold text-[10px]">وكيل تحسين • محادثة حية</span>
+                </div>
+                <span className="text-[#00E5BE] text-[9px]">نشط الآن</span>
+              </div>
+              <div className="space-y-1.5 text-right font-sans">
+                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 text-[11px] leading-snug">
+                  <span className="text-gray-500 font-mono text-[9px] block">العميل (واتساب):</span>
+                  &ldquo;نحتاج أتمتة نظام إدارة علاقات العملاء (CRM) لفروعنا في الرياض.&rdquo;
+                </div>
+                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-[11px] leading-snug">
+                  <span className="text-[#00E5BE] font-mono text-[9px] block">وكيل تحسين الذكي:</span>
+                  &ldquo;أهلاً بك! نطلق أنظمة الأتمتة المخصصة خلال أسبوعين فقط. حجزت لك موعد تدشين غداً الساعة ٢:٠٠ ظهراً. هل تود التأكيد؟&rdquo;
+                </div>
+              </div>
             </div>
-            <span className="text-[#00E5BE] text-[9px]">Active</span>
-          </div>
-          <div className="space-y-1.5 text-left font-sans">
-            <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 text-[11px] leading-snug">
-              <span className="text-gray-500 font-mono text-[9px] block">Customer (WhatsApp):</span>
-              &ldquo;We need an automated CRM pipeline for our Riyadh branches.&rdquo;
+          ),
+        },
+        {
+          step: "٠٢",
+          total: "٠٤",
+          tag: "أتمتة العمليات",
+          title: "أتمتة العمليات المؤسسية الشاملة",
+          subtitle: "القضاء التام على الاختناقات اليدوية عبر مختلف الأقسام والفرق.",
+          desc: "اربط أنظمة تخطيط الموارد (ERP)، وقواعد البيانات، والدعم الفني، وبوابات الدفع بقواعد ذكية ذاتية المعالجة تقلص المهام اليدوية بأكثر من ٤٠٪.",
+          metrics: [
+            { label: "تقليص العمل اليدوي", val: "-٤٢٪" },
+            { label: "دقة معالجة البيانات", val: "٩٩.٩٪" },
+            { label: "سرعة التدشين", val: "١٤ يوماً" },
+          ],
+          badge: "تدفقات فورية خالية من التأخير",
+          icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-right">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <span className="text-white font-bold text-[10px]">مسار تدفق البيانات المؤتمت</span>
+                <span className="text-[#00E5BE] text-[9px]">مزامنة مستمرة</span>
+              </div>
+              <div className="space-y-1 font-sans text-[11px]">
+                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">١</span>
+                  <span>استقبال الطلب واستخراج البيانات بالذكاء الاصطناعي (OCR)</span>
+                </div>
+                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">٢</span>
+                  <span>التحقق الذكي وتقييم المخاطر اللحظي</span>
+                </div>
+                <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold">✓</span>
+                  <span>مزامنة فورية مع قاعدة البيانات وإشعار الإدارة</span>
+                </div>
+              </div>
             </div>
-            <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-[11px] leading-snug">
-              <span className="text-[#00E5BE] font-mono text-[9px] block">Tahseen AI:</span>
-              &ldquo;Certainly! Reserved an onboarding slot for tomorrow at 2:00 PM (AST). Confirm?&rdquo;
+          ),
+        },
+        {
+          step: "٠٣",
+          total: "٠٤",
+          tag: "متابعة فورية",
+          title: "المتابعة اللحظية والبيانات الميدانية",
+          subtitle: "رؤية كاملة لجميع التفاعلات المؤتمتة وأداء الحملات بدقة عالية.",
+          desc: "لوحات تحليلات مباشرة ترصد كفاءة الحملات، ورضا العملاء، ودقة الوكلاء، ونسب التحويل في الوقت الفعلي دون أي تكهنات.",
+          metrics: [
+            { label: "متوسط سرعة الاستجابة", val: "~٠.٤ ثانية" },
+            { label: "نسبة توافر النظام", val: "٩٩.٩٨٪" },
+            { label: "الامتثال والتدقيق", val: "١٠٠٪" },
+          ],
+          badge: "بيانات بث مباشر",
+          icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <span className="text-white font-bold text-[10px]">تحليلات العمليات الحية</span>
+                <span className="text-[#00E5BE] text-[9px]">بث مباشر</span>
+              </div>
+              <div className="grid grid-cols-2 gap-1.5 text-center">
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+                  <div className="text-sm font-bold text-white font-sans">١٢,٤٨٠</div>
+                  <div className="text-[8px] text-gray-400 uppercase">طلب / يومياً</div>
+                </div>
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+                  <div className="text-sm font-bold text-[#00E5BE] font-sans">+٤٥٪</div>
+                  <div className="text-[8px] text-gray-400 uppercase">زيادة التحويل</div>
+                </div>
+              </div>
+              <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
+              </div>
             </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      step: "02",
-      total: "04",
-      tag: "WORKFLOW AUTOMATION",
-      title: "End-to-End Enterprise Automation",
-      subtitle: "Eliminate repetitive manual bottlenecks across cross-functional operations.",
-      desc: "Connect your ERP, databases, customer support, and payment gateways with intelligent rules and self-healing automated logic that reduces manual processing by over 40%.",
-      metrics: [
-        { label: "Manual Work Reduction", val: "-42%" },
-        { label: "Data Accuracy", val: "99.9%" },
-        { label: "Deployment Speed", val: "14 Days" },
-      ],
-      badge: "Zero-Latency Flows",
-      icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
-      mockup: (
-        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
-          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-            <span className="text-white font-bold text-[10px]">Automated Pipeline</span>
-            <span className="text-[#00E5BE] text-[9px]">Continuous Sync</span>
-          </div>
-          <div className="space-y-1 font-sans text-[11px]">
-            <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-              <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">1</span>
-              <span>RFP Ingestion & OCR Entity Parsing</span>
+          ),
+        },
+        {
+          step: "٠٤",
+          total: "٠٤",
+          tag: "هندسة سيادية",
+          title: "الذكاء الاصطناعي السيادي والأمن المؤسسي",
+          subtitle: "حماية تامة وسرية مطلقة لبيانات ومعلومات مؤسستك الخاصة.",
+          desc: "نماذج ذكاء اصطناعي مخصصة وأنظمة استرجاع خاصة مستضافة بالكامل داخل سحابة سعودية سيادية متوافقة مع المتطلبات والتشريعات المحلية.",
+          metrics: [
+            { label: "تشفير البيانات", val: "AES-256 / TLS" },
+            { label: "الاستضافة", val: "سحابة سعودية سيادية" },
+            { label: "الالتزام والضمان", val: "اتفاقية SLA صارمة" },
+          ],
+          badge: "ذكاء اصطناعي سيادي",
+          icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-right">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <span className="text-white font-bold text-[10px]">درع السيادة والأمان</span>
+                <span className="text-[#00E5BE] text-[9px]">محمي ومشفر</span>
+              </div>
+              <div className="space-y-1 text-[11px] font-sans">
+                <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
+                  <span>بيئة سحابية خاصة معزولة ومنع تسريب البيانات</span>
+                </div>
+                <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
+                  <span>توافق كامل مع التشريعات والمعايير في المملكة</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-              <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">2</span>
-              <span>Intelligent Risk & Validation Scoring</span>
+          ),
+        },
+      ]
+    : [
+        {
+          step: "01",
+          total: "04",
+          tag: "AUTONOMOUS OPERATIONS",
+          title: "AI Agents for Sales & Marketing",
+          subtitle: "Autonomous multi-channel intelligence that qualifies leads and converts 24/7.",
+          desc: "Deploy intelligent agents across WhatsApp, website chat, and email that answer complex inquiries, schedule meetings directly into your calendar, and hand off qualified leads with full context.",
+          metrics: [
+            { label: "Sales Performance", val: "3X Boost" },
+            { label: "Lead Response Time", val: "< 10s" },
+            { label: "Active Availability", val: "24/7 / 365" },
+          ],
+          badge: "Agentic AI System",
+          icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
+                  <span className="text-white font-bold text-[10px]">Tahseen Agent • Live</span>
+                </div>
+                <span className="text-[#00E5BE] text-[9px]">Active</span>
+              </div>
+              <div className="space-y-1.5 text-left font-sans">
+                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 text-[11px] leading-snug">
+                  <span className="text-gray-500 font-mono text-[9px] block">Customer (WhatsApp):</span>
+                  &ldquo;We need an automated CRM pipeline for our Riyadh branches.&rdquo;
+                </div>
+                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white text-[11px] leading-snug">
+                  <span className="text-[#00E5BE] font-mono text-[9px] block">Tahseen AI:</span>
+                  &ldquo;Certainly! Reserved an onboarding slot for tomorrow at 2:00 PM (AST). Confirm?&rdquo;
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
-              <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold">✓</span>
-              <span>Auto-Sync to Database & Executive Alert</span>
+          ),
+        },
+        {
+          step: "02",
+          total: "04",
+          tag: "WORKFLOW AUTOMATION",
+          title: "End-to-End Enterprise Automation",
+          subtitle: "Eliminate repetitive manual bottlenecks across cross-functional operations.",
+          desc: "Connect your ERP, databases, customer support, and payment gateways with intelligent rules and self-healing automated logic that reduces manual processing by over 40%.",
+          metrics: [
+            { label: "Manual Work Reduction", val: "-42%" },
+            { label: "Data Accuracy", val: "99.9%" },
+            { label: "Deployment Speed", val: "14 Days" },
+          ],
+          badge: "Zero-Latency Flows",
+          icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <span className="text-white font-bold text-[10px]">Automated Pipeline</span>
+                <span className="text-[#00E5BE] text-[9px]">Continuous Sync</span>
+              </div>
+              <div className="space-y-1 font-sans text-[11px]">
+                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">1</span>
+                  <span>RFP Ingestion & OCR Entity Parsing</span>
+                </div>
+                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold">2</span>
+                  <span>Intelligent Risk & Validation Scoring</span>
+                </div>
+                <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
+                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold">✓</span>
+                  <span>Auto-Sync to Database & Executive Alert</span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      step: "03",
-      total: "04",
-      tag: "REAL-TIME TELEMETRY",
-      title: "Live Oversight & Actionable Data",
-      subtitle: "Complete visibility over every automated interaction and campaign performance.",
-      desc: "Live analytics dashboards that track campaign throughput, customer sentiment, agent accuracy, and conversion metrics in real time with zero guesswork.",
-      metrics: [
-        { label: "Average Latency", val: "~0.4s" },
-        { label: "System Uptime", val: "99.98%" },
-        { label: "Audit Compliance", val: "100%" },
-      ],
-      badge: "Real-Time Telemetry",
-      icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
-      mockup: (
-        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
-          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-            <span className="text-white font-bold text-[10px]">Live Throughput</span>
-            <span className="text-[#00E5BE] text-[9px]">Stream</span>
-          </div>
-          <div className="grid grid-cols-2 gap-1.5 text-center">
-            <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-sm font-bold text-white font-sans">12,480</div>
-              <div className="text-[8px] text-gray-400 uppercase">Requests / Day</div>
+          ),
+        },
+        {
+          step: "03",
+          total: "04",
+          tag: "REAL-TIME TELEMETRY",
+          title: "Live Oversight & Actionable Data",
+          subtitle: "Complete visibility over every automated interaction and campaign performance.",
+          desc: "Live analytics dashboards that track campaign throughput, customer sentiment, agent accuracy, and conversion metrics in real time with zero guesswork.",
+          metrics: [
+            { label: "Average Latency", val: "~0.4s" },
+            { label: "System Uptime", val: "99.98%" },
+            { label: "Audit Compliance", val: "100%" },
+          ],
+          badge: "Real-Time Telemetry",
+          icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[11px]">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <span className="text-white font-bold text-[10px]">Live Throughput</span>
+                <span className="text-[#00E5BE] text-[9px]">Stream</span>
+              </div>
+              <div className="grid grid-cols-2 gap-1.5 text-center">
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+                  <div className="text-sm font-bold text-white font-sans">12,480</div>
+                  <div className="text-[8px] text-gray-400 uppercase">Requests / Day</div>
+                </div>
+                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
+                  <div className="text-sm font-bold text-[#00E5BE] font-sans">+45%</div>
+                  <div className="text-[8px] text-gray-400 uppercase">Conversion Lift</div>
+                </div>
+              </div>
+              <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
+              </div>
             </div>
-            <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-              <div className="text-sm font-bold text-[#00E5BE] font-sans">+45%</div>
-              <div className="text-[8px] text-gray-400 uppercase">Conversion Lift</div>
+          ),
+        },
+        {
+          step: "04",
+          total: "04",
+          tag: "SOVEREIGN ARCHITECTURE",
+          title: "Sovereign AI & Enterprise Security",
+          subtitle: "Keep your proprietary organizational knowledge private, compliant, and protected.",
+          desc: "Tailored AI models and private retrieval pipelines hosted inside secure Saudi cloud environments, adhering strictly to regional regulatory and data sovereignty standards.",
+          metrics: [
+            { label: "Data Encryption", val: "AES-256 / TLS" },
+            { label: "Hosting", val: "KSA Sovereign" },
+            { label: "Compliance", val: "Strict SLA" },
+          ],
+          badge: "Sovereign AI",
+          icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
+          mockup: (
+            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
+              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
+                <span className="text-white font-bold text-[10px]">Sovereignty Shield</span>
+                <span className="text-[#00E5BE] text-[9px]">Protected</span>
+              </div>
+              <div className="space-y-1 text-[11px] font-sans">
+                <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
+                  <span>Isolated Local VPC & Zero Data Leaks</span>
+                </div>
+                <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
+                  <span>Full Regulatory Alignment in Saudi Arabia</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
-          </div>
-        </div>
-      ),
-    },
-    {
-      step: "04",
-      total: "04",
-      tag: "SOVEREIGN ARCHITECTURE",
-      title: "Sovereign AI & Enterprise Security",
-      subtitle: "Keep your proprietary organizational knowledge private, compliant, and protected.",
-      desc: "Tailored AI models and private retrieval pipelines hosted inside secure Saudi cloud environments, adhering strictly to regional regulatory and data sovereignty standards.",
-      metrics: [
-        { label: "Data Encryption", val: "AES-256 / TLS" },
-        { label: "Hosting", val: "KSA Sovereign" },
-        { label: "Compliance", val: "Strict SLA" },
-      ],
-      badge: "Sovereign AI",
-      icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
-      mockup: (
-        <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[11px] text-left">
-          <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-            <span className="text-white font-bold text-[10px]">Sovereignty Shield</span>
-            <span className="text-[#00E5BE] text-[9px]">Protected</span>
-          </div>
-          <div className="space-y-1 text-[11px] font-sans">
-            <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-              <span>Isolated Local VPC & Zero Data Leaks</span>
-            </div>
-            <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-              <span>Full Regulatory Alignment in Saudi Arabia</span>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-  ];
+          ),
+        },
+      ];
 
-  const plans = [
-    {
-      tag: "STRATEGY & ADOPTION",
-      title: "AI Consulting",
-      subtitle: "Project Based",
-      desc: "AI strategy for operational efficiency, workflow auditing, and executive deployment.",
-      features: [
-        "AI Strategy for efficiency & deployment",
-        "Employee training on modern AI tools",
-        "Measurable employee productivity boost",
-        "Dedicated executive AI advisor",
-        "Continuous progress oversight",
-      ],
-      popular: false,
-    },
-    {
-      tag: "MOST POPULAR",
-      title: "AI Agents & Automation",
-      subtitle: "Project Based",
-      desc: "Autonomous intelligent agents for 24/7 sales, marketing, and workflow automation.",
-      features: [
-        "3X performance over manual sales reps",
-        "Custom live reports & dashboards",
-        "Enterprise-grade security & encryption",
-        "Seamless 3rd-party system integration",
-        "Dedicated account manager & SLA",
-      ],
-      popular: true,
-    },
-    {
-      tag: "ENGINEERING",
-      title: "Web & App Development",
-      subtitle: "Project Based",
-      desc: "Custom full-stack web platforms and mobile applications powered by AI intelligence.",
-      features: [
-        "Full-stack web & mobile app engineering",
-        "Native AI & LLM model integrations",
-        "Advanced real-time analytics engine",
-        "Top-grade cloud infrastructure & security",
-        "24/7 technical maintenance & support",
-      ],
-      popular: false,
-    },
-  ];
+  const plans = isAr
+    ? [
+        {
+          tag: "الاستراتيجية والتبني",
+          title: "استشارات الذكاء الاصطناعي",
+          subtitle: "حسب المشروع",
+          desc: "استراتيجيات وخارطة طريق تنفيذية ذكية لتحقيق الكفاءة التشغيلية والتحول الرقمي.",
+          features: [
+            "استراتيجية AI لرفع الكفاءة والتدشين",
+            "تدريب الموظفين على أحدث أدوات الذكاء الاصطناعي",
+            "زيادة مؤكدة في إنتاجية الفريق والعمليات",
+            "مستشار تنفيذي مخصص لمتابعة التقدم",
+            "متابعة دورية وتقييم نتائج الأداء",
+          ],
+          popular: false,
+        },
+        {
+          tag: "الأكثر طلباً",
+          title: "وكلاء الذكاء الاصطناعي والأتمتة",
+          subtitle: "حسب المشروع",
+          desc: "وكلاء أذكياء مستقلون لأتمتة المبيعات، والتسويق، والعمليات على مدار الساعة.",
+          features: [
+            "أداء يفوق موظفي المبيعات اليدويين بثلاثة أضعاف",
+            "لوحات تحكم وتقارير حية ومخصصة",
+            "أمان وتشفير بيانات بمستوى مؤسسي متقدم",
+            "تكامل سلس مع كافة أنظمتك وقواعد بياناتك",
+            "مدير حساب مخصص واتفاقية مستوى خدمة SLA",
+          ],
+          popular: true,
+        },
+        {
+          tag: "الهندسة البرمجية",
+          title: "تطوير الويب والتطبيقات",
+          subtitle: "حسب المشروع",
+          desc: "تطوير منصات ويب متكاملة وتطبيقات جوال ذكية مدعومة بنماذج الذكاء الاصطناعي.",
+          features: [
+            "تطوير شامل لمواقع وتطبيقات الجوال المتقدمة",
+            "دمج مخصص لنماذج اللغة والذكاء الاصطناعي",
+            "محرك تحليلات فورية ومباشرة للأداء",
+            "بنية تحتية سحابية متقدمة وأعلى معايير الأمان",
+            "دعم فني وصيانة مستمرة على مدار الساعة",
+          ],
+          popular: false,
+        },
+      ]
+    : [
+        {
+          tag: "STRATEGY & ADOPTION",
+          title: "AI Consulting",
+          subtitle: "Project Based",
+          desc: "AI strategy for operational efficiency, workflow auditing, and executive deployment.",
+          features: [
+            "AI Strategy for efficiency & deployment",
+            "Employee training on modern AI tools",
+            "Measurable employee productivity boost",
+            "Dedicated executive AI advisor",
+            "Continuous progress oversight",
+          ],
+          popular: false,
+        },
+        {
+          tag: "MOST POPULAR",
+          title: "AI Agents & Automation",
+          subtitle: "Project Based",
+          desc: "Autonomous intelligent agents for 24/7 sales, marketing, and workflow automation.",
+          features: [
+            "3X performance over manual sales reps",
+            "Custom live reports & dashboards",
+            "Enterprise-grade security & encryption",
+            "Seamless 3rd-party system integration",
+            "Dedicated account manager & SLA",
+          ],
+          popular: true,
+        },
+        {
+          tag: "ENGINEERING",
+          title: "Web & App Development",
+          subtitle: "Project Based",
+          desc: "Custom full-stack web platforms and mobile applications powered by AI intelligence.",
+          features: [
+            "Full-stack web & mobile app engineering",
+            "Native AI & LLM model integrations",
+            "Advanced real-time analytics engine",
+            "Top-grade cloud infrastructure & security",
+            "24/7 technical maintenance & support",
+          ],
+          popular: false,
+        },
+      ];
 
-  const testimonials = [
-    {
-      quote: "Tahseen streamlined our internal processes — we reduced manual work by over 40% in just weeks.",
-      author: "Ahmed AL-Mutairi",
-      role: "Operations Director, FutureTech",
-      metrics: "40% Manual Work Reduced",
-    },
-    {
-      quote: "The AI automation was easy to deploy and helped us serve clients faster and more consistently across Saudi Arabia.",
-      author: "Sara Al-Harbi",
-      role: "Head of Growth, DataPlus",
-      metrics: "3X Lead Response Speed",
-    },
-    {
-      quote: "Our team now focuses on strategy instead of repetitive tasks — Tahseen took care of the rest seamlessly.",
-      author: "Ismael Mohammad",
-      role: "Owner, Deconec",
-      metrics: "100+ Hours Saved / Month",
-    },
-    {
-      quote: "We saw measurable gains in operational efficiency and client satisfaction. Highly recommend Tahseen for any business.",
-      author: "Saleh El Oamry",
-      role: "CEO, Canacio",
-      metrics: "+35% Operational Efficiency",
-    },
-    {
-      quote: "We integrated Tahseen without coding. The results were immediate — faster operations and better customer insights.",
-      author: "Tarek Amer",
-      role: "Managing Director, Gito",
-      metrics: "Instant ROI in 3 Weeks",
-    },
-    {
-      quote: "The automation flows are intuitive and saved us countless hours. Support was highly responsive and forward-deployed.",
-      author: "Osama Mazen",
-      role: "Founder, Ioptp",
-      metrics: "99.9% Pipeline Reliability",
-    },
-  ];
+  const testimonials = isAr
+    ? [
+        {
+          quote: "ساهمت تحسين في تبسيط عملياتنا الداخلية — قلصنا أكثر من ٤٠٪ من المهام اليدوية خلال أسابيع قليلة.",
+          author: "أحمد المطيري",
+          role: "مدير العمليات، FutureTech",
+          metrics: "تقليص ٤٠٪ من العمل اليدوي",
+        },
+        {
+          quote: "أتمتة الذكاء الاصطناعي كانت سهلة التدشين وساعدتنا على خدمة عملائنا في المملكة بسرعة وثبات فائقين.",
+          author: "سارة الحربي",
+          role: "رئيسة النمو، DataPlus",
+          metrics: "٣ أضعاف سرعة الرد",
+        },
+        {
+          quote: "فريقنا الآن يركز على الاستراتيجية بدلاً من المهام المتكررة — تولت تحسين الباقي بكل احترافية.",
+          author: "إسماعيل محمد",
+          role: "مالك، ديكونيك (Deconec)",
+          metrics: "+١٠٠ ساعة عمل موفرة شهرياً",
+        },
+        {
+          quote: "شهدنا مكاسب ملموسة في الكفاءة التشغيلية ورضا العملاء. نوصي بحلول تحسين بشدة لأي منشأة.",
+          author: "صالح العمري",
+          role: "الرئيس التنفيذي، كاناسيو (Canacio)",
+          metrics: "+٣٥٪ كفاءة تشغيلية",
+        },
+        {
+          quote: "قمنا بربط تحسين دون الحاجة لبرمجة معقدة. النتائج كانت فورية — سرعة في العمليات ودقة في تحليلات العملاء.",
+          author: "طارق عامر",
+          role: "المدير العام، جيتو (Gito)",
+          metrics: "عائد استثمار فوري خلال ٣ أسابيع",
+        },
+        {
+          quote: "مسارات الأتمتة سلسة ومبتكرة ووفرت علينا ساعات طويلة. الدعم الفني كان متميزاً ومتواجداً دائماً.",
+          author: "أسامة مازن",
+          role: "مؤسس، آي أوبتب (Ioptp)",
+          metrics: "٩٩.٩٪ موثوقية النظام",
+        },
+      ]
+    : [
+        {
+          quote: "Tahseen streamlined our internal processes — we reduced manual work by over 40% in just weeks.",
+          author: "Ahmed AL-Mutairi",
+          role: "Operations Director, FutureTech",
+          metrics: "40% Manual Work Reduced",
+        },
+        {
+          quote: "The AI automation was easy to deploy and helped us serve clients faster and more consistently across Saudi Arabia.",
+          author: "Sara Al-Harbi",
+          role: "Head of Growth, DataPlus",
+          metrics: "3X Lead Response Speed",
+        },
+        {
+          quote: "Our team now focuses on strategy instead of repetitive tasks — Tahseen took care of the rest seamlessly.",
+          author: "Ismael Mohammad",
+          role: "Owner, Deconec",
+          metrics: "100+ Hours Saved / Month",
+        },
+        {
+          quote: "We saw measurable gains in operational efficiency and client satisfaction. Highly recommend Tahseen for any business.",
+          author: "Saleh El Oamry",
+          role: "CEO, Canacio",
+          metrics: "+35% Operational Efficiency",
+        },
+        {
+          quote: "We integrated Tahseen without coding. The results were immediate — faster operations and better customer insights.",
+          author: "Tarek Amer",
+          role: "Managing Director, Gito",
+          metrics: "Instant ROI in 3 Weeks",
+        },
+        {
+          quote: "The automation flows are intuitive and saved us countless hours. Support was highly responsive and forward-deployed.",
+          author: "Osama Mazen",
+          role: "Founder, Ioptp",
+          metrics: "99.9% Pipeline Reliability",
+        },
+      ];
 
   const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
@@ -308,32 +551,109 @@ export default function Home() {
     setCarouselIndex((prev) => (prev + 1) % testimonials.length);
   };
 
-  const faqs = [
-    {
-      q: "What is Tahseen AI?",
-      a: "Tahseen AI is a pioneering Saudi Arabian startup poised to redefine B2B operations across SMEs through cutting-edge artificial intelligence, workflow automation, and custom intelligent agent systems.",
-    },
-    {
-      q: "What are Tahseen AI's primary services?",
-      a: "We provide AI Consultation & Strategy, Full-stack Web & Mobile Development, AI Agents for Sales & Marketing, Corporate AI Training & Workshops, AI Chat & Call Centre Solutions, and End-to-End Workflow Automation.",
-    },
-    {
-      q: "Why do I need Tahseen AI solutions?",
-      a: "Tahseen AI delivers unparalleled value by reducing repetitive manual tasks by over 40%, accelerating response times, and deploying scalable autonomous systems tailored specifically to your business goals.",
-    },
-    {
-      q: "Can I customize Tahseen AI to fit my brand?",
-      a: "Absolutely. Every AI agent, workflow, and web platform is fully tailored to match your brand identity, tone of voice, internal databases, and operational requirements.",
-    },
-    {
-      q: "Does Tahseen AI provide services to individuals and startups?",
-      a: "Yes. In addition to enterprise B2B solutions, Tahseen AI provides adaptable, high-impact AI packages tailored for growing startups, entrepreneurs, and professional teams.",
-    },
-  ];
+  const faqs = isAr
+    ? [
+        {
+          q: "ما هي مجموعة تحسين للذكاء الاصطناعي (Tahseen AI)؟",
+          a: "تحسين هي شركة تقنية سعودية رائدة متخصصة في إعادة تعريف وتطوير العمليات المؤسسية عبر حلول الذكاء الاصطناعي المتقدمة، وأتمتة مسارات العمل، ونظم الوكلاء الأذكياء المستقلة.",
+        },
+        {
+          q: "ما هي أبرز الخدمات التي تقدمها تحسين للذكاء الاصطناعي؟",
+          a: "نقدم استشارات واستراتيجيات الذكاء الاصطناعي، وتطوير مواقع وتطبيقات الجوال الذكية، وبناء وكلاء ذكاء اصطناعي للمبيعات والتسويق، وحلول مراكز الاتصال الذكية، وأتمتة العمليات المتكاملة.",
+        },
+        {
+          q: "لماذا تحتاج منشأتي إلى حلول تحسين للذكاء الاصطناعي؟",
+          a: "توفر تحسين قيمة استثنائية عبر تقليص أكثر من ٤٠٪ من المهام اليدوية المتكررة، ومضاعفة سرعة الاستجابة للعملاء، ونشر أنظمة ذكية ذاتية التشغيل ومصممة خصيصاً لتحقيق أهدافك.",
+        },
+        {
+          q: "هل يمكن تخصيص حلول تحسين لتتطابق مع هوية ونبرة علامتي التجارية؟",
+          a: "بالتأكيد. كل وكيل ذكي ونظام أتمتة يتم تدريبه وتخصيصه بالكامل ليتوافق مع هوية منشأتك، ونبرة مخاطبة عملائك، وقواعد بياناتك الداخلية.",
+        },
+        {
+          q: "هل توفر تحسين خدماتها للشركات الناشئة ورواد الأعمال؟",
+          a: "نعم. بالإضافة إلى الحلول المؤسسية الكبرى (Enterprise)، نوفر باقات مرنة وعالية الأثر مخصصة للشركات الناشئة ورواد الأعمال لمساعدتهم على النمو المتسارع.",
+        },
+      ]
+    : [
+        {
+          q: "What is Tahseen AI?",
+          a: "Tahseen AI is a pioneering Saudi Arabian startup poised to redefine B2B operations across SMEs through cutting-edge artificial intelligence, workflow automation, and custom intelligent agent systems.",
+        },
+        {
+          q: "What are Tahseen AI's primary services?",
+          a: "We provide AI Consultation & Strategy, Full-stack Web & Mobile Development, AI Agents for Sales & Marketing, Corporate AI Training & Workshops, AI Chat & Call Centre Solutions, and End-to-End Workflow Automation.",
+        },
+        {
+          q: "Why do I need Tahseen AI solutions?",
+          a: "Tahseen AI delivers unparalleled value by reducing repetitive manual tasks by over 40%, accelerating response times, and deploying scalable autonomous systems tailored specifically to your business goals.",
+        },
+        {
+          q: "Can I customize Tahseen AI to fit my brand?",
+          a: "Absolutely. Every AI agent, workflow, and web platform is fully tailored to match your brand identity, tone of voice, internal databases, and operational requirements.",
+        },
+        {
+          q: "Does Tahseen AI provide services to individuals and startups?",
+          a: "Yes. In addition to enterprise B2B solutions, Tahseen AI provides adaptable, high-impact AI packages tailored for growing startups, entrepreneurs, and professional teams.",
+        },
+      ];
+
+  const pillsRow1 = isAr
+    ? [
+        "تقارير فورية",
+        "تفاعل مخصص",
+        "الحفاظ على العملاء",
+        "تكامل سلس مع الأنظمة",
+        "بث بيانات مباشر",
+        "تقارير فورية",
+        "تفاعل مخصص",
+        "الحفاظ على العملاء",
+        "تكامل سلس مع الأنظمة",
+        "بث بيانات مباشر",
+      ]
+    : [
+        "Real-Time Reports",
+        "Personalized Engagement",
+        "Customer Retention",
+        "Seamless Integrations",
+        "Live Telemetry Stream",
+        "Real-Time Reports",
+        "Personalized Engagement",
+        "Customer Retention",
+        "Seamless Integrations",
+        "Live Telemetry Stream",
+      ];
+
+  const pillsRow2 = isAr
+    ? [
+        "زيادة الكفاءة",
+        "اقتصادي ومجدٍ",
+        "إنفاق ذكي",
+        "قرارات مدفوعة بالبيانات",
+        "سحابة سعودية سيادية",
+        "زيادة الكفاءة",
+        "اقتصادي ومجدٍ",
+        "إنفاق ذكي",
+        "قرارات مدفوعة بالبيانات",
+        "سحابة سعودية سيادية",
+      ]
+    : [
+        "Increased Efficiency",
+        "Cost-Effective",
+        "Smart Spending",
+        "Data-Driven Decisions",
+        "Sovereign Saudi Cloud",
+        "Increased Efficiency",
+        "Cost-Effective",
+        "Smart Spending",
+        "Data-Driven Decisions",
+        "Sovereign Saudi Cloud",
+      ];
 
   return (
-    <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans">
-      
+    <div
+      dir={isAr ? "rtl" : "ltr"}
+      className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans"
+    >
       {/* Background ambient radial glows */}
       <div className="absolute top-0 right-1/4 w-[700px] h-[550px] bg-cyan-500/10 rounded-full blur-[170px] pointer-events-none -z-10" />
       <div className="absolute top-[45%] left-[-150px] w-[600px] h-[600px] bg-[#00E5BE]/5 rounded-full blur-[200px] pointer-events-none -z-10" />
@@ -343,7 +663,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-6 sm:px-12 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
-          {/* Left: Official Brand Logo */}
+          {/* Logo */}
           <Link
             href="#home"
             onClick={(e) => handleSmoothScroll(e, "#home")}
@@ -355,14 +675,14 @@ export default function Home() {
                 alt="Tahseen AI"
                 fill
                 sizes="(max-width: 640px) 176px, 192px"
-                className="object-contain object-left"
+                className={`object-contain ${isAr ? "object-right" : "object-left"}`}
                 priority
               />
             </div>
           </Link>
 
-          {/* Right: Nav Links & LET'S TALK Button */}
-          <div className="flex items-center gap-5 sm:gap-7 lg:gap-8 xl:gap-10">
+          {/* Right: Nav Links & Language Switcher & LET'S TALK Button */}
+          <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
             <nav className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8 text-[11px] sm:text-xs font-semibold tracking-wider text-gray-300">
               {navLinks.map((link) =>
                 link.href.startsWith("/") ? (
@@ -386,11 +706,22 @@ export default function Home() {
               )}
             </nav>
 
+            {/* Language Toggle Button */}
+            <button
+              onClick={() => setLang(isAr ? "en" : "ar")}
+              aria-label="Toggle language"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#00E5BE]/40 text-gray-200 hover:text-[#00E5BE] transition-all cursor-pointer"
+            >
+              <Globe className="w-3.5 h-3.5 text-[#00E5BE]" />
+              <span>{isAr ? "English" : "العربية"}</span>
+            </button>
+
+            {/* Contact Action Button */}
             <Link
               href="/contact"
               className="inline-flex items-center justify-center px-5 sm:px-6 py-2 text-[11px] sm:text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
-              <span>LET&apos;S TALK</span>
+              <span>{isAr ? "تحدث معنا" : "LET'S TALK"}</span>
             </Link>
           </div>
 
@@ -406,19 +737,28 @@ export default function Home() {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] pointer-events-none">
           
           {/* Left Hero Column */}
-          <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-left pointer-events-auto">
+          <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-start pointer-events-auto">
             
             {/* Primary Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
-              AI Solutions That <br />
-              <span className="text-[#00E5BE]">Enhance</span> Your Work
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.2] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+              {isAr ? (
+                <>
+                  حلول ذكاء اصطناعي <br />
+                  <span className="text-[#00E5BE]">تُعزز</span> وتطوّر أعمالك
+                </>
+              ) : (
+                <>
+                  AI Solutions That <br />
+                  <span className="text-[#00E5BE]">Enhance</span> Your Work
+                </>
+              )}
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xs sm:text-[13px] text-gray-300 max-w-sm font-normal leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
-              We build AI agents and automation systems <br />
-              that help businesses work smarter, faster, <br />
-              and more efficiently.
+            <p className="text-xs sm:text-[13px] text-gray-300 max-w-md font-normal leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+              {isAr
+                ? "نبتكر وكلاء ذكاء اصطناعي وأنظمة أتمتة متقدمة تمكّن الشركات والمؤسسات من العمل بذكاء وسرعة وكفاءة أعلى."
+                : "We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently."}
             </p>
 
             {/* Primary CTA Button */}
@@ -428,14 +768,14 @@ export default function Home() {
                 onClick={(e) => handleSmoothScroll(e, "#services")}
                 className="inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group cursor-pointer hover:shadow-[0_0_18px_rgba(0,229,190,0.4)]"
               >
-                <span>LET&apos;S BUILD TOGETHER</span>
-                <ArrowRight className="w-3.5 h-3.5 ml-2 text-[#00E5BE] group-hover:translate-x-1 transition-transform duration-200" />
+                <span>{isAr ? "لنبدأ بالبناء معاً" : "LET'S BUILD TOGETHER"}</span>
+                <ArrowRight className={`w-3.5 h-3.5 mx-2 text-[#00E5BE] group-hover:translate-x-1 transition-transform duration-200 ${isAr ? "rotate-180" : ""}`} />
               </a>
             </div>
 
           </div>
 
-          {/* Right Hero Column */}
+          {/* Right Hero Column Spacer */}
           <div className="hidden lg:block lg:col-span-6 xl:col-span-7" />
 
         </div>
@@ -459,12 +799,12 @@ export default function Home() {
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
-              AI Agents
+              {isAr ? "وكلاء الذكاء الاصطناعي" : "AI Agents"}
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed font-normal max-w-[210px] text-center mx-auto group-hover:text-gray-200 transition-colors">
-              Intelligent agents that <br />
-              automate and scale your <br />
-              operations.
+              {isAr
+                ? "وكلاء أذكياء لأتمتة وتوسيع نطاق عملياتك على مدار الساعة."
+                : "Intelligent agents that automate and scale your operations."}
             </p>
           </div>
 
@@ -478,12 +818,12 @@ export default function Home() {
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
-              Automation
+              {isAr ? "أتمتة العمليات" : "Automation"}
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed font-normal max-w-[210px] text-center mx-auto group-hover:text-gray-200 transition-colors">
-              Streamline workflows <br />
-              and eliminate repetitive <br />
-              tasks.
+              {isAr
+                ? "تبسيط تدفقات العمل والقضاء التام على المهام اليدوية المتكررة."
+                : "Streamline workflows and eliminate repetitive tasks."}
             </p>
           </div>
 
@@ -498,12 +838,12 @@ export default function Home() {
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
-              Consulting
+              {isAr ? "استشارات الذكاء الاصطناعي" : "Consulting"}
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed font-normal max-w-[210px] text-center mx-auto group-hover:text-gray-200 transition-colors">
-              AI strategy and roadmap <br />
-              aligned with your business <br />
-              goals.
+              {isAr
+                ? "استراتيجيات وخارطة طريق ذكية متوافقة مع أهدافك المؤسسية."
+                : "AI strategy and roadmap aligned with your business goals."}
             </p>
           </div>
 
@@ -524,12 +864,12 @@ export default function Home() {
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
-              Development
+              {isAr ? "التطوير المخصص" : "Development"}
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed font-normal max-w-[210px] text-center mx-auto group-hover:text-gray-200 transition-colors">
-              Custom AI solutions <br />
-              built for real-world <br />
-              impact.
+              {isAr
+                ? "حلول برمجية وذكاء اصطناعي مصممة خصيصاً لتحقيق أثر واقعي وملموس."
+                : "Custom AI solutions built for real-world impact."}
             </p>
           </div>
 
@@ -537,20 +877,29 @@ export default function Home() {
 
       </main>
 
-      {/* 4. Enterprise Social Proof & Partner Logos (In Crisp White/Teal Box for Maximum Visibility) */}
+      {/* 4. Enterprise Social Proof & Partner Logos */}
       <section id="about" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28">
         
-        {/* Centered Heading with Left & Right Dotted Divider Lines */}
+        {/* Centered Heading with Dotted Divider Lines */}
         <div className="flex items-center justify-center gap-4 sm:gap-8 w-full mb-10">
           <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
           <h4 className="text-sm sm:text-base md:text-lg font-bold text-gray-200 text-center tracking-tight leading-relaxed max-w-xl">
-            Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
-            in Saudi Arabia
+            {isAr ? (
+              <>
+                معتمد وموثوق من قِبل كبرى المؤسسات الرائدة <br className="hidden sm:inline" />
+                في المملكة العربية السعودية
+              </>
+            ) : (
+              <>
+                Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
+                in Saudi Arabia
+              </>
+            )}
           </h4>
           <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
         </div>
 
-        {/* Crisp White/Teal Container Box for Maximum Logo Clarity */}
+        {/* Crisp White/Teal Container Box */}
         <div className="rounded-2xl sm:rounded-3xl bg-white/[0.96] backdrop-blur-2xl border-2 border-[#00E5BE]/40 p-6 sm:p-8 md:p-10 shadow-[0_12px_40px_rgba(0,229,190,0.18)] flex flex-wrap items-center justify-center gap-10 sm:gap-16 lg:gap-24 transition-all duration-300 hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.28)]">
           
           {/* Logo 1: Zana Cultural Entity */}
@@ -590,18 +939,28 @@ export default function Home() {
 
       </section>
 
-      {/* 5. Comprehensive Insights Section (Distinct Boundary with Streaming Pill Cloud) */}
+      {/* 5. Comprehensive Insights Section */}
       <section id="insights" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.07] bg-gradient-to-b from-white/[0.015] via-transparent to-transparent">
         <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
             <Activity className="w-3.5 h-3.5" />
-            <span>LIVE OVERSIGHT & REAL-TIME ANALYTICS</span>
+            <span>{isAr ? "متابعة حية وتحليلات فورية" : "LIVE OVERSIGHT & REAL-TIME ANALYTICS"}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Comprehensive Insights That Drive <span className="text-[#00E5BE]">Growth</span>
+            {isAr ? (
+              <>
+                تحليلات شاملة تقود <span className="text-[#00E5BE]">النمو والريادة</span>
+              </>
+            ) : (
+              <>
+                Comprehensive Insights That Drive <span className="text-[#00E5BE]">Growth</span>
+              </>
+            )}
           </h2>
           <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
-            Track every campaign, automated agent, and customer interaction in real time to refine engagement strategies and eliminate guesswork.
+            {isAr
+              ? "تتبّع كل حملة، ووكيل ذكي، وتفاعل مع العملاء بشكل فوري لتطوير استراتيجياتك والتخلص من التخمين."
+              : "Track every campaign, automated agent, and customer interaction in real time to refine engagement strategies and eliminate guesswork."}
           </p>
         </div>
 
@@ -614,15 +973,24 @@ export default function Home() {
                 <TrendingUp className="w-5 h-5" />
               </div>
               <div className="space-y-1.5">
-                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">LIVE OVERSIGHT</span>
-                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">Real-Time Insights</h3>
+                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
+                  {isAr ? "المتابعة اللحظية" : "LIVE OVERSIGHT"}
+                </span>
+                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
+                  {isAr ? "رؤى لحظية مباشرة" : "Real-Time Insights"}
+                </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                  Monitor your campaigns and customer touchpoints in real time to ensure maximum operational effectiveness and identify optimization opportunities instantly.
+                  {isAr
+                    ? "راقب حملاتك ونقاط اتصال العملاء في الوقت الفعلي لضمان أعلى فاعلية تشغيلية واكتشاف فرص التحسين فوراً."
+                    : "Monitor your campaigns and customer touchpoints in real time to ensure maximum operational effectiveness and identify optimization opportunities instantly."}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-2.5 pt-1">
-                {["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"].map((item) => (
+                {(isAr
+                  ? ["الحفاظ على العملاء (+٤٠٪)", "تكامل سلس مع الأنظمة", "تقارير فورية مباشرة", "تفاعل مخصص وذكي"]
+                  : ["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"]
+                ).map((item) => (
                   <div key={item} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
                     <span>{item}</span>
@@ -635,22 +1003,22 @@ export default function Home() {
               <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2.5">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-pulse" />
-                  <span className="font-bold text-white">Live Agent Telemetry</span>
+                  <span className="font-bold text-white">{isAr ? "بيانات تشغيل الوكلاء الحية" : "Live Agent Telemetry"}</span>
                 </div>
-                <span className="text-[#00E5BE] font-mono font-semibold">99.98% Uptime</span>
+                <span className="text-[#00E5BE] font-mono font-semibold">{isAr ? "٩٩.٩٨٪ جاهزية النظام" : "99.98% Uptime"}</span>
               </div>
               <div className="grid grid-cols-3 gap-2.5 text-center">
                 <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-base sm:text-lg font-bold text-white">~0.4s</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Latency</div>
+                  <div className="text-base sm:text-lg font-bold text-white">{isAr ? "~٠.٤ ثانية" : "~0.4s"}</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isAr ? "سرعة الاستجابة" : "Latency"}</div>
                 </div>
                 <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-base sm:text-lg font-bold text-[#00E5BE]">3.2X</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Conversion</div>
+                  <div className="text-base sm:text-lg font-bold text-[#00E5BE]">{isAr ? "٣.٢ أضعاف" : "3.2X"}</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isAr ? "معدل التحويل" : "Conversion"}</div>
                 </div>
                 <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-base sm:text-lg font-bold text-white">24/7</div>
-                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">Active</div>
+                  <div className="text-base sm:text-lg font-bold text-white">{isAr ? "٢٤/٧" : "24/7"}</div>
+                  <div className="text-[10px] text-gray-400 uppercase tracking-wider">{isAr ? "نشط" : "Active"}</div>
                 </div>
               </div>
             </div>
@@ -663,15 +1031,24 @@ export default function Home() {
                 <BarChart3 className="w-5 h-5" />
               </div>
               <div className="space-y-1.5">
-                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">STRATEGIC EFFICIENCY</span>
-                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">Actionable Data</h3>
+                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
+                  {isAr ? "الكفاءة الاستراتيجية" : "STRATEGIC EFFICIENCY"}
+                </span>
+                <h3 className="text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
+                  {isAr ? "بيانات قابلة للتنفيذ" : "Actionable Data"}
+                </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                  Leverage analytics to enhance team workflows, boost engagement, and make data-driven decisions that reduce overhead and increase marketing ROI.
+                  {isAr
+                    ? "استفد من التحليلات المتقدمة لتحسين تدفقات العمل، وزيادة التفاعل، واتخاذ قرارات مبنية على البيانات تقلل التكاليف وتعزز العائد."
+                    : "Leverage analytics to enhance team workflows, boost engagement, and make data-driven decisions that reduce overhead and increase marketing ROI."}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-2.5 pt-1">
-                {["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"].map((item) => (
+                {(isAr
+                  ? ["نشر فعال واقتصادي", "إنفاق مالي ذكي", "قرارات مبنية على البيانات", "زيادة الكفاءة التشغيلية"]
+                  : ["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"]
+                ).map((item) => (
                   <div key={item} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
                     <span>{item}</span>
@@ -682,14 +1059,14 @@ export default function Home() {
 
             <div className="p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2.5">
               <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2.5">
-                <span className="font-bold text-white">Workflow Efficiency Gain</span>
-                <span className="text-[#00E5BE] font-mono font-semibold">+45% Gain</span>
+                <span className="font-bold text-white">{isAr ? "مكاسب كفاءة العمليات" : "Workflow Efficiency Gain"}</span>
+                <span className="text-[#00E5BE] font-mono font-semibold">{isAr ? "+٤٥٪ كفاءة" : "+45% Gain"}</span>
               </div>
               <div className="space-y-2">
                 <div>
                   <div className="flex justify-between text-[10px] text-gray-400 mb-1">
-                    <span>Manual Task Reduction</span>
-                    <span className="text-[#00E5BE] font-bold">42%</span>
+                    <span>{isAr ? "تقليص المهام اليدوية" : "Manual Task Reduction"}</span>
+                    <span className="text-[#00E5BE] font-bold">{isAr ? "٤٢٪" : "42%"}</span>
                   </div>
                   <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[42%]" />
@@ -697,8 +1074,8 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="flex justify-between text-[10px] text-gray-400 mb-1">
-                    <span>Lead Response Speed</span>
-                    <span className="text-[#00E5BE] font-bold">85%</span>
+                    <span>{isAr ? "سرعة الاستجابة للعملاء" : "Lead Response Speed"}</span>
+                    <span className="text-[#00E5BE] font-bold">{isAr ? "٨٥٪" : "85%"}</span>
                   </div>
                   <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[85%]" />
@@ -710,7 +1087,7 @@ export default function Home() {
 
         </div>
 
-        {/* Dual-Row Animated Streaming Value Pills (Embedded in Comprehensive Insights) */}
+        {/* Dual-Row Animated Streaming Value Pills */}
         <div className="mt-16 pt-10 border-t border-white/[0.06] space-y-4 overflow-hidden relative">
           {/* Edge Vignette Fades */}
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#060913] to-transparent z-10 pointer-events-none" />
@@ -719,18 +1096,7 @@ export default function Home() {
           {/* Row 1: Leftward Streaming Marquee */}
           <div className="overflow-hidden flex">
             <div className="animate-marquee-left flex items-center gap-3 sm:gap-4 py-1">
-              {[
-                "Real-Time Reports",
-                "Personalized Engagement",
-                "Customer Retention",
-                "Seamless Integrations",
-                "Live Telemetry Stream",
-                "Real-Time Reports",
-                "Personalized Engagement",
-                "Customer Retention",
-                "Seamless Integrations",
-                "Live Telemetry Stream",
-              ].map((pill, idx) => (
+              {pillsRow1.map((pill, idx) => (
                 <div
                   key={idx}
                   className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
@@ -744,18 +1110,7 @@ export default function Home() {
           {/* Row 2: Rightward Streaming Marquee */}
           <div className="overflow-hidden flex">
             <div className="animate-marquee-right flex items-center gap-3 sm:gap-4 py-1">
-              {[
-                "Increased Efficiency",
-                "Cost-Effective",
-                "Smart Spending",
-                "Data-Driven Decisions",
-                "Sovereign Saudi Cloud",
-                "Increased Efficiency",
-                "Cost-Effective",
-                "Smart Spending",
-                "Data-Driven Decisions",
-                "Sovereign Saudi Cloud",
-              ].map((pill, idx) => (
+              {pillsRow2.map((pill, idx) => (
                 <div
                   key={idx}
                   className="px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
@@ -769,22 +1124,32 @@ export default function Home() {
 
       </section>
 
-      {/* 6. Sticky Interactive Solutions Showcase (Distinct Container Separation) */}
+      {/* 6. Sticky Interactive Solutions Showcase */}
       <section id="solutions" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* Left Column: Sticky Title & Step Navigator */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-5 text-left">
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-5 text-start">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
                 <Sparkles className="w-3 h-3" />
-                <span>BUILT FOR HIGH-ASSURANCE SCALE</span>
+                <span>{isAr ? "مُصمم للتوسع المؤسسي عالي الكفاءة" : "BUILT FOR HIGH-ASSURANCE SCALE"}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                AI Solutions Built for <span className="text-[#00E5BE]">Your Industry</span>
+                {isAr ? (
+                  <>
+                    حلول ذكاء اصطناعي مصممة <span className="text-[#00E5BE]">لقطاعك</span>
+                  </>
+                ) : (
+                  <>
+                    AI Solutions Built for <span className="text-[#00E5BE]">Your Industry</span>
+                  </>
+                )}
               </h2>
               <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
-                Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations.
+                {isAr
+                  ? "تصفح حلولنا المتخصصة والمصممة للقضاء على القيود التشغيلية وتسريع نمو المؤسسات السعودية."
+                  : "Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations."}
               </p>
             </div>
 
@@ -798,7 +1163,7 @@ export default function Home() {
                     const elem = document.getElementById(`solution-step-${idx}`);
                     if (elem) elem.scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
-                  className={`w-full p-3 rounded-xl border text-left transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                  className={`w-full p-3 rounded-xl border text-start transition-all duration-300 flex items-center justify-between cursor-pointer ${
                     activeSolution === idx
                       ? "bg-white/[0.04] border-[#00E5BE] text-white shadow-[0_0_20px_rgba(0,229,190,0.15)]"
                       : "bg-transparent border-white/[0.06] text-gray-400 hover:border-white/20 hover:text-gray-200"
@@ -822,8 +1187,8 @@ export default function Home() {
                 href="/contact"
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
               >
-                <span>CONSULT ON CUSTOM WORKFLOWS</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>{isAr ? "استشرنا حول تدفقات العمل المخصصة" : "CONSULT ON CUSTOM WORKFLOWS"}</span>
+                <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
               </Link>
             </div>
           </div>
@@ -835,18 +1200,18 @@ export default function Home() {
                 key={sol.step}
                 id={`solution-step-${idx}`}
                 onMouseEnter={() => setActiveSolution(idx)}
-                className={`p-6 sm:p-7 rounded-3xl border transition-all duration-500 space-y-4 text-left ${
+                className={`p-6 sm:p-7 rounded-3xl border transition-all duration-500 space-y-4 text-start ${
                   activeSolution === idx
                     ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_16px_50px_rgba(0,229,190,0.15)] -translate-y-1"
                     : "bg-white/[0.02] border-white/[0.08] hover:border-white/20"
                 }`}
               >
-                {/* Card Header: Step Index & Badge */}
+                {/* Card Header */}
                 <div className="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-base font-extrabold text-[#00E5BE]">{sol.step}</span>
                     <span className="font-mono text-xs text-gray-500">/ {sol.total}</span>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-2">{sol.tag}</span>
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mx-2">{sol.tag}</span>
                   </div>
                   <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold">
                     {sol.badge}
@@ -885,17 +1250,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Flexible Service Packages (Distinct Background Separation) */}
+      {/* 7. Flexible Service Packages */}
       <section id="pricing" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.06] bg-gradient-to-b from-[#08121a]/30 to-transparent">
         <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-16">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
-            TRANSPARENT ENGAGEMENT, MEASURABLE RESULTS
+            {isAr ? "تعاقد شفاف ونتائج ملموسة" : "TRANSPARENT ENGAGEMENT, MEASURABLE RESULTS"}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Flexible Plans for <span className="text-[#00E5BE]">Companies & SMEs</span>
+            {isAr ? (
+              <>
+                باقات مرنة تناسب <span className="text-[#00E5BE]">الشركات والمؤسسات</span>
+              </>
+            ) : (
+              <>
+                Flexible Plans for <span className="text-[#00E5BE]">Companies & SMEs</span>
+              </>
+            )}
           </h2>
           <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
-            Choose the engagement model that fits your operational goals and scale seamlessly as you grow.
+            {isAr
+              ? "اختر نموذج العمل الذي يحقق أهدافك التشغيلية وتوسع بسلاسة مع نمو أعمالك."
+              : "Choose the engagement model that fits your operational goals and scale seamlessly as you grow."}
           </p>
         </div>
 
@@ -943,8 +1318,8 @@ export default function Home() {
                       : "btn-teal-outline group-hover:bg-[#00E5BE] group-hover:text-[#060913] group-hover:shadow-[0_4px_20px_rgba(0,229,190,0.5)]"
                   }`}
                 >
-                  <span>GET STARTED</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+                  <span>{isAr ? "ابدأ الآن" : "GET STARTED"}</span>
+                  <ArrowRight className={`w-3.5 h-3.5 mx-1.5 ${isAr ? "rotate-180" : ""}`} />
                 </Link>
               </div>
             </div>
@@ -957,13 +1332,23 @@ export default function Home() {
         <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>TESTED & TRUSTED NATIONWIDE</span>
+            <span>{isAr ? "مُجرب وموثوق على مستوى المملكة" : "TESTED & TRUSTED NATIONWIDE"}</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight text-center">
-            What Our <span className="text-[#00E5BE]">Clients</span> Say
+            {isAr ? (
+              <>
+                ماذا يقول <span className="text-[#00E5BE]">عملاؤنا</span>
+              </>
+            ) : (
+              <>
+                What Our <span className="text-[#00E5BE]">Clients</span> Say
+              </>
+            )}
           </h2>
           <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal text-center">
-            Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI.
+            {isAr
+              ? "آراء وتجارب مباشرة من قادة ومؤسسي الأعمال في السعودية الذين سرّعوا أعمالهم مع تحسين للذكاء الاصطناعي."
+              : "Hear directly from founders and enterprise leaders across Saudi Arabia accelerating workflows with Tahseen AI."}
           </p>
         </div>
 
@@ -976,13 +1361,13 @@ export default function Home() {
           <div
             className="flex transition-transform duration-700 ease-out gap-5 sm:gap-6"
             style={{
-              transform: `translateX(-${carouselIndex * (100 / (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3))}%)`,
+              transform: `translateX(${isAr ? "" : "-"}${carouselIndex * (100 / (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3))}%)`,
             }}
           >
             {extendedTestimonials.map((t, idx) => (
               <div
                 key={idx}
-                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 p-7 rounded-3xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] group"
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 p-7 rounded-3xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_36px_rgba(0,229,190,0.12)] group text-start"
               >
                 <div className="space-y-3.5">
                   <div className="flex items-center justify-between">
@@ -1014,14 +1399,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Carousel Pagination Dots & Arrow Controls */}
+        {/* Carousel Controls */}
         <div className="flex items-center justify-center gap-4 mt-10">
           <button
             onClick={handlePrev}
             aria-label="Previous testimonial"
             className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
           </button>
 
           <div className="flex items-center gap-2">
@@ -1044,22 +1429,32 @@ export default function Home() {
             aria-label="Next testimonial"
             className="w-9 h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95"
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
           </button>
         </div>
       </section>
 
-      {/* 9. Interactive FAQ Section (Distinct Clean Section) */}
+      {/* 9. Interactive FAQ Section */}
       <section className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1080px] mx-auto w-full border-t border-white/[0.07]">
         <div className="text-center space-y-3.5 max-w-2xl mx-auto mb-14">
           <span className="text-[#00E5BE] text-xs sm:text-sm font-bold tracking-widest uppercase">
-            YOUR QUERIES, SIMPLIFIED
+            {isAr ? "استفساراتك بإجابات واضحة" : "YOUR QUERIES, SIMPLIFIED"}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Frequently Asked <span className="text-[#00E5BE]">Questions</span>
+            {isAr ? (
+              <>
+                الأسئلة <span className="text-[#00E5BE]">الشائعة</span>
+              </>
+            ) : (
+              <>
+                Frequently Asked <span className="text-[#00E5BE]">Questions</span>
+              </>
+            )}
           </h2>
           <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
-            Find clear answers to common questions about Tahseen AI&apos;s capabilities and integration process.
+            {isAr
+              ? "إجابات شاملة ومباشرة عن إمكانيات تحسين للذكاء الاصطناعي وكيفية تكاملها مع منشأتك."
+              : "Find clear answers to common questions about Tahseen AI's capabilities and integration process."}
           </p>
         </div>
 
@@ -1071,7 +1466,7 @@ export default function Home() {
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
+                className="w-full p-5 text-start flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
@@ -1090,29 +1485,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. High-Impact CTA & Telemetry Banner (Matching Design Spec) */}
+      {/* 10. High-Impact CTA & Telemetry Banner */}
       <section id="contact" className="relative z-10 py-24 sm:py-32 px-6 sm:px-10 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-28 border-t border-white/[0.08]">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-8 sm:p-12 lg:p-14 shadow-[0_0_50px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 transition-all duration-500">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
             {/* Left Column: Headline, Trust Badge & Action Buttons */}
-            <div className="lg:col-span-6 space-y-6 text-left">
+            <div className="lg:col-span-6 space-y-6 text-start">
               {/* Trust Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-semibold text-gray-300">
                 <Users className="w-3.5 h-3.5 text-[#00E5BE]" />
-                <span>Trusted by 10k + businesses</span>
+                <span>{isAr ? "موثوق من أكثر من ١٠ آلاف جهة عمل" : "Trusted by 10k + businesses"}</span>
               </div>
 
               {/* Title */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.12]">
-                Build AI-Powered <br />
-                Solution Now!
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+                {isAr ? (
+                  <>
+                    ابنِ حل الذكاء الاصطناعي <br />
+                    الخاص بك الآن!
+                  </>
+                ) : (
+                  <>
+                    Build AI-Powered <br />
+                    Solution Now!
+                  </>
+                )}
               </h2>
 
               {/* Subtitle */}
               <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-md">
-                Automate lead generation and customer engagement in diverse and dynamic real-world settings
+                {isAr
+                  ? "أتمت توليد العملاء المحتملين والتفاعل الذكي في بيئات العمل الحقيقية والديناميكية."
+                  : "Automate lead generation and customer engagement in diverse and dynamic real-world settings"}
               </p>
 
               {/* Dual Action Buttons */}
@@ -1121,8 +1527,8 @@ export default function Home() {
                   href="/contact"
                   className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.5)] hover:-translate-y-0.5 cursor-pointer"
                 >
-                  <span>Get Started</span>
-                  <ArrowRight className="w-4 h-4 ml-2 text-[#060913]" />
+                  <span>{isAr ? "ابدأ الآن" : "Get Started"}</span>
+                  <ArrowRight className={`w-4 h-4 mx-2 text-[#060913] ${isAr ? "rotate-180" : ""}`} />
                 </Link>
 
                 <Link
@@ -1130,7 +1536,7 @@ export default function Home() {
                   className="inline-flex items-center justify-center px-6 py-3 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#1E293B] border border-white/10 text-white hover:bg-[#334155] transition-all shadow-lg cursor-pointer gap-2"
                 >
                   <HelpCircle className="w-4 h-4 text-gray-400" />
-                  <span>Learn More</span>
+                  <span>{isAr ? "معرفة المزيد" : "Learn More"}</span>
                 </Link>
               </div>
             </div>
@@ -1140,38 +1546,38 @@ export default function Home() {
               
               {/* Layer 1: Background Balance Card */}
               <div className="rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl p-6 shadow-2xl space-y-4">
-                <div className="flex items-center gap-3 text-left">
-                  <span className="text-lg font-bold text-white tracking-tight">Balance</span>
+                <div className="flex items-center gap-3 text-start">
+                  <span className="text-lg font-bold text-white tracking-tight">{isAr ? "الرصيد والقيمة" : "Balance"}</span>
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00E5BE]/15 border border-[#00E5BE]/30 text-[#00E5BE] text-[11px] font-bold">
                     <CheckCircle2 className="w-3 h-3" />
-                    <span>On track</span>
+                    <span>{isAr ? "على المسار الصحيح" : "On track"}</span>
                   </span>
                 </div>
 
                 {/* Layer 2: Overlapping High-Contrast Chart Card */}
-                <div className="rounded-xl bg-[#060913]/95 border border-white/10 p-5 shadow-2xl space-y-4 text-left sm:translate-x-3 sm:translate-y-1">
+                <div className="rounded-xl bg-[#060913]/95 border border-white/10 p-5 shadow-2xl space-y-4 text-start sm:translate-x-3 sm:translate-y-1">
                   <div>
-                    <div className="text-[11px] text-gray-400 font-medium">Total Spent</div>
-                    <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono mt-0.5">$682.5</div>
+                    <div className="text-[11px] text-gray-400 font-medium">{isAr ? "إجمالي العائد المحقق" : "Total Spent"}</div>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono mt-0.5">$682.5K</div>
                   </div>
 
                   {/* Horizontal Threshold Guideline */}
                   <div className="relative pt-2">
                     <div className="w-full border-b border-dashed border-[#00E5BE]/30 absolute top-4 left-0" />
                     
-                    {/* Monthly Bar Chart (Jan - Oct) */}
+                    {/* Monthly Bar Chart */}
                     <div className="flex items-end justify-between gap-1.5 sm:gap-2 h-28 pt-4">
                       {[
-                        { m: "Jan", h: "35%", active: false },
-                        { m: "Feb", h: "75%", active: false },
-                        { m: "Mar", h: "55%", active: false },
-                        { m: "Apr", h: "65%", active: false },
-                        { m: "May", h: "50%", active: false },
-                        { m: "Jun", h: "95%", active: true },
-                        { m: "Jul", h: "45%", active: false },
-                        { m: "Aug", h: "75%", active: false },
-                        { m: "Sep", h: "30%", active: false },
-                        { m: "Oct", h: "60%", active: false },
+                        { m: isAr ? "يناير" : "Jan", h: "35%", active: false },
+                        { m: isAr ? "فبراير" : "Feb", h: "75%", active: false },
+                        { m: isAr ? "مارس" : "Mar", h: "55%", active: false },
+                        { m: isAr ? "أبريل" : "Apr", h: "65%", active: false },
+                        { m: isAr ? "مايو" : "May", h: "50%", active: false },
+                        { m: isAr ? "يونيو" : "Jun", h: "95%", active: true },
+                        { m: isAr ? "يوليو" : "Jul", h: "45%", active: false },
+                        { m: isAr ? "أغسطس" : "Aug", h: "75%", active: false },
+                        { m: isAr ? "سبتمبر" : "Sep", h: "30%", active: false },
+                        { m: isAr ? "أكتوبر" : "Oct", h: "60%", active: false },
                       ].map((bar) => (
                         <div key={bar.m} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
                           <div
@@ -1182,7 +1588,7 @@ export default function Home() {
                                 : "bg-white/10 group-hover:bg-white/20"
                             }`}
                           />
-                          <span className={`text-[9px] font-mono ${bar.active ? "text-[#00E5BE] font-bold" : "text-gray-500"}`}>
+                          <span className={`text-[8px] sm:text-[9px] font-mono ${bar.active ? "text-[#00E5BE] font-bold" : "text-gray-500"}`}>
                             {bar.m}
                           </span>
                         </div>
@@ -1201,7 +1607,7 @@ export default function Home() {
       </section>
 
       {/* 11. Enterprise Footer */}
-      <Footer />
+      <Footer lang={lang} />
 
     </div>
   );

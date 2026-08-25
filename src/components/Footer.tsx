@@ -4,7 +4,94 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, ArrowRight, HeartHandshake } from "lucide-react";
 
-export default function Footer() {
+interface FooterProps {
+  lang?: "ar" | "en";
+}
+
+export default function Footer({ lang = "ar" }: FooterProps) {
+  const isAr = lang === "ar";
+
+  const content = {
+    ar: {
+      mission:
+        "نبتكر حلول ذكاء اصطناعي سيادية وتدفقات عمل مؤتمتة تمكّن الشركات والمؤسسات السعودية من التوسع والنمو بذكاء وسرعة وأمان فائق.",
+      hq: "المقر الرئيسي في الرياض، المملكة العربية السعودية",
+      social: (
+        <>
+          تبرع بنسبة 1% من الأعمال لصالح{" "}
+          <strong className="text-white">منصة إحسان (Ehsan Platform)</strong>
+        </>
+      ),
+      colSolutions: "المنصة والحلول",
+      solutionsList: [
+        { name: "وكلاء الذكاء الاصطناعي", href: "/#services" },
+        { name: "أتمتة العمليات المؤسسية", href: "/#services" },
+        { name: "التحليلات والمتابعة الحية", href: "/#insights" },
+        { name: "أتمتة الحملات والتواصل", href: "/#solutions" },
+        { name: "استشارات واستراتيجيات AI", href: "/#services" },
+        { name: "هندسة الويب والتطبيقات المتكاملة", href: "/#services" },
+      ],
+      colCompany: "عن الشركة",
+      companyList: [
+        { name: "عن تحسين للذكاء الاصطناعي", href: "/#about" },
+        { name: "رسالتنا ورؤيتنا", href: "/#about" },
+        { name: "قصص نجاح العملاء", href: "/#insights" },
+        { name: "الأمن والذكاء الاصطناعي السيادي", href: "/#solutions" },
+        { name: "الوظائف والشراكات", href: "/contact" },
+        { name: "اتصل بنا", href: "/contact" },
+      ],
+      colContact: "التواصل المباشر",
+      contactDesc: "هل لديك مشروع أو استفسار حول تكامل الأنظمة؟ تواصل مباشرة مع فريقنا الهندسي.",
+      emailLabel: "البريد الإلكتروني المباشر",
+      letsTalk: "تحدث معنا",
+      copyright: `© ${new Date().getFullYear()} مجموعة تحسين للذكاء الاصطناعي (Tahseen AI). جميع الحقوق محفوظة.`,
+      privacy: "سياسة الخصوصية",
+      terms: "الشروط والأحكام",
+      security: "أمان الأنظمة",
+      vision: "المملكة العربية السعودية • رؤية 2030",
+    },
+    en: {
+      mission:
+        "Pioneering sovereign Artificial Intelligence and automated workflows that empower Saudi enterprises and SMEs to scale smarter, faster, and more securely.",
+      hq: "Headquartered in Riyadh, Kingdom of Saudi Arabia",
+      social: (
+        <>
+          1% of proceeds donated to{" "}
+          <strong className="text-white">Ehsan Platform (منصة إحسان)</strong>
+        </>
+      ),
+      colSolutions: "Solutions & Platform",
+      solutionsList: [
+        { name: "Autonomous AI Agents", href: "/#services" },
+        { name: "Enterprise Workflow Automation", href: "/#services" },
+        { name: "Real-Time Insights & Oversight", href: "/#insights" },
+        { name: "Campaign & Outreach Automation", href: "/#solutions" },
+        { name: "AI Consultation & Strategy", href: "/#services" },
+        { name: "Full-Stack Web & Mobile Engineering", href: "/#services" },
+      ],
+      colCompany: "Company",
+      companyList: [
+        { name: "About Tahseen AI", href: "/#about" },
+        { name: "Our Purpose & Vision", href: "/#about" },
+        { name: "Client Success Stories", href: "/#insights" },
+        { name: "Security & Sovereign AI", href: "/#solutions" },
+        { name: "Careers & Partnerships", href: "/contact" },
+        { name: "Contact Us", href: "/contact" },
+      ],
+      colContact: "Direct Contact",
+      contactDesc: "Have an RFP, integration question, or need AI consulting? Connect directly with our team.",
+      emailLabel: "Email Engineering",
+      letsTalk: "LET'S TALK",
+      copyright: `© ${new Date().getFullYear()} Tahseen AI (مجموعة تحسين للذكاء الاصطناعي). All rights reserved.`,
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+      security: "System Security",
+      vision: "KSA • Vision 2030",
+    },
+  };
+
+  const t = isAr ? content.ar : content.en;
+
   return (
     <footer className="relative z-10 bg-[#04060d] border-t border-white/[0.06] pt-16 sm:pt-20 pb-12 text-gray-400 font-sans">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 space-y-16">
@@ -12,7 +99,7 @@ export default function Footer() {
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
           
-          {/* Column 1: Brand Info & Mission (4 Cols) */}
+          {/* Column 1: Brand Info & Mission */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center group">
               <div className="relative h-11 w-52 sm:h-12 sm:w-60 transition-transform duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(0,229,190,0.3)]">
@@ -21,46 +108,41 @@ export default function Footer() {
                   alt="Tahseen AI"
                   fill
                   sizes="(max-width: 640px) 208px, 240px"
-                  className="object-contain object-left"
+                  className={`object-contain ${isAr ? "object-right" : "object-left"}`}
                 />
               </div>
             </Link>
 
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm font-normal">
-              Pioneering sovereign Artificial Intelligence and automated workflows that empower Saudi enterprises and SMEs to scale smarter, faster, and more securely.
+              {t.mission}
             </p>
 
             {/* Saudi Regional Identity & Ehsan Pledge */}
             <div className="space-y-2.5 pt-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-gray-300">
                 <MapPin className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
-                <span>Headquartered in Riyadh, Kingdom of Saudi Arabia</span>
+                <span>{t.hq}</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-medium text-gray-300">
                 <HeartHandshake className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
-                <span>1% of proceeds donated to <strong className="text-white">Ehsan Platform (منصة إحسان)</strong></span>
+                <span>{t.social}</span>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Solutions & Capabilities (3 Cols) */}
+          {/* Column 2: Solutions & Capabilities */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
-              Solutions & Platform
+              {t.colSolutions}
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {[
-                { name: "Autonomous AI Agents", href: "/#services" },
-                { name: "Enterprise Workflow Automation", href: "/#services" },
-                { name: "Real-Time Insights & Oversight", href: "/#insights" },
-                { name: "Campaign & Outreach Automation", href: "/#solutions" },
-                { name: "AI Consultation & Strategy", href: "/#services" },
-                { name: "Full-Stack Web & Mobile Engineering", href: "/#services" },
-              ].map((item) => (
+              {t.solutionsList.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="inline-block hover:text-[#00E5BE] hover:translate-x-1.5 transition-all duration-200"
+                    className={`inline-block hover:text-[#00E5BE] transition-all duration-200 ${
+                      isAr ? "hover:-translate-x-1.5" : "hover:translate-x-1.5"
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -69,24 +151,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Company & Governance (2 Cols) */}
+          {/* Column 3: Company & Governance */}
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
-              Company
+              {t.colCompany}
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {[
-                { name: "About Tahseen AI", href: "/#about" },
-                { name: "Our Purpose & Vision", href: "/#about" },
-                { name: "Client Success Stories", href: "/#insights" },
-                { name: "Security & Sovereign AI", href: "/#solutions" },
-                { name: "Careers & Partnerships", href: "/contact" },
-                { name: "Contact Us", href: "/contact" },
-              ].map((item) => (
+              {t.companyList.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="inline-block hover:text-[#00E5BE] hover:translate-x-1.5 transition-all duration-200"
+                    className={`inline-block hover:text-[#00E5BE] transition-all duration-200 ${
+                      isAr ? "hover:-translate-x-1.5" : "hover:translate-x-1.5"
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -95,13 +172,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Stay Connected & Direct Inquiries (3 Cols) */}
+          {/* Column 4: Stay Connected & Direct Inquiries */}
           <div className="lg:col-span-3 space-y-5">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
-              Direct Contact
+              {t.colContact}
             </h4>
             <p className="text-xs text-gray-400 leading-relaxed">
-              Have an RFP, integration question, or need AI consulting? Connect directly with our team.
+              {t.contactDesc}
             </p>
 
             <a
@@ -111,8 +188,8 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-xl bg-[#00E5BE]/10 text-[#00E5BE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                 <Mail className="w-4 h-4" />
               </div>
-              <div className="text-left">
-                <div className="text-[10px] uppercase font-bold text-gray-400">Email Engineering</div>
+              <div>
+                <div className="text-[10px] uppercase font-bold text-gray-400">{t.emailLabel}</div>
                 <div className="text-xs font-bold text-white group-hover:text-[#00E5BE] transition-colors">
                   info@tahseenai.com
                 </div>
@@ -123,8 +200,8 @@ export default function Footer() {
               href="/contact"
               className="w-full inline-flex items-center justify-center py-3.5 px-4 rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-bold text-xs uppercase tracking-widest transition-all shadow-[0_4px_20px_rgba(0,229,190,0.3)] hover:shadow-[0_6px_25px_rgba(0,229,190,0.5)] hover:-translate-y-0.5 gap-1.5"
             >
-              <span>LET&apos;S TALK</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>{t.letsTalk}</span>
+              <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
             </Link>
           </div>
 
@@ -133,20 +210,20 @@ export default function Footer() {
         {/* Bottom Sub-Footer Bar */}
         <div className="pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-mono">
           <div>
-            © {new Date().getFullYear()} Tahseen AI (مجموعة تحسين للذكاء الاصطناعي). All rights reserved.
+            {t.copyright}
           </div>
 
           <div className="flex items-center gap-6 text-gray-400">
             <Link href="/#about" className="hover:text-[#00E5BE] transition-colors">
-              Privacy Policy
+              {t.privacy}
             </Link>
             <Link href="/#about" className="hover:text-[#00E5BE] transition-colors">
-              Terms of Service
+              {t.terms}
             </Link>
             <Link href="/#insights" className="hover:text-[#00E5BE] transition-colors">
-              System Security
+              {t.security}
             </Link>
-            <span className="text-[#00E5BE] font-semibold">KSA • Vision 2030</span>
+            <span className="text-[#00E5BE] font-semibold">{t.vision}</span>
           </div>
         </div>
 

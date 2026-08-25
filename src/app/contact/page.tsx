@@ -1,38 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send, Globe } from "lucide-react";
 import Footer from "@/components/Footer";
 
 export default function ContactPage() {
+  const [lang, setLang] = useState<"ar" | "en">("ar");
+  const isAr = lang === "ar";
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isAr ? "rtl" : "ltr";
+  }, [lang, isAr]);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     company: "",
     phone: "",
-    service: "AI Agents",
+    service: isAr ? "وكلاء الذكاء الاصطناعي والأتمتة" : "AI Agents & Automation",
     budget: "$5,000 - $15,000",
     message: "",
   });
 
-  const navLinks = [
-    { name: "HOME", href: "/#home" },
-    { name: "SERVICES", href: "/#services" },
-    { name: "SOLUTIONS", href: "/#solutions" },
-    { name: "ABOUT US", href: "/#about" },
-    { name: "CONTACT", href: "/contact" },
-  ];
+  const navLinks = isAr
+    ? [
+        { name: "الرئيسية", href: "/#home" },
+        { name: "خدماتنا", href: "/#services" },
+        { name: "التحليلات", href: "/#insights" },
+        { name: "الحلول", href: "/#solutions" },
+        { name: "من نحن", href: "/#about" },
+        { name: "اتصل بنا", href: "/contact" },
+      ]
+    : [
+        { name: "HOME", href: "/#home" },
+        { name: "SERVICES", href: "/#services" },
+        { name: "INSIGHTS", href: "/#insights" },
+        { name: "SOLUTIONS", href: "/#solutions" },
+        { name: "ABOUT US", href: "/#about" },
+        { name: "CONTACT", href: "/contact" },
+      ];
 
-  const servicesList = [
-    "AI Agents & Automation",
-    "AI Consulting & Strategy",
-    "Full-stack Web & App Dev",
-    "AI Chat & Call Center",
-    "Custom LLM Integration",
-  ];
+  const servicesList = isAr
+    ? [
+        "وكلاء الذكاء الاصطناعي والأتمتة",
+        "استشارات واستراتيجيات AI",
+        "تطوير الويب وتطبيقات الجوال",
+        "مراكز الاتصال والدردشة الذكية",
+        "دمج وتدريب نماذج LLM المخصصة",
+      ]
+    : [
+        "AI Agents & Automation",
+        "AI Consulting & Strategy",
+        "Full-stack Web & App Dev",
+        "AI Chat & Call Center",
+        "Custom LLM Integration",
+      ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,8 +66,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans">
-      
+    <div
+      dir={isAr ? "rtl" : "ltr"}
+      className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans"
+    >
       {/* Background ambient radial glow */}
       <div className="absolute top-0 right-1/4 w-[650px] h-[550px] bg-cyan-500/10 rounded-full blur-[180px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 left-[-100px] w-[600px] h-[600px] bg-[#00E5BE]/5 rounded-full blur-[200px] pointer-events-none -z-10" />
@@ -50,7 +78,7 @@ export default function ContactPage() {
       <header className="sticky top-0 z-50 w-full bg-[#060913]/85 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-6 sm:px-12 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
-          {/* Left: Official Brand Logo */}
+          {/* Logo */}
           <Link href="/" className="flex items-center group cursor-pointer">
             <div className="relative h-9 w-44 sm:h-10 sm:w-48 transition-transform duration-200 group-hover:scale-105">
               <Image
@@ -58,21 +86,21 @@ export default function ContactPage() {
                 alt="Tahseen AI"
                 fill
                 sizes="(max-width: 640px) 176px, 192px"
-                className="object-contain object-left"
+                className={`object-contain ${isAr ? "object-right" : "object-left"}`}
                 priority
               />
             </div>
           </Link>
 
-          {/* Right: Nav Links & LET'S TALK Button */}
-          <div className="flex items-center gap-5 sm:gap-7 lg:gap-8 xl:gap-10">
+          {/* Right: Nav Links & Language Switcher & LET'S TALK Button */}
+          <div className="flex items-center gap-4 sm:gap-6 lg:gap-8">
             <nav className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8 text-[11px] sm:text-xs font-semibold tracking-wider text-gray-200">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   className={`transition-colors duration-200 cursor-pointer ${
-                    link.name === "CONTACT" ? "text-[#00E5BE]" : "hover:text-[#00E5BE]"
+                    link.href === "/contact" ? "text-[#00E5BE]" : "hover:text-[#00E5BE]"
                   }`}
                 >
                   {link.name}
@@ -80,11 +108,21 @@ export default function ContactPage() {
               ))}
             </nav>
 
+            {/* Language Toggle Button */}
+            <button
+              onClick={() => setLang(isAr ? "en" : "ar")}
+              aria-label="Toggle language"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#00E5BE]/40 text-gray-200 hover:text-[#00E5BE] transition-all cursor-pointer"
+            >
+              <Globe className="w-3.5 h-3.5 text-[#00E5BE]" />
+              <span>{isAr ? "English" : "العربية"}</span>
+            </button>
+
             <Link
               href="/contact"
               className="inline-flex items-center justify-center px-5 sm:px-6 py-2 text-[11px] sm:text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
             >
-              <span>LET&apos;S TALK</span>
+              <span>{isAr ? "تحدث معنا" : "LET'S TALK"}</span>
             </Link>
           </div>
 
@@ -98,36 +136,56 @@ export default function ContactPage() {
         <div className="text-center space-y-4 max-w-3xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-bold tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>LET&apos;S TALK AI SOLUTIONS</span>
+            <span>{isAr ? "تحدث مع خبراء الذكاء الاصطناعي" : "LET'S TALK AI SOLUTIONS"}</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight">
-            Start Your <span className="text-[#00E5BE]">AI Transformation</span>
+            {isAr ? (
+              <>
+                ابدأ رحلة <span className="text-[#00E5BE]">التحول بالذكاء الاصطناعي</span>
+              </>
+            ) : (
+              <>
+                Start Your <span className="text-[#00E5BE]">AI Transformation</span>
+              </>
+            )}
           </h1>
           <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            Ready to automate manual workflows, deploy intelligent sales agents, or consult on enterprise AI strategy? Tell us about your project below.
+            {isAr
+              ? "جاهز لأتمتة تدفقات العمل اليدوية، وتدشين وكلاء مبيعات أذكياء، أو استشارة فريقنا المتخصص؟ شاركنا تفاصيل مشروعك أدناه."
+              : "Ready to automate manual workflows, deploy intelligent sales agents, or consult on enterprise AI strategy? Tell us about your project below."}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: Interactive Contact Form */}
-          <div className="lg:col-span-7 bg-white/[0.02] border border-white/[0.06] rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+          <div className="lg:col-span-7 bg-white/[0.02] border border-white/[0.06] rounded-3xl p-8 sm:p-12 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] text-start">
             {formSubmitted ? (
               <div className="py-16 text-center space-y-6">
                 <div className="w-16 h-16 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE] text-[#00E5BE] flex items-center justify-center mx-auto shadow-[0_0_30px_rgba(0,229,190,0.3)]">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <div className="space-y-2">
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white">Message Received!</h3>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                    {isAr ? "تم استلام رسالتك بنجاح!" : "Message Received!"}
+                  </h3>
                   <p className="text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
-                    Thank you, <span className="text-white font-semibold">{formData.fullName}</span>. Our AI engineering team in Riyadh will review your project details and get back to you at <span className="text-[#00E5BE]">{formData.email}</span> within 24 business hours.
+                    {isAr ? (
+                      <>
+                        شكراً لك، <span className="text-white font-semibold">{formData.fullName}</span>. سيقوم فريقنا الهندسي في الرياض بمراجعة تفاصيل مشروعك والتواصل معك عبر البريد <span className="text-[#00E5BE]">{formData.email}</span> خلال ٢٤ ساعة عمل.
+                      </>
+                    ) : (
+                      <>
+                        Thank you, <span className="text-white font-semibold">{formData.fullName}</span>. Our AI engineering team in Riyadh will review your project details and get back to you at <span className="text-[#00E5BE]">{formData.email}</span> within 24 business hours.
+                      </>
+                    )}
                   </p>
                 </div>
                 <button
                   onClick={() => setFormSubmitted(false)}
-                  className="px-6 py-2.5 rounded-lg btn-teal-outline text-xs font-bold uppercase tracking-wider"
+                  className="px-6 py-2.5 rounded-lg btn-teal-outline text-xs font-bold uppercase tracking-wider cursor-pointer"
                 >
-                  Send Another Inquiry
+                  {isAr ? "إرسال استفسار آخر" : "Send Another Inquiry"}
                 </button>
               </div>
             ) : (
@@ -136,12 +194,12 @@ export default function ContactPage() {
                   {/* Full Name */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">
-                      Your Name <span className="text-[#00E5BE]">*</span>
+                      {isAr ? "الاسم الكامل" : "Your Name"} <span className="text-[#00E5BE]">*</span>
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Sultan Al-Otaibi"
+                      placeholder={isAr ? "مثال: سلطان العتيبي" : "e.g. Sultan Al-Otaibi"}
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm"
@@ -151,7 +209,7 @@ export default function ContactPage() {
                   {/* Work Email */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">
-                      Work Email <span className="text-[#00E5BE]">*</span>
+                      {isAr ? "البريد الإلكتروني للعمل" : "Work Email"} <span className="text-[#00E5BE]">*</span>
                     </label>
                     <input
                       type="email"
@@ -168,11 +226,11 @@ export default function ContactPage() {
                   {/* Company */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">
-                      Company / Organization
+                      {isAr ? "الشركة / المؤسسة" : "Company / Organization"}
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Al-Nokhba Group"
+                      placeholder={isAr ? "مثال: مجموعة النخبة" : "e.g. Al-Nokhba Group"}
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm"
@@ -182,7 +240,7 @@ export default function ContactPage() {
                   {/* Phone */}
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">
-                      Phone Number
+                      {isAr ? "رقم الجوال" : "Phone Number"}
                     </label>
                     <input
                       type="tel"
@@ -197,7 +255,7 @@ export default function ContactPage() {
                 {/* Service Interest */}
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">
-                    Service of Interest
+                    {isAr ? "الخدمة المطلوبة" : "Service of Interest"}
                   </label>
                   <div className="flex flex-wrap gap-2.5 pt-1">
                     {servicesList.map((svc) => (
@@ -205,7 +263,7 @@ export default function ContactPage() {
                         key={svc}
                         type="button"
                         onClick={() => setFormData({ ...formData, service: svc })}
-                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+                        className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                           formData.service === svc
                             ? "bg-[#00E5BE] text-[#060913] shadow-[0_0_15px_rgba(0,229,190,0.4)]"
                             : "bg-white/[0.04] text-gray-300 border border-white/10 hover:border-white/30"
@@ -220,12 +278,16 @@ export default function ContactPage() {
                 {/* Message */}
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-300 uppercase tracking-wider">
-                    Project Details & Goals <span className="text-[#00E5BE]">*</span>
+                    {isAr ? "تفاصيل وأهداف المشروع" : "Project Details & Goals"} <span className="text-[#00E5BE]">*</span>
                   </label>
                   <textarea
                     required
                     rows={4}
-                    placeholder="Describe your workflows, goals, or what challenges you want to solve with AI..."
+                    placeholder={
+                      isAr
+                        ? "صف لنا تدفقات العمل الحالية، وأهدافك، أو التحديات التي ترغب في حلها بالذكاء الاصطناعي..."
+                        : "Describe your workflows, goals, or what challenges you want to solve with AI..."
+                    }
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#00E5BE] focus:ring-1 focus:ring-[#00E5BE] transition-colors text-sm resize-none"
@@ -237,75 +299,84 @@ export default function ContactPage() {
                   type="submit"
                   className="w-full py-4 rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-bold text-xs sm:text-sm uppercase tracking-widest transition-all shadow-[0_4px_25px_rgba(0,229,190,0.4)] hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <span>SUBMIT INQUIRY</span>
-                  <Send className="w-4 h-4" />
+                  <Send className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
+                  <span>{isAr ? "إرسال طلب المشروع ←" : "SEND INQUIRY →"}</span>
                 </button>
               </form>
             )}
           </div>
 
-          {/* Right Column: Direct Contact Info & Value Badges */}
-          <div className="lg:col-span-5 space-y-8">
+          {/* Right Column: Direct Info & Why Choose Us */}
+          <div className="lg:col-span-5 space-y-8 text-start">
             
-            {/* Direct Email Card */}
-            <div className="p-8 rounded-3xl bg-gradient-to-br from-[#0d1d24] to-[#060913] border border-[#00E5BE]/30 shadow-[0_10px_40px_rgba(0,229,190,0.1)] space-y-6">
-              <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE] text-[#00E5BE] flex items-center justify-center">
-                <Mail className="w-6 h-6" />
+            {/* Direct Contact Card */}
+            <div className="p-8 rounded-3xl bg-gradient-to-br from-[#0c1f24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 space-y-6 shadow-[0_12px_40px_rgba(0,229,190,0.1)]">
+              <h3 className="text-xl font-bold text-white tracking-tight">
+                {isAr ? "معلومات التواصل المباشر" : "Direct Contact Details"}
+              </h3>
+
+              <div className="space-y-4">
+                <a
+                  href="mailto:info@tahseenai.com"
+                  className="flex items-center gap-3.5 text-sm text-gray-300 hover:text-[#00E5BE] transition-colors group"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-transform">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase font-bold text-gray-400">
+                      {isAr ? "البريد الإلكتروني المباشر" : "Direct Email"}
+                    </div>
+                    <div className="font-semibold text-white">info@tahseenai.com</div>
+                  </div>
+                </a>
+
+                <div className="flex items-center gap-3.5 text-sm text-gray-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE]">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase font-bold text-gray-400">
+                      {isAr ? "المقر الرئيسي" : "Headquarters"}
+                    </div>
+                    <div className="font-semibold text-white">
+                      {isAr ? "الرياض، المملكة العربية السعودية" : "Riyadh, Kingdom of Saudi Arabia"}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3.5 text-sm text-gray-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE]">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase font-bold text-gray-400">
+                      {isAr ? "ساعات الاستجابة" : "Working Hours"}
+                    </div>
+                    <div className="font-semibold text-white">
+                      {isAr ? "الأحد – الخميس (الرد خلال ٢٤ ساعة)" : "Sunday – Thursday (Response in <24 hrs)"}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2">
-                <span className="text-xs font-bold text-[#00E5BE] tracking-widest uppercase">DIRECT CONTACT</span>
-                <h3 className="text-2xl font-bold text-white">info@tahseenai.com</h3>
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                  For RFPs, partnership proposals, or general inquiries, feel free to email our team directly anytime.
-                </p>
-              </div>
-              <a
-                href="mailto:info@tahseenai.com"
-                className="inline-flex items-center text-xs font-bold text-[#00E5BE] hover:underline uppercase tracking-wider gap-1.5"
-              >
-                <span>SEND AN EMAIL</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
             </div>
 
-            {/* Office & Regional Hub Card */}
-            <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#00E5BE] flex-shrink-0 mt-1">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-base font-bold text-white">Headquarters</h4>
-                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
-                    Riyadh, Kingdom of Saudi Arabia <br />
-                    Serving enterprises and innovators nationwide.
-                  </p>
-                </div>
-              </div>
-
-              <div className="h-px bg-white/5" />
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#00E5BE] flex-shrink-0 mt-1">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-base font-bold text-white">Response Time</h4>
-                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
-                    Sunday – Thursday: 9:00 AM – 6:00 PM (AST) <br />
-                    Average inquiry response under 24 hours.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Saudi Impact Notice */}
-            <div className="p-6 rounded-2xl bg-[#00E5BE]/5 border border-[#00E5BE]/20 flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-[#00E5BE]/10 text-[#00E5BE] flex items-center justify-center flex-shrink-0">
-                <Sparkles className="w-5 h-5" />
+            {/* Social Commitment & Trust */}
+            <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3">
+              <div className="flex items-center gap-2 text-[#00E5BE] font-bold text-xs uppercase tracking-wider">
+                <Sparkles className="w-4 h-4" />
+                <span>{isAr ? "التزامنا تجاه المجتمع السعودي" : "National Impact Pledge"}</span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed">
-                <span className="text-white font-semibold">1% for Ehsan:</span> We proudly contribute 1% of all project proceeds to the <span className="text-[#00E5BE] font-medium">Ehsan Platform (منصة إحسان)</span>.
+                {isAr ? (
+                  <>
+                    نلتزم بالتبرع بنسبة <strong className="text-white">١٪ من عوائد أعمالنا</strong> لصالح <strong className="text-[#00E5BE]">منصة إحسان (Ehsan Platform)</strong> لدعم المبادرات الخيرية في المملكة.
+                  </>
+                ) : (
+                  <>
+                    We proudly donate <strong className="text-white">1% of all revenue</strong> to the <strong className="text-[#00E5BE]">Ehsan Platform (منصة إحسان)</strong> to support social development across Saudi Arabia.
+                  </>
+                )}
               </p>
             </div>
 
@@ -316,7 +387,7 @@ export default function ContactPage() {
       </main>
 
       {/* 3. Enterprise Footer */}
-      <Footer />
+      <Footer lang={lang} />
 
     </div>
   );
