@@ -683,27 +683,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. Sticky Interactive Scroll-Down Solutions Showcase (Modeled after Mozn AI) */}
-      <section id="solutions" className="relative z-10 py-16 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      {/* 6. Sticky Interactive Scroll-Down Solutions Showcase (Compact Refined Scale) */}
+      <section id="solutions" className="relative z-10 py-12 px-6 sm:px-10 lg:px-12 max-w-[1360px] mx-auto w-full scroll-mt-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Left Column: Sticky Title & Step Navigator */}
-          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6 text-left">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold tracking-widest uppercase">
-                <Sparkles className="w-3 h-3" />
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-4 text-left">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[9px] font-bold tracking-widest uppercase">
+                <Sparkles className="w-2.5 h-2.5" />
                 <span>BUILT FOR HIGH-ASSURANCE SCALE</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight leading-tight">
                 AI Solutions Built for <span className="text-[#00E5BE]">Your Industry</span>
               </h2>
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
+              <p className="text-xs text-gray-300 leading-relaxed font-normal">
                 Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations.
               </p>
             </div>
 
-            {/* Step Navigation Pill Selector (Interactive Jump & Progress) */}
-            <div className="space-y-2 pt-2">
+            {/* Step Navigation Pill Selector */}
+            <div className="space-y-1.5 pt-1">
               {showcaseSolutions.map((sol, idx) => (
                 <button
                   key={sol.step}
@@ -712,17 +712,17 @@ export default function Home() {
                     const elem = document.getElementById(`solution-step-${idx}`);
                     if (elem) elem.scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
-                  className={`w-full p-3 rounded-xl border text-left transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                  className={`w-full p-2.5 rounded-lg border text-left transition-all duration-300 flex items-center justify-between cursor-pointer ${
                     activeSolution === idx
-                      ? "bg-white/[0.04] border-[#00E5BE] text-white shadow-[0_0_20px_rgba(0,229,190,0.15)]"
+                      ? "bg-white/[0.04] border-[#00E5BE] text-white shadow-[0_0_15px_rgba(0,229,190,0.12)]"
                       : "bg-transparent border-white/[0.06] text-gray-400 hover:border-white/20 hover:text-gray-200"
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className={`font-mono text-xs font-bold ${activeSolution === idx ? "text-[#00E5BE]" : "text-gray-500"}`}>
+                  <div className="flex items-center gap-2.5">
+                    <span className={`font-mono text-[11px] font-bold ${activeSolution === idx ? "text-[#00E5BE]" : "text-gray-500"}`}>
                       {sol.step}
                     </span>
-                    <span className="text-xs font-bold">{sol.title}</span>
+                    <span className="text-[11px] font-bold">{sol.title}</span>
                   </div>
                   {activeSolution === idx && (
                     <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
@@ -731,65 +731,65 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="pt-2">
+            <div className="pt-1">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
+                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
               >
                 <span>CONSULT ON CUSTOM WORKFLOWS</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
           </div>
 
           {/* Right Column: Scrollable Solution Showcase Cards */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-5">
             {showcaseSolutions.map((sol, idx) => (
               <div
                 key={sol.step}
                 id={`solution-step-${idx}`}
                 onMouseEnter={() => setActiveSolution(idx)}
-                className={`p-7 sm:p-8 rounded-3xl border transition-all duration-500 space-y-6 text-left ${
+                className={`p-5 sm:p-6 rounded-2xl border transition-all duration-500 space-y-4 text-left ${
                   activeSolution === idx
-                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_16px_50px_rgba(0,229,190,0.15)] -translate-y-1"
+                    ? "bg-gradient-to-br from-[#0d1d24] via-[#07131a] to-[#060913] border-[#00E5BE]/60 shadow-[0_12px_40px_rgba(0,229,190,0.12)] -translate-y-0.5"
                     : "bg-white/[0.02] border-white/[0.08] hover:border-white/20"
                 }`}
               >
                 {/* Card Header: Step Index & Badge */}
-                <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-base font-extrabold text-[#00E5BE]">{sol.step}</span>
-                    <span className="font-mono text-xs text-gray-500">/ {sol.total}</span>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-2">{sol.tag}</span>
+                <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-mono text-sm font-extrabold text-[#00E5BE]">{sol.step}</span>
+                    <span className="font-mono text-[10px] text-gray-500">/ {sol.total}</span>
+                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-1.5">{sol.tag}</span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] font-bold">
+                  <span className="px-2 py-0.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[9px] font-bold">
                     {sol.badge}
                   </span>
                 </div>
 
                 {/* Title & Description */}
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center">
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
                       {sol.icon}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">{sol.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">{sol.title}</h3>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">{sol.desc}</p>
+                  <p className="text-xs text-gray-300 leading-relaxed font-normal">{sol.desc}</p>
                 </div>
 
                 {/* Metrics Row */}
-                <div className="grid grid-cols-3 gap-2.5 pt-1">
+                <div className="grid grid-cols-3 gap-2 pt-0.5">
                   {sol.metrics.map((m) => (
-                    <div key={m.label} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05] text-center">
-                      <div className="text-sm sm:text-base font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
-                      <div className="text-[9px] text-gray-400 font-medium tracking-tight mt-0.5">{m.label}</div>
+                    <div key={m.label} className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05] text-center">
+                      <div className="text-xs sm:text-sm font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
+                      <div className="text-[8px] text-gray-400 font-medium tracking-tight mt-0.5">{m.label}</div>
                     </div>
                   ))}
                 </div>
 
                 {/* Interactive Simulated UI Mockup */}
-                <div className="pt-2">
+                <div className="pt-1">
                   {sol.mockup}
                 </div>
               </div>
