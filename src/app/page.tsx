@@ -1246,8 +1246,8 @@ export default function Home() {
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
                   {isAr
-                    ? "صُممت تحسين لتكون بيئة تدريب منضبطة تضمن استثمار وقت الطالب وتركيزه على ما يحتاجه فعلياً. يعتمد نظامنا على المعلم الذكي التفاعلي الذي يشرح طريقة التفكير خطوة بخطوة، مع تقارير مستوى دورية لأولياء الأمور واشتراك موحد بـ ٥٩ ريالاً شهرياً."
-                    : "Tahseen Education is built to provide high school students with disciplined, adaptive practice powered by our interactive AI Smart Tutor. Includes instant step-by-step reasoning breakdown, comprehensive parent diagnostics, and unified access at 59 SAR/month."}
+                    ? "صُممت تحسين لتكون بيئة تدريب منضبطة تضمن استثمار وقت الطالب وتركيزه على ما يحتاجه فعلياً. يعتمد نظامنا على المعلم الذكي التفاعلي الذي يشرح طريقة التفكير خطوة بخطوة، مع تقارير مستوى دورية لأولياء الأمور وتوجيه دراسي متكامل."
+                    : "Tahseen Education is built to provide high school students with disciplined, adaptive practice powered by our interactive AI Smart Tutor. Includes instant step-by-step reasoning breakdown, comprehensive parent diagnostics, and integrated academic roadmaps."}
                 </p>
               </div>
 
@@ -1289,13 +1289,13 @@ export default function Home() {
             <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-2xl bg-[#060913]/90 border border-white/10 text-center">
               <div className="space-y-1.5">
                 <span className="text-[10px] font-mono text-[#00E5BE] uppercase tracking-widest block font-bold">
-                  {isAr ? "وصول شامل للمنظومة" : "ALL-IN-ONE ACCESS"}
+                  {isAr ? "منظومة موحدة" : "UNIFIED PLATFORM"}
                 </span>
-                <div className="text-2xl sm:text-3xl font-extrabold text-white">
-                  ٥٩ {isAr ? "ريال / شهرياً" : "SAR / month"}
+                <div className="text-xl sm:text-2xl font-extrabold text-white">
+                  {isAr ? "حساب واحد لجميع الاختبارات" : "One Account for All Exams"}
                 </div>
                 <p className="text-[11px] text-gray-400">
-                  {isAr ? "إلغاء بنقرة واحدة في أي وقت" : "Cancel anytime with one click"}
+                  {isAr ? "وصول كامل للقدرات والتحصيلي وبوصلتي" : "Full access to Qudurat, Tahsili & Bausalty"}
                 </p>
               </div>
 
