@@ -26,6 +26,7 @@ export default function Footer({ lang = "en" }: FooterProps) {
       ),
       colSolutions: "المنصة والحلول",
       solutionsList: [
+        { name: "منظومة تحسين التعليمية", href: "https://edutahseen.com" },
         { name: "وكلاء الذكاء الاصطناعي", href: "/#services" },
         { name: "أتمتة العمليات المؤسسية", href: "/#services" },
         { name: "التحليلات والمتابعة الحية", href: "/#insights" },
@@ -63,6 +64,7 @@ export default function Footer({ lang = "en" }: FooterProps) {
       ),
       colSolutions: "Solutions & Platform",
       solutionsList: [
+        { name: "Tahseen Education (edutahseen.com)", href: "https://edutahseen.com" },
         { name: "Autonomous AI Agents", href: `${homePrefix}/#services` },
         { name: "Enterprise Workflow Automation", href: `${homePrefix}/#services` },
         { name: "Real-Time Insights & Oversight", href: `${homePrefix}/#insights` },
