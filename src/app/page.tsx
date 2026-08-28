@@ -1190,12 +1190,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Tahseen Education Ecosystem Showcase */}
+      {/* 7. Tahseen Education (Main Highlight with 3 Sub-Mentions) */}
       <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-gradient-to-b from-[#061219]/40 via-[#050814] to-[#061219]/40">
-        <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
+        
+        {/* Section Tag */}
+        <div className="text-center space-y-3 max-w-3xl mx-auto mb-10 sm:mb-12">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,229,190,0.15)]">
             <GraduationCap className="w-3.5 h-3.5" />
-            <span>{isAr ? "الذراع التعليمي • مجموعة تحسين" : "TAHSEEN AI EDUCATION ECOSYSTEM"}</span>
+            <span>{isAr ? "الذراع التعليمي • مجموعة تحسين للذكاء الاصطناعي" : "EDUCATIONAL DIVISION • TAHSEEN AI GROUP"}</span>
           </div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             {isAr ? (
@@ -1204,224 +1206,204 @@ export default function Home() {
               </>
             ) : (
               <>
-                Tahseen Education • <span className="text-[#00E5BE]">High School & College Alignment</span>
+                Tahseen Education • <span className="text-[#00E5BE]">AI-Powered High School Excellence</span>
               </>
             )}
           </h2>
           <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal max-w-2xl mx-auto">
             {isAr
-              ? "ثلاث محطات متتالية، حساب واحد، ومسار واضح حتى باب الجامعة — تدريب تكيفي ذكي لاختبارات القدرات والتحصيلي ومطابقة التخصص الجامعي الأنسب بدرجاتك الموزونة الفعلية."
-              : "Three integrated AI platforms, one account, and a direct path to top Saudi universities — adaptive Qudurat, Tahsili preparation, and weighted GPA university major alignment."}
+              ? "المنظومة التعليمية الذكية الشاملة لطلاب المرحلة الثانوية في المملكة العربية السعودية — ثلاث محطات متتالية، حساب واحد، ومسار واضح حتى باب الجامعة."
+              : "The unified AI learning ecosystem for Saudi high school students — three sequential stations, one account, and a clear pathway to top university admission."}
           </p>
         </div>
 
-        {/* The 3 Educational Platforms Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch mb-12 sm:mb-16">
-          
-          {/* 1. Qudurat AI */}
-          <div className="relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 bg-gradient-to-b from-[#0a1820] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.2)] transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4 sm:space-y-5">
-              <div className="flex items-center justify-between">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#00E5BE]/15 text-[#00E5BE] text-[9px] sm:text-[10px] font-bold tracking-wider uppercase">
-                  {isAr ? "متاحة الآن • القدرات العامة" : "LIVE NOW • GENERAL APTITUDE"}
+        {/* MAIN HIGHLIGHT CARD: Tahseen Education Platform */}
+        <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-gradient-to-br from-[#0a1e28] via-[#07141b] to-[#050814] border-2 border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-10 overflow-hidden">
+          {/* Subtle background glow */}
+          <div className="absolute top-0 right-0 w-[400px] h-[300px] bg-[#00E5BE]/10 rounded-full blur-[120px] pointer-events-none -z-10" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            {/* Left/Main Column: Highlights & Key Strengths */}
+            <div className="lg:col-span-8 space-y-6 text-start">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="px-3 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase shadow-[0_0_12px_rgba(0,229,190,0.5)]">
+                  {isAr ? "المنصة الرئيسية • edutahseen.com" : "MAIN PLATFORM • EDUTAHSEEN.COM"}
                 </span>
-                <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                <span className="px-3 py-0.5 rounded-full bg-white/10 text-gray-300 text-[10px] font-medium">
+                  {isAr ? "٤,٣٠٠+ طالب وطالبة" : "4,300+ Active Students"}
+                </span>
+                <span className="px-3 py-0.5 rounded-full bg-white/10 text-gray-300 text-[10px] font-medium">
+                  {isAr ? "معايير قياس وهيئة تقويم التعليم (ETEC)" : "Saudi ETEC & Qiyas Standards"}
+                </span>
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+                  {isAr
+                    ? "منظومة واحدة متكاملة تغنيك عن الدروس الخصوصية"
+                    : "One Unified Platform Replacing Private Tutoring"}
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">
+                  {isAr
+                    ? "صُممت تحسين لتكون بيئة تدريب منضبطة تضمن استثمار وقت الطالب وتركيزه على ما يحتاجه فعلياً. يعتمد نظامنا على المعلم الذكي التفاعلي الذي يشرح طريقة التفكير خطوة بخطوة، مع تقارير مستوى دورية لأولياء الأمور واشتراك موحد بـ ٥٩ ريالاً شهرياً."
+                    : "Tahseen Education is built to provide high school students with disciplined, adaptive practice powered by our interactive AI Smart Tutor. Includes instant step-by-step reasoning breakdown, comprehensive parent diagnostics, and unified access at 59 SAR/month."}
+                </p>
+              </div>
+
+              {/* Core Features Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                  <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{isAr ? "المعلم الذكي التفاعلي" : "AI Smart Tutor"}</span>
+                  </div>
+                  <p className="text-[11px] text-gray-400">
+                    {isAr ? "يشرح طريقة التفكير وحل المسائل خطوة بخطوة" : "Breaks down problem-solving logic step by step"}
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                  <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{isAr ? "تقارير مستوى دورية" : "Parent Diagnostics"}</span>
+                  </div>
+                  <p className="text-[11px] text-gray-400">
+                    {isAr ? "متابعة دقيقة لنقاط القوة والضعف في كل مادة" : "Detailed tracking of strengths & skill gaps per subject"}
+                  </p>
+                </div>
+
+                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                  <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{isAr ? "محتوى معتمد وموثوق" : "ETEC & Qiyas Aligned"}</span>
+                  </div>
+                  <p className="text-[11px] text-gray-400">
+                    {isAr ? "بنوك أسئلة متوافقة مع أحدث معايير قياس" : "Up-to-date question banks matching actual exams"}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Main CTA Portal Box */}
+            <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-2xl bg-[#060913]/90 border border-white/10 text-center">
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-mono text-[#00E5BE] uppercase tracking-widest block font-bold">
+                  {isAr ? "وصول شامل للمنظومة" : "ALL-IN-ONE ACCESS"}
+                </span>
+                <div className="text-2xl sm:text-3xl font-extrabold text-white">
+                  ٥٩ {isAr ? "ريال / شهرياً" : "SAR / month"}
+                </div>
+                <p className="text-[11px] text-gray-400">
+                  {isAr ? "إلغاء بنقرة واحدة في أي وقت" : "Cancel anytime with one click"}
+                </p>
+              </div>
+
+              <a
+                href="https://edutahseen.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center py-3.5 px-6 rounded-xl text-xs font-extrabold tracking-widest uppercase bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_20px_rgba(0,229,190,0.5)] transition-all cursor-pointer"
+              >
+                <span>{isAr ? "زيارة منصة تحسين التعليمية" : "VISIT EDUTAHSEEN.COM"}</span>
+                <ExternalLink className="w-4 h-4 mx-1.5" />
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        {/* 3 SUB-MENTIONS / JOURNEY STATIONS */}
+        <div className="space-y-4">
+          <div className="text-start">
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+              {isAr ? "محطات الرحلة التعليمية الثلاث المشمولة في المنصة:" : "The Three Educational Stations Included in the Platform:"}
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            {/* Mention 1: Qudurat */}
+            <a
+              href="https://edutahseen.com/qudurat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.08] hover:border-[#00E5BE]/50 transition-all duration-200 flex items-center justify-between gap-3 text-start group cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0 group-hover:scale-105 transition-transform">
                   <BookOpen className="w-5 h-5" />
                 </div>
+                <div>
+                  <div className="text-xs font-mono text-[#00E5BE] font-semibold uppercase">
+                    {isAr ? "المحطة الأولى" : "Station 01"}
+                  </div>
+                  <h4 className="text-sm font-bold text-white group-hover:text-[#00E5BE] transition-colors">
+                    {isAr ? "قدرات AI (Qudurat)" : "Qudurat AI"}
+                  </h4>
+                  <p className="text-[11px] text-gray-400 line-clamp-1">
+                    {isAr ? "تدريب تكيفي للكمي واللفظي" : "Adaptive Quantitative & Verbal Prep"}
+                  </p>
+                </div>
               </div>
+              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#00E5BE] flex-shrink-0 transition-colors" />
+            </a>
 
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
-                  {isAr ? "قدرات AI (Qudurat)" : "Qudurat AI"}
-                </h3>
-                <span className="text-[11px] font-mono text-[#00E5BE] font-medium block mt-0.5">
-                  {isAr ? "تدريب تكيفي للكمي واللفظي" : "Adaptive Quantitative & Verbal"}
-                </span>
-                <p className="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed font-normal">
-                  {isAr
-                    ? "تدريب ذكي متكيف مع مستواك الفعلي وفق أحدث تجميعات قياس مع شروحات المعلم الذكي التفاعلية خطوة بخطوة."
-                    : "Adaptive AI practice dynamically adjusting to student skill gaps with up-to-date Saudi Qiyas exam banks and interactive AI Smart Tutor reasoning."}
-                </p>
-              </div>
-
-              <div className="h-px bg-white/10" />
-
-              <ul className="space-y-2 text-xs sm:text-sm text-gray-300 font-normal">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "المعلم الذكي يحلل طريقة التفكير والحل" : "AI Smart Tutor explains problem-solving logic"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "تجميعات حديثة ومحدثة وفق معايير قياس" : "Updated Saudi Qiyas aptitude test banks"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "تشخيص فوري ودقيق لنقاط الضعف" : "Real-time diagnostic weakness reporting"}</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-white/5">
-              <a
-                href="https://edutahseen.com/qudurat"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl btn-teal-outline group-hover:bg-[#00E5BE] group-hover:text-[#060913] transition-all duration-200 cursor-pointer"
-              >
-                <span>{isAr ? "ابدأ تدريب القدرات" : "EXPLORE QUDURAT AI"}</span>
-                <ExternalLink className="w-3.5 h-3.5 mx-1.5" />
-              </a>
-            </div>
-          </div>
-
-          {/* 2. Tahsili AI */}
-          <div className="relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 bg-gradient-to-b from-[#0a1820] to-[#060913] border border-[#38BDF8]/30 hover:border-[#38BDF8] hover:shadow-[0_16px_50px_rgba(56,189,248,0.2)] transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4 sm:space-y-5">
-              <div className="flex items-center justify-between">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#38BDF8]/15 text-[#38BDF8] text-[9px] sm:text-[10px] font-bold tracking-wider uppercase">
-                  {isAr ? "متاحة الآن • التحصيلي العلمي" : "LIVE NOW • SAUDI TAHSILI"}
-                </span>
-                <div className="w-10 h-10 rounded-xl bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
+            {/* Mention 2: Tahsili */}
+            <a
+              href="https://edutahseen.com/tahsili"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.08] hover:border-[#38BDF8]/50 transition-all duration-200 flex items-center justify-between gap-3 text-start group cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] flex-shrink-0 group-hover:scale-105 transition-transform">
                   <GraduationCap className="w-5 h-5" />
                 </div>
-              </div>
-
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#38BDF8] transition-colors">
-                  {isAr ? "تحصيلي AI (Tahsili)" : "Tahsili AI"}
-                </h3>
-                <span className="text-[11px] font-mono text-[#38BDF8] font-medium block mt-0.5">
-                  {isAr ? "إتقان المواد العلمية الأربع" : "4-Subject Science Mastery"}
-                </span>
-                <p className="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed font-normal">
-                  {isAr
-                    ? "تغطية شاملة لمناهج الرياضيات، والفيزياء، والكيمياء، والأحياء مع اختبارات محاكية وتشخيص فوري."
-                    : "Complete mastery of Math, Physics, Chemistry, and Biology with realistic timed simulation tests and instant AI diagnostic feedback."}
-                </p>
-              </div>
-
-              <div className="h-px bg-white/10" />
-
-              <ul className="space-y-2 text-xs sm:text-sm text-gray-300 font-normal">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#38BDF8] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "تغطية مكثفة وشاملة للمواد العلمية الأربع" : "Comprehensive science curriculum coverage"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#38BDF8] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "اختبارات محاكية لبيئة قياس الفعلية" : "Timed exam simulation matching Qiyas formats"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#38BDF8] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "شروحات فورية ومبسطة بالذكاء الاصطناعي" : "Instant AI-powered concept explanations"}</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-white/5">
-              <a
-                href="https://edutahseen.com/tahsili"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl btn-teal-outline group-hover:bg-[#38BDF8] group-hover:text-[#060913] group-hover:border-[#38BDF8] transition-all duration-200 cursor-pointer"
-              >
-                <span>{isAr ? "ابدأ تحضير التحصيلي" : "EXPLORE TAHSILI AI"}</span>
-                <ExternalLink className="w-3.5 h-3.5 mx-1.5" />
-              </a>
-            </div>
-          </div>
-
-          {/* 3. Bausalty */}
-          <div className="relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 bg-gradient-to-b from-[#0a1820] to-[#060913] border border-[#A855F7]/30 hover:border-[#A855F7] hover:shadow-[0_16px_50px_rgba(168,85,247,0.2)] transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-4 sm:space-y-5">
-              <div className="flex items-center justify-between">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#A855F7]/15 text-[#A855F7] text-[9px] sm:text-[10px] font-bold tracking-wider uppercase">
-                  {isAr ? "متاحة الآن • التوجيه والمطابقة الجامعية" : "LIVE NOW • MAJOR & CAREER ALIGNMENT"}
-                </span>
-                <div className="w-10 h-10 rounded-xl bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center text-[#A855F7]">
-                  <Compass className="w-5 h-5" />
+                <div>
+                  <div className="text-xs font-mono text-[#38BDF8] font-semibold uppercase">
+                    {isAr ? "المحطة الثانية" : "Station 02"}
+                  </div>
+                  <h4 className="text-sm font-bold text-white group-hover:text-[#38BDF8] transition-colors">
+                    {isAr ? "تحصيلي AI (Tahsili)" : "Tahsili AI"}
+                  </h4>
+                  <p className="text-[11px] text-gray-400 line-clamp-1">
+                    {isAr ? "إتقان المواد العلمية الأربع" : "4-Subject Science Mastery"}
+                  </p>
                 </div>
               </div>
+              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#38BDF8] flex-shrink-0 transition-colors" />
+            </a>
 
-              <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#A855F7] transition-colors">
-                  {isAr ? "بوصلتي (Bausalty)" : "Bausalty AI"}
-                </h3>
-                <span className="text-[11px] font-mono text-[#A855F7] font-medium block mt-0.5">
-                  {isAr ? "مقياس الميول والمطابقة الجامعية" : "RIASEC Major Matching Engine"}
-                </span>
-                <p className="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed font-normal">
-                  {isAr
-                    ? "مقياس الميول المهنية المعتمد (Holland Code RIASEC) ومطابقة التخصص الجامعي الأنسب بدرجاتك الموزونة الفعلية."
-                    : "Standardized Holland Code (RIASEC) career alignment engine matching Saudi graduates to ideal university majors based on actual weighted GPA."}
-                </p>
+            {/* Mention 3: Bausalty */}
+            <a
+              href="https://edutahseen.com/busalati"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 sm:p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.08] hover:border-[#A855F7]/50 transition-all duration-200 flex items-center justify-between gap-3 text-start group cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center text-[#A855F7] flex-shrink-0 group-hover:scale-105 transition-transform">
+                  <Compass className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-mono text-[#A855F7] font-semibold uppercase">
+                    {isAr ? "المحطة الثالثة" : "Station 03"}
+                  </div>
+                  <h4 className="text-sm font-bold text-white group-hover:text-[#A855F7] transition-colors">
+                    {isAr ? "بوصلتي (Bausalty)" : "Bausalty AI"}
+                  </h4>
+                  <p className="text-[11px] text-gray-400 line-clamp-1">
+                    {isAr ? "مقياس الميول والتوجيه الجامعي" : "RIASEC Major Matching Engine"}
+                  </p>
+                </div>
               </div>
+              <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#A855F7] flex-shrink-0 transition-colors" />
+            </a>
 
-              <div className="h-px bg-white/10" />
-
-              <ul className="space-y-2 text-xs sm:text-sm text-gray-300 font-normal">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#A855F7] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "مقياس هولاند العالمي لاكتشاف الميول والشغف" : "Standardized RIASEC personality test"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#A855F7] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "حساب النسبة الموزونة لكافة الجامعات السعودية" : "Saudi university weighted GPA calculator"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#A855F7] flex-shrink-0 mt-0.5" />
-                  <span>{isAr ? "خارطة طريق مهنية وتوصيات تخصصية مخصصة" : "Tailored career roadmap per university major"}</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-white/5">
-              <a
-                href="https://edutahseen.com/busalati"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl btn-teal-outline group-hover:bg-[#A855F7] group-hover:text-white group-hover:border-[#A855F7] transition-all duration-200 cursor-pointer"
-              >
-                <span>{isAr ? "اكتشف تخصصك الجامعي" : "DISCOVER UNIVERSITY MAJOR"}</span>
-                <ExternalLink className="w-3.5 h-3.5 mx-1.5" />
-              </a>
-            </div>
           </div>
-
         </div>
 
-        {/* Education Platform Stats & Parent Assurance Banner */}
-        <div className="p-6 sm:p-8 rounded-2xl sm:rounded-3xl glass-card-framer border border-white/10 bg-gradient-to-r from-[#0a1820]/90 via-[#060913] to-[#0a1820]/90 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
-          <div className="space-y-1.5 max-w-xl">
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
-              <span className="px-2.5 py-0.5 rounded-full bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-bold uppercase font-mono">
-                {isAr ? "٤,٣٠٠+ طالب وطالبة يستعدون عبر تحسين" : "4,300+ Active Saudi High School Students"}
-              </span>
-              <span className="text-[10px] text-gray-400 font-medium">
-                {isAr ? "معايير متوافقة مع هيئة تقويم التعليم (ETEC)" : "ETEC & Saudi Qiyas Aligned"}
-              </span>
-            </div>
-            <h4 className="text-base sm:text-lg font-bold text-white">
-              {isAr ? "اشتراك واحد شامل يلغي الحاجة للدروس الخصوصية" : "One Unified Subscription Replacing Private Tutoring"}
-            </h4>
-            <p className="text-xs text-gray-300 font-normal">
-              {isAr
-                ? "وصول كامل لمنظومات القدرات والتحصيلي وبوصلتي بـ ٥٩ ريالاً شهرياً مع تقارير مستوى دورية لأولياء الأمور."
-                : "Full access to Qudurat, Tahsili, and Bausalty with regular diagnostic progress reporting for parents and schools."}
-            </p>
-          </div>
-
-          <a
-            href="https://edutahseen.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 text-xs font-bold tracking-widest uppercase rounded-xl bg-gradient-to-r from-[#00D2B4] via-[#0284C7] to-[#4F46E5] text-[#060913] hover:brightness-110 shadow-[0_4px_20px_rgba(0,229,190,0.3)] transition-all flex-shrink-0 cursor-pointer"
-          >
-            <span>{isAr ? "زيارة منصة تحسين التعليمية (edutahseen.com)" : "VISIT EDUTAHSEEN.COM"}</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        </div>
       </section>
 
       {/* 8. Interactive Testimonial Carousel */}
