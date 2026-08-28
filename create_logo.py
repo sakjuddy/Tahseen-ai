@@ -1,217 +1,233 @@
 import math
 from PIL import Image, ImageDraw, ImageFont
 
-# Load the exact authentic emblem from the brand sheet
-emblem = Image.open('C:/Users/sakju/tahseen-ai/public/emblem-official-exact.png').convert('RGBA')
+# Load the new high-res authentic emblem
+emblem = Image.open('C:/Users/sakju/tahseen-ai/public/emblem-new.png').convert('RGBA')
 
-# Target height for master logo
-target_emblem_h = 100
-scale_e = target_emblem_h / emblem.height
-emblem_scaled = emblem.resize((int(emblem.width * scale_e), target_emblem_h), Image.Resampling.LANCZOS)
+# Target height for emblem in master logo
+target_emblem_h = 104
+aspect = emblem.width / emblem.height
+target_emblem_w = int(target_emblem_h * aspect)
+emblem_resized = emblem.resize((target_emblem_w, target_emblem_h), Image.Resampling.LANCZOS)
 
-# Create high-precision letter glyphs (upright, non-italic, clean strokes, white #FFFFFF)
-LH = 30
-ST = 4 # stroke width
+# Create canvas
+canvas_h = 108
+canvas_w = 480
+logo = Image.new('RGBA', (canvas_w, canvas_h), (0, 0, 0, 0))
 
-def create_glyph(w, h):
-    img = Image.new('RGBA', (w, h), (0, 0, 0, 0))
-    return img, ImageDraw.Draw(img)
+# 1. Paste emblem on left
+emblem_x = 4
+emblem_y = (canvas_h - target_emblem_h) // 2
+logo.paste(emblem_resized, (emblem_x, emblem_y), emblem_resized)
 
-# T (Upright)
-img_T, d = create_glyph(20, LH)
-d.line([(0, 2), (20, 2)], fill=(255, 255, 255, 255), width=ST)
-d.line([(10, 2), (10, LH - 2)], fill=(255, 255, 255, 255), width=ST)
+# 2. Draw vertical divider |
+draw = ImageDraw.Draw(logo)
+divider_x = emblem_x + target_emblem_w + 14
+divider_y_start = 14
+divider_y_end = canvas_h - 14
 
-# A (Upright futuristic / \)
-img_A, d = create_glyph(22, LH)
-d.line([(2, LH - 2), (11, 2), (20, LH - 2)], fill=(255, 255, 255, 255), width=ST, joint='miter')
+for y in range(divider_y_start, divider_y_end):
+    # Soft vertical line
+    alpha = int(180 * math.sin((y - divider_y_start) / (divider_y_end - divider_y_start) * math.pi))
+    logo.putpixel((divider_x, y), (255, 255, 255, alpha))
+    logo.putpixel((divider_x + 1, y), (0, 229, 190, alpha // 2))
 
-# H (Upright)
-img_H, d = create_glyph(20, LH)
-d.line([(2, 2), (2, LH - 2)], fill=(255, 255, 255, 255), width=ST)
-d.line([(18, 2), (18, LH - 2)], fill=(255, 255, 255, 255), width=ST)
-d.line([(2, LH // 2), (18, LH // 2)], fill=(255, 255, 255, 255), width=ST)
+# 3. Draw Wordmark TAHSEEN <AI> & Tagline ENHANCE YOUR WORK
+# Let's render the geometric glyphs for TAHSEEN, <, AI, >, and ENHANCE YOUR WORK
+start_text_x = divider_x + 16
+text_y = 20
 
-# S (UPRIGHT - NOT ITALICIZED, clean geometric)
-img_S, d = create_glyph(20, LH)
-d.line([(18, 4), (6, 4)], fill=(255, 255, 255, 255), width=ST)
-d.line([(3, 4), (3, LH // 2 - 1)], fill=(255, 255, 255, 255), width=ST)
-d.line([(3, LH // 2 - 1), (17, LH // 2 + 1)], fill=(255, 255, 255, 255), width=ST)
-d.line([(17, LH // 2 + 1), (17, LH - 4)], fill=(255, 255, 255, 255), width=ST)
-d.line([(17, LH - 4), (3, LH - 4)], fill=(255, 255, 255, 255), width=ST)
+# We use clean geometric rendering matching the official brand book:
+# Glyphs: T, A, H, S (straight/upright), E, E, N, < (teal), A, I, > (teal)
 
-# E (Three parallel horizontal bars)
-img_E, d = create_glyph(20, LH)
-d.line([(2, 3), (18, 3)], fill=(255, 255, 255, 255), width=ST)
-d.line([(2, LH // 2), (16, LH // 2)], fill=(255, 255, 255, 255), width=ST)
-d.line([(2, LH - 3), (18, LH - 3)], fill=(255, 255, 255, 255), width=ST)
+def draw_t(draw, x, y, h, w, color):
+    lw = 2.4
+    # Top bar
+    draw.rectangle([x, y, x + w, y + lw], fill=color)
+    # Stem
+    draw.rectangle([x + (w - lw) / 2, y, x + (w + lw) / 2, y + h], fill=color)
+    return w
 
-# N (Upright)
-img_N, d = create_glyph(22, LH)
-d.line([(2, 2), (2, LH - 2)], fill=(255, 255, 255, 255), width=ST)
-d.line([(2, 2), (20, LH - 2)], fill=(255, 255, 255, 255), width=ST)
-d.line([(20, 2), (20, LH - 2)], fill=(255, 255, 255, 255), width=ST)
+def draw_a(draw, x, y, h, w, color):
+    lw = 2.4
+    # Inverted V (stylized apex)
+    draw.line([(x, y + h), (x + w / 2, y)], fill=color, width=int(round(lw)))
+    draw.line([(x + w / 2, y), (x + w, y + h)], fill=color, width=int(round(lw)))
+    return w
 
-# I (Upright)
-img_I, d = create_glyph(6, LH)
-d.line([(3, 2), (3, LH - 2)], fill=(255, 255, 255, 255), width=ST)
+def draw_h(draw, x, y, h, w, color):
+    lw = 2.4
+    draw.rectangle([x, y, x + lw, y + h], fill=color)
+    draw.rectangle([x + w - lw, y, x + w, y + h], fill=color)
+    draw.rectangle([x, y + (h - lw) / 2, x + w, y + (h + lw) / 2], fill=color)
+    return w
 
-# < (Teal chevron)
-teal = (0, 210, 180, 255) # Official Teal
-img_BO, d = create_glyph(14, LH)
-d.line([(11, 4), (3, LH // 2), (11, LH - 4)], fill=teal, width=ST, joint='miter')
+def draw_s(draw, x, y, h, w, color):
+    # Straight, upright modern non-italic S
+    lw = 2.4
+    draw.rectangle([x, y, x + w, y + lw], fill=color)
+    draw.rectangle([x, y, x + lw, y + h / 2], fill=color)
+    draw.rectangle([x, y + (h - lw) / 2, x + w, y + (h + lw) / 2], fill=color)
+    draw.rectangle([x + w - lw, y + h / 2, x + w, y + h], fill=color)
+    draw.rectangle([x, y + h - lw, x + w, y + h], fill=color)
+    return w
 
-# > (Teal chevron)
-img_BC, d = create_glyph(14, LH)
-d.line([(3, 4), (11, LH // 2), (3, LH - 4)], fill=teal, width=ST, joint='miter')
+def draw_e(draw, x, y, h, w, color):
+    lw = 2.4
+    draw.rectangle([x, y, x + lw, y + h], fill=color)
+    draw.rectangle([x, y, x + w, y + lw], fill=color)
+    draw.rectangle([x, y + (h - lw) / 2, x + w * 0.85, y + (h + lw) / 2], fill=color)
+    draw.rectangle([x, y + h - lw, x + w, y + h], fill=color)
+    return w
 
-# Assemble Top Line: T A H S E E N   < A I > with spacing between letters
-letter_gap = 10
-word_gap = 18
+def draw_n(draw, x, y, h, w, color):
+    lw = 2.4
+    draw.rectangle([x, y, x + lw, y + h], fill=color)
+    draw.rectangle([x + w - lw, y, x + w, y + h], fill=color)
+    draw.line([(x + lw / 2, y), (x + w - lw / 2, y + h)], fill=color, width=int(round(lw)))
+    return w
 
-glyphs = [
-    img_T, img_A, img_H, img_S, img_E, img_E, img_N,
-    'WORD_GAP',
-    img_BO, img_A, img_I, img_BC
-]
+def draw_chevron_left(draw, x, y, h, w, color):
+    lw = 2.4
+    draw.line([(x + w, y), (x, y + h / 2)], fill=color, width=int(round(lw)))
+    draw.line([(x, y + h / 2), (x + w, y + h)], fill=color, width=int(round(lw)))
+    return w
 
-total_top_w = 0
-for g in glyphs:
-    if g == 'WORD_GAP':
-        total_top_w += word_gap
-    else:
-        total_top_w += g.width + letter_gap
+def draw_chevron_right(draw, x, y, h, w, color):
+    lw = 2.4
+    draw.line([(x, y), (x + w, y + h / 2)], fill=color, width=int(round(lw)))
+    draw.line([(x + w, y + h / 2), (x, y + h)], fill=color, width=int(round(lw)))
+    return w
 
-top_line = Image.new('RGBA', (total_top_w, LH), (0, 0, 0, 0))
-cx = 0
-for g in glyphs:
-    if g == 'WORD_GAP':
-        cx += word_gap
-    else:
-        top_line.paste(g, (cx, 0), g)
-        cx += g.width + letter_gap
+def draw_i(draw, x, y, h, w, color):
+    lw = 2.4
+    draw.rectangle([x + (w - lw) / 2, y, x + (w + lw) / 2, y + h], fill=color)
+    return w
+
+# 4. Render Letterforms on 4x supersampled canvas for ultra-smooth anti-aliasing
+scale = 4
+hires_w = canvas_w * scale
+hires_h = canvas_h * scale
+hires = Image.new('RGBA', (hires_w, hires_h), (0, 0, 0, 0))
+
+# Paste scaled emblem
+emblem_hi = emblem.resize((target_emblem_w * scale, target_emblem_h * scale), Image.Resampling.LANCZOS)
+hires.paste(emblem_hi, (emblem_x * scale, emblem_y * scale), emblem_hi)
+
+hdraw = ImageDraw.Draw(hires)
+
+# Divider
+hx = divider_x * scale
+hy1 = divider_y_start * scale
+hy2 = divider_y_end * scale
+for y in range(hy1, hy2):
+    t = (y - hy1) / (hy2 - hy1)
+    alpha = int(220 * math.sin(t * math.pi))
+    for xoff in range(int(scale * 1.5)):
+        hires.putpixel((hx + xoff, y), (255, 255, 255, alpha))
+
+# Render Wordmark
+letter_h = 25 * scale
+letter_w = 16 * scale
+letter_spacing = 7 * scale
+curr_x = start_text_x * scale
+curr_y = 22 * scale
+
+white = (255, 255, 255, 255)
+teal = (0, 229, 190, 255)
+
+# T A H S E E N
+curr_x += draw_t(hdraw, curr_x, curr_y, letter_h, letter_w, white) + letter_spacing
+curr_x += draw_a(hdraw, curr_x, curr_y, letter_h, letter_w, white) + letter_spacing
+curr_x += draw_h(hdraw, curr_x, curr_y, letter_h, letter_w, white) + letter_spacing
+curr_x += draw_s(hdraw, curr_x, curr_y, letter_h, letter_w, white) + letter_spacing
+curr_x += draw_e(hdraw, curr_x, curr_y, letter_h, letter_w, white) + letter_spacing
+curr_x += draw_e(hdraw, curr_x, curr_y, letter_h, letter_w, white) + letter_spacing
+curr_x += draw_n(hdraw, curr_x, curr_y, letter_h, letter_w, white) + letter_spacing * 2
+
+# < A I >
+chevron_w = 9 * scale
+curr_x += draw_chevron_left(hdraw, curr_x, curr_y, letter_h, chevron_w, teal) + 4 * scale
+curr_x += draw_a(hdraw, curr_x, curr_y, letter_h, letter_w * 0.9, white) + 4 * scale
+curr_x += draw_i(hdraw, curr_x, curr_y, letter_h, letter_w * 0.4, white) + 4 * scale
+curr_x += draw_chevron_right(hdraw, curr_x, curr_y, letter_h, chevron_w, teal)
 
 # Slogan: E N H A N C E   Y O U R   W O R K
-SH = 10
-SST = 2
+slogan_y = curr_y + letter_h + 10 * scale
+slogan_h = 10 * scale
+slogan_w = 7 * scale
+slogan_space = 4.5 * scale
+sx = start_text_x * scale
 
-def create_slogan_glyph(w, h):
-    img = Image.new('RGBA', (w, h), (0, 0, 0, 0))
-    return img, ImageDraw.Draw(img)
+slogan_text = "ENHANCE YOUR WORK"
+for char in slogan_text:
+    if char == ' ':
+        sx += 10 * scale
+    elif char == 'E':
+        sx += draw_e(hdraw, sx, slogan_y, slogan_h, slogan_w, (220, 235, 245, 240)) + slogan_space
+    elif char == 'N':
+        sx += draw_n(hdraw, sx, slogan_y, slogan_h, slogan_w, (220, 235, 245, 240)) + slogan_space
+    elif char == 'H':
+        sx += draw_h(hdraw, sx, slogan_y, slogan_h, slogan_w, (220, 235, 245, 240)) + slogan_space
+    elif char == 'A':
+        sx += draw_a(hdraw, sx, slogan_y, slogan_h, slogan_w, (220, 235, 245, 240)) + slogan_space
+    elif char == 'C':
+        # C
+        lw = 2.4 * (slogan_h / letter_h)
+        hdraw.rectangle([sx, slogan_y, sx + slogan_w, slogan_y + lw], fill=(220, 235, 245, 240))
+        hdraw.rectangle([sx, slogan_y, sx + lw, slogan_y + slogan_h], fill=(220, 235, 245, 240))
+        hdraw.rectangle([sx, slogan_y + slogan_h - lw, sx + slogan_w, slogan_y + slogan_h], fill=(220, 235, 245, 240))
+        sx += slogan_w + slogan_space
+    elif char == 'Y':
+        lw = 2.4 * (slogan_h / letter_h)
+        hdraw.line([(sx, slogan_y), (sx + slogan_w / 2, slogan_y + slogan_h / 2)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        hdraw.line([(sx + slogan_w, slogan_y), (sx + slogan_w / 2, slogan_y + slogan_h / 2)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        hdraw.line([(sx + slogan_w / 2, slogan_y + slogan_h / 2), (sx + slogan_w / 2, slogan_y + slogan_h)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        sx += slogan_w + slogan_space
+    elif char == 'O':
+        lw = 2.4 * (slogan_h / letter_h)
+        hdraw.rectangle([sx, slogan_y, sx + slogan_w, slogan_y + slogan_h], outline=(220, 235, 245, 240), width=int(round(lw)))
+        sx += slogan_w + slogan_space
+    elif char == 'U':
+        lw = 2.4 * (slogan_h / letter_h)
+        hdraw.rectangle([sx, slogan_y, sx + lw, slogan_y + slogan_h], fill=(220, 235, 245, 240))
+        hdraw.rectangle([sx + slogan_w - lw, slogan_y, sx + slogan_w, slogan_y + slogan_h], fill=(220, 235, 245, 240))
+        hdraw.rectangle([sx, slogan_y + slogan_h - lw, sx + slogan_w, slogan_y + slogan_h], fill=(220, 235, 245, 240))
+        sx += slogan_w + slogan_space
+    elif char == 'R':
+        lw = 2.4 * (slogan_h / letter_h)
+        hdraw.rectangle([sx, slogan_y, sx + lw, slogan_y + slogan_h], fill=(220, 235, 245, 240))
+        hdraw.rectangle([sx, slogan_y, sx + slogan_w, slogan_y + lw], fill=(220, 235, 245, 240))
+        hdraw.rectangle([sx + slogan_w - lw, slogan_y, sx + slogan_w, slogan_y + slogan_h / 2], fill=(220, 235, 245, 240))
+        hdraw.rectangle([sx, slogan_y + (slogan_h - lw) / 2, sx + slogan_w, slogan_y + (slogan_h + lw) / 2], fill=(220, 235, 245, 240))
+        hdraw.line([(sx + lw, slogan_y + slogan_h / 2), (sx + slogan_w, slogan_y + slogan_h)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        sx += slogan_w + slogan_space
+    elif char == 'W':
+        lw = 2.4 * (slogan_h / letter_h)
+        hdraw.line([(sx, slogan_y), (sx + slogan_w * 0.25, slogan_y + slogan_h)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        hdraw.line([(sx + slogan_w * 0.25, slogan_y + slogan_h), (sx + slogan_w * 0.5, slogan_y + slogan_h * 0.3)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        hdraw.line([(sx + slogan_w * 0.5, slogan_y + slogan_h * 0.3), (sx + slogan_w * 0.75, slogan_y + slogan_h)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        hdraw.line([(sx + slogan_w * 0.75, slogan_y + slogan_h), (sx + slogan_w, slogan_y)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        sx += slogan_w + slogan_space
+    elif char == 'K':
+        lw = 2.4 * (slogan_h / letter_h)
+        hdraw.rectangle([sx, slogan_y, sx + lw, slogan_y + slogan_h], fill=(220, 235, 245, 240))
+        hdraw.line([(sx + slogan_w, slogan_y), (sx + lw, slogan_y + slogan_h / 2)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        hdraw.line([(sx + lw, slogan_y + slogan_h / 2), (sx + slogan_w, slogan_y + slogan_h)], fill=(220, 235, 245, 240), width=int(round(lw)))
+        sx += slogan_w + slogan_space
 
-# Slogan letter glyphs
-s_E, d = create_slogan_glyph(8, SH)
-d.line([(1, 1), (7, 1)], fill=(226, 232, 240, 255), width=SST)
-d.line([(1, 5), (6, 5)], fill=(226, 232, 240, 255), width=SST)
-d.line([(1, 9), (7, 9)], fill=(226, 232, 240, 255), width=SST)
+# Find bounding box and crop with padding
+bbox = hires.getbbox()
+hires_cropped = hires.crop((0, 0, bbox[2] + 20 * scale, hires_h))
 
-s_N, d = create_slogan_glyph(8, SH)
-d.line([(1, 1), (1, 9)], fill=(226, 232, 240, 255), width=SST)
-d.line([(1, 1), (7, 9)], fill=(226, 232, 240, 255), width=SST)
-d.line([(7, 1), (7, 9)], fill=(226, 232, 240, 255), width=SST)
+# Downsample with Lanczos for smooth anti-aliased output
+final_logo = hires_cropped.resize((hires_cropped.width // scale, hires_cropped.height // scale), Image.Resampling.LANCZOS)
+final_logo.save('C:/Users/sakju/tahseen-ai/public/tahseen-logo.png')
+final_logo.save('C:/Users/sakju/tahseen-ai/public/logo.png')
 
-s_H, d = create_slogan_glyph(8, SH)
-d.line([(1, 1), (1, 9)], fill=(226, 232, 240, 255), width=SST)
-d.line([(7, 1), (7, 9)], fill=(226, 232, 240, 255), width=SST)
-d.line([(1, 5), (7, 5)], fill=(226, 232, 240, 255), width=SST)
+# Also create square favicon / app icon from the new emblem
+icon_img = emblem.resize((192, 192), Image.Resampling.LANCZOS)
+icon_img.save('C:/Users/sakju/tahseen-ai/public/icon.png')
+icon_img.save('C:/Users/sakju/tahseen-ai/src/app/icon.png')
 
-s_A, d = create_slogan_glyph(8, SH)
-d.line([(1, 9), (4, 1), (7, 9)], fill=(226, 232, 240, 255), width=SST)
-d.line([(2, 6), (6, 6)], fill=(226, 232, 240, 255), width=SST)
-
-s_C, d = create_slogan_glyph(8, SH)
-d.line([(7, 1), (2, 1), (2, 9), (7, 9)], fill=(226, 232, 240, 255), width=SST)
-
-s_Y, d = create_slogan_glyph(8, SH)
-d.line([(1, 1), (4, 5)], fill=(226, 232, 240, 255), width=SST)
-d.line([(7, 1), (4, 5)], fill=(226, 232, 240, 255), width=SST)
-d.line([(4, 5), (4, 9)], fill=(226, 232, 240, 255), width=SST)
-
-s_O, d = create_slogan_glyph(8, SH)
-d.line([(2, 1), (6, 1)], fill=(226, 232, 240, 255), width=SST)
-d.line([(1, 2), (1, 8)], fill=(226, 232, 240, 255), width=SST)
-d.line([(7, 2), (7, 8)], fill=(226, 232, 240, 255), width=SST)
-d.line([(2, 9), (6, 9)], fill=(226, 232, 240, 255), width=SST)
-
-s_U, d = create_slogan_glyph(8, SH)
-d.line([(1, 1), (1, 8), (7, 8), (7, 1)], fill=(226, 232, 240, 255), width=SST)
-
-s_R, d = create_slogan_glyph(8, SH)
-d.line([(1, 1), (1, 9)], fill=(226, 232, 240, 255), width=SST)
-d.line([(1, 1), (6, 1), (7, 3), (6, 5), (1, 5)], fill=(226, 232, 240, 255), width=SST)
-d.line([(4, 5), (7, 9)], fill=(226, 232, 240, 255), width=SST)
-
-s_W, d = create_slogan_glyph(10, SH)
-d.line([(1, 1), (3, 9), (5, 4), (7, 9), (9, 1)], fill=(226, 232, 240, 255), width=SST)
-
-s_K, d = create_slogan_glyph(8, SH)
-d.line([(1, 1), (1, 9)], fill=(226, 232, 240, 255), width=SST)
-d.line([(7, 1), (1, 5), (7, 9)], fill=(226, 232, 240, 255), width=SST)
-
-slogan_items = [
-    s_E, s_N, s_H, s_A, s_N, s_C, s_E,
-    'SLOGAN_SPACE',
-    s_Y, s_O, s_U, s_R,
-    'SLOGAN_SPACE',
-    s_W, s_O, s_R, s_K
-]
-
-s_letter_gap = 7
-s_word_gap = 18
-
-slogan_w = 0
-for it in slogan_items:
-    if it == 'SLOGAN_SPACE':
-        slogan_w += s_word_gap
-    else:
-        slogan_w += it.width + s_letter_gap
-
-slogan_line = Image.new('RGBA', (slogan_w, SH), (0, 0, 0, 0))
-scx = 0
-for it in slogan_items:
-    if it == 'SLOGAN_SPACE':
-        scx += s_word_gap
-    else:
-        slogan_line.paste(it, (scx, 0), it)
-        scx += it.width + s_letter_gap
-
-# Build Right Text Block
-gap_y = 12
-text_block_w = max(top_line.width, slogan_line.width)
-text_block_h = top_line.height + gap_y + slogan_line.height
-
-text_block = Image.new('RGBA', (text_block_w, text_block_h), (0, 0, 0, 0))
-text_block.paste(top_line, (0, 0), top_line)
-text_block.paste(slogan_line, (0, top_line.height + gap_y), slogan_line)
-
-# Divider bar |
-div_w = 2
-div_h = int(target_emblem_h * 0.72)
-divider = Image.new('RGBA', (div_w, div_h), (255, 255, 255, 140))
-
-# Composite Master
-gap_master = 24
-master_w = emblem_scaled.width + gap_master + div_w + gap_master + text_block.width + 30
-master_h = max(target_emblem_h, text_block.height) + 20
-
-master = Image.new('RGBA', (master_w, master_h), (0, 0, 0, 0))
-e_y = (master_h - emblem_scaled.height) // 2
-master.paste(emblem_scaled, (10, e_y), emblem_scaled)
-
-div_x = 10 + emblem_scaled.width + gap_master
-div_y = (master_h - div_h) // 2
-master.paste(divider, (div_x, div_y), divider)
-
-tb_x = div_x + div_w + gap_master
-tb_y = (master_h - text_block.height) // 2
-master.paste(text_block, (tb_x, tb_y), text_block)
-
-mbbox = master.getbbox()
-if mbbox:
-    master = master.crop((mbbox[0] - 4, mbbox[1] - 4, mbbox[2] + 4, mbbox[3] + 4))
-
-master.save('C:/Users/sakju/tahseen-ai/public/tahseen-logo.png', format='PNG', optimize=True)
-master.save('C:/Users/sakju/tahseen-ai/public/logo.png', format='PNG', optimize=True)
-emblem_scaled.resize((64, 64), Image.Resampling.LANCZOS).save('C:/Users/sakju/tahseen-ai/src/app/icon.png', format='PNG')
-
-print('Master Logo with exact emblem, non-italic S, spaced letters generated! Size:', master.size)
+print(f"New Master Logo generated successfully! Size: {final_logo.size}")
