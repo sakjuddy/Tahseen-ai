@@ -16,7 +16,7 @@ export default function Footer({ lang = "ar" }: FooterProps) {
   const content = {
     ar: {
       mission:
-        "نبتكر حلول ذكاء اصطناعي سيادية وتدفقات عمل مؤتمتة تمكّن الشركات والمؤسسات السعودية من التوسع والنمو بذكاء وسرعة وأمان فائق.",
+        "نبتكر حلول ذكاء اصطناعي متقدمة وتدفقات عمل مؤتمتة تمكّن الشركات والمؤسسات السعودية من التوسع والنمو بذكاء وسرعة وأمان فائق.",
       hq: "المقر الرئيسي في الرياض، المملكة العربية السعودية",
       social: (
         <>
@@ -38,7 +38,7 @@ export default function Footer({ lang = "ar" }: FooterProps) {
         { name: "عن تحسين للذكاء الاصطناعي", href: "/#about" },
         { name: "رسالتنا ورؤيتنا", href: "/#about" },
         { name: "قصص نجاح العملاء", href: "/#insights" },
-        { name: "الأمن والذكاء الاصطناعي السيادي", href: "/#solutions" },
+        { name: "أمن البيانات وحماية الأنظمة", href: "/#solutions" },
         { name: "الوظائف والشراكات", href: contactHref },
         { name: "اتصل بنا", href: contactHref },
       ],
@@ -54,7 +54,7 @@ export default function Footer({ lang = "ar" }: FooterProps) {
     },
     en: {
       mission:
-        "Pioneering sovereign Artificial Intelligence and automated workflows that empower Saudi enterprises and SMEs to scale smarter, faster, and more securely.",
+        "Pioneering enterprise Artificial Intelligence and automated workflows that empower Saudi enterprises and SMEs to scale smarter, faster, and more securely.",
       hq: "Headquartered in Riyadh, Kingdom of Saudi Arabia",
       social: (
         <>
@@ -76,7 +76,7 @@ export default function Footer({ lang = "ar" }: FooterProps) {
         { name: "About Tahseen AI", href: `${homePrefix}/#about` },
         { name: "Our Purpose & Vision", href: `${homePrefix}/#about` },
         { name: "Client Success Stories", href: `${homePrefix}/#insights` },
-        { name: "Security & Sovereign AI", href: `${homePrefix}/#solutions` },
+        { name: "Enterprise Security & Compliance", href: `${homePrefix}/#solutions` },
         { name: "Careers & Partnerships", href: contactHref },
         { name: "Contact Us", href: contactHref },
       ],

@@ -43,18 +43,21 @@ export default function Home() {
 
   // Sync Language from URL param or LocalStorage on mount
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const urlLang = params.get("lang");
-      if (urlLang === "en" || urlLang === "ar") {
-        setLang(urlLang as "ar" | "en");
-      } else {
-        const saved = localStorage.getItem("tahseen_lang");
-        if (saved === "en" || saved === "ar") {
-          setLang(saved as "ar" | "en");
+    const timer = setTimeout(() => {
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        const urlLang = params.get("lang");
+        if (urlLang === "en" || urlLang === "ar") {
+          setLang(urlLang as "ar" | "en");
+        } else {
+          const saved = localStorage.getItem("tahseen_lang");
+          if (saved === "en" || saved === "ar") {
+            setLang(saved as "ar" | "en");
+          }
         }
       }
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -225,21 +228,21 @@ export default function Home() {
         {
           step: "٠٤",
           total: "٠٤",
-          tag: "هندسة سيادية",
-          title: "الذكاء الاصطناعي السيادي والأمن المؤسسي",
+          tag: "أمن وسرية البيانات",
+          title: "أمن البيانات وحماية الأنظمة المؤسسية",
           subtitle: "حماية تامة وسرية مطلقة لبيانات ومعلومات مؤسستك الخاصة.",
-          desc: "نماذج ذكاء اصطناعي مخصصة وأنظمة استرجاع خاصة مستضافة بالكامل داخل سحابة سعودية سيادية متوافقة مع المتطلبات والتشريعات المحلية.",
+          desc: "نماذج ذكاء اصطناعي مخصصة وأنظمة استرجاع خاصة مستضافة بالكامل داخل بيئة سحابية آمنة متوافقة مع المتطلبات والتشريعات المحلية.",
           metrics: [
             { label: "تشفير البيانات", val: "AES-256" },
-            { label: "الاستضافة", val: "سحابة سيادية" },
+            { label: "الاستضافة", val: "سحابة آمنة" },
             { label: "الضمان", val: "SLA صارم" },
           ],
-          badge: "ذكاء اصطناعي سيادي",
+          badge: "أمان مؤسسي متقدم",
           icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
             <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-right">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">درع السيادة والأمان</span>
+                <span className="text-white font-bold text-[10px]">درع حماية البيانات والأمان</span>
                 <span className="text-[#00E5BE] text-[9px]">محمي ومشفر</span>
               </div>
               <div className="space-y-1 text-xs font-sans">
@@ -369,21 +372,21 @@ export default function Home() {
         {
           step: "04",
           total: "04",
-          tag: "SOVEREIGN ARCHITECTURE",
-          title: "Sovereign AI & Enterprise Security",
+          tag: "ENTERPRISE SECURITY",
+          title: "Enterprise Security & Data Protection",
           subtitle: "Keep your proprietary organizational knowledge private, compliant, and protected.",
-          desc: "Tailored AI models and private retrieval pipelines hosted inside secure Saudi cloud environments, adhering strictly to regional regulatory and data sovereignty standards.",
+          desc: "Tailored AI models and private retrieval pipelines hosted inside secure cloud environments, adhering strictly to regional regulatory and data privacy standards.",
           metrics: [
             { label: "Encryption", val: "AES-256" },
-            { label: "Hosting", val: "KSA Cloud" },
+            { label: "Hosting", val: "Secure Cloud" },
             { label: "SLA", val: "Strict" },
           ],
-          badge: "Sovereign AI",
+          badge: "Enterprise Security",
           icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
             <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-left">
               <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">Sovereignty Shield</span>
+                <span className="text-white font-bold text-[10px]">Security & Privacy Shield</span>
                 <span className="text-[#00E5BE] text-[9px]">Protected</span>
               </div>
               <div className="space-y-1 text-xs font-sans">
@@ -398,96 +401,6 @@ export default function Home() {
               </div>
             </div>
           ),
-        },
-      ];
-
-  const plans = isAr
-    ? [
-        {
-          tag: "الاستراتيجية والتبني",
-          title: "استشارات الذكاء الاصطناعي",
-          subtitle: "حسب المشروع",
-          desc: "استراتيجيات وخارطة طريق تنفيذية ذكية لتحقيق الكفاءة التشغيلية والتحول الرقمي.",
-          features: [
-            "استراتيجية AI لرفع الكفاءة والتدشين",
-            "تدريب الموظفين على أحدث أدوات الذكاء الاصطناعي",
-            "زيادة مؤكدة في إنتاجية الفريق والعمليات",
-            "مستشار تنفيذي مخصص لمتابعة التقدم",
-            "متابعة دورية وتقييم نتائج الأداء",
-          ],
-          popular: false,
-        },
-        {
-          tag: "الأكثر طلباً",
-          title: "وكلاء الذكاء الاصطناعي والأتمتة",
-          subtitle: "حسب المشروع",
-          desc: "وكلاء أذكياء مستقلون لأتمتة المبيعات، والتسويق، والعمليات على مدار الساعة.",
-          features: [
-            "أداء يفوق موظفي المبيعات اليدويين بثلاثة أضعاف",
-            "لوحات تحكم وتقارير حية ومخصصة",
-            "أمان وتشفير بيانات بمستوى مؤسسي متقدم",
-            "تكامل سلس مع كافة أنظمتك وقواعد بياناتك",
-            "مدير حساب مخصص واتفاقية مستوى خدمة SLA",
-          ],
-          popular: true,
-        },
-        {
-          tag: "الهندسة البرمجية",
-          title: "تطوير الويب والتطبيقات",
-          subtitle: "حسب المشروع",
-          desc: "تطوير منصات ويب متكاملة وتطبيقات جوال ذكية مدعومة بنماذج الذكاء الاصطناعي.",
-          features: [
-            "تطوير شامل لمواقع وتطبيقات الجوال المتقدمة",
-            "دمج مخصص لنماذج اللغة والذكاء الاصطناعي",
-            "محرك تحليلات فورية ومباشرة للأداء",
-            "بنية تحتية سحابية متقدمة وأعلى معايير الأمان",
-            "دعم فني وصيانة مستمرة على مدار الساعة",
-          ],
-          popular: false,
-        },
-      ]
-    : [
-        {
-          tag: "STRATEGY & ADOPTION",
-          title: "AI Consulting",
-          subtitle: "Project Based",
-          desc: "AI strategy for operational efficiency, workflow auditing, and executive deployment.",
-          features: [
-            "AI Strategy for efficiency & deployment",
-            "Employee training on modern AI tools",
-            "Measurable employee productivity boost",
-            "Dedicated executive AI advisor",
-            "Continuous progress oversight",
-          ],
-          popular: false,
-        },
-        {
-          tag: "MOST POPULAR",
-          title: "AI Agents & Automation",
-          subtitle: "Project Based",
-          desc: "Autonomous intelligent agents for 24/7 sales, marketing, and workflow automation.",
-          features: [
-            "3X performance over manual sales reps",
-            "Custom live reports & dashboards",
-            "Enterprise-grade security & encryption",
-            "Seamless 3rd-party system integration",
-            "Dedicated account manager & SLA",
-          ],
-          popular: true,
-        },
-        {
-          tag: "ENGINEERING",
-          title: "Web & App Development",
-          subtitle: "Project Based",
-          desc: "Custom full-stack web platforms and mobile applications powered by AI intelligence.",
-          features: [
-            "Full-stack web & mobile app engineering",
-            "Native AI & LLM model integrations",
-            "Advanced real-time analytics engine",
-            "Top-grade cloud infrastructure & security",
-            "24/7 technical maintenance & support",
-          ],
-          popular: false,
         },
       ];
 
@@ -607,7 +520,7 @@ export default function Home() {
         },
         {
           q: "هل توفر تحسين خدماتها للشركات الناشئة ورواد الأعمال؟",
-          a: "نعم. بالإضافة إلى الحلول المؤسسية الكبرى (Enterprise)، نوفر باقات مرنة وعالية الأثر مخصصة للشركات الناشئة ورواد الأعمال لمساعدتهم على النمو المتسارع.",
+          a: "نعم. بالإضافة إلى الحلول المؤسسية الكبرى (Enterprise)، نوفر حلولاً مخصصة وعالية الأثر للشركات الناشئة ورواد الأعمال لمساعدتهم على النمو المتسارع.",
         },
       ]
     : [
@@ -629,7 +542,7 @@ export default function Home() {
         },
         {
           q: "Does Tahseen AI provide services to individuals and startups?",
-          a: "Yes. In addition to enterprise B2B solutions, Tahseen AI provides adaptable, high-impact AI packages tailored for growing startups, entrepreneurs, and professional teams.",
+          a: "Yes. In addition to enterprise B2B solutions, Tahseen AI provides adaptable, high-impact AI solutions tailored for growing startups, entrepreneurs, and professional teams.",
         },
       ];
 
@@ -657,7 +570,7 @@ export default function Home() {
         "اقتصادي ومجدٍ",
         "إنفاق مالي ذكي",
         "قرارات مدفوعة بالبيانات",
-        "سحابة سعودية سيادية",
+        "أعلى معايير الأمان والتشفير",
         "تدفقات عمل مؤتمتة",
       ]
     : [
@@ -665,7 +578,7 @@ export default function Home() {
         "Cost-Effective",
         "Smart Spending",
         "Data-Driven Decisions",
-        "Sovereign Saudi Cloud",
+        "Enterprise Data Security",
         "Automated Workflows",
       ];
 
@@ -1340,84 +1253,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Flexible Service Packages */}
-      <section id="pricing" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.06] bg-gradient-to-b from-[#08121a]/30 to-transparent">
-        <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
-            {isAr ? "تعاقد شفاف ونتائج ملموسة" : "TRANSPARENT ENGAGEMENT, MEASURABLE RESULTS"}
-          </span>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            {isAr ? (
-              <>
-                باقات مرنة تناسب <span className="text-[#00E5BE]">الشركات والمؤسسات</span>
-              </>
-            ) : (
-              <>
-                Flexible Plans for <span className="text-[#00E5BE]">Companies & SMEs</span>
-              </>
-            )}
-          </h2>
-          <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal">
-            {isAr
-              ? "اختر نموذج العمل الذي يحقق أهدافك التشغيلية وتوسع بسلاسة مع نمو أعمالك."
-              : "Choose the engagement model that fits your operational goals and scale seamlessly as you grow."}
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch">
-          {plans.map((plan) => (
-            <div
-              key={plan.title}
-              className={`relative rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group ${
-                plan.popular
-                  ? "bg-gradient-to-b from-[#0d1c24] to-[#060913] border-2 border-[#00E5BE] shadow-[0_0_35px_rgba(0,229,190,0.18)] lg:-translate-y-1.5"
-                  : "bg-white/[0.02] hover:bg-gradient-to-b hover:from-[#0c262c] hover:via-[#081c22] hover:to-[#060913] border border-white/[0.08] hover:border-[#00E5BE] hover:shadow-[0_16px_50px_rgba(0,229,190,0.22)]"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[9px] sm:text-[10px] font-extrabold tracking-widest uppercase shadow-[0_0_12px_rgba(0,229,190,0.5)]">
-                  {plan.tag}
-                </div>
-              )}
-
-              <div className="space-y-4 sm:space-y-5">
-                <div>
-                  <span className="text-[10px] sm:text-[11px] font-bold text-[#00E5BE] tracking-wider uppercase">{plan.subtitle}</span>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mt-1 transition-colors duration-200 group-hover:text-[#00E5BE]">{plan.title}</h3>
-                  <p className="text-xs text-gray-300 mt-1 leading-relaxed">{plan.desc}</p>
-                </div>
-
-                <div className="h-px bg-white/10" />
-
-                <ul className="space-y-2.5 sm:space-y-3">
-                  {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2 text-xs sm:text-sm text-gray-200">
-                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-5 sm:pt-6 mt-4 sm:mt-5 border-t border-white/5">
-                <Link
-                  href={contactHref}
-                  className={`w-full inline-flex items-center justify-center py-3 text-xs font-bold tracking-widest uppercase rounded-xl transition-all duration-200 cursor-pointer ${
-                    plan.popular
-                      ? "bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_16px_rgba(0,229,190,0.4)]"
-                      : "btn-teal-outline group-hover:bg-[#00E5BE] group-hover:text-[#060913] group-hover:shadow-[0_4px_20px_rgba(0,229,190,0.5)]"
-                  }`}
-                >
-                  <span>{isAr ? "ابدأ الآن" : "GET STARTED"}</span>
-                  <ArrowRight className={`w-3.5 h-3.5 mx-1.5 ${isAr ? "rotate-180" : ""}`} />
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 8. Interactive Testimonial Carousel */}
+      {/* 7. Interactive Testimonial Carousel */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">

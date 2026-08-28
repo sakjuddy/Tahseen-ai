@@ -26,18 +26,21 @@ export default function ContactPage() {
 
   // Sync Language from URL param or LocalStorage on mount
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const urlLang = params.get("lang");
-      if (urlLang === "en" || urlLang === "ar") {
-        setLang(urlLang as "ar" | "en");
-      } else {
-        const saved = localStorage.getItem("tahseen_lang");
-        if (saved === "en" || saved === "ar") {
-          setLang(saved as "ar" | "en");
+    const timer = setTimeout(() => {
+      if (typeof window !== "undefined") {
+        const params = new URLSearchParams(window.location.search);
+        const urlLang = params.get("lang");
+        if (urlLang === "en" || urlLang === "ar") {
+          setLang(urlLang as "ar" | "en");
+        } else {
+          const saved = localStorage.getItem("tahseen_lang");
+          if (saved === "en" || saved === "ar") {
+            setLang(saved as "ar" | "en");
+          }
         }
       }
-    }
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
