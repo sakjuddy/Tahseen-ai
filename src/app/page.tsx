@@ -30,9 +30,9 @@ import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const [lang, setLang] = useState<"ar" | "en">("ar");
+  const [lang, setLang] = useState<"ar" | "en">("en");
   const isAr = lang === "ar";
-  const contactHref = isAr ? "/contact" : "/contact?lang=en";
+  const contactHref = isAr ? "/contact?lang=ar" : "/contact";
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -40,7 +40,7 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [activeSolution, setActiveSolution] = useState(0);
 
-  // Sync Language from URL param or LocalStorage on mount
+  // Sync Language from URL param or LocalStorage on mount (Default is English)
   useEffect(() => {
     const timer = setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -70,10 +70,10 @@ export default function Home() {
     if (typeof window !== "undefined") {
       localStorage.setItem("tahseen_lang", nextLang);
       const url = new URL(window.location.href);
-      if (nextLang === "ar") {
+      if (nextLang === "en") {
         url.searchParams.delete("lang");
       } else {
-        url.searchParams.set("lang", "en");
+        url.searchParams.set("lang", "ar");
       }
       window.history.replaceState({}, "", url.toString());
     }

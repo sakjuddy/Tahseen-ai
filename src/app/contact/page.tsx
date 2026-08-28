@@ -7,10 +7,10 @@ import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles,
 import Footer from "@/components/Footer";
 
 export default function ContactPage() {
-  const [lang, setLang] = useState<"ar" | "en">("ar");
+  const [lang, setLang] = useState<"ar" | "en">("en");
   const isAr = lang === "ar";
-  const homePrefix = isAr ? "" : "/?lang=en";
-  const contactHref = isAr ? "/contact" : "/contact?lang=en";
+  const homePrefix = isAr ? "/?lang=ar" : "";
+  const contactHref = isAr ? "/contact?lang=ar" : "/contact";
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -24,7 +24,7 @@ export default function ContactPage() {
     message: "",
   });
 
-  // Sync Language from URL param or LocalStorage on mount
+  // Sync Language from URL param or LocalStorage on mount (Default is English)
   useEffect(() => {
     const timer = setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -54,10 +54,10 @@ export default function ContactPage() {
     if (typeof window !== "undefined") {
       localStorage.setItem("tahseen_lang", nextLang);
       const url = new URL(window.location.href);
-      if (nextLang === "ar") {
+      if (nextLang === "en") {
         url.searchParams.delete("lang");
       } else {
-        url.searchParams.set("lang", "en");
+        url.searchParams.set("lang", "ar");
       }
       window.history.replaceState({}, "", url.toString());
     }

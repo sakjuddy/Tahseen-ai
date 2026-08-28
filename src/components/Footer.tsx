@@ -8,10 +8,10 @@ interface FooterProps {
   lang?: "ar" | "en";
 }
 
-export default function Footer({ lang = "ar" }: FooterProps) {
+export default function Footer({ lang = "en" }: FooterProps) {
   const isAr = lang === "ar";
-  const contactHref = isAr ? "/contact" : "/contact?lang=en";
-  const homePrefix = isAr ? "" : "/?lang=en";
+  const contactHref = isAr ? "/contact?lang=ar" : "/contact";
+  const homePrefix = isAr ? "/?lang=ar" : "";
 
   const content = {
     ar: {
