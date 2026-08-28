@@ -20,7 +20,6 @@ import {
   Bot,
   Workflow,
   LineChart,
-  Lock,
   Users,
   HelpCircle,
   Globe,
@@ -118,7 +117,7 @@ export default function Home() {
     ? [
         {
           step: "٠١",
-          total: "٠٤",
+          total: "٠٣",
           tag: "العمليات الذاتية",
           title: "وكلاء الذكاء الاصطناعي للمبيعات والتسويق",
           subtitle: "ذكاء اصطناعي تفاعلي متعدد القنوات لتأهيل العملاء وإغلاق الصفقات على مدار الساعة.",
@@ -154,7 +153,7 @@ export default function Home() {
         },
         {
           step: "٠٢",
-          total: "٠٤",
+          total: "٠٣",
           tag: "أتمتة العمليات",
           title: "أتمتة العمليات المؤسسية الشاملة",
           subtitle: "القضاء التام على الاختناقات اليدوية عبر مختلف الأقسام والفرق.",
@@ -191,7 +190,7 @@ export default function Home() {
         },
         {
           step: "٠٣",
-          total: "٠٤",
+          total: "٠٣",
           tag: "متابعة فورية",
           title: "المتابعة اللحظية والبيانات الميدانية",
           subtitle: "رؤية كاملة لجميع التفاعلات المؤتمتة وأداء الحملات بدقة عالية.",
@@ -225,44 +224,11 @@ export default function Home() {
             </div>
           ),
         },
-        {
-          step: "٠٤",
-          total: "٠٤",
-          tag: "أمن وسرية البيانات",
-          title: "أمن البيانات وحماية الأنظمة المؤسسية",
-          subtitle: "حماية تامة وسرية مطلقة لبيانات ومعلومات مؤسستك الخاصة.",
-          desc: "نماذج ذكاء اصطناعي مخصصة وأنظمة استرجاع خاصة مستضافة بالكامل داخل بيئة سحابية آمنة متوافقة مع المتطلبات والتشريعات المحلية.",
-          metrics: [
-            { label: "تشفير البيانات", val: "AES-256" },
-            { label: "الاستضافة", val: "سحابة آمنة" },
-            { label: "الضمان", val: "SLA صارم" },
-          ],
-          badge: "أمان مؤسسي متقدم",
-          icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
-          mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-right">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">درع حماية البيانات والأمان</span>
-                <span className="text-[#00E5BE] text-[9px]">محمي ومشفر</span>
-              </div>
-              <div className="space-y-1 text-xs font-sans">
-                <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span className="text-[10px]">بيئة سحابية خاصة معزولة ومنع تسريب البيانات</span>
-                </div>
-                <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span className="text-[10px]">توافق كامل مع التشريعات والمعايير في المملكة</span>
-                </div>
-              </div>
-            </div>
-          ),
-        },
       ]
     : [
         {
           step: "01",
-          total: "04",
+          total: "03",
           tag: "AUTONOMOUS OPERATIONS",
           title: "AI Agents for Sales & Marketing",
           subtitle: "Autonomous multi-channel intelligence that qualifies leads and converts 24/7.",
@@ -298,7 +264,7 @@ export default function Home() {
         },
         {
           step: "02",
-          total: "04",
+          total: "03",
           tag: "WORKFLOW AUTOMATION",
           title: "End-to-End Enterprise Automation",
           subtitle: "Eliminate repetitive manual bottlenecks across cross-functional operations.",
@@ -335,7 +301,7 @@ export default function Home() {
         },
         {
           step: "03",
-          total: "04",
+          total: "03",
           tag: "REAL-TIME TELEMETRY",
           title: "Live Oversight & Actionable Data",
           subtitle: "Complete visibility over every automated interaction and campaign performance.",
@@ -365,39 +331,6 @@ export default function Home() {
               </div>
               <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
                 <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
-              </div>
-            </div>
-          ),
-        },
-        {
-          step: "04",
-          total: "04",
-          tag: "ENTERPRISE SECURITY",
-          title: "Enterprise Security & Data Protection",
-          subtitle: "Keep your proprietary organizational knowledge private, compliant, and protected.",
-          desc: "Tailored AI models and private retrieval pipelines hosted inside secure cloud environments, adhering strictly to regional regulatory and data privacy standards.",
-          metrics: [
-            { label: "Encryption", val: "AES-256" },
-            { label: "Hosting", val: "Secure Cloud" },
-            { label: "SLA", val: "Strict" },
-          ],
-          badge: "Enterprise Security",
-          icon: <Lock className="w-5 h-5 text-[#00E5BE]" />,
-          mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-left">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">Security & Privacy Shield</span>
-                <span className="text-[#00E5BE] text-[9px]">Protected</span>
-              </div>
-              <div className="space-y-1 text-xs font-sans">
-                <div className="p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span className="text-[10px]">Isolated Local VPC & Zero Data Leaks</span>
-                </div>
-                <div className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] text-gray-300 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                  <span className="text-[10px]">Full Regulatory Alignment in Saudi Arabia</span>
-                </div>
               </div>
             </div>
           ),
@@ -570,7 +503,6 @@ export default function Home() {
         "اقتصادي ومجدٍ",
         "إنفاق مالي ذكي",
         "قرارات مدفوعة بالبيانات",
-        "أعلى معايير الأمان والتشفير",
         "تدفقات عمل مؤتمتة",
       ]
     : [
@@ -578,7 +510,6 @@ export default function Home() {
         "Cost-Effective",
         "Smart Spending",
         "Data-Driven Decisions",
-        "Enterprise Data Security",
         "Automated Workflows",
       ];
 
