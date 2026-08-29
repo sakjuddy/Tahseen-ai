@@ -602,10 +602,11 @@ export default function Home() {
               )}
             </nav>
 
-            {/* Little Theme Switch Slider */}
+            {/* Little Theme Switch Slider (RTL/LTR Normalized with dir="ltr") */}
             <button
               onClick={toggleTheme}
               type="button"
+              dir="ltr"
               role="switch"
               aria-checked={isLight}
               aria-label={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
@@ -616,8 +617,9 @@ export default function Home() {
                 <Moon className={`w-3 h-3 ${!isLight ? "text-cyan-300 opacity-100" : "text-gray-400 opacity-40"}`} />
               </div>
               <span
+                style={{ left: "2px" }}
                 className={`absolute top-0.5 bottom-0.5 w-5 h-5 rounded-full bg-[#00E5BE] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
-                  isLight ? "translate-x-0.5" : "translate-x-6"
+                  isLight ? "translate-x-0" : "translate-x-6"
                 }`}
               >
                 {isLight ? <Sun className="w-3 h-3 text-[#060913]" /> : <Moon className="w-3 h-3 text-[#060913]" />}
@@ -649,16 +651,18 @@ export default function Home() {
             <button
               onClick={toggleTheme}
               type="button"
+              dir="ltr"
               aria-label="Toggle theme"
               className="relative inline-flex items-center w-11 h-5.5 p-0.5 rounded-full border border-white/20 bg-white/10 transition-colors"
             >
-              <div className="w-full flex justify-between items-center px-1 text-[10px]">
+              <div className="w-full flex justify-between items-center px-1 text-[10px] select-none pointer-events-none">
                 <Sun className={`w-2.5 h-2.5 ${isLight ? "text-amber-500" : "text-gray-400 opacity-40"}`} />
                 <Moon className={`w-2.5 h-2.5 ${!isLight ? "text-cyan-300" : "text-gray-400 opacity-40"}`} />
               </div>
               <span
+                style={{ left: "2px" }}
                 className={`absolute top-0.5 bottom-0.5 w-4.5 h-4.5 rounded-full bg-[#00E5BE] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
-                  isLight ? "translate-x-0.5" : "translate-x-5"
+                  isLight ? "translate-x-0" : "translate-x-5"
                 }`}
               >
                 {isLight ? <Sun className="w-2.5 h-2.5" /> : <Moon className="w-2.5 h-2.5" />}
