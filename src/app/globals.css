@@ -108,7 +108,7 @@
   animation-play-state: paused;
 }
 
-/* Light Mode Theme Overrides without changing layout */
+/* Light Mode Theme Overrides */
 html.light {
   color-scheme: light;
 }
@@ -184,4 +184,46 @@ html.light .btn-teal-outline:hover {
 html.light footer {
   background-color: #f1f5f9 !important;
   border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* HERO SECTION REMAINS OBSIDIAN DARK IN BOTH MODES */
+html.light #home,
+#home {
+  background-color: #060913 !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html.light #home h1,
+html.light #home h2,
+html.light #home h3,
+html.light #home .text-white {
+  color: #ffffff !important;
+}
+
+html.light #home p,
+html.light #home .text-gray-300 {
+  color: #d1d5db !important;
+}
+
+html.light #home .text-gray-400,
+html.light #home .text-gray-500 {
+  color: #9ca3af !important;
+}
+
+html.light #home .bg-white\/\[0\.02\] {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #e2e8f0 !important;
+}
+
+html.light #home .btn-teal-outline {
+  background-color: #060913 !important;
+  border: 1px solid #00e5be !important;
+  color: #ffffff !important;
+}
+
+html.light #home .btn-teal-outline:hover {
+  background-color: rgba(0, 229, 190, 0.12) !important;
+  color: #ffffff !important;
 }
