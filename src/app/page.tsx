@@ -29,13 +29,17 @@ import {
   GraduationCap,
   Compass,
   ExternalLink,
+  Sun,
+  Moon,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   const [lang, setLang] = useState<"ar" | "en">("en");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const isAr = lang === "ar";
+  const isLight = theme === "light";
   const contactHref = isAr ? "/contact?lang=ar" : "/contact";
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -44,7 +48,7 @@ export default function Home() {
   const [isPaused, setIsPaused] = useState(false);
   const [activeSolution, setActiveSolution] = useState(0);
 
-  // Sync Language from URL param or LocalStorage on mount (Default is English)
+  // Sync Language & Theme from LocalStorage on mount
   useEffect(() => {
     const timer = setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -57,6 +61,15 @@ export default function Home() {
           if (saved === "en" || saved === "ar") {
             setLang(saved as "ar" | "en");
           }
+        }
+
+        const savedTheme = localStorage.getItem("tahseen_theme") as "dark" | "light" | null;
+        if (savedTheme === "dark" || savedTheme === "light") {
+          setTheme(savedTheme);
+          document.documentElement.classList.remove("dark", "light");
+          document.documentElement.classList.add(savedTheme);
+        } else {
+          document.documentElement.classList.add("dark");
         }
       }
     }, 0);
@@ -80,6 +93,16 @@ export default function Home() {
         url.searchParams.set("lang", "ar");
       }
       window.history.replaceState({}, "", url.toString());
+    }
+  };
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("tahseen_theme", nextTheme);
+      document.documentElement.classList.remove("dark", "light");
+      document.documentElement.classList.add(nextTheme);
     }
   };
 
@@ -544,7 +567,7 @@ export default function Home() {
           >
             <div className="relative h-8 w-36 sm:h-9 sm:w-44 lg:h-10 lg:w-48 transition-transform duration-300 group-hover:scale-105">
               <Image
-                src="/tahseen-logo.png"
+                src={isLight ? "/tahseen-logo-light.png" : "/tahseen-logo.png"}
                 alt="Tahseen AI"
                 fill
                 sizes="(max-width: 640px) 144px, 192px"
@@ -555,8 +578,8 @@ export default function Home() {
           </Link>
 
           {/* Desktop Nav Links & Controls */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-7">
-            <nav className="flex items-center gap-4 lg:gap-7 text-xs font-semibold tracking-wider text-gray-300">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6">
+            <nav className="flex items-center gap-4 lg:gap-6 text-xs font-semibold tracking-wider text-gray-300">
               {navLinks.map((link) =>
                 link.href.startsWith("/") ? (
                   <Link
@@ -579,6 +602,28 @@ export default function Home() {
               )}
             </nav>
 
+            {/* Little Theme Switch Slider */}
+            <button
+              onClick={toggleTheme}
+              type="button"
+              role="switch"
+              aria-checked={isLight}
+              aria-label={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
+              className="relative inline-flex items-center w-12 h-6 p-0.5 rounded-full border border-white/20 bg-white/10 transition-colors duration-300 cursor-pointer flex-shrink-0"
+            >
+              <div className="w-full flex justify-between items-center px-1 text-xs select-none pointer-events-none">
+                <Sun className={`w-3 h-3 ${isLight ? "text-amber-500 opacity-100" : "text-gray-400 opacity-40"}`} />
+                <Moon className={`w-3 h-3 ${!isLight ? "text-cyan-300 opacity-100" : "text-gray-400 opacity-40"}`} />
+              </div>
+              <span
+                className={`absolute top-0.5 bottom-0.5 w-5 h-5 rounded-full bg-[#00E5BE] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
+                  isLight ? "translate-x-0.5" : "translate-x-6"
+                }`}
+              >
+                {isLight ? <Sun className="w-3 h-3 text-[#060913]" /> : <Moon className="w-3 h-3 text-[#060913]" />}
+              </span>
+            </button>
+
             {/* Language Toggle Button */}
             <button
               onClick={toggleLanguage}
@@ -598,8 +643,28 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Mobile Right Controls: Language Switcher & Hamburger */}
+          {/* Mobile Right Controls: Theme Switcher, Language & Hamburger */}
           <div className="flex md:hidden items-center gap-2">
+            {/* Mobile Little Theme Slider */}
+            <button
+              onClick={toggleTheme}
+              type="button"
+              aria-label="Toggle theme"
+              className="relative inline-flex items-center w-11 h-5.5 p-0.5 rounded-full border border-white/20 bg-white/10 transition-colors"
+            >
+              <div className="w-full flex justify-between items-center px-1 text-[10px]">
+                <Sun className={`w-2.5 h-2.5 ${isLight ? "text-amber-500" : "text-gray-400 opacity-40"}`} />
+                <Moon className={`w-2.5 h-2.5 ${!isLight ? "text-cyan-300" : "text-gray-400 opacity-40"}`} />
+              </div>
+              <span
+                className={`absolute top-0.5 bottom-0.5 w-4.5 h-4.5 rounded-full bg-[#00E5BE] shadow-xs flex items-center justify-center text-[#060913] transition-transform duration-300 transform ${
+                  isLight ? "translate-x-0.5" : "translate-x-5"
+                }`}
+              >
+                {isLight ? <Sun className="w-2.5 h-2.5" /> : <Moon className="w-2.5 h-2.5" />}
+              </span>
+            </button>
+
             <button
               onClick={toggleLanguage}
               aria-label="Toggle language"
@@ -1676,7 +1741,7 @@ export default function Home() {
       </section>
 
       {/* 11. Enterprise Footer */}
-      <Footer lang={lang} />
+      <Footer lang={lang} theme={theme} />
 
     </div>
   );
