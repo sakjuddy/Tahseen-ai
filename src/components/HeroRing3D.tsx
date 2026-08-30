@@ -370,9 +370,9 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     let mouseY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+      // Screen-wide normalized mouse coordinates [-1, 1]
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
       mouseX = Math.max(-1, Math.min(1, x));
       mouseY = Math.max(-1, Math.min(1, y));
     };
@@ -380,13 +380,16 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     window.addEventListener("mousemove", handleMouseMove);
 
     // --- 6. Resize Observer with Adaptive Mobile Viewport ---
+    let isCurrentDesktop = window.innerWidth >= 1024;
+    let isCurrentTablet = window.innerWidth >= 640 && window.innerWidth < 1024;
+
     const handleResize = () => {
       if (!container) return;
       const w = container.clientWidth || window.innerWidth;
       const h = container.clientHeight || 550;
       const isMobile = w < 640;
-      const desk = w >= 1024;
-      const tab = w >= 640 && w < 1024;
+      isCurrentDesktop = w >= 1024;
+      isCurrentTablet = w >= 640 && w < 1024;
 
       camera.fov = isMobile ? 44 : 36;
       camera.position.set(0, 0, isMobile ? 11.5 : 10.5);
@@ -396,18 +399,13 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       renderer.setSize(w, h);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-      heroGroup.position.set(
-        desk ? ringBaseX : 0,
-        desk ? ringBaseY : tab ? 1.15 : 0.95,
-        ringBaseZ
-      );
-      heroGroup.scale.setScalar(desk ? ringBaseScale : tab ? 0.56 : 0.44);
+      heroGroup.scale.setScalar(isCurrentDesktop ? ringBaseScale : isCurrentTablet ? 0.56 : 0.44);
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
-    // --- 7. Animation Loop ---
+    // --- 7. Animation Loop with Levitation & Parallax ---
     let animationFrameId: number;
     const clock = new THREE.Clock();
 
@@ -418,14 +416,30 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       waveShaderMaterial.uniforms.uTime.value = elapsedTime;
       glowUniforms.pulseTime.value = elapsedTime * glowPulseSpeed;
 
-      const targetRotX = baseRotX + mouseY * 0.18;
-      const targetRotY =
-        baseRotY + mouseX * 0.18 + Math.sin(elapsedTime * 0.5) * 0.02;
-      const targetRotZ = baseRotZ + Math.cos(elapsedTime * 0.6) * 0.015;
+      // 1. Smooth Harmonic Up & Down Floating Motion
+      const floatingOffsetY = Math.sin(elapsedTime * 1.4) * 0.22 + Math.sin(elapsedTime * 0.7) * 0.08;
+      const floatingRotX = Math.sin(elapsedTime * 1.1) * 0.035;
+      const floatingRotZ = Math.cos(elapsedTime * 0.9) * 0.025;
 
-      heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.06;
-      heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.06;
-      heroGroup.rotation.z += (targetRotZ - heroGroup.rotation.z) * 0.06;
+      // 2. Responsive Cursor Parallax (Rotation)
+      const targetRotX = baseRotX + (-mouseY * 0.28) + floatingRotX;
+      const targetRotY = baseRotY + (mouseX * 0.32 * (mirrored ? -1 : 1));
+      const targetRotZ = baseRotZ + (-mouseX * 0.12 * (mirrored ? -1 : 1)) + floatingRotZ;
+
+      // 3. Responsive Cursor Parallax (Position Translation)
+      const baseX = isCurrentDesktop ? ringBaseX : 0;
+      const baseY = isCurrentDesktop ? ringBaseY : isCurrentTablet ? 1.15 : 0.95;
+      
+      const targetPosX = baseX + (mouseX * 0.35);
+      const targetPosY = baseY + (-mouseY * 0.25) + floatingOffsetY;
+
+      // 4. Smooth Damped Interpolation (Lerp)
+      heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.05;
+      heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.05;
+      heroGroup.rotation.z += (targetRotZ - heroGroup.rotation.z) * 0.05;
+
+      heroGroup.position.x += (targetPosX - heroGroup.position.x) * 0.05;
+      heroGroup.position.y += (targetPosY - heroGroup.position.y) * 0.05;
 
       renderer.render(scene, camera);
     };
