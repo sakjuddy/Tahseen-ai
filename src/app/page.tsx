@@ -34,10 +34,6 @@ import {
   Cpu,
   ShieldCheck,
   Check,
-  Building2,
-  Briefcase,
-  Layers,
-  ArrowUpRight,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
@@ -148,150 +144,124 @@ export default function Home() {
     }
   };
 
-  const moznPillars = isAr
+  const showcaseSolutions = isAr
     ? [
         {
-          num: "٠١",
-          tag: "العمليات الحيوية",
-          title: "حلول الذكاء الاصطناعي للمهام الأساسية",
-          desc: "أنظمة ذكية للمهام التي تتطلب أعلى درجات الدقة: المبيعات، خدمة العملاء، أتمتة الـ ERP، وإدارة المعرفة والقرارات المؤسسية.",
+          step: "٠١",
+          total: "٠٣",
+          tag: "العمليات الذاتية",
+          title: "وكلاء الذكاء الاصطناعي للمبيعات والتسويق",
+          subtitle: "ذكاء اصطناعي تفاعلي متعدد القنوات لتأهيل العملاء وإغلاق الصفقات على مدار الساعة.",
+          desc: "انشر وكلاء أذكياء عبر الواتساب والموقع الإلكتروني والبريد للإجابة على الاستفسارات المعقدة، وحجز الاجتماعات في تقويمك، وتحويل العملاء المؤهلين مباشرة.",
+          metrics: [
+            { label: "نمو أداء المبيعات", val: "٣ أضعاف" },
+            { label: "سرعة الاستجابة", val: "< ١٠ ثوانٍ" },
+            { label: "التوافر والجاهزية", val: "٢٤/٧ / ٣٦٥" },
+          ],
+          features: [
+            "تكامل مباشر مع الواتساب وبوابات المحادثة الحية",
+            "جدولة تلقائية للاجتماعات وتحديث التقويم",
+            "تأهيل دقيق للعملاء المحتملين وتمرير البيانات للـ CRM",
+          ],
+          icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
         },
         {
-          num: "٠٢",
-          tag: "تحكم مؤسسي كامل",
-          title: "سيادة وأمان البيانات المؤسسية",
-          desc: "تحكم كامل لنشر وتشغيل وكلاء الذكاء الاصطناعي مع الحفاظ على سرية وحوكمة بياناتك داخل بيئاتك السحابية الآمنة.",
-        },
-        {
-          num: "٠٣",
-          tag: "الهندسة الميدانية المدمجة",
-          title: "مهندسون مدمجون مع فريقك",
-          desc: "خبراء ذكاء اصطناعي ومهندسون يعملون جنباً إلى جنب مع فريقك حتى تدشين الحلول بالكامل وتحقيق قيمة ملموسة ونتائج مؤكدة.",
-        },
-      ]
-    : [
-        {
-          num: "01",
-          tag: "HIGH-ASSURANCE DOMAINS",
-          title: "AI Solutions for Critical Workflows",
-          desc: "Intelligent systems for the operations that matter most: sales conversion, customer support, ERP automation, and executive knowledge retrieval.",
-        },
-        {
-          num: "02",
-          tag: "FULL GOVERNANCE & CONTROL",
-          title: "Enterprise Data Privacy & Control",
-          desc: "Full autonomy to deploy and operate AI agents on your terms, maintaining complete privacy and strict governance over your organizational data.",
-        },
-        {
-          num: "03",
-          tag: "FORWARD-DEPLOYED ENGINEERING",
-          title: "Engineers Embedded with Your Team",
-          desc: "Dedicated AI engineers and data strategists who work side-by-side with your teams until the system is adopted and delivering measurable value.",
-        },
-      ];
-
-  const moznSolutions = isAr
-    ? [
-        {
-          tag: "المبيعات والتسويق",
-          title: "وكلاء الذكاء الاصطناعي للمبيعات",
-          flow: "استقبال ← تأهيل ← حجز موعد",
-          desc: "وكلاء أذكياء عبر الواتساب والموقع لتأهيل العملاء المحتملين والإجابة على الاستفسارات وجدولة المواعيد على مدار الساعة.",
-          metrics: "٣ أضعاف سرعة الرد",
-        },
-        {
+          step: "٠٢",
+          total: "٠٣",
           tag: "أتمتة العمليات",
-          title: "أتمتة مسارات العمل المؤسسية",
-          flow: "استخراج ← تحقق ← مزامنة ERP",
-          desc: "ربط أنظمة تخطيط الموارد (ERP) وقواعد البيانات بمعالجة ذكية ذاتية تقلص أكثر من ٤٠٪ من الأعباء اليدوية المتكررة.",
-          metrics: "-٤٢٪ عمل يدوي",
+          title: "أتمتة العمليات المؤسسية الشاملة",
+          subtitle: "القضاء التام على الاختناقات اليدوية عبر مختلف الأقسام والفرق.",
+          desc: "اربط أنظمة تخطيط الموارد (ERP)، وقواعد البيانات، والدعم الفني، وبوابات الدفع بقواعد ذكية ذاتية المعالجة تقلص المهام اليدوية بأكثر من ٤٠٪.",
+          metrics: [
+            { label: "تقليص العمل اليدوي", val: "-٤٢٪" },
+            { label: "دقة معالجة البيانات", val: "٩٩.٩٪" },
+            { label: "سرعة التدشين", val: "١٤ يوماً" },
+          ],
+          features: [
+            "معالجة واستخراج بيانات المستندات والفواتير آلياً",
+            "مزامنة مستمرة مع قواعد بيانات Oracle و SAP",
+            "سلاسل موافقات ذكية مع توثيق تدقيق كامل",
+          ],
+          icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
         },
         {
-          tag: "التحليلات والمتابعة",
-          title: "التحليلات والمتابعة الميدانية اللحظية",
-          flow: "رصد ← تحليل ← تحسين مستمر",
-          desc: "لوحات تحكم مباشرة ترصد كفاءة الحملات، ورضا العملاء، ودقة الوكلاء، ومعدلات التحويل في الوقت الفعلي دون تكهنات.",
-          metrics: "٩٩.٩٨٪ دقة وتشغيل",
-        },
-        {
-          tag: "استراتيجيات الذكاء الاصطناعي",
-          title: "الاستشارات والتحول الرقمي",
-          flow: "تقييم ← خارطة طريق ← تدشين",
-          desc: "استراتيجيات مخصصة وتدريب تنفيذي لتمكين منشأتك من تبني أحدث أدوات الذكاء الاصطناعي لرفع الإنتاجية التشغيلية.",
-          metrics: "عائد استثمار مؤكد",
-        },
-        {
-          tag: "هندسة المنصات",
-          title: "تطوير الويب وتطبيقات الجوال الذكية",
-          flow: "تصميم ← دمج LLM ← إطلاق",
-          desc: "بناء منصات وتطبيقات ويب وجوال متكاملة ومؤتمتة مدعومة بأحدث نماذج الذكاء الاصطناعي التوليدي والوكلاء الأذكياء.",
-          metrics: "بنية تحتية متطورة",
-        },
-        {
-          tag: "مراكز الاتصال الذكية",
-          title: "مراكز الاتصال والدردشة الذكية",
-          flow: "تواصل ← تحليل فوري ← حل آلي",
-          desc: "أنظمة اتصال ودردشة تفاعلية متعددة القنوات تتعامل مع استفسارات العملاء بدقة وسرعة فائقة على مدار ٢٤/٧.",
-          metrics: "جاهزية ٢٤/٧/٣٦٥",
+          step: "٠٣",
+          total: "٠٣",
+          tag: "متابعة فورية",
+          title: "المتابعة اللحظية والبيانات الميدانية",
+          subtitle: "رؤية كاملة لجميع التفاعلات المؤتمتة وأداء الحملات بدقة عالية.",
+          desc: "لوحات تحليلات مباشرة ترصد كفاءة الحملات، ورضا العملاء، ودقة الوكلاء، ونسب التحويل في الوقت الفعلي دون أي تكهنات.",
+          metrics: [
+            { label: "سرعة الاستجابة", val: "~٠.٤ ثانية" },
+            { label: "نسبة التوافر", val: "٩٩.٩٨٪" },
+            { label: "الامتثال", val: "١٠٠٪" },
+          ],
+          features: [
+            "لوحات تحكم تفاعلية لرصد كفاءة كل مسار عمل",
+            "تنبيهات فورية عند رصد أي اختناق تشغيلي",
+            "تحليلات تنبؤية لتحسين تجربة العملاء ونمو الإيرادات",
+          ],
+          icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
         },
       ]
     : [
         {
-          tag: "SALES & OUTREACH",
-          title: "Autonomous Sales & Lead AI Agents",
-          flow: "Capture → Qualify → Book",
-          desc: "Deploy multi-channel intelligent agents across WhatsApp, webchat, and email that qualify leads and schedule calendar meetings 24/7.",
-          metrics: "3X Lead Velocity",
+          step: "01",
+          total: "03",
+          tag: "AUTONOMOUS OPERATIONS",
+          title: "AI Agents for Sales & Marketing",
+          subtitle: "Autonomous multi-channel intelligence that qualifies leads and converts 24/7.",
+          desc: "Deploy intelligent agents across WhatsApp, website chat, and email that answer complex inquiries, schedule meetings directly into your calendar, and hand off qualified leads with full context.",
+          metrics: [
+            { label: "Sales Boost", val: "3X Growth" },
+            { label: "Response Time", val: "< 10s" },
+            { label: "Availability", val: "24/7 / 365" },
+          ],
+          features: [
+            "Native WhatsApp and live-chat integrations",
+            "Automated calendar booking and CRM synchronization",
+            "Multi-channel contextual lead qualification",
+          ],
+          icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
         },
         {
-          tag: "ENTERPRISE AUTOMATION",
+          step: "02",
+          total: "03",
+          tag: "WORKFLOW AUTOMATION",
           title: "End-to-End Enterprise Automation",
-          flow: "Ingest → Validate → Sync",
-          desc: "Connect ERP systems, databases, customer support, and payment gateways with self-healing automation reducing manual work by >40%.",
-          metrics: "-42% Manual Work",
+          subtitle: "Eliminate repetitive manual bottlenecks across cross-functional operations.",
+          desc: "Connect your ERP, databases, customer support, and payment gateways with intelligent rules and self-healing automated logic that reduces manual processing by over 40%.",
+          metrics: [
+            { label: "Manual Work Reduced", val: "-42%" },
+            { label: "Data Accuracy", val: "99.9%" },
+            { label: "Deployment Speed", val: "14 Days" },
+          ],
+          features: [
+            "Automated document, RFP, and invoice ingestion",
+            "Seamless two-way sync with ERP systems",
+            "Smart approval chains with complete audit trails",
+          ],
+          icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
         },
         {
+          step: "03",
+          total: "03",
           tag: "REAL-TIME TELEMETRY",
-          title: "Live Operational Oversight & Analytics",
-          flow: "Monitor → Analyze → Optimize",
-          desc: "Live analytics dashboards tracking campaign throughput, customer sentiment, agent accuracy, and conversion metrics in real time.",
-          metrics: "99.98% High Assurance",
+          title: "Live Oversight & Actionable Data",
+          subtitle: "Complete visibility over every automated interaction and campaign performance.",
+          desc: "Live analytics dashboards that track campaign throughput, customer sentiment, agent accuracy, and conversion metrics in real time with zero guesswork.",
+          metrics: [
+            { label: "Latency", val: "~0.4s" },
+            { label: "Uptime", val: "99.98%" },
+            { label: "Compliance", val: "100%" },
+          ],
+          features: [
+            "Real-time operational visibility across all workflows",
+            "Proactive bottleneck and anomaly alerts",
+            "Continuous conversion rate optimization metrics",
+          ],
+          icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
         },
-        {
-          tag: "AI STRATEGY",
-          title: "AI Consulting & Executive Roadmaps",
-          flow: "Audit → Roadmap → Deploy",
-          desc: "Strategic AI roadmaps and operational auditing aligned directly with your enterprise growth goals and workforce enablement.",
-          metrics: "Proven ROI",
-        },
-        {
-          tag: "FULL-STACK ENGINEERING",
-          title: "Custom Web & Mobile AI Engineering",
-          flow: "Design → LLM Integration → Scale",
-          desc: "Full-stack web applications and mobile platforms powered natively by intelligent agents and tailored LLM pipelines.",
-          metrics: "Scalable Architecture",
-        },
-        {
-          tag: "CONVERSATIONAL CARE",
-          title: "AI Chat & Multi-Channel Contact Centers",
-          flow: "Engage → Resolve → Escalate",
-          desc: "Autonomous customer care pipelines resolving complex enterprise inquiries instantly across all digital customer touchpoints.",
-          metrics: "24/7/365 Availability",
-        },
-      ];
-
-  const moznDomains = isAr
-    ? [
-        { num: "١", title: "القطاع المؤسسي والشركات الكبرى", desc: "أتمتة سلاسل الإمداد، وإدارة علاقات العملاء، ومطابقة الفواتير." },
-        { num: "٢", title: "الشركات الناشئة سريعة النمو", desc: "نشر وكلاء المبيعات المؤتمتين ومضاعفة سرعة التوسع التشغيلي." },
-        { num: "٣", title: "القطاع التعليمي والتوجيه الأكاديمي", desc: "منظومة تحسين التعليمية لاختبارات القدرات والتحصيلي والتوجيه الجامعي." },
-        { num: "٤", title: "قطاع التجزئة والمتاجر متعددة الفروع", desc: "خدمة عملاء لحظية عبر الواتساب ومزامنة المخزون ونقاط البيع." },
-      ]
-    : [
-        { num: "1", title: "Enterprise & Large Corporations", desc: "Supply chain automation, ERP synchronization, and automated invoice verification." },
-        { num: "2", title: "High-Growth Startups & SMEs", desc: "Deploying autonomous sales agents and accelerating customer acquisition velocity." },
-        { num: "3", title: "Education & Academic Readiness", desc: "Tahseen Education ecosystem for Qudurat, Tahsili, and university major alignment." },
-        { num: "4", title: "Retail & Multi-Branch Commerce", desc: "Instant 24/7 WhatsApp customer care and automated inventory synchronization." },
       ];
 
   const testimonials = isAr
@@ -764,18 +734,30 @@ export default function Home() {
 
       </main>
 
-      {/* 4. MOZN-STYLE PARTNER LOGOS STRIP */}
+      {/* 4. Enterprise Social Proof & Partner Logos */}
       <section id="about" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28">
-        <div className="text-center space-y-2 mb-6 sm:mb-8">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-gray-400 uppercase">
-            {isAr
-              ? "معتمد وموثوق من كبرى المؤسسات والجامعات في المملكة العربية السعودية"
-              : "TRUSTED BY LEADING ENTERPRISES AND UNIVERSITIES ACROSS SAUDI ARABIA"}
-          </span>
+        
+        {/* Centered Heading with Dotted Divider Lines */}
+        <div className="flex items-center justify-center gap-3 sm:gap-8 w-full mb-8 sm:mb-10">
+          <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
+          <h4 className="text-xs sm:text-base md:text-lg font-bold text-gray-300 text-center tracking-tight leading-relaxed max-w-xl">
+            {isAr ? (
+              <>
+                معتمد وموثوق من قِبل كبرى المؤسسات الرائدة <br className="hidden sm:inline" />
+                في المملكة العربية السعودية
+              </>
+            ) : (
+              <>
+                Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
+                in Saudi Arabia
+              </>
+            )}
+          </h4>
+          <div className="hidden sm:block flex-1 border-t border-dashed border-white/20" />
         </div>
 
-        {/* Sharp White/Dark Container Box */}
-        <div className="rounded-md bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-md flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
+        {/* Sharp White/Teal Container Box */}
+        <div className="rounded-md bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-lg flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
           
           {/* Logo 1: Imam Abdulrahman Bin Faisal University */}
           <div className="relative h-12 w-28 sm:h-16 sm:w-40 transition-transform duration-300 hover:scale-105">
@@ -811,130 +793,179 @@ export default function Home() {
           </div>
 
         </div>
+
       </section>
 
-      {/* 5. MOZN-STYLE "OUR PURPOSE" STATEMENT BANNER */}
-      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.07]">
-        <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-6">
+      {/* 5. Comprehensive Insights Section */}
+      <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.07]">
+        
+        {/* Header */}
+        <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-            <span>{isAr ? "رسالتنا وأهدافنا" : "OUR PURPOSE"}</span>
+            <Activity className="w-3.5 h-3.5" />
+            <span>{isAr ? "رؤى تشغيلية ومؤشرات لحظية" : "REAL-TIME INSIGHTS & ACTIONABLE DATA"}</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
             {isAr ? (
               <>
-                تهتدي تحسين بهدف واضح: <br className="hidden sm:inline" />
-                <span className="text-[#00E5BE]">تمكين المؤسسات بحلول ذكاء اصطناعي وأتمتة تصنع أثراً حقيقياً.</span>
+                تحليلات شاملة تقود <span className="text-[#00E5BE]">النمو والريادة</span>
               </>
             ) : (
               <>
-                Tahseen is guided by one aim: <br className="hidden sm:inline" />
-                <span className="text-[#00E5BE]">To deliver AI solutions that enhance and transform enterprise operations.</span>
+                Comprehensive Insights That Drive <span className="text-[#00E5BE]">Growth</span>
               </>
             )}
           </h2>
           <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal max-w-2xl mx-auto">
             {isAr
-              ? "نبتكر ونبني وكلاء أذكياء وتدفقات عمل مؤتمتة تمكّن الشركات والمنشآت السعودية من التوسع والنمو بذكاء وسرعة ودقة فائقة."
-              : "Everything we build is designed to streamline manual friction, empower confident business decisions, and scale operational productivity across Saudi Arabia."}
+              ? "تتبّع كل حملة، ووكيل ذكي، وتفاعل مع العملاء بشكل فوري لتطوير استراتيجياتك والتخلص من التخمين."
+              : "Track every campaign, automated agent, and customer interaction in real time to refine engagement strategies and eliminate guesswork."}
           </p>
         </div>
-      </section>
 
-      {/* 6. MOZN-STYLE "WHY TAHSEEN" THREE PILLARS */}
-      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.07]">
-        <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-            <span>{isAr ? "لماذا تحسين" : "WHY TAHSEEN"}</span>
-          </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            {isAr ? (
-              <>
-                ثلاث ركائز أساسية <span className="text-[#00E5BE]">لتحول ذكي وناجح</span>
-              </>
-            ) : (
-              <>
-                Three pillars to <span className="text-[#00E5BE]">successful AI deployment.</span>
-              </>
-            )}
-          </h2>
-        </div>
+        {/* 2-Column Sharp Bento Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+          
+          {/* Card 1: Lead Velocity & Autonomous Qualification */}
+          <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start">
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                <Bot className="w-5 h-5" />
+              </div>
+              <span className="text-xs font-mono text-[#00E5BE] font-bold">
+                {isAr ? "استجابة فورية" : "Instant Ingestion"}
+              </span>
+            </div>
 
-        {/* 3 Pillars Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {moznPillars.map((p) => (
-            <div
-              key={p.num}
-              className="p-6 sm:p-8 sharp-bento flex flex-col justify-between space-y-6 text-start"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-white/5 pb-3">
-                  <span className="text-xs font-mono text-[#00E5BE] font-bold uppercase">{p.tag}</span>
-                  <span className="text-lg font-mono font-bold text-gray-500">{p.num}</span>
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold">{p.title}</h3>
-                <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-normal">{p.desc}</p>
+            <div>
+              <h3 className="text-xl font-bold">
+                {isAr ? "تأهيل العملاء وإغلاق الصفقات آلياً" : "Autonomous Lead Routing & Engagement"}
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-400 mt-1.5 leading-relaxed font-normal">
+                {isAr
+                  ? "يتولى الوكلاء الأذكياء الرد الفوري على الاستفسارات، وفحص المتطلبات وتأهيلها، وتحديد المواعيد مباشرة في تقويم فريقك."
+                  : "Intelligent agents qualify inquiries across WhatsApp, chat, and email, mapping context directly into your CRM."}
+              </p>
+            </div>
+
+            <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+                <span>{isAr ? "رد فوري في أقل من ١٠ ثوانٍ على مدار الساعة" : "Sub-10s multi-channel customer response time"}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
+                <span>{isAr ? "مضاعفة معدلات تحويل العملاء المحتملين ٣ أضعاف" : "3X increase in qualified deal pipeline speed"}</span>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Card 2: Operations & Data Synchronization */}
+          <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start">
+            <div className="flex items-center justify-between">
+              <div className="w-10 h-10 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
+                <Workflow className="w-5 h-5" />
+              </div>
+              <span className="text-xs font-mono text-[#38BDF8] font-bold">
+                99.9% Data Accuracy
+              </span>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold">
+                {isAr ? "مزامنة العمليات المؤسسية وسلاسل العمل" : "Zero-Friction Enterprise Integration"}
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-400 mt-1.5 leading-relaxed font-normal">
+                {isAr
+                  ? "ربط فوري بين أنظمة تخطيط الموارد (ERP)، واستخراج المستندات، والتوافق الضريبي دون أي حاجة لتدخل يدوي متكرر."
+                  : "Connect databases, payment gateways, and ERP systems with self-healing automation logic."}
+              </p>
+            </div>
+
+            <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
+                <span>{isAr ? "تقليص أكثر من ٤٠٪ من الأعباء اليدوية الروتينية" : "Over 40% reduction in manual processing tasks"}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
+                <span>{isAr ? "توافق تام مع التشريعات والمعايير المحلية في المملكة" : "Strict compliance with regional data regulations"}</span>
+              </div>
+            </div>
+          </div>
+
         </div>
+
       </section>
 
-      {/* 7. MOZN-STYLE "SOLUTIONS" (6 SHARP CARDS WITH PROCESS FLOW) */}
+      {/* 6. Solutions Showcase */}
       <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
         
         {/* Section Heading */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-            <span>{isAr ? "الحلول المتخصصة" : "SOLUTIONS"}</span>
+            <Cpu className="w-3.5 h-3.5" />
+            <span>{isAr ? "مُصمم للتوسع المؤسسي عالي الكفاءة" : "BUILT FOR HIGH-ASSURANCE SCALE"}</span>
           </div>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
             {isAr ? (
               <>
-                حلول ذكاء اصطناعي مصممة <span className="text-[#00E5BE]">للعمليات الحيوية</span>
+                حلول ذكاء اصطناعي مصممة <span className="text-[#00E5BE]">لقطاعك</span>
               </>
             ) : (
               <>
-                AI Solutions Built for <span className="text-[#00E5BE]">High-Assurance Operations</span>
+                AI Solutions Built for <span className="text-[#00E5BE]">Your Industry</span>
               </>
             )}
           </h2>
           <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal max-w-2xl mx-auto">
             {isAr
-              ? "مع تسارع التحول الرقمي، تركز تحسين على حل التحديات التشغيلية المعقدة بأكثر الطرق كفاءة وسرعة وأمان."
-              : "As enterprises prioritize automation, Tahseen engineering is focused on solving core operational bottlenecks in the fastest, most compliant way."}
+              ? "تصفح حلولنا المتخصصة والمصممة للقضاء على القيود التشغيلية وتسريع نمو المؤسسات السعودية."
+              : "Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations."}
           </p>
         </div>
 
-        {/* 6 Sharp Solution Cards Grid (Mozn Style) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {moznSolutions.map((sol) => (
+        {/* 3 Sharp Solution Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+          {showcaseSolutions.map((sol) => (
             <div
-              key={sol.title}
-              className="p-6 sm:p-7 sharp-bento flex flex-col justify-between space-y-5 text-start group"
+              key={sol.step}
+              className="p-6 sm:p-8 sharp-bento flex flex-col justify-between space-y-6 text-start"
             >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
-                  <span className="text-[10px] font-mono text-[#00E5BE] font-bold uppercase">{sol.tag}</span>
-                  <span className="text-[10px] font-mono text-gray-400">{sol.metrics}</span>
-                </div>
-                <h3 className="text-lg font-bold group-hover:text-[#00E5BE] transition-colors">{sol.title}</h3>
-                
-                {/* Mozn-Style Flow Arrow Ticker */}
-                <div className="py-1 px-2.5 rounded bg-black/40 border border-white/5 text-[10px] font-mono text-gray-300 flex items-center justify-between">
-                  <span>{sol.flow}</span>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-sm font-bold text-[#00E5BE]">{sol.step}</span>
+                    <span className="text-xs text-gray-500 font-mono">/ {sol.total}</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-mono font-bold uppercase">
+                    {sol.tag}
+                  </span>
                 </div>
 
-                <p className="text-xs text-gray-400 leading-relaxed font-normal">{sol.desc}</p>
+                <div className="space-y-2">
+                  <h3 className="text-xl font-bold">{sol.title}</h3>
+                  <p className="text-xs text-gray-400 leading-relaxed font-normal">{sol.desc}</p>
+                </div>
+
+                <div className="space-y-2 pt-2 border-t border-white/5">
+                  {sol.features.map((feat) => (
+                    <div key={feat} className="flex items-start gap-2 text-xs text-gray-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0 mt-0.5" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="pt-3 border-t border-white/5">
-                <Link
-                  href={contactHref}
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#00E5BE] hover:underline uppercase tracking-wider"
-                >
-                  <span>{isAr ? "استكشف الحل" : "EXPLORE"}</span>
-                  <ArrowRight className={`w-3 h-3 ${isAr ? "rotate-180" : ""}`} />
-                </Link>
+              {/* Bottom Metrics Pill */}
+              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/5 text-center font-mono">
+                {sol.metrics.map((m) => (
+                  <div key={m.label} className="p-2 rounded-md bg-white/[0.02] border border-white/5">
+                    <div className="text-xs font-bold text-[#00E5BE]">{m.val}</div>
+                    <div className="text-[8px] text-gray-500 truncate mt-0.5">{m.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
@@ -942,7 +973,33 @@ export default function Home() {
 
       </section>
 
-      {/* 8. TAHSEEN EDUCATION (FLAGSHIP ECOSYSTEM SHOWCASE) */}
+      {/* 7. Value Marquee */}
+      <section className="relative z-10 py-12 sm:py-16 overflow-hidden border-t border-b border-white/[0.06] bg-[#050814]/60">
+        <div className="space-y-4">
+          <div className="flex gap-4 animate-marquee-left">
+            {pillsRow1.map((pill, idx) => (
+              <div
+                key={`p1-${idx}`}
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+              >
+                {pill}
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-4 animate-marquee-right">
+            {pillsRow2.map((pill, idx) => (
+              <div
+                key={`p2-${idx}`}
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+              >
+                {pill}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Tahseen Education (Flagship Ecosystem Highlight) */}
       <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-gradient-to-b from-[#061219]/40 via-[#050814] to-[#061219]/40">
         
         {/* Section Tag */}
@@ -969,7 +1026,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Sharp Flagship Highlight Card */}
+        {/* Sharp Highlight Card */}
         <div className="relative rounded-md p-6 sm:p-10 lg:p-12 sharp-bento border-2 border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-8 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
@@ -1141,63 +1198,7 @@ export default function Home() {
 
       </section>
 
-      {/* 9. MOZN-STYLE "BUILT FOR" DOMAINS */}
-      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.07]">
-        <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-            <span>{isAr ? "القطاعات المستهدفة" : "BUILT FOR"}</span>
-          </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            {isAr ? (
-              <>
-                مصمم للقطاعات <span className="text-[#00E5BE]">ذات الأثر التشغيلي العالي</span>
-              </>
-            ) : (
-              <>
-                High-assurance domains <span className="text-[#00E5BE]">where the stakes are the highest.</span>
-              </>
-            )}
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-          {moznDomains.map((dom) => (
-            <div key={dom.num} className="p-6 sharp-bento space-y-4 text-start">
-              <span className="text-2xl font-mono font-bold text-[#00E5BE]">{dom.num}</span>
-              <h3 className="text-base font-bold">{dom.title}</h3>
-              <p className="text-xs text-gray-400 leading-relaxed font-normal">{dom.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 10. VALUE MARQUEE */}
-      <section className="relative z-10 py-12 sm:py-16 overflow-hidden border-t border-b border-white/[0.06] bg-[#050814]/60">
-        <div className="space-y-4">
-          <div className="flex gap-4 animate-marquee-left">
-            {pillsRow1.map((pill, idx) => (
-              <div
-                key={`p1-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
-              >
-                {pill}
-              </div>
-            ))}
-          </div>
-          <div className="flex gap-4 animate-marquee-right">
-            {pillsRow2.map((pill, idx) => (
-              <div
-                key={`p2-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
-              >
-                {pill}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 11. SHARP CLIENT TESTIMONIALS */}
+      {/* 9. Testimonials */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
@@ -1253,7 +1254,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. Saudi Ehsan Platform 1% Social Pledge Banner */}
+      {/* 10. Saudi Ehsan Platform 1% Social Pledge Banner */}
       <section className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1200px] mx-auto w-full">
         <div className="p-8 sm:p-12 rounded-md sharp-bento bg-gradient-to-r from-[#061e1b]/80 via-[#060913] to-[#061e1b]/80 border border-[#00E5BE]/30 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
           <div className="flex items-center gap-4">
@@ -1282,7 +1283,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 13. SHARP FAQ SECTION */}
+      {/* 11. FAQ Section */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1000px] mx-auto w-full border-t border-white/[0.07]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
           <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
@@ -1338,12 +1339,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 14. MOZN-STYLE FINAL HIGH-IMPACT CALL TO ACTION */}
+      {/* 12. Final CTA Banner */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 max-w-[1300px] mx-auto w-full">
         <div className="relative rounded-md p-8 sm:p-14 lg:p-20 text-center overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
           <div className="space-y-4 max-w-2xl mx-auto">
             <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-              {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "PUT ENTERPRISE AI TO WORK FOR YOUR BUSINESS"}
+              {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
             </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
               {isAr ? (
@@ -1376,7 +1377,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 15. Global Master Footer */}
+      {/* 13. Global Master Footer */}
       <Footer lang={lang} theme={theme} />
 
     </div>
