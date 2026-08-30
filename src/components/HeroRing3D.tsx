@@ -365,9 +365,16 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const waveParticleSystem = new THREE.Points(waveGeom, waveShaderMaterial);
     scene.add(waveParticleSystem);
 
-    // --- 5. Cursor Parallax Tracking ---
+    // --- 5. Cursor Parallax & Click Impulse Tracking ---
     let mouseX = 0;
     let mouseY = 0;
+    let clickImpulseRotX = 0;
+    let clickImpulseRotY = 0;
+    let clickImpulseRotZ = 0;
+    let clickImpulsePosZ = 0;
+    let clickScaleSpring = 1.0;
+    let clickScaleVelocity = 0;
+    let clickGlowBoost = 0.0;
 
     const handleMouseMove = (e: MouseEvent) => {
       // Screen-wide normalized mouse coordinates [-1, 1]
@@ -377,7 +384,28 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       mouseY = Math.max(-1, Math.min(1, y));
     };
 
+    const handlePointerDown = (e: PointerEvent) => {
+      // Calculate click vector relative to window center
+      const clickX = (e.clientX / window.innerWidth - 0.5) * 2;
+      const clickY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+      // 1. Elastic bouncy scale compression
+      clickScaleVelocity = -0.16;
+
+      // 2. Dynamic 3D rotational impulse kick oriented towards click
+      clickImpulseRotX += -clickY * 0.45;
+      clickImpulseRotY += clickX * 0.55 * (mirrored ? -1 : 1);
+      clickImpulseRotZ += (Math.random() - 0.5) * 0.35;
+
+      // 3. Depth pushback recoil
+      clickImpulsePosZ = -0.85;
+
+      // 4. Glow pulse surge
+      clickGlowBoost = 0.35;
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("pointerdown", handlePointerDown);
 
     // --- 6. Resize Observer with Adaptive Mobile Viewport ---
     let isCurrentDesktop = window.innerWidth >= 1024;
@@ -405,7 +433,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
-    // --- 7. Animation Loop with Levitation & Parallax ---
+    // --- 7. Animation Loop with Levitation, Parallax & Click Dynamics ---
     let animationFrameId: number;
     const clock = new THREE.Clock();
 
@@ -416,30 +444,52 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       waveShaderMaterial.uniforms.uTime.value = elapsedTime;
       glowUniforms.pulseTime.value = elapsedTime * glowPulseSpeed;
 
+      // --- Spring Physics for Scale ---
+      const springStiffness = 0.18;
+      const springDamping = 0.78;
+      const springForce = (1.0 - clickScaleSpring) * springStiffness;
+      clickScaleVelocity = (clickScaleVelocity + springForce) * springDamping;
+      clickScaleSpring += clickScaleVelocity;
+
+      // --- Decay Impulses ---
+      clickImpulseRotX *= 0.90;
+      clickImpulseRotY *= 0.90;
+      clickImpulseRotZ *= 0.88;
+      clickImpulsePosZ *= 0.88;
+      clickGlowBoost *= 0.92;
+
+      glowUniforms.intensity.value = 0.15 + clickGlowBoost;
+
       // 1. Smooth Harmonic Up & Down Floating Motion
       const floatingOffsetY = Math.sin(elapsedTime * 1.4) * 0.22 + Math.sin(elapsedTime * 0.7) * 0.08;
       const floatingRotX = Math.sin(elapsedTime * 1.1) * 0.035;
       const floatingRotZ = Math.cos(elapsedTime * 0.9) * 0.025;
 
-      // 2. Responsive Cursor Parallax (Rotation)
-      const targetRotX = baseRotX + (-mouseY * 0.28) + floatingRotX;
-      const targetRotY = baseRotY + (mouseX * 0.32 * (mirrored ? -1 : 1));
-      const targetRotZ = baseRotZ + (-mouseX * 0.12 * (mirrored ? -1 : 1)) + floatingRotZ;
+      // 2. Responsive Cursor Parallax + Click Impulse (Rotation)
+      const targetRotX = baseRotX + (-mouseY * 0.28) + floatingRotX + clickImpulseRotX;
+      const targetRotY = baseRotY + (mouseX * 0.32 * (mirrored ? -1 : 1)) + clickImpulseRotY;
+      const targetRotZ = baseRotZ + (-mouseX * 0.12 * (mirrored ? -1 : 1)) + floatingRotZ + clickImpulseRotZ;
 
-      // 3. Responsive Cursor Parallax (Position Translation)
+      // 3. Responsive Cursor Parallax + Click Impulse (Position Translation)
       const baseX = isCurrentDesktop ? ringBaseX : 0;
       const baseY = isCurrentDesktop ? ringBaseY : isCurrentTablet ? 1.15 : 0.95;
       
       const targetPosX = baseX + (mouseX * 0.35);
       const targetPosY = baseY + (-mouseY * 0.25) + floatingOffsetY;
+      const targetPosZ = ringBaseZ + clickImpulsePosZ;
 
       // 4. Smooth Damped Interpolation (Lerp)
-      heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.05;
-      heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.05;
-      heroGroup.rotation.z += (targetRotZ - heroGroup.rotation.z) * 0.05;
+      heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.06;
+      heroGroup.rotation.y += (targetRotY - heroGroup.rotation.y) * 0.06;
+      heroGroup.rotation.z += (targetRotZ - heroGroup.rotation.z) * 0.06;
 
-      heroGroup.position.x += (targetPosX - heroGroup.position.x) * 0.05;
-      heroGroup.position.y += (targetPosY - heroGroup.position.y) * 0.05;
+      heroGroup.position.x += (targetPosX - heroGroup.position.x) * 0.06;
+      heroGroup.position.y += (targetPosY - heroGroup.position.y) * 0.06;
+      heroGroup.position.z += (targetPosZ - heroGroup.position.z) * 0.06;
+
+      // Apply dynamic scale with spring
+      const currentBaseScale = isCurrentDesktop ? ringBaseScale : isCurrentTablet ? 0.56 : 0.44;
+      heroGroup.scale.setScalar(currentBaseScale * clickScaleSpring);
 
       renderer.render(scene, camera);
     };
@@ -448,6 +498,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("pointerdown", handlePointerDown);
       resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
 
