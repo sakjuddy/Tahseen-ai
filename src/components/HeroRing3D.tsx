@@ -365,13 +365,12 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const waveParticleSystem = new THREE.Points(waveGeom, waveShaderMaterial);
     scene.add(waveParticleSystem);
 
-    // --- 5. Cursor Parallax & Click Impulse Tracking ---
+    // --- 5. Cursor Parallax & In-Place Circular Impulse Tracking ---
     let mouseX = 0;
     let mouseY = 0;
+    let clickSwirlImpulse = 0;
     let clickImpulseRotX = 0;
     let clickImpulseRotY = 0;
-    let clickImpulseRotZ = 0;
-    let clickImpulsePosZ = 0;
     let clickScaleSpring = 1.0;
     let clickScaleVelocity = 0;
     let clickGlowBoost = 0.0;
@@ -389,19 +388,18 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       const clickX = (e.clientX / window.innerWidth - 0.5) * 2;
       const clickY = (e.clientY / window.innerHeight - 0.5) * 2;
 
-      // 1. Elastic bouncy scale compression
-      clickScaleVelocity = -0.16;
+      // 1. Soft cushion scale impulse
+      clickScaleVelocity = -0.07;
 
-      // 2. Dynamic 3D rotational impulse kick oriented towards click
-      clickImpulseRotX += -clickY * 0.45;
-      clickImpulseRotY += clickX * 0.55 * (mirrored ? -1 : 1);
-      clickImpulseRotZ += (Math.random() - 0.5) * 0.35;
+      // 2. Add an in-place circular orbital swirl impulse
+      clickSwirlImpulse += 0.55;
 
-      // 3. Depth pushback recoil
-      clickImpulsePosZ = -0.85;
+      // 3. Gentle rotational tilt in place towards click angle
+      clickImpulseRotX += -clickY * 0.25;
+      clickImpulseRotY += clickX * 0.30 * (mirrored ? -1 : 1);
 
-      // 4. Glow pulse surge
-      clickGlowBoost = 0.35;
+      // 4. Subtle glow burst
+      clickGlowBoost = 0.25;
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -433,7 +431,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
-    // --- 7. Animation Loop with Levitation, Parallax & Click Dynamics ---
+    // --- 7. Animation Loop with In-Place Circular Orbit & Parallax ---
     let animationFrameId: number;
     const clock = new THREE.Clock();
 
@@ -445,38 +443,43 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       glowUniforms.pulseTime.value = elapsedTime * glowPulseSpeed;
 
       // --- Spring Physics for Scale ---
-      const springStiffness = 0.18;
-      const springDamping = 0.78;
+      const springStiffness = 0.16;
+      const springDamping = 0.82;
       const springForce = (1.0 - clickScaleSpring) * springStiffness;
       clickScaleVelocity = (clickScaleVelocity + springForce) * springDamping;
       clickScaleSpring += clickScaleVelocity;
 
-      // --- Decay Impulses ---
-      clickImpulseRotX *= 0.90;
-      clickImpulseRotY *= 0.90;
-      clickImpulseRotZ *= 0.88;
-      clickImpulsePosZ *= 0.88;
+      // --- Decay Click Impulses ---
+      clickSwirlImpulse *= 0.93;
+      clickImpulseRotX *= 0.91;
+      clickImpulseRotY *= 0.91;
       clickGlowBoost *= 0.92;
 
       glowUniforms.intensity.value = 0.15 + clickGlowBoost;
 
-      // 1. Smooth Harmonic Up & Down Floating Motion
-      const floatingOffsetY = Math.sin(elapsedTime * 1.4) * 0.22 + Math.sin(elapsedTime * 0.7) * 0.08;
-      const floatingRotX = Math.sin(elapsedTime * 1.1) * 0.035;
-      const floatingRotZ = Math.cos(elapsedTime * 0.9) * 0.025;
+      // 1. Smooth In-Place Circular Motion (Orbit in XY plane)
+      const orbitSpeed = 1.15;
+      const totalOrbitAngle = elapsedTime * orbitSpeed + clickSwirlImpulse * 3.0;
+      
+      const inPlaceCircleX = Math.cos(totalOrbitAngle) * (0.16 + clickSwirlImpulse * 0.12);
+      const inPlaceCircleY = Math.sin(totalOrbitAngle) * (0.20 + clickSwirlImpulse * 0.14);
 
-      // 2. Responsive Cursor Parallax + Click Impulse (Rotation)
-      const targetRotX = baseRotX + (-mouseY * 0.28) + floatingRotX + clickImpulseRotX;
-      const targetRotY = baseRotY + (mouseX * 0.32 * (mirrored ? -1 : 1)) + clickImpulseRotY;
-      const targetRotZ = baseRotZ + (-mouseX * 0.12 * (mirrored ? -1 : 1)) + floatingRotZ + clickImpulseRotZ;
+      // Gyroscopic in-place subtle tilt
+      const inPlaceTiltX = Math.sin(totalOrbitAngle) * 0.04;
+      const inPlaceTiltY = Math.cos(totalOrbitAngle) * 0.04;
 
-      // 3. Responsive Cursor Parallax + Click Impulse (Position Translation)
+      // 2. Cursor Parallax + In-Place Circular Rotation
+      const targetRotX = baseRotX + (-mouseY * 0.26) + inPlaceTiltX + clickImpulseRotX;
+      const targetRotY = baseRotY + (mouseX * 0.30 * (mirrored ? -1 : 1)) + inPlaceTiltY + clickImpulseRotY;
+      const targetRotZ = baseRotZ + (-mouseX * 0.10 * (mirrored ? -1 : 1)) + inPlaceCircleX * 0.15;
+
+      // 3. Position: Base Position + In-Place Circular Movement + Cursor Parallax (NO Z pushback)
       const baseX = isCurrentDesktop ? ringBaseX : 0;
       const baseY = isCurrentDesktop ? ringBaseY : isCurrentTablet ? 1.15 : 0.95;
       
-      const targetPosX = baseX + (mouseX * 0.35);
-      const targetPosY = baseY + (-mouseY * 0.25) + floatingOffsetY;
-      const targetPosZ = ringBaseZ + clickImpulsePosZ;
+      const targetPosX = baseX + inPlaceCircleX + (mouseX * 0.30);
+      const targetPosY = baseY + inPlaceCircleY + (-mouseY * 0.22);
+      const targetPosZ = ringBaseZ;
 
       // 4. Smooth Damped Interpolation (Lerp)
       heroGroup.rotation.x += (targetRotX - heroGroup.rotation.x) * 0.06;
