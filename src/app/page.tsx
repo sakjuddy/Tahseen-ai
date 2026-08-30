@@ -31,6 +31,12 @@ import {
   ExternalLink,
   Sun,
   Moon,
+  Cpu,
+  ShieldCheck,
+  Terminal,
+  Zap,
+  Check,
+  Search,
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
@@ -44,9 +50,14 @@ export default function Home() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [faqFilter, setFaqFilter] = useState<string>("all");
+  const [faqSearch, setFaqSearch] = useState<string>("");
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [activeSolution, setActiveSolution] = useState(0);
+  const [activeInsightTab, setActiveInsightTab] = useState<"sales" | "automation" | "telemetry">("sales");
+  const [activeEduStation, setActiveEduStation] = useState<"qudurat" | "tahsili" | "bausalty">("qudurat");
+  const [activeChartMonth, setActiveChartMonth] = useState<number>(5);
 
   // Sync Language & Theme from LocalStorage on mount
   useEffect(() => {
@@ -159,22 +170,28 @@ export default function Home() {
           badge: "نظام وكلاء ذكي",
           icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
-                  <span className="text-white font-bold text-[10px]">وكيل تحسين • محادثة حية</span>
+            <div className={`p-4 rounded-xl border space-y-3 font-mono text-[10px] sm:text-[11px] ${isLight ? "bg-white border-slate-200 shadow-sm" : "bg-[#060913]/90 border-white/10"}`}>
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 text-gray-400">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-ping" />
+                  <span className={`font-bold text-xs ${isLight ? "text-slate-900" : "text-white"}`}>وكيل تحسين • بث محادثة حية</span>
                 </div>
-                <span className="text-[#00E5BE] text-[9px]">نشط الآن</span>
+                <span className="px-2 py-0.5 rounded bg-[#00E5BE]/20 text-[#00E5BE] text-[9px] font-bold">نشط الآن</span>
               </div>
-              <div className="space-y-1.5 text-right font-sans">
-                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 leading-snug">
-                  <span className="text-gray-500 font-mono text-[9px] block">العميل (واتساب):</span>
-                  &ldquo;نحتاج أتمتة نظام إدارة علاقات العملاء (CRM) لفروعنا في الرياض.&rdquo;
+              <div className="space-y-2 text-right font-sans">
+                <div className={`p-2.5 rounded-lg leading-snug border ${isLight ? "bg-slate-100 border-slate-200 text-slate-700" : "bg-white/[0.03] border-white/[0.05] text-gray-300"}`}>
+                  <div className="flex items-center justify-between text-[9px] text-gray-500 font-mono mb-1">
+                    <span>العميل (واتساب السعودية)</span>
+                    <span>14:02:15</span>
+                  </div>
+                  &ldquo;نحتاج أتمتة نظام إدارة علاقات العملاء (CRM) لفروعنا في الرياض وربطه مع نقاط البيع.&rdquo;
                 </div>
-                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white leading-snug">
-                  <span className="text-[#00E5BE] font-mono text-[9px] block">وكيل تحسين الذكي:</span>
-                  &ldquo;أهلاً بك! نطلق أنظمة الأتمتة المخصصة خلال أسبوعين فقط. حجزت لك موعد تدشين غداً الساعة ٢:٠٠ ظهراً. هل تود التأكيد؟&rdquo;
+                <div className="p-2.5 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-emerald-950 dark:text-white leading-snug">
+                  <div className="flex items-center justify-between text-[9px] text-[#00E5BE] font-mono mb-1 font-bold">
+                    <span>وكيل تحسين الذكي (Agentic Flow)</span>
+                    <span>14:02:16 • رد خلال ثانية</span>
+                  </div>
+                  &ldquo;أهلاً بك! تم تحليل البنية التقنية المطلوبة. نطلق الأتمتة المخصصة خلال أسبوعين. حجزت لك موعد تدشين غداً الساعة ٢:٠٠ ظهراً مع الفريق الهندسي. هل تود التأكيد؟&rdquo;
                 </div>
               </div>
             </div>
@@ -195,23 +212,32 @@ export default function Home() {
           badge: "تدفقات فورية خالية من التأخير",
           icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-right">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">مسار تدفق البيانات المؤتمت</span>
-                <span className="text-[#00E5BE] text-[9px]">مزامنة مستمرة</span>
+            <div className={`p-4 rounded-xl border space-y-2.5 font-mono text-[10px] sm:text-[11px] text-right ${isLight ? "bg-white border-slate-200 shadow-sm" : "bg-[#060913]/90 border-white/10"}`}>
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 text-gray-400">
+                <span className={`font-bold text-xs ${isLight ? "text-slate-900" : "text-white"}`}>مسار تدفق البيانات المؤتمت (ERP Pipeline)</span>
+                <span className="px-2 py-0.5 rounded bg-[#38BDF8]/20 text-[#38BDF8] text-[9px] font-bold">مزامنة مستمرة</span>
               </div>
-              <div className="space-y-1 font-sans">
-                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">١</span>
-                  <span className="truncate">استقبال الطلب واستخراج البيانات بالـ AI</span>
+              <div className="space-y-1.5 font-sans">
+                <div className={`flex items-center justify-between p-2 rounded-lg border ${isLight ? "bg-slate-100 border-slate-200 text-slate-700" : "bg-white/[0.03] border-white/[0.05]"}`}>
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-5 h-5 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[10px] font-bold flex-shrink-0">١</span>
+                    <span className="truncate">استقبال المعاملة واستخراج البيانات بالذكاء الاصطناعي</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#00E5BE] font-bold">مكتمل</span>
                 </div>
-                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">٢</span>
-                  <span className="truncate">التحقق الذكي وتقييم المخاطر اللحظي</span>
+                <div className={`flex items-center justify-between p-2 rounded-lg border ${isLight ? "bg-slate-100 border-slate-200 text-slate-700" : "bg-white/[0.03] border-white/[0.05]"}`}>
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-5 h-5 rounded-full bg-[#38BDF8]/20 text-[#38BDF8] flex items-center justify-center text-[10px] font-bold flex-shrink-0">٢</span>
+                    <span className="truncate">التحقق الذكي وتقييم المخاطر اللحظي للائتمان</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#38BDF8] font-bold">مكتمل</span>
                 </div>
-                <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold flex-shrink-0">✓</span>
-                  <span className="truncate">مزامنة فورية مع قاعدة البيانات</span>
+                <div className="flex items-center justify-between p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-emerald-950 dark:text-white">
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-5 h-5 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[10px] font-bold flex-shrink-0">✓</span>
+                    <span className="truncate">مزامنة فورية مع قاعدة البيانات المركزية وإشعار الإدارة</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#00E5BE] font-bold">لحظي</span>
                 </div>
               </div>
             </div>
@@ -232,23 +258,32 @@ export default function Home() {
           badge: "بيانات بث مباشر",
           icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">تحليلات العمليات الحية</span>
-                <span className="text-[#00E5BE] text-[9px]">بث مباشر</span>
+            <div className={`p-4 rounded-xl border space-y-3 font-mono text-[10px] sm:text-[11px] ${isLight ? "bg-white border-slate-200 shadow-sm" : "bg-[#060913]/90 border-white/10"}`}>
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 text-gray-400">
+                <span className={`font-bold text-xs ${isLight ? "text-slate-900" : "text-white"}`}>تحليلات العمليات الحية (Live Telemetry)</span>
+                <span className="flex items-center gap-1 text-[#00E5BE] text-[9px] font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-ping" />
+                  بث مباشر
+                </span>
               </div>
-              <div className="grid grid-cols-2 gap-1.5 text-center">
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-                  <div className="text-sm font-bold text-white font-sans">١٢,٤٨٠</div>
-                  <div className="text-[8px] text-gray-400 uppercase">طلب / يومياً</div>
+              <div className="grid grid-cols-2 gap-2 text-center">
+                <div className={`p-2.5 rounded-lg border ${isLight ? "bg-slate-50 border-slate-200" : "bg-white/[0.02] border-white/[0.05]"}`}>
+                  <div className={`text-base font-extrabold font-sans ${isLight ? "text-slate-900" : "text-white"}`}>١٢,٤٨٠</div>
+                  <div className="text-[9px] text-gray-400 uppercase font-mono mt-0.5">طلب / يومياً</div>
                 </div>
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-                  <div className="text-sm font-bold text-[#00E5BE] font-sans">+٤٥٪</div>
-                  <div className="text-[8px] text-gray-400 uppercase">زيادة التحويل</div>
+                <div className={`p-2.5 rounded-lg border ${isLight ? "bg-slate-50 border-slate-200" : "bg-white/[0.02] border-white/[0.05]"}`}>
+                  <div className="text-base font-extrabold text-[#00E5BE] font-sans">+٤٥٪</div>
+                  <div className="text-[9px] text-gray-400 uppercase font-mono mt-0.5">زيادة التحويل</div>
                 </div>
               </div>
-              <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
+              <div className="space-y-1">
+                <div className="flex justify-between text-[9px] text-gray-400 font-mono">
+                  <span>سعة المعالجة اللحظية</span>
+                  <span className="text-[#00E5BE]">٩٤٪ كفاءة</span>
+                </div>
+                <div className="h-1.5 w-full rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
+                </div>
               </div>
             </div>
           ),
@@ -270,22 +305,28 @@ export default function Home() {
           badge: "Agentic AI System",
           icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
-                  <span className="text-white font-bold text-[10px]">Tahseen Agent • Live</span>
+            <div className={`p-4 rounded-xl border space-y-3 font-mono text-[10px] sm:text-[11px] ${isLight ? "bg-white border-slate-200 shadow-sm" : "bg-[#060913]/90 border-white/10"}`}>
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 text-gray-400">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-ping" />
+                  <span className={`font-bold text-xs ${isLight ? "text-slate-900" : "text-white"}`}>Tahseen Agent • Live Stream</span>
                 </div>
-                <span className="text-[#00E5BE] text-[9px]">Active</span>
+                <span className="px-2 py-0.5 rounded bg-[#00E5BE]/20 text-[#00E5BE] text-[9px] font-bold">Active</span>
               </div>
-              <div className="space-y-1.5 text-left font-sans">
-                <div className="p-2 rounded-lg bg-white/[0.03] text-gray-300 leading-snug">
-                  <span className="text-gray-500 font-mono text-[9px] block">Customer (WhatsApp):</span>
-                  &ldquo;We need an automated CRM pipeline for our Riyadh branches.&rdquo;
+              <div className="space-y-2 text-left font-sans">
+                <div className={`p-2.5 rounded-lg leading-snug border ${isLight ? "bg-slate-100 border-slate-200 text-slate-700" : "bg-white/[0.03] border-white/[0.05] text-gray-300"}`}>
+                  <div className="flex items-center justify-between text-[9px] text-gray-500 font-mono mb-1">
+                    <span>Customer (WhatsApp KSA)</span>
+                    <span>14:02:15</span>
+                  </div>
+                  &ldquo;We need an automated CRM pipeline for our Riyadh branches connected with POS databases.&rdquo;
                 </div>
-                <div className="p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white leading-snug">
-                  <span className="text-[#00E5BE] font-mono text-[9px] block">Tahseen AI:</span>
-                  &ldquo;Certainly! Reserved an onboarding slot for tomorrow at 2:00 PM (AST). Confirm?&rdquo;
+                <div className="p-2.5 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-emerald-950 dark:text-white leading-snug">
+                  <div className="flex items-center justify-between text-[9px] text-[#00E5BE] font-mono mb-1 font-bold">
+                    <span>Tahseen AI Agent (Agentic Flow)</span>
+                    <span>14:02:16 • Latency 0.4s</span>
+                  </div>
+                  &ldquo;Certainly! We deploy custom automation pipelines within 14 days. I have reserved an onboarding slot for tomorrow at 2:00 PM AST. Confirm?&rdquo;
                 </div>
               </div>
             </div>
@@ -306,23 +347,32 @@ export default function Home() {
           badge: "Zero-Latency Flows",
           icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-1.5 font-mono text-[10px] sm:text-[11px] text-left">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">Automated Pipeline</span>
-                <span className="text-[#00E5BE] text-[9px]">Continuous Sync</span>
+            <div className={`p-4 rounded-xl border space-y-2.5 font-mono text-[10px] sm:text-[11px] text-left ${isLight ? "bg-white border-slate-200 shadow-sm" : "bg-[#060913]/90 border-white/10"}`}>
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 text-gray-400">
+                <span className={`font-bold text-xs ${isLight ? "text-slate-900" : "text-white"}`}>Automated ERP Pipeline</span>
+                <span className="px-2 py-0.5 rounded bg-[#38BDF8]/20 text-[#38BDF8] text-[9px] font-bold">Continuous Sync</span>
               </div>
-              <div className="space-y-1 font-sans">
-                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">1</span>
-                  <span className="truncate">RFP Ingestion & OCR Entity Parsing</span>
+              <div className="space-y-1.5 font-sans">
+                <div className={`flex items-center justify-between p-2 rounded-lg border ${isLight ? "bg-slate-100 border-slate-200 text-slate-700" : "bg-white/[0.03] border-white/[0.05]"}`}>
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-5 h-5 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[10px] font-bold flex-shrink-0">1</span>
+                    <span className="truncate">RFP Ingestion & OCR Entity Parsing</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#00E5BE] font-bold">Processed</span>
                 </div>
-                <div className="flex items-center gap-2 p-1.5 rounded bg-white/[0.03]">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] flex items-center justify-center text-[9px] font-bold flex-shrink-0">2</span>
-                  <span className="truncate">Intelligent Risk & Validation Scoring</span>
+                <div className={`flex items-center justify-between p-2 rounded-lg border ${isLight ? "bg-slate-100 border-slate-200 text-slate-700" : "bg-white/[0.03] border-white/[0.05]"}`}>
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-5 h-5 rounded-full bg-[#38BDF8]/20 text-[#38BDF8] flex items-center justify-center text-[10px] font-bold flex-shrink-0">2</span>
+                    <span className="truncate">Intelligent Risk & Validation Scoring</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#38BDF8] font-bold">Verified</span>
                 </div>
-                <div className="flex items-center gap-2 p-1.5 rounded bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
-                  <span className="w-4 h-4 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[9px] font-bold flex-shrink-0">✓</span>
-                  <span className="truncate">Auto-Sync to Database & Executive Alert</span>
+                <div className="flex items-center justify-between p-2 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-emerald-950 dark:text-white">
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-5 h-5 rounded-full bg-[#00E5BE] text-[#060913] flex items-center justify-center text-[10px] font-bold flex-shrink-0">✓</span>
+                    <span className="truncate">Auto-Sync to Database & Executive Alert</span>
+                  </div>
+                  <span className="text-[9px] font-mono text-[#00E5BE] font-bold">Instant</span>
                 </div>
               </div>
             </div>
@@ -343,23 +393,32 @@ export default function Home() {
           badge: "Real-Time Telemetry",
           icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
           mockup: (
-            <div className="p-3 rounded-xl bg-[#060913]/90 border border-white/10 space-y-2 font-mono text-[10px] sm:text-[11px]">
-              <div className="flex items-center justify-between border-b border-white/10 pb-1.5 text-gray-400">
-                <span className="text-white font-bold text-[10px]">Live Throughput</span>
-                <span className="text-[#00E5BE] text-[9px]">Stream</span>
+            <div className={`p-4 rounded-xl border space-y-3 font-mono text-[10px] sm:text-[11px] ${isLight ? "bg-white border-slate-200 shadow-sm" : "bg-[#060913]/90 border-white/10"}`}>
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 text-gray-400">
+                <span className={`font-bold text-xs ${isLight ? "text-slate-900" : "text-white"}`}>Live Throughput Stream</span>
+                <span className="flex items-center gap-1 text-[#00E5BE] text-[9px] font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-ping" />
+                  Live Stream
+                </span>
               </div>
-              <div className="grid grid-cols-2 gap-1.5 text-center">
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-                  <div className="text-sm font-bold text-white font-sans">12,480</div>
-                  <div className="text-[8px] text-gray-400 uppercase">Requests / Day</div>
+              <div className="grid grid-cols-2 gap-2 text-center">
+                <div className={`p-2.5 rounded-lg border ${isLight ? "bg-slate-50 border-slate-200" : "bg-white/[0.02] border-white/[0.05]"}`}>
+                  <div className={`text-base font-extrabold font-sans ${isLight ? "text-slate-900" : "text-white"}`}>12,480</div>
+                  <div className="text-[9px] text-gray-400 uppercase font-mono mt-0.5">Requests / Day</div>
                 </div>
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-                  <div className="text-sm font-bold text-[#00E5BE] font-sans">+45%</div>
-                  <div className="text-[8px] text-gray-400 uppercase">Conversion Lift</div>
+                <div className={`p-2.5 rounded-lg border ${isLight ? "bg-slate-50 border-slate-200" : "bg-white/[0.02] border-white/[0.05]"}`}>
+                  <div className="text-base font-extrabold text-[#00E5BE] font-sans">+45%</div>
+                  <div className="text-[9px] text-gray-400 uppercase font-mono mt-0.5">Conversion Lift</div>
                 </div>
               </div>
-              <div className="h-1 w-full rounded-full bg-white/10 overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
+              <div className="space-y-1">
+                <div className="flex justify-between text-[9px] text-gray-400 font-mono">
+                  <span>Cluster Load</span>
+                  <span className="text-[#00E5BE]">94% Optimal</span>
+                </div>
+                <div className="h-1.5 w-full rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[94%]" />
+                </div>
               </div>
             </div>
           ),
@@ -381,132 +440,113 @@ export default function Home() {
           metrics: "٣ أضعاف سرعة الرد",
         },
         {
-          quote: "فريقنا الآن يركز على الاستراتيجية بدلاً من المهام المتكررة — تولت تحسين الباقي بكل احترافية.",
-          author: "إسماعيل محمد",
-          role: "مالك، ديكونيك (Deconec)",
-          metrics: "+١٠٠ ساعة موفرة شهرياً",
-        },
-        {
-          quote: "شهدنا مكاسب ملموسة في الكفاءة التشغيلية ورضا العملاء. نوصي بحلول تحسين بشدة لأي منشأة.",
-          author: "صالح العمري",
-          role: "الرئيس التنفيذي، كاناسيو (Canacio)",
-          metrics: "+٣٥٪ كفاءة تشغيلية",
-        },
-        {
-          quote: "قمنا بربط تحسين دون الحاجة لبرمجة معقدة. النتائج كانت فورية — سرعة في العمليات ودقة في تحليلات العملاء.",
-          author: "طارق عامر",
-          role: "المدير العام، جيتو (Gito)",
-          metrics: "عائد استثمار فوري في ٣ أسابيع",
-        },
-        {
-          quote: "مسارات الأتمتة سلسة ومبتكرة ووفرت علينا ساعات طويلة. الدعم الفني كان متميزاً ومتواجداً دائماً.",
-          author: "أسامة مازن",
-          role: "مؤسس، آي أوبتب (Ioptp)",
-          metrics: "٩٩.٩٪ موثوقية النظام",
+          quote: "الوكلاء الأذكياء وفروا تجربة تفاعلية مميزة لعملائنا ورفعوا معدلات التحويل المالي بأكثر من ٤٥٪.",
+          author: "خالد الغامدي",
+          role: "الرئيس التنفيذي، CloudSphere",
+          metrics: "+٤٥٪ زيادة المبيعات",
         },
       ]
     : [
         {
-          quote: "Tahseen streamlined our internal processes — we reduced manual work by over 40% in just weeks.",
-          author: "Ahmed AL-Mutairi",
-          role: "Operations Director, FutureTech",
-          metrics: "40% Manual Work Reduced",
+          quote: "Tahseen streamlined our operations end-to-end — we eliminated repetitive manual workflows in just weeks.",
+          author: "Ahmed Al-Mutairi",
+          role: "Head of Operations, FutureTech",
+          metrics: "-42% Manual Workload",
         },
         {
-          quote: "The AI automation was easy to deploy and helped us serve clients faster and more consistently across Saudi Arabia.",
-          author: "Sara Al-Harbi",
-          role: "Head of Growth, DataPlus",
-          metrics: "3X Lead Response Speed",
+          quote: "The autonomous agent deployment was seamless and allows us to serve enterprise clients across KSA with speed and precision.",
+          author: "Sarah Al-Harbi",
+          role: "Growth Director, DataPlus",
+          metrics: "3X Lead Response Time",
         },
         {
-          quote: "Our team now focuses on strategy instead of repetitive tasks — Tahseen took care of the rest seamlessly.",
-          author: "Ismael Mohammad",
-          role: "Owner, Deconec",
-          metrics: "100+ Hours Saved / Month",
-        },
-        {
-          quote: "We saw measurable gains in operational efficiency and client satisfaction. Highly recommend Tahseen for any business.",
-          author: "Saleh El Oamry",
-          role: "CEO, Canacio",
-          metrics: "+35% Operational Efficiency",
-        },
-        {
-          quote: "We integrated Tahseen without coding. The results were immediate — faster operations and better customer insights.",
-          author: "Tarek Amer",
-          role: "Managing Director, Gito",
-          metrics: "Instant ROI in 3 Weeks",
-        },
-        {
-          quote: "The automation flows are intuitive and saved us countless hours. Support was highly responsive and forward-deployed.",
-          author: "Osama Mazen",
-          role: "Founder, Ioptp",
-          metrics: "99.9% Pipeline Reliability",
+          quote: "Tahseen AI delivers incredible ROI and enterprise clarity. Their intelligent workflows increased our conversion rates significantly.",
+          author: "Khaled Al-Ghamdi",
+          role: "CEO, CloudSphere",
+          metrics: "+45% Conversion Lift",
         },
       ];
-
-  const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       setCarouselIndex((prev) => (prev + 1) % testimonials.length);
-    }, 4500);
+    }, 6000);
     return () => clearInterval(interval);
   }, [isPaused, testimonials.length]);
-
-  const handlePrev = () => {
-    setCarouselIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
 
   const handleNext = () => {
     setCarouselIndex((prev) => (prev + 1) % testimonials.length);
   };
 
-  const faqs = isAr
+  const handlePrev = () => {
+    setCarouselIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const rawFaqs = isAr
     ? [
         {
+          category: "services",
           q: "ما هي مجموعة تحسين للذكاء الاصطناعي (Tahseen AI)؟",
           a: "تحسين هي شركة تقنية سعودية رائدة متخصصة في إعادة تعريف وتطوير العمليات المؤسسية عبر حلول الذكاء الاصطناعي المتقدمة، وأتمتة مسارات العمل، ونظم الوكلاء الأذكياء المستقلة.",
         },
         {
+          category: "services",
           q: "ما هي أبرز الخدمات التي تقدمها تحسين للذكاء الاصطناعي؟",
           a: "نقدم استشارات واستراتيجيات الذكاء الاصطناعي، وتطوير مواقع وتطبيقات الجوال الذكية، وبناء وكلاء ذكاء اصطناعي للمبيعات والتسويق، وحلول مراكز الاتصال الذكية، وأتمتة العمليات المتكاملة.",
         },
         {
+          category: "enterprise",
           q: "لماذا تحتاج منشأتي إلى حلول تحسين للذكاء الاصطناعي؟",
           a: "توفر تحسين قيمة استثنائية عبر تقليص أكثر من ٤٠٪ من المهام اليدوية المتكررة، ومضاعفة سرعة الاستجابة للعملاء، ونشر أنظمة ذكية ذاتية التشغيل ومصممة خصيصاً لتحقيق أهدافك.",
         },
         {
+          category: "customization",
           q: "هل يمكن تخصيص حلول تحسين لتتطابق مع هوية ونبرة علامتي التجارية؟",
           a: "بالتأكيد. كل وكيل ذكي ونظام أتمتة يتم تدريبه وتخصيصه بالكامل ليتوافق مع هوية منشأتك، ونبرة مخاطبة عملائك، وقواعد بياناتك الداخلية.",
         },
         {
+          category: "enterprise",
           q: "هل توفر تحسين خدماتها للشركات الناشئة ورواد الأعمال؟",
           a: "نعم. بالإضافة إلى الحلول المؤسسية الكبرى (Enterprise)، نوفر حلولاً مخصصة وعالية الأثر للشركات الناشئة ورواد الأعمال لمساعدتهم على النمو المتسارع.",
         },
       ]
     : [
         {
+          category: "services",
           q: "What is Tahseen AI?",
           a: "Tahseen AI is a pioneering Saudi Arabian startup poised to redefine B2B operations across SMEs through cutting-edge artificial intelligence, workflow automation, and custom intelligent agent systems.",
         },
         {
+          category: "services",
           q: "What are Tahseen AI's primary services?",
           a: "We provide AI Consultation & Strategy, Full-stack Web & Mobile Development, AI Agents for Sales & Marketing, Corporate AI Training & Workshops, AI Chat & Call Centre Solutions, and End-to-End Workflow Automation.",
         },
         {
+          category: "enterprise",
           q: "Why do I need Tahseen AI solutions?",
           a: "Tahseen AI delivers unparalleled value by reducing repetitive manual tasks by over 40%, accelerating response times, and deploying scalable autonomous systems tailored specifically to your business goals.",
         },
         {
+          category: "customization",
           q: "Can I customize Tahseen AI to fit my brand?",
           a: "Absolutely. Every AI agent, workflow, and web platform is fully tailored to match your brand identity, tone of voice, internal databases, and operational requirements.",
         },
         {
+          category: "enterprise",
           q: "Does Tahseen AI provide services to individuals and startups?",
           a: "Yes. In addition to enterprise B2B solutions, Tahseen AI provides adaptable, high-impact AI solutions tailored for growing startups, entrepreneurs, and professional teams.",
         },
       ];
+
+  const filteredFaqs = rawFaqs.filter((faq) => {
+    const matchesCat = faqFilter === "all" || faq.category === faqFilter;
+    const matchesSearch =
+      faqSearch.trim() === "" ||
+      faq.q.toLowerCase().includes(faqSearch.toLowerCase()) ||
+      faq.a.toLowerCase().includes(faqSearch.toLowerCase());
+    return matchesCat && matchesSearch;
+  });
 
   const basePillsRow1 = isAr
     ? [
@@ -548,15 +588,25 @@ export default function Home() {
   return (
     <div
       dir={isAr ? "rtl" : "ltr"}
-      className="relative min-h-screen bg-[#060913] text-white flex flex-col justify-between overflow-x-clip font-sans"
+      className={`relative min-h-screen flex flex-col justify-between overflow-x-clip font-sans transition-colors duration-300 ${
+        isLight ? "bg-[#F8FAFC] text-slate-900" : "bg-[#060913] text-white"
+      }`}
     >
       {/* Background ambient radial glows */}
-      <div className="absolute top-0 right-1/4 w-[350px] sm:w-[700px] h-[350px] sm:h-[550px] bg-cyan-500/10 rounded-full blur-[140px] sm:blur-[170px] pointer-events-none -z-10" />
-      <div className="absolute top-[45%] left-[-100px] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-[#00E5BE]/5 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
-      <div className="absolute bottom-[10%] right-[-80px] w-[320px] sm:w-[650px] h-[320px] sm:h-[650px] bg-cyan-500/8 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
+      <div className={`absolute top-0 right-1/4 w-[350px] sm:w-[700px] h-[350px] sm:h-[550px] rounded-full pointer-events-none -z-10 ${
+        isLight ? "bg-cyan-500/5 blur-[120px]" : "bg-cyan-500/10 blur-[140px] sm:blur-[170px]"
+      }`} />
+      <div className={`absolute top-[45%] left-[-100px] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] rounded-full pointer-events-none -z-10 ${
+        isLight ? "bg-[#00E5BE]/4 blur-[140px]" : "bg-[#00E5BE]/5 blur-[160px] sm:blur-[200px]"
+      }`} />
+      <div className={`absolute bottom-[10%] right-[-80px] w-[320px] sm:w-[650px] h-[320px] sm:h-[650px] rounded-full pointer-events-none -z-10 ${
+        isLight ? "bg-cyan-500/4 blur-[140px]" : "bg-cyan-500/8 blur-[160px] sm:blur-[200px]"
+      }`} />
 
-      {/* 1. Sticky Header / Navbar */}
-      <header className="sticky top-0 z-50 w-full bg-[#060913]/90 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">
+      {/* 1. Sticky Header / Navbar (Kept Untouched) */}
+      <header className={`sticky top-0 z-50 w-full backdrop-blur-xl border-b transition-all duration-300 ${
+        isLight ? "bg-white/90 border-slate-200/80 shadow-xs" : "bg-[#060913]/90 border-white/[0.04]"
+      }`}>
         <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
           {/* Logo */}
@@ -579,7 +629,9 @@ export default function Home() {
 
           {/* Desktop Nav Links & Controls */}
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
-            <nav className="flex items-center gap-4 lg:gap-6 text-xs font-semibold tracking-wider text-gray-300">
+            <nav className={`flex items-center gap-4 lg:gap-6 text-xs font-semibold tracking-wider ${
+              isLight ? "text-slate-700" : "text-gray-300"
+            }`}>
               {navLinks.map((link) =>
                 link.href.startsWith("/") ? (
                   <Link
@@ -738,7 +790,7 @@ export default function Home() {
         )}
       </header>
 
-      {/* 2. Hero Section */}
+      {/* 2. Hero Section (Kept Untouched as Requested) */}
       <main id="home" className="relative z-10 pt-4 sm:pt-6 pb-10 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full">
         
         {/* 3D Canvas Layer */}
@@ -765,47 +817,40 @@ export default function Home() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xs sm:text-[13px] text-gray-300 max-w-sm sm:max-w-md font-normal leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+            <p className="text-xs sm:text-sm lg:text-base text-gray-300 leading-relaxed font-normal max-w-lg">
               {isAr
-                ? "نبتكر وكلاء ذكاء اصطناعي وأنظمة أتمتة متقدمة تمكّن الشركات والمؤسسات من العمل بذكاء وسرعة وكفاءة أعلى."
-                : "We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently."}
+                ? "نبتكر ونبني وكلاء ذكاء اصطناعي وأنظمة أتمتة متطورة تمكّن الشركات والمؤسسات من العمل بذكاء وسرعة وإنتاجية مضاعفة."
+                : "We build agents and automation systems that help businesses work smarter, faster, and more efficiently."}
             </p>
 
             {/* Primary CTA Button */}
-            <div className="pt-1">
-              <a
-                href="#services"
-                onClick={(e) => handleSmoothScroll(e, "#services")}
-                className="inline-flex items-center justify-center px-5 py-3 sm:py-2.5 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline group cursor-pointer hover:shadow-[0_0_18px_rgba(0,229,190,0.4)] w-full sm:w-auto text-center"
+            <div className="pt-1 sm:pt-2 flex flex-wrap items-center gap-3.5">
+              <Link
+                href={contactHref}
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 sm:py-3.5 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer group"
               >
-                <span>{isAr ? "لنبدأ بالبناء معاً" : "LET'S BUILD TOGETHER"}</span>
-                <ArrowRight className={`w-3.5 h-3.5 mx-2 text-[#00E5BE] group-hover:translate-x-1 transition-transform duration-200 ${isAr ? "rotate-180" : ""}`} />
-              </a>
+                <span>{isAr ? "لنبنِ معاً" : "LET'S BUILD TOGETHER"}</span>
+                <ArrowRight className={`w-4 h-4 text-[#00E5BE] transition-transform duration-300 group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
+              </Link>
             </div>
 
           </div>
 
-          {/* Right Spacer */}
-          <div className="hidden lg:block lg:col-span-6 xl:col-span-7" />
+          {/* Right Empty Spacing for 3D Ring */}
+          <div className="hidden lg:block lg:col-span-6 xl:col-span-7 h-[420px]" />
 
         </div>
 
-        {/* 3. Bottom 4 Services Row */}
-        <div id="services" className="mt-12 sm:mt-20 pt-8 sm:pt-10 scroll-mt-24 sm:scroll-mt-28 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-4 text-center justify-items-center relative z-10 max-w-[1360px] mx-auto w-full">
+        {/* 3. Core 4 Services Section */}
+        <div id="services" className="relative z-10 pt-8 sm:pt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pointer-events-auto scroll-mt-24 sm:scroll-mt-28">
           
           {/* Card 1: AI Agents */}
           <div className="w-full p-4 sm:p-5 rounded-xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-2.5 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_25px_rgba(0,229,190,0.1)] cursor-default">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
-              <svg width="26" height="26" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 6C13.477 6 9 10.477 9 16C9 19.387 10.686 22.38 13.286 24.19L14 28H24L24.714 24.19C27.314 22.38 29 19.387 29 16C29 10.477 24.523 6 19 6Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M14.5 31.5H23.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <path d="M16 35H22" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <circle cx="19" cy="15.5" r="2" fill="#00E5BE"/>
-                <line x1="19" y1="1.5" x2="19" y2="3.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="6.5" y1="9" x2="4.5" y2="7.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="31.5" y1="9" x2="33.5" y2="7.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="4.5" y1="18.5" x2="2.5" y2="18.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
-                <line x1="33.5" y1="18.5" x2="35.5" y2="18.5" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round"/>
+              <svg width="24" height="24" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="5" width="26" height="26" rx="6" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 18L16 22L24 14" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="18" cy="18" r="1.5" fill="#00E5BE"/>
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -813,7 +858,7 @@ export default function Home() {
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed font-normal max-w-[210px] text-center mx-auto group-hover:text-gray-200 transition-colors">
               {isAr
-                ? "وكلاء أذكياء لأتمتة وتوسيع نطاق عملياتك على مدار الساعة."
+                ? "وكلاء أذكياء يعملون بشكل مستقل لأتمتة وتوسيع نطاق عملياتك."
                 : "Intelligent agents that automate and scale your operations."}
             </p>
           </div>
@@ -821,10 +866,12 @@ export default function Home() {
           {/* Card 2: Automation */}
           <div className="w-full p-4 sm:p-5 rounded-xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-2.5 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_25px_rgba(0,229,190,0.1)] cursor-default">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
-              <svg width="26" height="26" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 4L22.2 7.8C23.5 9.3 25.5 10.1 27.5 9.9L32.2 9.5L33 14.2C33.3 16.2 34.6 17.9 36.5 18.7L37 19L36.5 19.3C34.6 20.1 33.3 21.8 33 23.8L32.2 28.5L27.5 28.1C25.5 27.9 23.5 28.7 22.2 30.2L19 34L15.8 30.2C14.5 28.7 12.5 27.9 10.5 28.1L5.8 28.5L5 23.8C4.7 21.8 3.4 20.1 1.5 19.3L1 19L1.5 18.7C3.4 17.9 4.7 16.2 5 14.2L5.8 9.5L10.5 9.9C12.5 10.1 14.5 9.3 15.8 7.8L19 4Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="19" cy="19" r="4.5" stroke="#00E5BE" strokeWidth="2.2"/>
-                <circle cx="19" cy="19" r="1.5" fill="#00E5BE"/>
+              <svg width="24" height="24" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="18,4 31,11 31,25 18,32 5,25 5,11" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                <line x1="18" y1="4" x2="18" y2="18" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="18" y1="18" x2="31" y2="25" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="18" y1="18" x2="5" y2="25" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round"/>
+                <circle cx="18" cy="18" r="2.5" fill="#00E5BE"/>
               </svg>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -832,7 +879,7 @@ export default function Home() {
             </h3>
             <p className="text-xs text-gray-300 leading-relaxed font-normal max-w-[210px] text-center mx-auto group-hover:text-gray-200 transition-colors">
               {isAr
-                ? "تبسيط تدفقات العمل والقضاء التام على المهام اليدوية المتكررة."
+                ? "تبسيط مسارات العمل والتخلص من المهام اليدوية المتكررة."
                 : "Streamline workflows and eliminate repetitive tasks."}
             </p>
           </div>
@@ -840,7 +887,7 @@ export default function Home() {
           {/* Card 3: Consulting */}
           <div className="w-full p-4 sm:p-5 rounded-xl bg-white/[0.015] hover:bg-white/[0.04] border border-white/[0.05] hover:border-[#00E5BE]/40 space-y-2.5 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_8px_25px_rgba(0,229,190,0.1)] cursor-default">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#00E5BE]/20 group-hover:border-[#00E5BE]/50 mx-auto">
-              <svg width="26" height="26" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="24" height="24" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 19C9 13.477 13.477 9 19 9C24.523 9 29 13.477 29 19C29 21.884 27.781 24.484 25.823 26.315L27 32L21.5 30.2C20.697 30.457 19.86 30.6 19 30.6C13.477 30.6 9 26.123 9 20.6V19Z" stroke="#00E5BE" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M12 11C12 7.5 15 5 19 5C23 5 26 7.5 26 11" stroke="#00E5BE" strokeWidth="2" strokeLinecap="round" strokeDasharray="1 3"/>
                 <circle cx="19" cy="19" r="2.8" stroke="#00E5BE" strokeWidth="2"/>
@@ -912,24 +959,24 @@ export default function Home() {
         {/* Crisp White/Teal Container Box */}
         <div className="rounded-2xl sm:rounded-3xl bg-white/[0.96] backdrop-blur-2xl border-2 border-[#00E5BE]/40 p-5 sm:p-8 md:p-10 shadow-[0_12px_40px_rgba(0,229,190,0.18)] flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
           
-          {/* Logo 1: Zana Cultural Entity */}
-          <div className="relative h-12 w-12 sm:h-16 sm:w-16 transition-transform duration-300 hover:scale-105">
+          {/* Logo 1: Imam Abdulrahman Bin Faisal University */}
+          <div className="relative h-12 w-28 sm:h-16 sm:w-40 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-1.png"
-              alt="Saudi Cultural Entity"
+              alt="Imam Abdulrahman Bin Faisal University"
               fill
-              sizes="(max-width: 640px) 48px, 64px"
+              sizes="(max-width: 640px) 112px, 160px"
               className="object-contain"
             />
           </div>
 
-          {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
-          <div className="relative h-10 w-44 sm:h-14 sm:w-64 transition-transform duration-300 hover:scale-105">
+          {/* Logo 2: Zana */}
+          <div className="relative h-10 w-24 sm:h-14 sm:w-32 transition-transform duration-300 hover:scale-105">
             <Image
-              src="/partners/partner-2.svg"
-              alt="Imam Abdulrahman Bin Faisal University"
+              src="/partners/partner-2.png"
+              alt="Zana - Empowering Startups"
               fill
-              sizes="(max-width: 640px) 176px, 256px"
+              sizes="(max-width: 640px) 96px, 128px"
               className="object-contain"
             />
           </div>
@@ -949,8 +996,10 @@ export default function Home() {
 
       </section>
 
-      {/* 5. Comprehensive Insights Section */}
+      {/* 5. DYNAMIC COMPREHENSIVE INSIGHTS & INTERACTIVE AI TESTBENCH */}
       <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.07] bg-gradient-to-b from-white/[0.015] via-transparent to-transparent">
+        
+        {/* Section Header */}
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
             <Activity className="w-3.5 h-3.5" />
@@ -974,166 +1023,256 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+        {/* Dynamic Bento Grid of Live Telemetry & Interactive Console */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch mb-8">
           
-          {/* Card 1: Real-Time Oversight */}
-          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-3.5">
-              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
-                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <div className="space-y-1">
-                <span className="text-[10px] sm:text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
-                  {isAr ? "المتابعة اللحظية" : "LIVE OVERSIGHT"}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
-                  {isAr ? "رؤى لحظية مباشرة" : "Real-Time Insights"}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                  {isAr
-                    ? "راقب حملاتك ونقاط اتصال العملاء في الوقت الفعلي لضمان أعلى فاعلية تشغيلية واكتشاف فرص التحسين فوراً."
-                    : "Monitor your campaigns and customer touchpoints in real time to ensure maximum operational effectiveness and identify optimization opportunities instantly."}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                {(isAr
-                  ? ["الحفاظ على العملاء (+٤٠٪)", "تكامل سلس مع الأنظمة", "تقارير فورية مباشرة", "تفاعل مخصص وذكي"]
-                  : ["Customer Retention (+40%)", "Seamless Integrations", "Real-Time Reports", "Personalized Engagement"]
-                ).map((item) => (
-                  <div key={item} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                    <span className="truncate">{item}</span>
+          {/* Card 1: Interactive Agent Scenario Simulator (Left 7 Cols) */}
+          <div className="lg:col-span-7 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 shadow-[0_12px_40px_rgba(0,229,190,0.08)] flex flex-col justify-between space-y-6">
+            
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                    <Bot className="w-5 h-5" />
                   </div>
-                ))}
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                      {isAr ? "محاكي الوكلاء الأذكياء التفاعلي" : "Interactive Agent Testbench"}
+                    </h3>
+                    <span className="text-[10px] font-mono text-[#00E5BE]">
+                      {isAr ? "اختر سيناريو تشغيلي لاختبار الاستجابة" : "Select an operational workflow to simulate live"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Scenario Selector Tabs */}
+                <div className="flex items-center p-1 rounded-xl bg-black/40 border border-white/10 text-xs font-mono">
+                  <button
+                    onClick={() => setActiveInsightTab("sales")}
+                    className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                      activeInsightTab === "sales" ? "bg-[#00E5BE] text-[#060913] font-bold shadow-xs" : "text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {isAr ? "المبيعات" : "Sales Agent"}
+                  </button>
+                  <button
+                    onClick={() => setActiveInsightTab("automation")}
+                    className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                      activeInsightTab === "automation" ? "bg-[#00E5BE] text-[#060913] font-bold shadow-xs" : "text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {isAr ? "الأتمتة" : "ERP Sync"}
+                  </button>
+                  <button
+                    onClick={() => setActiveInsightTab("telemetry")}
+                    className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                      activeInsightTab === "telemetry" ? "bg-[#00E5BE] text-[#060913] font-bold shadow-xs" : "text-gray-400 hover:text-white"
+                    }`}
+                  >
+                    {isAr ? "التحليلات" : "Telemetry"}
+                  </button>
+                </div>
+              </div>
+
+              {/* Dynamic Live Terminal Window */}
+              <div className="p-4 rounded-2xl bg-black/60 border border-white/10 font-mono text-xs space-y-3 relative overflow-hidden">
+                <div className="flex items-center justify-between border-b border-white/10 pb-2 text-[10px] text-gray-500">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block" />
+                    <span className="text-gray-400 ml-2">tahseen-agentic-runtime v2.4</span>
+                  </div>
+                  <span className="text-[#00E5BE] flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-ping" />
+                    STREAM READY
+                  </span>
+                </div>
+
+                {/* Tab Content Display */}
+                {activeInsightTab === "sales" && (
+                  <div className="space-y-2 text-start font-sans">
+                    <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-gray-300">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-gray-500 mb-1">
+                        <span>INCOMING_LEAD (WhatsApp API)</span>
+                        <span>0.12s latency</span>
+                      </div>
+                      <p className="text-xs">
+                        &ldquo;مرحباً، نحتاج نظام أتمتة مبيعات متصل مع شات بوت ذكي لمتابعة العملاء المحتملين في الرياض.&rdquo;
+                      </p>
+                    </div>
+                    <div className="p-2.5 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-[#00E5BE] mb-1 font-bold">
+                        <span>TAHSEEN_AI_REASONING_CORE</span>
+                        <span>Confidence: 99.4%</span>
+                      </div>
+                      <p className="text-xs">
+                        &ldquo;أهلاً بك! تم تصنيف الطلب بنجاح كفرصة مؤسسية مؤهلة. قمنا بجدولة جلسة عمل هندسية غداً وحجز موعد في التقويم.&rdquo;
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {activeInsightTab === "automation" && (
+                  <div className="space-y-2 text-start font-mono text-[11px]">
+                    <div className="flex items-center gap-2 text-emerald-400">
+                      <span>[14:28:01]</span>
+                      <span>INGEST: Enterprise Invoice #SA-9824 received</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-cyan-300">
+                      <span>[14:28:02]</span>
+                      <span>OCR_PARSE: Extracted 14 line items, Tax ID verified (ZATCA compliance 100%)</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[#00E5BE]">
+                      <span>[14:28:03]</span>
+                      <span>ERP_SYNC: Updated Oracle / SAP database, zero human intervention needed.</span>
+                    </div>
+                  </div>
+                )}
+
+                {activeInsightTab === "telemetry" && (
+                  <div className="grid grid-cols-3 gap-2 text-center font-mono py-1">
+                    <div className="p-2 rounded bg-white/[0.04] border border-white/5">
+                      <div className="text-[10px] text-gray-400">THROUGHPUT</div>
+                      <div className="text-sm font-bold text-white mt-0.5">18,420 / min</div>
+                    </div>
+                    <div className="p-2 rounded bg-white/[0.04] border border-white/5">
+                      <div className="text-[10px] text-gray-400">LATENCY</div>
+                      <div className="text-sm font-bold text-[#00E5BE] mt-0.5">&lt; 0.38s</div>
+                    </div>
+                    <div className="p-2 rounded bg-white/[0.04] border border-white/5">
+                      <div className="text-[10px] text-gray-400">AVAILABILITY</div>
+                      <div className="text-sm font-bold text-cyan-300 mt-0.5">99.98%</div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="p-3.5 sm:p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2.5">
-              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-pulse" />
-                  <span className="font-bold text-white text-[11px] sm:text-xs">{isAr ? "بيانات تشغيل الوكلاء الحية" : "Live Agent Telemetry"}</span>
-                </div>
-                <span className="text-[#00E5BE] font-mono font-semibold text-[11px] sm:text-xs">{isAr ? "٩٩.٩٨٪ توافر" : "99.98% Uptime"}</span>
+            {/* Bottom Value Proof Indicators */}
+            <div className="grid grid-cols-3 gap-3 pt-2 border-t border-white/[0.08] text-center font-sans">
+              <div>
+                <div className="text-lg sm:text-xl font-bold text-white font-mono">٤٠٪+</div>
+                <div className="text-[10px] text-gray-400">{isAr ? "تقليص العمل اليدوي" : "Manual Workload Cut"}</div>
               </div>
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-sm sm:text-base font-bold text-white">{isAr ? "~٠.٤ ثانية" : "~0.4s"}</div>
-                  <div className="text-[8px] sm:text-[9px] text-gray-400 uppercase">{isAr ? "الاستجابة" : "Latency"}</div>
-                </div>
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-sm sm:text-base font-bold text-[#00E5BE]">{isAr ? "٣.٢X" : "3.2X"}</div>
-                  <div className="text-[8px] sm:text-[9px] text-gray-400 uppercase">{isAr ? "التحويل" : "Conversion"}</div>
-                </div>
-                <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                  <div className="text-sm sm:text-base font-bold text-white">{isAr ? "٢٤/٧" : "24/7"}</div>
-                  <div className="text-[8px] sm:text-[9px] text-gray-400 uppercase">{isAr ? "نشط" : "Active"}</div>
-                </div>
+              <div>
+                <div className="text-lg sm:text-xl font-bold text-[#00E5BE] font-mono">٣ أضعاف</div>
+                <div className="text-[10px] text-gray-400">{isAr ? "سرعة تأهيل العملاء" : "Lead Conversion Speed"}</div>
+              </div>
+              <div>
+                <div className="text-lg sm:text-xl font-bold text-cyan-300 font-mono">٢٤/٧</div>
+                <div className="text-[10px] text-gray-400">{isAr ? "جاهزية تشغيل مستمرة" : "Autonomous Uptime"}</div>
               </div>
             </div>
+
           </div>
 
-          {/* Card 2: Actionable Data */}
-          <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 hover:border-[#00E5BE]/60 space-y-5 shadow-[0_12px_40px_rgba(0,229,190,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-            <div className="space-y-3.5">
-              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] group-hover:scale-110 transition-all">
-                <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <div className="space-y-1">
-                <span className="text-[10px] sm:text-xs font-bold text-[#00E5BE] tracking-widest uppercase">
-                  {isAr ? "الكفاءة الاستراتيجية" : "STRATEGIC EFFICIENCY"}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#00E5BE] transition-colors">
-                  {isAr ? "بيانات قابلة للتنفيذ" : "Actionable Data"}
-                </h3>
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                  {isAr
-                    ? "استفد من التحليلات المتقدمة لتحسين تدفقات العمل، وزيادة التفاعل، واتخاذ قرارات مبنية على البيانات تقلل التكاليف وتعزز العائد."
-                    : "Leverage analytics to enhance team workflows, boost engagement, and make data-driven decisions that reduce overhead and increase marketing ROI."}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
-                {(isAr
-                  ? ["نشر فعال واقتصادي", "إنفاق مالي ذكي", "قرارات مبنية على البيانات", "زيادة الكفاءة التشغيلية"]
-                  : ["Cost-Effective Deployment", "Smart Spending", "Data-Driven Decisions", "Increased Efficiency"]
-                ).map((item) => (
-                  <div key={item} className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/[0.08] hover:border-[#00E5BE]/40 text-xs font-medium text-gray-200 hover:text-white transition-all cursor-default">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0" />
-                    <span className="truncate">{item}</span>
+          {/* Card 2: Interactive Monthly Performance Chart (Right 5 Cols) */}
+          <div className="lg:col-span-5 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-[#00E5BE]/30 shadow-[0_12px_40px_rgba(0,229,190,0.08)] flex flex-col justify-between space-y-6">
+            
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+                    <TrendingUp className="w-5 h-5" />
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-3.5 sm:p-4 rounded-xl bg-[#060913]/90 border border-white/[0.08] space-y-2">
-              <div className="flex items-center justify-between text-xs border-b border-white/[0.06] pb-2">
-                <span className="font-bold text-white text-[11px] sm:text-xs">{isAr ? "مكاسب كفاءة العمليات" : "Workflow Efficiency Gain"}</span>
-                <span className="text-[#00E5BE] font-mono font-semibold text-[11px] sm:text-xs">{isAr ? "+٤٥٪ كفاءة" : "+45% Gain"}</span>
-              </div>
-              <div className="space-y-2">
-                <div>
-                  <div className="flex justify-between text-[10px] text-gray-400 mb-1">
-                    <span>{isAr ? "تقليص المهام اليدوية" : "Manual Task Reduction"}</span>
-                    <span className="text-[#00E5BE] font-bold">{isAr ? "٤٢٪" : "42%"}</span>
-                  </div>
-                  <div className="w-full h-1.5 sm:h-2 rounded-full bg-white/10 overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[42%]" />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-[10px] text-gray-400 mb-1">
-                    <span>{isAr ? "سرعة الاستجابة للعملاء" : "Lead Response Speed"}</span>
-                    <span className="text-[#00E5BE] font-bold">{isAr ? "٨٥٪" : "85%"}</span>
-                  </div>
-                  <div className="w-full h-1.5 sm:h-2 rounded-full bg-white/10 overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#00B8A9] to-[#00E5BE] w-[85%]" />
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                      {isAr ? "نمو التحويل ومعدلات الكفاءة" : "Conversion & Velocity Growth"}
+                    </h3>
+                    <span className="text-[10px] font-mono text-[#00E5BE]">
+                      {isAr ? "انقر على الأعمدة لمشاهدة البيانات" : "Interactive monthly trend analysis"}
+                    </span>
                   </div>
                 </div>
               </div>
+
+              {/* Interactive Bar Visualizer */}
+              <div className="p-4 rounded-2xl bg-black/40 border border-white/10 space-y-4">
+                <div className="flex items-center justify-between text-xs font-mono">
+                  <span className="text-gray-400">{isAr ? "أداء الربع السنوي" : "Performance Index"}</span>
+                  <span className="text-[#00E5BE] font-bold">
+                    {isAr ? "+٤٥٪ نمو مستمر" : "+45% Consistent Lift"}
+                  </span>
+                </div>
+
+                {/* Animated Interactive Bars */}
+                <div className="flex items-end justify-between gap-1.5 h-32 pt-4">
+                  {[
+                    { month: isAr ? "يناير" : "Jan", height: "45%", val: "+22%" },
+                    { month: isAr ? "فبراير" : "Feb", height: "60%", val: "+28%" },
+                    { month: isAr ? "مارس" : "Mar", height: "55%", val: "+31%" },
+                    { month: isAr ? "أبريل" : "Apr", height: "72%", val: "+38%" },
+                    { month: isAr ? "مايو" : "May", height: "85%", val: "+42%" },
+                    { month: isAr ? "يونيو" : "Jun", height: "98%", val: "+45%" },
+                  ].map((bar, idx) => (
+                    <button
+                      key={bar.month}
+                      onClick={() => setActiveChartMonth(idx)}
+                      className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group cursor-pointer"
+                    >
+                      <div className={`text-[9px] font-mono transition-opacity ${activeChartMonth === idx ? "text-[#00E5BE] opacity-100 font-bold" : "text-gray-500 opacity-0 group-hover:opacity-100"}`}>
+                        {bar.val}
+                      </div>
+                      <div
+                        style={{ height: bar.height }}
+                        className={`w-full rounded-t-lg transition-all duration-300 ${
+                          activeChartMonth === idx
+                            ? "bg-gradient-to-t from-[#00A389] to-[#00E5BE] shadow-[0_0_15px_rgba(0,229,190,0.6)] scale-x-105"
+                            : "bg-white/10 group-hover:bg-white/20"
+                        }`}
+                      />
+                      <span className={`text-[9px] font-mono ${activeChartMonth === idx ? "text-[#00E5BE] font-bold" : "text-gray-400"}`}>
+                        {bar.month}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
+
+            <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between text-xs">
+              <span className="text-gray-300 font-medium">
+                {isAr ? "متوسط سرعة الإنجاز بعد الأتمتة:" : "Average turnaround after deployment:"}
+              </span>
+              <span className="font-mono font-bold text-[#00E5BE]">
+                {isAr ? "أقل من ١٠ ثوانٍ" : "&lt; 10 seconds"}
+              </span>
+            </div>
+
           </div>
 
-        </div>
-
-        {/* Dual-Row Animated Streaming Value Pills */}
-        <div className="mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-white/[0.06] space-y-3 sm:space-y-4 overflow-hidden relative">
-          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-r from-[#060913] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 bg-gradient-to-l from-[#060913] to-transparent z-10 pointer-events-none" />
-
-          {/* Row 1 */}
-          <div className="overflow-hidden flex">
-            <div className="animate-marquee-left flex items-center gap-2.5 sm:gap-4 py-1">
-              {pillsRow1.map((pill, idx) => (
-                <div
-                  key={idx}
-                  className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-[11px] sm:text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
-                >
-                  {pill}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Row 2 */}
-          <div className="overflow-hidden flex">
-            <div className="animate-marquee-right flex items-center gap-2.5 sm:gap-4 py-1">
-              {pillsRow2.map((pill, idx) => (
-                <div
-                  key={idx}
-                  className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/[0.03] hover:bg-[#00E5BE]/15 border border-white/10 hover:border-[#00E5BE]/50 text-[11px] sm:text-xs font-semibold text-gray-200 hover:text-white transition-all duration-200 cursor-default shadow-sm hover:scale-105 whitespace-nowrap flex-shrink-0"
-                >
-                  {pill}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
       </section>
 
-      {/* 6. Sticky Interactive Solutions Showcase */}
+      {/* 6. Continuous Animated Value Pills Marquee */}
+      <section className="relative z-10 py-12 sm:py-16 overflow-hidden border-t border-b border-white/[0.06] bg-[#050814]/60">
+        <div className="space-y-4">
+          <div className="flex gap-4 animate-marquee-left">
+            {pillsRow1.map((pill, idx) => (
+              <div
+                key={`p1-${idx}`}
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+              >
+                {pill}
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-4 animate-marquee-right">
+            {pillsRow2.map((pill, idx) => (
+              <div
+                key={`p2-${idx}`}
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+              >
+                {pill}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Sticky Interactive Solutions Showcase */}
       <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
@@ -1162,27 +1301,25 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Step Navigation Pill Selector (Mobile Horizontal Swipe) */}
-            <div className="flex lg:flex-col gap-2 overflow-x-auto no-scrollbar pb-1 pt-1">
+            {/* Step Navigation Pill Selector */}
+            <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
               {showcaseSolutions.map((sol, idx) => (
                 <button
                   key={sol.step}
                   onClick={() => {
                     setActiveSolution(idx);
-                    const elem = document.getElementById(`solution-step-${idx}`);
-                    if (elem) elem.scrollIntoView({ behavior: "smooth", block: "center" });
+                    const el = document.getElementById(`solution-step-${idx}`);
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
                   }}
-                  className={`flex-shrink-0 lg:w-full p-2.5 sm:p-3 rounded-xl border text-start transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                  className={`flex items-center justify-between p-3 sm:p-3.5 rounded-xl sm:rounded-2xl border text-xs sm:text-sm font-bold transition-all text-start cursor-pointer flex-shrink-0 lg:flex-shrink ${
                     activeSolution === idx
-                      ? "bg-white/[0.06] border-[#00E5BE] text-white shadow-[0_0_20px_rgba(0,229,190,0.15)]"
-                      : "bg-transparent border-white/[0.06] text-gray-400 hover:border-white/20 hover:text-gray-200"
+                      ? "bg-[#00E5BE]/15 border-[#00E5BE] text-[#00E5BE] shadow-xs"
+                      : "bg-white/[0.02] border-white/[0.06] text-gray-300 hover:border-white/20"
                   }`}
                 >
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    <span className={`font-mono text-xs font-bold ${activeSolution === idx ? "text-[#00E5BE]" : "text-gray-500"}`}>
-                      {sol.step}
-                    </span>
-                    <span className="text-xs font-bold whitespace-nowrap">{sol.title}</span>
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-mono text-xs opacity-75">{sol.step}</span>
+                    <span>{sol.title}</span>
                   </div>
                   {activeSolution === idx && (
                     <div className="hidden lg:block w-1.5 h-1.5 rounded-full bg-[#00E5BE] animate-pulse" />
@@ -1233,13 +1370,13 @@ export default function Home() {
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
                       {sol.icon}
                     </div>
-                    <h3 className="text-lg sm:text-2xl font-bold text-white tracking-tight">{sol.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-bold text-white">{sol.title}</h3>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal">{sol.desc}</p>
+                  <p className="text-xs sm:text-sm text-gray-300 font-normal leading-relaxed">{sol.desc}</p>
                 </div>
 
                 {/* Metrics Row */}
-                <div className="grid grid-cols-3 gap-2 pt-0.5">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 py-1">
                   {sol.metrics.map((m) => (
                     <div key={m.label} className="p-2 sm:p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-center">
                       <div className="text-xs sm:text-sm font-extrabold text-[#00E5BE] font-sans">{m.val}</div>
@@ -1259,7 +1396,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Tahseen Education (Main Highlight with 3 Sub-Mentions) */}
+      {/* 8. TAHSEEN EDUCATION (MAIN HIGHLIGHT WITH 3 SUB-MENTIONS & DYNAMIC SMART TUTOR PREVIEW) */}
       <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-gradient-to-b from-[#061219]/40 via-[#050814] to-[#061219]/40">
         
         {/* Section Tag */}
@@ -1286,15 +1423,13 @@ export default function Home() {
           </p>
         </div>
 
-        {/* MAIN HIGHLIGHT CARD: Tahseen Education Platform */}
-        <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-gradient-to-br from-[#0a1e28] via-[#07141b] to-[#050814] border-2 border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-10 overflow-hidden">
-          {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-[400px] h-[300px] bg-[#00E5BE]/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-
+        {/* MAIN HIGHLIGHT CARD: Tahseen Education Platform with Interactive Smart Tutor Preview */}
+        <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 bg-gradient-to-br from-[#0a1e28] via-[#07141b] to-[#050814] border-2 border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-8 overflow-hidden">
+          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left/Main Column: Highlights & Key Strengths */}
-            <div className="lg:col-span-8 space-y-6 text-start">
+            <div className="lg:col-span-7 space-y-6 text-start">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="px-3 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase shadow-[0_0_12px_rgba(0,229,190,0.5)]">
                   {isAr ? "المنصة الرئيسية • edutahseen.com" : "MAIN PLATFORM • EDUTAHSEEN.COM"}
@@ -1320,7 +1455,7 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Core Features Row */}
+              {/* Core Capabilities Row */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                 <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
@@ -1354,18 +1489,36 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Main CTA Portal Box */}
-            <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-2xl bg-[#060913]/90 border border-white/10 text-center">
-              <div className="space-y-1.5">
-                <span className="text-[10px] font-mono text-[#00E5BE] uppercase tracking-widest block font-bold">
-                  {isAr ? "منظومة موحدة" : "UNIFIED PLATFORM"}
-                </span>
-                <div className="text-xl sm:text-2xl font-extrabold text-white">
-                  {isAr ? "حساب واحد لجميع الاختبارات" : "One Account for All Exams"}
+            {/* Right Column: Interactive AI Smart Tutor Demo Sandbox */}
+            <div className="lg:col-span-5 p-5 sm:p-7 rounded-2xl bg-[#060913]/95 border border-white/10 space-y-4 text-start">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#00E5BE] animate-ping" />
+                  <span className="text-xs font-bold text-white font-mono">
+                    {isAr ? "المعلم الذكي • تجربة سؤال حي" : "AI Smart Tutor • Live Sandbox"}
+                  </span>
                 </div>
-                <p className="text-[11px] text-gray-400">
-                  {isAr ? "وصول كامل للقدرات والتحصيلي وبوصلتي" : "Full access to Qudurat, Tahsili & Bausalty"}
-                </p>
+                <span className="text-[10px] font-mono text-[#00E5BE] font-bold">Qiyas Simulated</span>
+              </div>
+
+              <div className="space-y-2.5 text-xs">
+                <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-gray-200">
+                  <span className="text-[10px] text-gray-400 block font-mono mb-1">
+                    {isAr ? "سؤال قسم الحساب والهندسة (قدرات كمي):" : "Quantitative Problem Sample:"}
+                  </span>
+                  &ldquo;إذا كان ثمن ٣ أقلام ودفترين يساوي ٢٩ ريالاً، وثمن قلمين و٣ دفاتر يساوي ٢٦ ريالاً، فما ثمن القلم الواحد؟&rdquo;
+                </div>
+
+                <div className="p-3 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-white space-y-1.5">
+                  <div className="flex items-center justify-between text-[10px] text-[#00E5BE] font-mono font-bold">
+                    <span>شرح المعلم الذكي خطوة بخطوة:</span>
+                    <span>الحل: ٧ ريالات</span>
+                  </div>
+                  <p className="text-[11px] text-gray-300 leading-relaxed font-normal">
+                    ١. نجمع المعادلتين: ٥ أقلام + ٥ دفاتر = ٥٥ ريالاً ← قلم + دفتر = ١١ ريالاً. <br />
+                    ٢. بالتعويض نجد ثمن القلم الواحد = <strong>٧ ريالات</strong> مباشرة.
+                  </p>
+                </div>
               </div>
 
               <a
@@ -1475,7 +1628,7 @@ export default function Home() {
 
       </section>
 
-      {/* 8. Interactive Testimonial Carousel */}
+      {/* 9. Interactive Testimonial Carousel */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
@@ -1500,89 +1653,97 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Carousel Viewport */}
-        <div
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          className="relative overflow-hidden"
-        >
+        <div className="max-w-4xl mx-auto">
           <div
-            className="flex transition-transform duration-700 ease-out gap-4 sm:gap-6"
-            style={{
-              transform: `translateX(${isAr ? "" : "-"}${carouselIndex * (100 / (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3))}%)`,
-            }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            className="p-6 sm:p-10 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#0c1e24] via-[#07131a] to-[#060913] border border-white/[0.08] transition-all text-start relative overflow-hidden shadow-2xl"
           >
-            {extendedTestimonials.map((t, idx) => (
-              <div
-                key={idx}
-                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex-shrink-0 p-5 sm:p-7 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/[0.03] via-white/[0.015] to-transparent border border-white/[0.08] hover:border-[#00E5BE]/50 flex flex-col justify-between space-y-4 sm:space-y-5 transition-all duration-300 text-start"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
-                      <Quote className="w-3.5 h-3.5" />
-                    </div>
-                    <div className="flex items-center gap-0.5 text-[#00E5BE]">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-[#00E5BE]" />
-                      ))}
-                    </div>
-                  </div>
-
-                  <p className="text-xs sm:text-sm text-gray-200 group-hover:text-white leading-relaxed font-normal italic transition-colors">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
+            <div className="flex items-center gap-1 text-[#00E5BE] mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-[#00E5BE]" />
+              ))}
+            </div>
+            <p className="text-sm sm:text-lg text-gray-200 leading-relaxed font-normal italic mb-6">
+              &ldquo;{testimonials[carouselIndex].quote}&rdquo;
+            </p>
+            <div className="flex items-center justify-between border-t border-white/10 pt-4">
+              <div>
+                <div className="font-bold text-white text-sm sm:text-base">
+                  {testimonials[carouselIndex].author}
                 </div>
-
-                <div className="pt-3 sm:pt-4 border-t border-white/[0.06] space-y-1">
-                  <div className="font-bold text-white text-xs sm:text-sm group-hover:text-[#00E5BE] transition-colors">{t.author}</div>
-                  <div className="text-[10px] sm:text-[11px] text-gray-400 font-medium">{t.role}</div>
-                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#00E5BE]/10 text-[#00E5BE] text-[9px] sm:text-[10px] font-semibold">
-                    <CheckCircle2 className="w-2.5 h-2.5" />
-                    <span>{t.metrics}</span>
-                  </div>
+                <div className="text-xs text-gray-400">
+                  {testimonials[carouselIndex].role}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Carousel Controls */}
-        <div className="flex items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
-          <button
-            onClick={handlePrev}
-            aria-label="Previous testimonial"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer"
-          >
-            <ChevronLeft className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
-          </button>
-
-          <div className="flex items-center gap-1.5 sm:gap-2">
-            {testimonials.map((_, dotIdx) => (
-              <button
-                key={dotIdx}
-                onClick={() => setCarouselIndex(dotIdx)}
-                aria-label={`Jump to slide ${dotIdx + 1}`}
-                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  carouselIndex === dotIdx
-                    ? "w-5 sm:w-6 bg-[#00E5BE] shadow-[0_0_10px_rgba(0,229,190,0.8)]"
-                    : "w-1.5 sm:w-2 bg-white/20 hover:bg-white/40"
-                }`}
-              />
-            ))}
+              <div className="px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-xs font-semibold">
+                {testimonials[carouselIndex].metrics}
+              </div>
+            </div>
           </div>
 
-          <button
-            onClick={handleNext}
-            aria-label="Next testimonial"
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/[0.03] hover:bg-[#00E5BE]/20 border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-all duration-200 cursor-pointer"
-          >
-            <ChevronRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
-          </button>
+          {/* Carousel Controls */}
+          <div className="flex items-center justify-center gap-3 mt-6">
+            <button
+              onClick={handlePrev}
+              aria-label="Previous"
+              className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
+            >
+              <ChevronLeft className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
+            </button>
+            <div className="flex items-center gap-2">
+              {testimonials.map((_, dotIdx) => (
+                <button
+                  key={dotIdx}
+                  onClick={() => setCarouselIndex(dotIdx)}
+                  aria-label={`Slide ${dotIdx + 1}`}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    carouselIndex === dotIdx ? "w-6 bg-[#00E5BE]" : "w-2 bg-white/20 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={handleNext}
+              aria-label="Next"
+              className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 hover:border-[#00E5BE]/50 flex items-center justify-center text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
+            >
+              <ChevronRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* 9. Interactive FAQ Section */}
+      {/* 10. Saudi Ehsan Platform 1% Social Pledge Banner */}
+      <section className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1200px] mx-auto w-full">
+        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#061e1b]/80 via-[#060913] to-[#061e1b]/80 border border-[#00E5BE]/30 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0">
+              <HeartHandshake className="w-7 h-7" />
+            </div>
+            <div className="space-y-1">
+              <div className="text-xs font-mono text-[#00E5BE] font-bold uppercase tracking-wider">
+                {isAr ? "الأثر المجتمعي المستدام" : "SOCIAL IMPACT PLEDGE"}
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-white">
+                {isAr ? "نتبرع بنسبة ١٪ من أرباح أعمالنا لمنصة إحسان" : "We Donate 1% of Proceeds to the Ehsan Platform"}
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-300 font-normal">
+                {isAr ? "التزاماً منا بالمسؤولية الاجتماعية ودعماً للقطاع الخيري وغير الربحي في المملكة العربية السعودية." : "Committed to sustainable social responsibility and empowering non-profit growth across Saudi Arabia."}
+              </p>
+            </div>
+          </div>
+
+          <Link
+            href={contactHref}
+            className="inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-xl btn-teal-outline flex-shrink-0 cursor-pointer"
+          >
+            <span>{isAr ? "تواصل معنا" : "GET IN TOUCH"}</span>
+          </Link>
+        </div>
+      </section>
+
+      {/* 11. DYNAMIC INTERACTIVE FAQ SECTION WITH QUICK FILTER */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1080px] mx-auto w-full border-t border-white/[0.07]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
           <span className="text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
@@ -1601,30 +1762,57 @@ export default function Home() {
           </h2>
           <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal">
             {isAr
-              ? "إجابات شاملة ومباشرة عن إمكانيات تحسين للذكاء الاصطناعي وكيفية تكاملها مع منشأتك."
-              : "Find clear answers to common questions about Tahseen AI's capabilities and integration process."}
+              ? "كل ما تود معرفته حول خدمات تحسين للذكاء الاصطناعي وكيف نساعد منشأتك على التوسع الذكي."
+              : "Everything you need to know about our AI systems, implementation speed, and enterprise integration."}
           </p>
+
+          {/* Dynamic FAQ Filter Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-3">
+            {[
+              { id: "all", label: isAr ? "الكل" : "All" },
+              { id: "services", label: isAr ? "الخدمات" : "Services" },
+              { id: "enterprise", label: isAr ? "المؤسسات" : "Enterprise" },
+              { id: "customization", label: isAr ? "التخصيص" : "Customization" },
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setFaqFilter(cat.id)}
+                className={`px-3.5 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer ${
+                  faqFilter === cat.id
+                    ? "bg-[#00E5BE] text-[#060913] font-bold shadow-xs"
+                    : "bg-white/[0.04] text-gray-300 border border-white/10 hover:border-[#00E5BE]/40"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="space-y-3">
-          {faqs.map((faq, idx) => (
+        <div className="space-y-3 sm:space-y-4">
+          {filteredFaqs.map((faq, idx) => (
             <div
-              key={idx}
-              className="rounded-xl sm:rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 overflow-hidden transition-all duration-200"
+              key={faq.q}
+              className="rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 transition-all duration-200 overflow-hidden"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-4 sm:p-5 text-start flex items-center justify-between gap-3 font-bold text-xs sm:text-base text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
+                aria-expanded={openFaq === idx}
+                className="w-full p-4 sm:p-5 flex items-center justify-between gap-4 text-start font-bold text-xs sm:text-base text-white hover:text-[#00E5BE] transition-colors cursor-pointer"
               >
-                <span>{faq.q}</span>
+                <div className="flex items-center gap-3">
+                  <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#00E5BE] flex-shrink-0" />
+                  <span>{faq.q}</span>
+                </div>
                 <ChevronDown
-                  className={`w-4 h-4 text-[#00E5BE] flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-4 h-4 text-[#00E5BE] transition-transform duration-200 flex-shrink-0 ${
                     openFaq === idx ? "rotate-180" : ""
                   }`}
                 />
               </button>
+
               {openFaq === idx && (
-                <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-0.5 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/[0.04]">
+                <div className="px-4 sm:px-5 pb-5 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/5 font-normal">
                   {faq.a}
                 </div>
               )}
@@ -1633,118 +1821,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 10. High-Impact CTA & Telemetry Banner */}
-      <section id="contact" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08]">
-        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-gradient-to-br from-[#0c1f24] via-[#08131c] to-[#060913] border border-[#00E5BE]/30 p-6 sm:p-10 lg:p-14 shadow-[0_0_50px_rgba(0,229,190,0.15)] hover:border-[#00E5BE]/60 transition-all duration-500">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
-            {/* Left Column */}
-            <div className="lg:col-span-6 space-y-4 sm:space-y-6 text-start">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[11px] sm:text-xs font-semibold text-gray-300">
-                <Users className="w-3.5 h-3.5 text-[#00E5BE]" />
-                <span>{isAr ? "موثوق من أكثر من ١٠ آلاف جهة عمل" : "Trusted by 10k + businesses"}</span>
-              </div>
-
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
-                {isAr ? (
-                  <>
-                    ابنِ حل الذكاء الاصطناعي <br />
-                    الخاص بك الآن!
-                  </>
-                ) : (
-                  <>
-                    Build AI-Powered <br />
-                    Solution Now!
-                  </>
-                )}
-              </h2>
-
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed max-w-md">
-                {isAr
-                  ? "أتمت توليد العملاء المحتملين والتفاعل الذكي في بيئات العمل الحقيقية والديناميكية."
-                  : "Automate lead generation and customer engagement in diverse and dynamic real-world settings"}
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
-                <Link
-                  href={contactHref}
-                  className="inline-flex items-center justify-center px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] transition-all shadow-[0_4px_25px_rgba(0,229,190,0.5)] cursor-pointer text-center"
-                >
-                  <span>{isAr ? "ابدأ الآن" : "Get Started"}</span>
-                  <ArrowRight className={`w-4 h-4 mx-2 text-[#060913] ${isAr ? "rotate-180" : ""}`} />
-                </Link>
-
-                <Link
-                  href={contactHref}
-                  className="inline-flex items-center justify-center px-6 py-3.5 text-xs sm:text-sm font-bold tracking-wider rounded-xl bg-[#1E293B] border border-white/10 text-white hover:bg-[#334155] transition-all shadow-lg cursor-pointer gap-2 text-center"
-                >
-                  <HelpCircle className="w-4 h-4 text-gray-400" />
-                  <span>{isAr ? "معرفة المزيد" : "Learn More"}</span>
-                </Link>
-              </div>
+      {/* 12. Final High-Impact CTA Banner */}
+      <section className="relative z-10 py-16 sm:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 max-w-[1300px] mx-auto w-full">
+        <div className="relative rounded-3xl p-8 sm:p-14 lg:p-20 text-center overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
+          <div className="space-y-4 max-w-2xl mx-auto">
+            <span className="text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+              {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+              {isAr ? (
+                <>
+                  ابنِ حلول الذكاء الاصطناعي <br />
+                  <span className="text-[#00E5BE]">لمنشأتك الآن!</span>
+                </>
+              ) : (
+                <>
+                  Build Your AI-Powered <br />
+                  <span className="text-[#00E5BE]">Solution Now!</span>
+                </>
+              )}
+            </h2>
+            <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal max-w-xl mx-auto">
+              {isAr
+                ? "تواصل مع فريقنا الهندسي اليوم لتقييم فرص الأتمتة ونشر أنظمة الذكاء الاصطناعي المخصصة لأعمالك."
+                : "Connect directly with our engineering team to assess automation opportunities and deploy custom intelligent agents."}
+            </p>
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href={contactHref}
+                className="inline-flex items-center gap-2 px-8 py-4 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer"
+              >
+                <span>{isAr ? "احجز استشارتك المجانية" : "SCHEDULE FREE CONSULTATION"}</span>
+                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
+              </Link>
             </div>
-
-            {/* Right Column */}
-            <div className="lg:col-span-6 relative">
-              <div className="rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl p-4 sm:p-6 shadow-2xl space-y-3 sm:space-y-4">
-                <div className="flex items-center gap-3 text-start">
-                  <span className="text-base sm:text-lg font-bold text-white tracking-tight">{isAr ? "الرصيد والقيمة" : "Balance"}</span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00E5BE]/15 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-[11px] font-bold">
-                    <CheckCircle2 className="w-3 h-3" />
-                    <span>{isAr ? "على المسار الصحيح" : "On track"}</span>
-                  </span>
-                </div>
-
-                <div className="rounded-xl bg-[#060913]/95 border border-white/10 p-4 sm:p-5 shadow-2xl space-y-3 text-start sm:translate-x-3 sm:translate-y-1">
-                  <div>
-                    <div className="text-[10px] sm:text-[11px] text-gray-400 font-medium">{isAr ? "إجمالي العائد المحقق" : "Total Spent"}</div>
-                    <div className="text-xl sm:text-3xl font-extrabold text-white font-mono mt-0.5">$682.5K</div>
-                  </div>
-
-                  <div className="relative pt-1 sm:pt-2">
-                    <div className="w-full border-b border-dashed border-[#00E5BE]/30 absolute top-3 left-0" />
-                    
-                    <div className="flex items-end justify-between gap-1 sm:gap-2 h-24 sm:h-28 pt-3 sm:pt-4">
-                      {[
-                        { m: isAr ? "يناير" : "Jan", h: "35%", active: false },
-                        { m: isAr ? "فبراير" : "Feb", h: "75%", active: false },
-                        { m: isAr ? "مارس" : "Mar", h: "55%", active: false },
-                        { m: isAr ? "أبريل" : "Apr", h: "65%", active: false },
-                        { m: isAr ? "مايو" : "May", h: "50%", active: false },
-                        { m: isAr ? "يونيو" : "Jun", h: "95%", active: true },
-                        { m: isAr ? "يوليو" : "Jul", h: "45%", active: false },
-                        { m: isAr ? "أغسطس" : "Aug", h: "75%", active: false },
-                        { m: isAr ? "سبتمبر" : "Sep", h: "30%", active: false },
-                        { m: isAr ? "أكتوبر" : "Oct", h: "60%", active: false },
-                      ].map((bar) => (
-                        <div key={bar.m} className="flex-1 flex flex-col items-center gap-1 h-full justify-end group">
-                          <div
-                            style={{ height: bar.h }}
-                            className={`w-full rounded-md transition-all duration-300 ${
-                              bar.active
-                                ? "bg-[#00E5BE] shadow-[0_0_15px_rgba(0,229,190,0.8)] scale-y-105"
-                                : "bg-white/10 group-hover:bg-white/20"
-                            }`}
-                          />
-                          <span className={`text-[7px] sm:text-[9px] font-mono ${bar.active ? "text-[#00E5BE] font-bold" : "text-gray-500"}`}>
-                            {bar.m}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
           </div>
-
         </div>
       </section>
 
-      {/* 11. Enterprise Footer */}
+      {/* 13. Global Master Footer */}
       <Footer lang={lang} theme={theme} />
 
     </div>
