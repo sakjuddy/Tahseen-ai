@@ -72,33 +72,46 @@
   transform: translateY(-2px);
 }
 
-/* Vertex Grid Pattern */
-.vertex-grid-pattern {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-html.light .vertex-grid-pattern {
-  background-image: radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* Vertex Card Styling */
-.vertex-card {
+/* Mozn-Style Sharp Bento Boxes with Crisp Corners */
+.sharp-bento {
   position: relative;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0.005) 100%);
+  background-color: rgba(7, 13, 22, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-html.light .vertex-card {
-  background: #ffffff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+
+html.light .sharp-bento {
+  background-color: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
 }
-.vertex-card:hover {
+
+.sharp-bento:hover {
   border-color: rgba(0, 229, 190, 0.5);
-  box-shadow: 0 8px 30px -4px rgba(0, 229, 190, 0.2);
+  box-shadow: 0 8px 30px -4px rgba(0, 229, 190, 0.15);
   transform: translateY(-2px);
+}
+
+/* Animated Scroll Down Indicator */
+@keyframes scroll-mouse {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-scroll-mouse {
+  animation: scroll-mouse 2s ease-in-out infinite;
 }
 
 /* Truly Continuous Infinite Marquee Animation for Value Pills */
@@ -137,13 +150,13 @@ html.light .vertex-card {
   animation-play-state: paused;
 }
 
-/* Vertex Light Mode Theme Overrides */
+/* Light Mode Theme Overrides */
 html.light {
   color-scheme: light;
 }
 
 html.light body {
-  background-color: #fafafa;
+  background-color: #f8fafc;
   color: #0f172a;
 }
 
@@ -167,7 +180,7 @@ html.light .text-gray-500 {
 }
 
 html.light .bg-\[\#060913\] {
-  background-color: #fafafa !important;
+  background-color: #f8fafc !important;
 }
 
 html.light .bg-\[\#04060d\] {
@@ -176,18 +189,7 @@ html.light .bg-\[\#04060d\] {
 
 html.light .bg-\[\#050814\]\/80,
 html.light .bg-\[\#050814\]\/60 {
-  background-color: rgba(244, 244, 245, 0.85) !important;
-}
-
-html.light .bg-white\/\[0\.01\],
-html.light .bg-white\/\[0\.015\],
-html.light .bg-white\/\[0\.02\],
-html.light .bg-white\/\[0\.03\],
-html.light .bg-white\/\[0\.04\],
-html.light .bg-white\/\[0\.05\] {
-  background-color: #ffffff !important;
-  border-color: rgba(15, 23, 42, 0.08) !important;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+  background-color: rgba(241, 245, 249, 0.85) !important;
 }
 
 html.light .border-white\/\[0\.04\],
@@ -213,7 +215,7 @@ html.light .btn-teal-outline:hover {
 }
 
 html.light footer {
-  background-color: #f4f4f5 !important;
+  background-color: #f1f5f9 !important;
   border-color: rgba(15, 23, 42, 0.08) !important;
 }
 

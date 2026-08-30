@@ -49,7 +49,6 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [activeSolution, setActiveSolution] = useState(0);
 
   // Sync Language & Theme from LocalStorage on mount
   useEffect(() => {
@@ -416,7 +415,7 @@ export default function Home() {
     <div
       dir={isAr ? "rtl" : "ltr"}
       className={`relative min-h-screen flex flex-col justify-between overflow-x-clip font-sans transition-colors duration-300 ${
-        isLight ? "bg-[#FAFAFA] text-slate-900" : "bg-[#060913] text-white"
+        isLight ? "bg-[#F8FAFC] text-slate-900" : "bg-[#060913] text-white"
       }`}
     >
       {/* Background ambient radial glows */}
@@ -672,8 +671,8 @@ export default function Home() {
         <div id="services" className="relative z-10 pt-8 sm:pt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pointer-events-auto scroll-mt-24 sm:scroll-mt-28">
           
           {/* Card 1: AI Agents */}
-          <div className="w-full p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-10 h-10 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
               <Bot className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -687,8 +686,8 @@ export default function Home() {
           </div>
 
           {/* Card 2: Automation */}
-          <div className="w-full p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-10 h-10 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
               <Workflow className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -702,8 +701,8 @@ export default function Home() {
           </div>
 
           {/* Card 3: Consulting */}
-          <div className="w-full p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-10 h-10 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
               <Compass className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -717,8 +716,8 @@ export default function Home() {
           </div>
 
           {/* Card 4: Development */}
-          <div className="w-full p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.06] hover:border-[#00E5BE]/40 space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-10 h-10 rounded-lg bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
               <BarChart3 className="w-5 h-5" />
             </div>
             <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
@@ -731,6 +730,23 @@ export default function Home() {
             </p>
           </div>
 
+        </div>
+
+        {/* Mozn-Style Animated Scroll Down Indicator */}
+        <div className="relative z-10 pt-8 pb-2 flex flex-col items-center justify-center gap-2 pointer-events-auto">
+          <a
+            href="#about"
+            onClick={(e) => handleSmoothScroll(e, "#about")}
+            className="flex flex-col items-center gap-2 text-[10px] font-mono tracking-widest text-gray-400 hover:text-[#00E5BE] transition-colors cursor-pointer group"
+            aria-label="Scroll to discover"
+          >
+            <div className="w-5 h-8 rounded-full border border-white/20 group-hover:border-[#00E5BE] flex items-start justify-center p-1 transition-colors">
+              <div className="w-1 h-2 rounded-full bg-[#00E5BE] animate-scroll-mouse" />
+            </div>
+            <span className="uppercase text-[9px] font-bold opacity-75 group-hover:opacity-100">
+              {isAr ? "اكتشف المنظومة ↓" : "SCROLL TO DISCOVER ↓"}
+            </span>
+          </a>
         </div>
 
       </main>
@@ -758,7 +774,7 @@ export default function Home() {
         </div>
 
         {/* Crisp White/Teal Container Box */}
-        <div className="rounded-2xl sm:rounded-3xl bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-lg flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
+        <div className="rounded-lg bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-lg flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
           
           {/* Logo 1: Imam Abdulrahman Bin Faisal University */}
           <div className="relative h-12 w-28 sm:h-16 sm:w-40 transition-transform duration-300 hover:scale-105">
@@ -797,12 +813,12 @@ export default function Home() {
 
       </section>
 
-      {/* 5. Clean Enterprise Insights & Core Capabilities */}
+      {/* 5. MOZN-STYLE SHARP ENTERPRISE INSIGHTS & CAPABILITIES */}
       <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.07]">
         
         {/* Header */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
             <Activity className="w-3.5 h-3.5" />
             <span>{isAr ? "رؤى تشغيلية ومؤشرات لحظية" : "REAL-TIME INSIGHTS & ACTIONABLE DATA"}</span>
           </div>
@@ -824,13 +840,13 @@ export default function Home() {
           </p>
         </div>
 
-        {/* 2-Column Clean Editorial Cards */}
+        {/* 2-Column Mozn-Style Sharp Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           
-          {/* Card 1: Lead Velocity & Autonomous Qualification */}
-          <div className="p-6 sm:p-8 rounded-3xl vertex-card space-y-5 text-start">
+          {/* Card 1: Autonomous Lead Routing & Engagement */}
+          <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-2xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
+              <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
                 <Bot className="w-5 h-5" />
               </div>
               <span className="text-xs font-mono text-[#00E5BE] font-bold">
@@ -862,9 +878,9 @@ export default function Home() {
           </div>
 
           {/* Card 2: Operations & Data Synchronization */}
-          <div className="p-6 sm:p-8 rounded-3xl vertex-card space-y-5 text-start">
+          <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start">
             <div className="flex items-center justify-between">
-              <div className="w-10 h-10 rounded-xl bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
+              <div className="w-10 h-10 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
                 <Workflow className="w-5 h-5" />
               </div>
               <span className="text-xs font-mono text-[#38BDF8] font-bold">
@@ -899,12 +915,12 @@ export default function Home() {
 
       </section>
 
-      {/* 6. Solutions Showcase */}
+      {/* 6. MOZN-STYLE SHARP SOLUTIONS SHOWCASE */}
       <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
         
         {/* Section Heading */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
             <Cpu className="w-3.5 h-3.5" />
             <span>{isAr ? "مُصمم للتوسع المؤسسي عالي الكفاءة" : "BUILT FOR HIGH-ASSURANCE SCALE"}</span>
           </div>
@@ -926,12 +942,12 @@ export default function Home() {
           </p>
         </div>
 
-        {/* 3 Solution Cards Grid */}
+        {/* 3 Sharp Solution Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
           {showcaseSolutions.map((sol) => (
             <div
               key={sol.step}
-              className="p-6 sm:p-8 rounded-3xl vertex-card flex flex-col justify-between space-y-6 text-start"
+              className="p-6 sm:p-8 sharp-bento flex flex-col justify-between space-y-6 text-start"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b border-white/5 pb-3">
@@ -939,7 +955,7 @@ export default function Home() {
                     <span className="font-mono text-sm font-bold text-[#00E5BE]">{sol.step}</span>
                     <span className="text-xs text-gray-500 font-mono">/ {sol.total}</span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-mono font-bold uppercase">
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-mono font-bold uppercase">
                     {sol.tag}
                   </span>
                 </div>
@@ -962,7 +978,7 @@ export default function Home() {
               {/* Bottom Metrics Pill */}
               <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/5 text-center font-mono">
                 {sol.metrics.map((m) => (
-                  <div key={m.label} className="p-2 rounded-xl bg-white/[0.02] border border-white/5">
+                  <div key={m.label} className="p-2 rounded-md bg-white/[0.02] border border-white/5">
                     <div className="text-xs font-bold text-[#00E5BE]">{m.val}</div>
                     <div className="text-[8px] text-gray-500 truncate mt-0.5">{m.label}</div>
                   </div>
@@ -981,7 +997,7 @@ export default function Home() {
             {pillsRow1.map((pill, idx) => (
               <div
                 key={`p1-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
               >
                 {pill}
               </div>
@@ -991,7 +1007,7 @@ export default function Home() {
             {pillsRow2.map((pill, idx) => (
               <div
                 key={`p2-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
               >
                 {pill}
               </div>
@@ -1000,12 +1016,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Tahseen Education (Flagship Ecosystem Highlight) */}
+      {/* 8. TAHSEEN EDUCATION (FLAGSHIP ECOSYSTEM HIGHLIGHT) */}
       <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-gradient-to-b from-[#061219]/40 via-[#050814] to-[#061219]/40">
         
         {/* Section Tag */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,229,190,0.15)]">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(0,229,190,0.15)]">
             <GraduationCap className="w-3.5 h-3.5" />
             <span>{isAr ? "الذراع التعليمي • مجموعة تحسين للذكاء الاصطناعي" : "EDUCATIONAL DIVISION • TAHSEEN AI GROUP"}</span>
           </div>
@@ -1027,19 +1043,19 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Highlight Card */}
-        <div className="relative rounded-3xl p-6 sm:p-10 lg:p-12 vertex-card border-2 border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-8 overflow-hidden">
+        {/* Sharp Flagship Highlight Card */}
+        <div className="relative rounded-lg p-6 sm:p-10 lg:p-12 sharp-bento border-2 border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-8 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-8 space-y-6 text-start">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="px-3 py-0.5 rounded-full bg-[#00E5BE] text-[#060913] text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase">
+                <span className="px-3 py-0.5 rounded-md bg-[#00E5BE] text-[#060913] text-[10px] sm:text-[11px] font-mono font-extrabold tracking-wider uppercase">
                   {isAr ? "المنصة الرئيسية • edutahseen.com" : "MAIN PLATFORM • EDUTAHSEEN.COM"}
                 </span>
-                <span className="px-3 py-0.5 rounded-full bg-white/10 text-gray-300 text-[10px] font-medium">
+                <span className="px-3 py-0.5 rounded-md bg-white/10 text-gray-300 text-[10px] font-medium">
                   {isAr ? "٤,٣٠٠+ طالب وطالبة" : "4,300+ Active Students"}
                 </span>
-                <span className="px-3 py-0.5 rounded-full bg-white/10 text-gray-300 text-[10px] font-medium">
+                <span className="px-3 py-0.5 rounded-md bg-white/10 text-gray-300 text-[10px] font-medium">
                   {isAr ? "معايير قياس وهيئة تقويم التعليم (ETEC)" : "Saudi ETEC & Qiyas Standards"}
                 </span>
               </div>
@@ -1058,7 +1074,7 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <div className="p-3 rounded-md bg-white/[0.03] border border-white/[0.08] space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{isAr ? "المعلم الذكي التفاعلي" : "AI Smart Tutor"}</span>
@@ -1068,7 +1084,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <div className="p-3 rounded-md bg-white/[0.03] border border-white/[0.08] space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{isAr ? "تقارير مستوى دورية" : "Parent Diagnostics"}</span>
@@ -1078,7 +1094,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <div className="p-3 rounded-md bg-white/[0.03] border border-white/[0.08] space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{isAr ? "محتوى معتمد وموثوق" : "ETEC & Qiyas Aligned"}</span>
@@ -1090,7 +1106,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-2xl bg-[#060913]/90 border border-white/10 text-center">
+            <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-md bg-[#060913]/90 border border-white/10 text-center">
               <div className="space-y-1.5">
                 <span className="text-[10px] font-mono text-[#00E5BE] uppercase tracking-widest block font-bold">
                   {isAr ? "منظومة موحدة" : "UNIFIED PLATFORM"}
@@ -1107,7 +1123,7 @@ export default function Home() {
                 href="https://edutahseen.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center py-3.5 px-6 rounded-xl text-xs font-extrabold tracking-widest uppercase bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_20px_rgba(0,229,190,0.5)] transition-all cursor-pointer"
+                className="w-full inline-flex items-center justify-center py-3.5 px-6 rounded-md text-xs font-extrabold tracking-widest uppercase bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_20px_rgba(0,229,190,0.5)] transition-all cursor-pointer"
               >
                 <span>{isAr ? "زيارة منصة تحسين التعليمية" : "VISIT EDUTAHSEEN.COM"}</span>
                 <ExternalLink className="w-4 h-4 mx-1.5" />
@@ -1117,17 +1133,17 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 3 Sub-Mentions */}
+        {/* 3 Sharp Sub-Mentions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           
           <a
             href="https://edutahseen.com/qudurat"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 sm:p-5 rounded-2xl vertex-card flex items-center justify-between gap-3 text-start group cursor-pointer"
+            className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0 group-hover:scale-105 transition-transform">
                 <BookOpen className="w-5 h-5" />
               </div>
               <div>
@@ -1149,10 +1165,10 @@ export default function Home() {
             href="https://edutahseen.com/tahsili"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 sm:p-5 rounded-2xl vertex-card flex items-center justify-between gap-3 text-start group cursor-pointer"
+            className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] flex-shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] flex-shrink-0 group-hover:scale-105 transition-transform">
                 <GraduationCap className="w-5 h-5" />
               </div>
               <div>
@@ -1174,10 +1190,10 @@ export default function Home() {
             href="https://edutahseen.com/busalati"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 sm:p-5 rounded-2xl vertex-card flex items-center justify-between gap-3 text-start group cursor-pointer"
+            className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center text-[#A855F7] flex-shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-md bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center text-[#A855F7] flex-shrink-0 group-hover:scale-105 transition-transform">
                 <Compass className="w-5 h-5" />
               </div>
               <div>
@@ -1199,10 +1215,10 @@ export default function Home() {
 
       </section>
 
-      {/* 9. Editorial Testimonials */}
+      {/* 9. SHARP TESTIMONIALS */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{isAr ? "مُجرب وموثوق على مستوى المملكة" : "TESTED & TRUSTED NATIONWIDE"}</span>
           </div>
@@ -1228,7 +1244,7 @@ export default function Home() {
           {testimonials.map((t) => (
             <div
               key={t.author}
-              className="p-6 sm:p-8 rounded-3xl vertex-card flex flex-col justify-between space-y-6 text-start"
+              className="p-6 sm:p-8 rounded-md sharp-bento flex flex-col justify-between space-y-6 text-start"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -1237,7 +1253,7 @@ export default function Home() {
                       <Star key={i} className="w-3.5 h-3.5 fill-[#00E5BE]" />
                     ))}
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-mono font-bold">
+                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-mono font-bold">
                     {t.metrics}
                   </span>
                 </div>
@@ -1257,9 +1273,9 @@ export default function Home() {
 
       {/* 10. Saudi Ehsan Platform 1% Social Pledge Banner */}
       <section className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1200px] mx-auto w-full">
-        <div className="p-8 sm:p-12 rounded-3xl vertex-card bg-gradient-to-r from-[#061e1b]/80 via-[#060913] to-[#061e1b]/80 border border-[#00E5BE]/30 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
+        <div className="p-8 sm:p-12 rounded-lg sharp-bento bg-gradient-to-r from-[#061e1b]/80 via-[#060913] to-[#061e1b]/80 border border-[#00E5BE]/30 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0">
+            <div className="w-14 h-14 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0">
               <HeartHandshake className="w-7 h-7" />
             </div>
             <div className="space-y-1">
@@ -1277,17 +1293,17 @@ export default function Home() {
 
           <Link
             href={contactHref}
-            className="inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-xl btn-teal-outline flex-shrink-0 cursor-pointer"
+            className="inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline flex-shrink-0 cursor-pointer"
           >
             <span>{isAr ? "تواصل معنا" : "GET IN TOUCH"}</span>
           </Link>
         </div>
       </section>
 
-      {/* 11. FAQ Section */}
+      {/* 11. SHARP FAQ SECTION */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1000px] mx-auto w-full border-t border-white/[0.07]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
-          <span className="text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+          <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
             {isAr ? "استفساراتك بإجابات واضحة" : "FREQUENTLY ASKED QUESTIONS"}
           </span>
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
@@ -1312,7 +1328,7 @@ export default function Home() {
           {faqs.map((faq, idx) => (
             <div
               key={faq.q}
-              className="rounded-2xl vertex-card overflow-hidden"
+              className="rounded-md sharp-bento overflow-hidden"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
@@ -1342,9 +1358,9 @@ export default function Home() {
 
       {/* 12. Final CTA Banner */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 max-w-[1300px] mx-auto w-full">
-        <div className="relative rounded-3xl p-8 sm:p-14 lg:p-20 text-center overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
+        <div className="relative rounded-lg p-8 sm:p-14 lg:p-20 text-center overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
           <div className="space-y-4 max-w-2xl mx-auto">
-            <span className="text-[#00E5BE] text-[10px] sm:text-xs font-bold tracking-widest uppercase">
+            <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
               {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
             </span>
             <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
@@ -1368,7 +1384,7 @@ export default function Home() {
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href={contactHref}
-                className="inline-flex items-center gap-2 px-8 py-4 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-xl bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-4 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer"
               >
                 <span>{isAr ? "احجز استشارتك المجانية" : "SCHEDULE FREE CONSULTATION"}</span>
                 <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
