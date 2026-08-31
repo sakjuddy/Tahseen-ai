@@ -682,72 +682,101 @@ export default function Home() {
 
         </div>
 
-        {/* 3. Core 4 Services Section (Sharp Bento Boxes) */}
-        <div id="services" className="relative z-10 pt-8 sm:pt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pointer-events-auto scroll-mt-24 sm:scroll-mt-28">
+      </main>
+
+      {/* 3. Core 4 Services (Dedicated Separate Section under Hero) */}
+      <section id="services" className="relative z-10 py-16 sm:py-24 px-4 sm:px-8 lg:px-16 max-w-[1500px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-dashed border-white/20">
+        
+        {/* Section Heading */}
+        <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
+            <Cpu className="w-3.5 h-3.5" />
+            <span>{isAr ? "خدماتنا الأساسية" : "OUR CORE SERVICES"}</span>
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
+            {isAr ? (
+              <>
+                حلول ذكاء اصطناعي مصممة <span className="text-[#00E5BE]">للأثر الواقعي</span>
+              </>
+            ) : (
+              <>
+                Core AI Capabilities <span className="text-[#00E5BE]">Engineered for Impact</span>
+              </>
+            )}
+          </h2>
+          <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal">
+            {isAr
+              ? "نبتكر ونبني وكلاء ذكاء اصطناعي وأنظمة أتمتة متطورة تمكّن الشركات والمؤسسات من العمل بذكاء وسرعة وإنتاجية مضاعفة."
+              : "We design and deploy autonomous systems, intelligent workflows, and custom digital platforms that scale your business."}
+          </p>
+        </div>
+
+        {/* 4 Sharp Bento Service Cards with Dashed Borders */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           
           {/* Card 1: AI Agents */}
-          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
-              <Bot className="w-5 h-5" />
+          <div className="w-full p-6 sm:p-7 sharp-bento border-dashed border-white/20 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-12 h-12 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+              <Bot className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+            <h3 className="text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
               {isAr ? "وكلاء الذكاء الاصطناعي" : "AI Agents"}
             </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[210px] text-center mx-auto">
+            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
               {isAr
-                ? "وكلاء أذكياء يعملون بشكل مستقل لأتمتة وتوسيع نطاق عملياتك."
-                : "Intelligent agents that automate and scale your operations."}
+                ? "وكلاء أذكياء يعملون بشكل مستقل لأتمتة وتوسيع نطاق عملياتك على مدار الساعة."
+                : "Intelligent autonomous agents that qualify leads, handle support, and scale operations."}
             </p>
           </div>
 
           {/* Card 2: Automation */}
-          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
-              <Workflow className="w-5 h-5" />
+          <div className="w-full p-6 sm:p-7 sharp-bento border-dashed border-white/20 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-12 h-12 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+              <Workflow className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+            <h3 className="text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
               {isAr ? "أتمتة العمليات" : "Automation"}
             </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[210px] text-center mx-auto">
+            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
               {isAr
-                ? "تبسيط مسارات العمل والتخلص من المهام اليدوية المتكررة."
-                : "Streamline workflows and eliminate repetitive tasks."}
+                ? "تبسيط مسارات العمل وربط الـ ERP والتخلص من المهام اليدوية المتكررة."
+                : "Streamline enterprise pipelines, connect ERPs, and eliminate manual bottlenecks."}
             </p>
           </div>
 
           {/* Card 3: Consulting */}
-          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
-              <Compass className="w-5 h-5" />
+          <div className="w-full p-6 sm:p-7 sharp-bento border-dashed border-white/20 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-12 h-12 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+              <Compass className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+            <h3 className="text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
               {isAr ? "استشارات الذكاء الاصطناعي" : "Consulting"}
             </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[210px] text-center mx-auto">
+            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
               {isAr
                 ? "استراتيجيات وخارطة طريق ذكية متوافقة مع أهدافك المؤسسية."
-                : "AI strategy and roadmap aligned with your business goals."}
+                : "Strategic AI roadmaps and operational auditing aligned with business ROI."}
             </p>
           </div>
 
           {/* Card 4: Development */}
-          <div className="w-full p-5 sharp-bento space-y-3 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
-            <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
-              <BarChart3 className="w-5 h-5" />
+          <div className="w-full p-6 sm:p-7 sharp-bento border-dashed border-white/20 space-y-4 group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div className="w-12 h-12 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center text-[#00E5BE] transition-all duration-300 group-hover:scale-105 mx-auto">
+              <BarChart3 className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
+            <h3 className="text-lg font-bold text-white tracking-tight text-center group-hover:text-[#00E5BE] transition-colors duration-200">
               {isAr ? "التطوير المخصص" : "Development"}
             </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[210px] text-center mx-auto">
+            <p className="text-xs text-gray-400 leading-relaxed font-normal max-w-[240px] text-center mx-auto">
               {isAr
                 ? "حلول برمجية وذكاء اصطناعي مصممة خصيصاً لتحقيق أثر واقعي وملموس."
-                : "Custom AI solutions built for real-world impact."}
+                : "Full-stack web and mobile systems built for high-assurance real-world impact."}
             </p>
           </div>
 
         </div>
 
-      </main>
+      </section>
 
       {/* 4. Enterprise Social Proof & Partner Logos */}
       <section id="about" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28">
