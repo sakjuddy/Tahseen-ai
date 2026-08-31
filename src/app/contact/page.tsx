@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, MapPin, Clock, CheckCircle2, MessageSquare, Sparkles, Send, Globe, Menu, X, Sun, Moon } from "lucide-react";
 import Footer from "@/components/Footer";
+import AmbientWaveParticles from "@/components/AmbientWaveParticles";
 
 export default function ContactPage() {
   const [lang, setLang] = useState<"ar" | "en">("en");
@@ -131,6 +132,9 @@ export default function ContactPage() {
       {/* Background ambient radial glow */}
       <div className="absolute top-0 right-1/4 w-[350px] sm:w-[650px] h-[350px] sm:h-[550px] bg-cyan-500/10 rounded-full blur-[140px] sm:blur-[180px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 left-[-80px] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-[#00E5BE]/5 rounded-full blur-[160px] sm:blur-[200px] pointer-events-none -z-10" />
+
+      {/* Ambient Wave Particles */}
+      <AmbientWaveParticles theme={theme} />
 
       {/* 1. Sticky Header / Navbar */}
       <header className="sticky top-0 z-50 w-full bg-[#060913]/90 backdrop-blur-xl border-b border-white/[0.04] transition-all duration-300">

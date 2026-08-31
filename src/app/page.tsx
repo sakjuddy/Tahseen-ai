@@ -37,6 +37,7 @@ import {
 } from "lucide-react";
 import HeroRing3D from "@/components/HeroRing3D";
 import Footer from "@/components/Footer";
+import AmbientWaveParticles from "@/components/AmbientWaveParticles";
 
 export default function Home() {
   const [lang, setLang] = useState<"ar" | "en">("en");
@@ -443,6 +444,9 @@ export default function Home() {
       <div className={`absolute bottom-[10%] right-[-80px] w-[320px] sm:w-[650px] h-[320px] sm:h-[650px] rounded-full pointer-events-none -z-10 ${
         isLight ? "bg-cyan-500/4 blur-[140px]" : "bg-cyan-500/8 blur-[160px] sm:blur-[200px]"
       }`} />
+
+      {/* Ambient Wave Particles Scattered Across Webpage */}
+      <AmbientWaveParticles theme={theme} />
 
       {/* 1. Sticky Header / Navbar (Kept Untouched as Requested) */}
       <header className={`sticky top-0 z-50 w-full backdrop-blur-xl border-b transition-all duration-300 ${
