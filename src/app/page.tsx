@@ -812,7 +812,7 @@ export default function Home() {
       </section>
 
       {/* 5. Comprehensive Insights Section */}
-      <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.07]">
+      <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-dashed border-white/20">
         
         {/* Header */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
@@ -838,11 +838,11 @@ export default function Home() {
           </p>
         </div>
 
-        {/* 2-Column Sharp Bento Cards */}
+        {/* 2-Column Sharp Bento Cards with Dashed Borders */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
           
           {/* Card 1: Lead Velocity & Autonomous Qualification */}
-          <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start">
+          <div className="p-6 sm:p-8 sharp-bento border-dashed border-white/20 space-y-5 text-start">
             <div className="flex items-center justify-between">
               <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE]">
                 <Bot className="w-5 h-5" />
@@ -863,7 +863,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
+            <div className="space-y-2 pt-2 border-t border-dashed border-white/10 text-xs text-gray-300">
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-[#00E5BE] flex-shrink-0" />
                 <span>{isAr ? "رد فوري في أقل من ١٠ ثوانٍ على مدار الساعة" : "Sub-10s multi-channel customer response time"}</span>
@@ -876,7 +876,7 @@ export default function Home() {
           </div>
 
           {/* Card 2: Operations & Data Synchronization */}
-          <div className="p-6 sm:p-8 sharp-bento space-y-5 text-start">
+          <div className="p-6 sm:p-8 sharp-bento border-dashed border-white/20 space-y-5 text-start">
             <div className="flex items-center justify-between">
               <div className="w-10 h-10 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8]">
                 <Workflow className="w-5 h-5" />
@@ -897,7 +897,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
+            <div className="space-y-2 pt-2 border-t border-dashed border-white/10 text-xs text-gray-300">
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-[#38BDF8] flex-shrink-0" />
                 <span>{isAr ? "تقليص أكثر من ٤٠٪ من الأعباء اليدوية الروتينية" : "Over 40% reduction in manual processing tasks"}</span>
@@ -914,7 +914,7 @@ export default function Home() {
       </section>
 
       {/* 6. SOLUTIONS SHOWCASE WITH STICKY SCROLL EFFECT & BENTO BOXES ON ONE SIDE */}
-      <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
+      <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-dashed border-white/20 bg-[#050814]/80">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
@@ -954,7 +954,7 @@ export default function Home() {
                   className={`w-full p-3.5 rounded-md border text-start transition-all duration-300 flex items-center justify-between cursor-pointer ${
                     activeSolutionIdx === idx
                       ? "bg-white/[0.06] border-[#00E5BE] text-white shadow-[0_0_15px_rgba(0,229,190,0.15)]"
-                      : "bg-white/[0.02] border-white/5 text-gray-400 hover:border-white/20 hover:text-gray-200"
+                      : "bg-white/[0.02] border-dashed border-white/10 text-gray-400 hover:border-white/20 hover:text-gray-200"
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -978,19 +978,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Column: Vertically Stacked Sharp Bento Solution Cards */}
+          {/* Right Column: Vertically Stacked Sharp Bento Solution Cards with Dashed Borders */}
           <div className="lg:col-span-7 space-y-6">
             {showcaseSolutions.map((sol, idx) => (
               <div
                 id={sol.id}
                 key={sol.id}
                 onMouseEnter={() => setActiveSolutionIdx(idx)}
-                className={`p-6 sm:p-8 md:p-10 sharp-bento space-y-6 text-start transition-all duration-300 ${
+                className={`p-6 sm:p-8 md:p-10 sharp-bento border-dashed border-white/20 space-y-6 text-start transition-all duration-300 ${
                   activeSolutionIdx === idx ? "border-[#00E5BE]/60 shadow-[0_10px_35px_rgba(0,229,190,0.12)]" : ""
                 }`}
               >
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                <div className="flex items-center justify-between border-b border-dashed border-white/10 pb-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center">
                       {sol.icon}
@@ -1011,7 +1011,7 @@ export default function Home() {
                 </div>
 
                 {/* Feature Checklist */}
-                <div className="space-y-2.5 pt-2 border-t border-white/5">
+                <div className="space-y-2.5 pt-2 border-t border-dashed border-white/10">
                   {sol.features.map((feat) => (
                     <div key={feat} className="flex items-start gap-2.5 text-xs text-gray-300">
                       <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
@@ -1021,9 +1021,9 @@ export default function Home() {
                 </div>
 
                 {/* Bottom Metric Badges */}
-                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/5 text-center font-mono">
+                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-dashed border-white/10 text-center font-mono">
                   {sol.metrics.map((m) => (
-                    <div key={m.label} className="p-2.5 rounded-md bg-white/[0.02] border border-white/5">
+                    <div key={m.label} className="p-2.5 rounded-md bg-white/[0.02] border border-dashed border-white/10">
                       <div className="text-xs sm:text-sm font-bold text-[#00E5BE]">{m.val}</div>
                       <div className="text-[9px] text-gray-400 truncate mt-0.5">{m.label}</div>
                     </div>
@@ -1038,13 +1038,13 @@ export default function Home() {
       </section>
 
       {/* 7. Value Marquee */}
-      <section className="relative z-10 py-12 sm:py-16 overflow-hidden border-t border-b border-white/[0.06] bg-[#050814]/60">
+      <section className="relative z-10 py-12 sm:py-16 overflow-hidden border-t border-b border-dashed border-white/20 bg-[#050814]/60">
         <div className="space-y-4">
           <div className="flex gap-4 animate-marquee-left">
             {pillsRow1.map((pill, idx) => (
               <div
                 key={`p1-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-dashed border-white/15 bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
               >
                 {pill}
               </div>
@@ -1054,7 +1054,7 @@ export default function Home() {
             {pillsRow2.map((pill, idx) => (
               <div
                 key={`p2-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/[0.06] bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-dashed border-white/15 bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
               >
                 {pill}
               </div>
@@ -1064,7 +1064,7 @@ export default function Home() {
       </section>
 
       {/* 8. Tahseen Education (Flagship Ecosystem Highlight) */}
-      <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-gradient-to-b from-[#061219]/40 via-[#050814] to-[#061219]/40">
+      <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-dashed border-white/20 bg-gradient-to-b from-[#061219]/40 via-[#050814] to-[#061219]/40">
         
         {/* Section Tag */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-10 sm:mb-12">
@@ -1090,8 +1090,8 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Sharp Highlight Card */}
-        <div className="relative rounded-md p-6 sm:p-10 lg:p-12 sharp-bento border-2 border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-8 overflow-hidden">
+        {/* Sharp Highlight Card with Dashed Borders */}
+        <div className="relative rounded-md p-6 sm:p-10 lg:p-12 sharp-bento border-2 border-dashed border-[#00E5BE] shadow-[0_20px_60px_rgba(0,229,190,0.22)] mb-8 overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-8 space-y-6 text-start">
@@ -1121,7 +1121,7 @@ export default function Home() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                <div className="p-3 rounded-md bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <div className="p-3 rounded-md bg-white/[0.03] border border-dashed border-white/10 space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{isAr ? "المعلم الذكي التفاعلي" : "AI Smart Tutor"}</span>
@@ -1131,7 +1131,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="p-3 rounded-md bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <div className="p-3 rounded-md bg-white/[0.03] border border-dashed border-white/10 space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{isAr ? "تقارير مستوى دورية" : "Parent Diagnostics"}</span>
@@ -1141,7 +1141,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="p-3 rounded-md bg-white/[0.03] border border-white/[0.08] space-y-1">
+                <div className="p-3 rounded-md bg-white/[0.03] border border-dashed border-white/10 space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00E5BE] font-bold text-xs">
                     <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>{isAr ? "محتوى معتمد وموثوق" : "ETEC & Qiyas Aligned"}</span>
@@ -1153,7 +1153,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-md bg-[#060913]/90 border border-white/10 text-center">
+            <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-md bg-[#060913]/90 border border-dashed border-white/20 text-center">
               <div className="space-y-1.5">
                 <span className="text-[10px] font-mono text-[#00E5BE] uppercase tracking-widest block font-bold">
                   {isAr ? "منظومة موحدة" : "UNIFIED PLATFORM"}
@@ -1180,14 +1180,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 3 Sharp Sub-Mentions */}
+        {/* 3 Sharp Sub-Mentions with Dashed Borders */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           
           <a
             href="https://edutahseen.com/qudurat"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer"
+            className="p-4 sm:p-5 rounded-md sharp-bento border-dashed border-white/20 flex items-center justify-between gap-3 text-start group cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0 group-hover:scale-105 transition-transform">
@@ -1212,7 +1212,7 @@ export default function Home() {
             href="https://edutahseen.com/tahsili"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer"
+            className="p-4 sm:p-5 rounded-md sharp-bento border-dashed border-white/20 flex items-center justify-between gap-3 text-start group cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/30 flex items-center justify-center text-[#38BDF8] flex-shrink-0 group-hover:scale-105 transition-transform">
@@ -1237,7 +1237,7 @@ export default function Home() {
             href="https://edutahseen.com/busalati"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 sm:p-5 rounded-md sharp-bento flex items-center justify-between gap-3 text-start group cursor-pointer"
+            className="p-4 sm:p-5 rounded-md sharp-bento border-dashed border-white/20 flex items-center justify-between gap-3 text-start group cursor-pointer"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-md bg-[#A855F7]/10 border border-[#A855F7]/30 flex items-center justify-center text-[#A855F7] flex-shrink-0 group-hover:scale-105 transition-transform">
@@ -1263,7 +1263,7 @@ export default function Home() {
       </section>
 
       {/* 9. Testimonials */}
-      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-white/[0.01]">
+      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-dashed border-white/20 bg-white/[0.01]">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5" />
@@ -1291,7 +1291,7 @@ export default function Home() {
           {testimonials.map((t) => (
             <div
               key={t.author}
-              className="p-6 sm:p-8 rounded-md sharp-bento flex flex-col justify-between space-y-6 text-start"
+              className="p-6 sm:p-8 rounded-md sharp-bento border-dashed border-white/20 flex flex-col justify-between space-y-6 text-start"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -1309,7 +1309,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-dashed border-white/10">
                 <div className="font-bold text-white text-sm">{t.author}</div>
                 <div className="text-[11px] text-gray-400">{t.role} • {t.company}</div>
               </div>
@@ -1320,7 +1320,7 @@ export default function Home() {
 
       {/* 10. Saudi Ehsan Platform 1% Social Pledge Banner */}
       <section className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1200px] mx-auto w-full">
-        <div className="p-8 sm:p-12 rounded-md sharp-bento bg-gradient-to-r from-[#061e1b]/80 via-[#060913] to-[#061e1b]/80 border border-[#00E5BE]/30 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
+        <div className="p-8 sm:p-12 rounded-md sharp-bento bg-gradient-to-r from-[#061e1b]/80 via-[#060913] to-[#061e1b]/80 border border-dashed border-[#00E5BE]/40 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0">
               <HeartHandshake className="w-7 h-7" />
@@ -1348,7 +1348,7 @@ export default function Home() {
       </section>
 
       {/* 11. FAQ Section */}
-      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1000px] mx-auto w-full border-t border-white/[0.07]">
+      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1000px] mx-auto w-full border-t border-dashed border-white/20">
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-12 sm:mb-16">
           <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
             {isAr ? "استفساراتك بإجابات واضحة" : "FREQUENTLY ASKED QUESTIONS"}
@@ -1375,7 +1375,7 @@ export default function Home() {
           {faqs.map((faq, idx) => (
             <div
               key={faq.q}
-              className="rounded-md sharp-bento overflow-hidden"
+              className="rounded-md sharp-bento border-dashed border-white/20 overflow-hidden"
             >
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
@@ -1394,7 +1394,7 @@ export default function Home() {
               </button>
 
               {openFaq === idx && (
-                <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-white/5 font-normal">
+                <div className="px-5 sm:px-6 pb-6 pt-1 text-xs sm:text-sm text-gray-300 leading-relaxed border-t border-dashed border-white/10 font-normal">
                   {faq.a}
                 </div>
               )}
@@ -1403,9 +1403,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. Final CTA Banner */}
+      {/* 12. Final CTA Banner with DOTTED / DASHED ARCHITECTURAL BENTO BOX */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 max-w-[1300px] mx-auto w-full">
-        <div className="relative rounded-md p-8 sm:p-14 lg:p-20 text-center overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
+        <div className="relative rounded-md p-8 sm:p-14 lg:p-20 text-center overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-dashed border-[#00E5BE]/50 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
           <div className="space-y-4 max-w-2xl mx-auto">
             <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
               {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}

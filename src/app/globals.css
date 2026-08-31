@@ -94,24 +94,34 @@ html.light .sharp-bento {
   transform: translateY(-2px);
 }
 
-/* Animated Scroll Down Indicator */
-@keyframes scroll-mouse {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(8px);
-    opacity: 0.3;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* Mozn-Style Dashed / Dotted Grid Cards */
+.dashed-card {
+  position: relative;
+  background-color: rgba(7, 13, 22, 0.7);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.animate-scroll-mouse {
-  animation: scroll-mouse 2s ease-in-out infinite;
+html.light .dashed-card {
+  background-color: #ffffff;
+  border: 1px dashed rgba(15, 23, 42, 0.2);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dashed-card:hover {
+  border-color: #00e5be;
+  box-shadow: 0 8px 30px -4px rgba(0, 229, 190, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Section Dotted & Dashed Lines */
+.section-dashed-divider {
+  border-top: 1px dashed rgba(255, 255, 255, 0.18);
+}
+html.light .section-dashed-divider {
+  border-top: 1px dashed rgba(15, 23, 42, 0.18);
 }
 
 /* Truly Continuous Infinite Marquee Animation for Value Pills */
