@@ -234,7 +234,6 @@ html.light #home,
 #home {
   background-color: #060913 !important;
   color: #ffffff !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 html.light #home h1,

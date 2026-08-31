@@ -689,7 +689,7 @@ export default function Home() {
       </main>
 
       {/* 3. Core 4 Services (Dedicated Separate Section under Hero) */}
-      <section id="services" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-16 max-w-[1500px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-dashed border-white/20">
+      <section id="services" className="relative z-10 py-10 sm:py-14 px-4 sm:px-8 lg:px-16 max-w-[1500px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28">
         
         {/* Section Heading */}
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
