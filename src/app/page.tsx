@@ -49,6 +49,7 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [activeSolutionIdx, setActiveSolutionIdx] = useState(0);
 
   // Sync Language & Theme from LocalStorage on mount
   useEffect(() => {
@@ -147,6 +148,7 @@ export default function Home() {
   const showcaseSolutions = isAr
     ? [
         {
+          id: "solution-01",
           step: "٠١",
           total: "٠٣",
           tag: "العمليات الذاتية",
@@ -163,9 +165,10 @@ export default function Home() {
             "جدولة تلقائية للاجتماعات وتحديث التقويم",
             "تأهيل دقيق للعملاء المحتملين وتمرير البيانات للـ CRM",
           ],
-          icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
+          icon: <Bot className="w-6 h-6 text-[#00E5BE]" />,
         },
         {
+          id: "solution-02",
           step: "٠٢",
           total: "٠٣",
           tag: "أتمتة العمليات",
@@ -182,9 +185,10 @@ export default function Home() {
             "مزامنة مستمرة مع قواعد بيانات Oracle و SAP",
             "سلاسل موافقات ذكية مع توثيق تدقيق كامل",
           ],
-          icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
+          icon: <Workflow className="w-6 h-6 text-[#00E5BE]" />,
         },
         {
+          id: "solution-03",
           step: "٠٣",
           total: "٠٣",
           tag: "متابعة فورية",
@@ -201,11 +205,12 @@ export default function Home() {
             "تنبيهات فورية عند رصد أي اختناق تشغيلي",
             "تحليلات تنبؤية لتحسين تجربة العملاء ونمو الإيرادات",
           ],
-          icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
+          icon: <LineChart className="w-6 h-6 text-[#00E5BE]" />,
         },
       ]
     : [
         {
+          id: "solution-01",
           step: "01",
           total: "03",
           tag: "AUTONOMOUS OPERATIONS",
@@ -222,9 +227,10 @@ export default function Home() {
             "Automated calendar booking and CRM synchronization",
             "Multi-channel contextual lead qualification",
           ],
-          icon: <Bot className="w-5 h-5 text-[#00E5BE]" />,
+          icon: <Bot className="w-6 h-6 text-[#00E5BE]" />,
         },
         {
+          id: "solution-02",
           step: "02",
           total: "03",
           tag: "WORKFLOW AUTOMATION",
@@ -241,9 +247,10 @@ export default function Home() {
             "Seamless two-way sync with ERP systems",
             "Smart approval chains with complete audit trails",
           ],
-          icon: <Workflow className="w-5 h-5 text-[#00E5BE]" />,
+          icon: <Workflow className="w-6 h-6 text-[#00E5BE]" />,
         },
         {
+          id: "solution-03",
           step: "03",
           total: "03",
           tag: "REAL-TIME TELEMETRY",
@@ -260,9 +267,17 @@ export default function Home() {
             "Proactive bottleneck and anomaly alerts",
             "Continuous conversion rate optimization metrics",
           ],
-          icon: <LineChart className="w-5 h-5 text-[#00E5BE]" />,
+          icon: <LineChart className="w-6 h-6 text-[#00E5BE]" />,
         },
       ];
+
+  const scrollToSolution = (id: string, index: number) => {
+    setActiveSolutionIdx(index);
+    const elem = document.getElementById(id);
+    if (elem) {
+      elem.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   const testimonials = isAr
     ? [
@@ -898,77 +913,126 @@ export default function Home() {
 
       </section>
 
-      {/* 6. Solutions Showcase */}
+      {/* 6. SOLUTIONS SHOWCASE WITH STICKY SCROLL EFFECT & BENTO BOXES ON ONE SIDE */}
       <section id="solutions" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08] bg-[#050814]/80">
         
-        {/* Section Heading */}
-        <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-            <Cpu className="w-3.5 h-3.5" />
-            <span>{isAr ? "مُصمم للتوسع المؤسسي عالي الكفاءة" : "BUILT FOR HIGH-ASSURANCE SCALE"}</span>
-          </div>
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            {isAr ? (
-              <>
-                حلول ذكاء اصطناعي مصممة <span className="text-[#00E5BE]">لقطاعك</span>
-              </>
-            ) : (
-              <>
-                AI Solutions Built for <span className="text-[#00E5BE]">Your Industry</span>
-              </>
-            )}
-          </h2>
-          <p className="text-xs sm:text-base text-gray-400 leading-relaxed font-normal max-w-2xl mx-auto">
-            {isAr
-              ? "تصفح حلولنا المتخصصة والمصممة للقضاء على القيود التشغيلية وتسريع نمو المؤسسات السعودية."
-              : "Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations."}
-          </p>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+          
+          {/* Left Column: Sticky Section Overview & Interactive Step Navigation */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 text-start">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
+                <Cpu className="w-3.5 h-3.5" />
+                <span>{isAr ? "مُصمم للتوسع المؤسسي عالي الكفاءة" : "BUILT FOR HIGH-ASSURANCE SCALE"}</span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                {isAr ? (
+                  <>
+                    حلول ذكاء اصطناعي مصممة <br className="hidden sm:inline" />
+                    <span className="text-[#00E5BE]">لقطاعك</span>
+                  </>
+                ) : (
+                  <>
+                    AI Solutions Built for <br className="hidden sm:inline" />
+                    <span className="text-[#00E5BE]">Your Industry</span>
+                  </>
+                )}
+              </h2>
+              <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-normal">
+                {isAr
+                  ? "تصفح حلولنا المتخصصة والمصممة للقضاء على القيود التشغيلية وتسريع نمو المؤسسات السعودية."
+                  : "Scroll through our specialized intelligence offerings engineered to eliminate manual friction and scale Saudi enterprise operations."}
+              </p>
+            </div>
 
-        {/* 3 Sharp Solution Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
-          {showcaseSolutions.map((sol) => (
-            <div
-              key={sol.step}
-              className="p-6 sm:p-8 sharp-bento flex flex-col justify-between space-y-6 text-start"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-white/5 pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-sm font-bold text-[#00E5BE]">{sol.step}</span>
-                    <span className="text-xs text-gray-500 font-mono">/ {sol.total}</span>
+            {/* Interactive Step Jump Buttons */}
+            <div className="space-y-2 pt-2">
+              {showcaseSolutions.map((sol, idx) => (
+                <button
+                  key={sol.id}
+                  onClick={() => scrollToSolution(sol.id, idx)}
+                  className={`w-full p-3.5 rounded-md border text-start transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                    activeSolutionIdx === idx
+                      ? "bg-white/[0.06] border-[#00E5BE] text-white shadow-[0_0_15px_rgba(0,229,190,0.15)]"
+                      : "bg-white/[0.02] border-white/5 text-gray-400 hover:border-white/20 hover:text-gray-200"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs font-bold text-[#00E5BE]">{sol.step}</span>
+                    <span className="text-xs font-bold font-sans">{sol.title}</span>
                   </div>
-                  <span className="px-2.5 py-0.5 rounded-md bg-[#00E5BE]/10 text-[#00E5BE] text-[10px] font-mono font-bold uppercase">
-                    {sol.tag}
-                  </span>
+                  <ArrowRight className={`w-3.5 h-3.5 text-[#00E5BE] transition-transform ${activeSolutionIdx === idx ? "translate-x-1" : "opacity-40"} ${isAr ? "rotate-180" : ""}`} />
+                </button>
+              ))}
+            </div>
+
+            {/* Direct Contact Button */}
+            <div className="pt-2">
+              <Link
+                href={contactHref}
+                className="inline-flex items-center gap-2 px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline cursor-pointer"
+              >
+                <span>{isAr ? "احجز استشارتك الآن" : "LET'S TALK"}</span>
+                <ArrowRight className={`w-3.5 h-3.5 ${isAr ? "rotate-180" : ""}`} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column: Vertically Stacked Sharp Bento Solution Cards */}
+          <div className="lg:col-span-7 space-y-6">
+            {showcaseSolutions.map((sol, idx) => (
+              <div
+                id={sol.id}
+                key={sol.id}
+                onMouseEnter={() => setActiveSolutionIdx(idx)}
+                className={`p-6 sm:p-8 md:p-10 sharp-bento space-y-6 text-start transition-all duration-300 ${
+                  activeSolutionIdx === idx ? "border-[#00E5BE]/60 shadow-[0_10px_35px_rgba(0,229,190,0.12)]" : ""
+                }`}
+              >
+                {/* Header */}
+                <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/20 flex items-center justify-center">
+                      {sol.icon}
+                    </div>
+                    <div>
+                      <span className="font-mono text-xs font-bold text-[#00E5BE] block">{sol.tag}</span>
+                      <span className="text-[11px] text-gray-400 font-mono">Stage {sol.step} of {sol.total}</span>
+                    </div>
+                  </div>
+                  <span className="font-mono text-lg font-bold text-gray-500">{sol.step}</span>
                 </div>
 
+                {/* Content */}
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold">{sol.title}</h3>
-                  <p className="text-xs text-gray-400 leading-relaxed font-normal">{sol.desc}</p>
+                  <h3 className="text-xl sm:text-2xl font-bold">{sol.title}</h3>
+                  <p className="text-xs sm:text-sm text-[#00E5BE] font-medium">{sol.subtitle}</p>
+                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-normal pt-1">{sol.desc}</p>
                 </div>
 
-                <div className="space-y-2 pt-2 border-t border-white/5">
+                {/* Feature Checklist */}
+                <div className="space-y-2.5 pt-2 border-t border-white/5">
                   {sol.features.map((feat) => (
-                    <div key={feat} className="flex items-start gap-2 text-xs text-gray-300">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#00E5BE] flex-shrink-0 mt-0.5" />
+                    <div key={feat} className="flex items-start gap-2.5 text-xs text-gray-300">
+                      <CheckCircle2 className="w-4 h-4 text-[#00E5BE] flex-shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
                 </div>
-              </div>
 
-              {/* Bottom Metrics Pill */}
-              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/5 text-center font-mono">
-                {sol.metrics.map((m) => (
-                  <div key={m.label} className="p-2 rounded-md bg-white/[0.02] border border-white/5">
-                    <div className="text-xs font-bold text-[#00E5BE]">{m.val}</div>
-                    <div className="text-[8px] text-gray-500 truncate mt-0.5">{m.label}</div>
-                  </div>
-                ))}
+                {/* Bottom Metric Badges */}
+                <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/5 text-center font-mono">
+                  {sol.metrics.map((m) => (
+                    <div key={m.label} className="p-2.5 rounded-md bg-white/[0.02] border border-white/5">
+                      <div className="text-xs sm:text-sm font-bold text-[#00E5BE]">{m.val}</div>
+                      <div className="text-[9px] text-gray-400 truncate mt-0.5">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
         </div>
 
       </section>
