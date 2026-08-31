@@ -264,12 +264,12 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     let pIdx = 0;
     const gridWidth = 58.0;
-    const gridDepth = 27.0;
+    const gridDepth = 32.0;
     const waveElevationY = -1.55;
-    const waveAmplitude = 1.5;
+    const waveAmplitude = 0.6;
     const waveAlphaMax = 1.0;
     const waveBaseSize = 0.4;
-    const waveSpeed = 0.9;
+    const waveSpeed = 1.0;
 
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
