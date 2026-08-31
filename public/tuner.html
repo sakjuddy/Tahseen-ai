@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tahseen AI - 3D Hero Tuner (Emblem & Wave Particles)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.19"></script>
+  <style>
+    body {
+      background-color: #060913;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .btn-teal-outline {
+      background-color: #060913;
+      border: 1px solid #00e5be;
+      color: #ffffff;
+      box-shadow: 0 0 15px -3px rgba(0, 229, 190, 0.2);
+    }
+    /* lil-gui custom styling */
+    .lil-gui {
+      --background-color: #0a131e;
+      --text-color: #e2e8f0;
+      --title-background-color: #00e5be;
+      --title-text-color: #060913;
+      --widget-color: #162436;
+      --hover-color: #21354e;
+      --focus-color: #00e5be;
+      --number-color: #00e5be;
+      --string-color: #38bdf8;
+      font-family: monospace;
+      border: 1px solid rgba(0, 229, 190, 0.3) !important;
+      border-radius: 8px !important;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8) !important;
+      z-index: 1000 !important;
+    }
+    .lil-gui .title {
+      font-weight: 800 !important;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between">
+
+  <!-- Navbar Replica -->
+  <header class="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/[0.06] bg-[#060913]/90 py-3 px-6 sm:px-12 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img src="/tahseen-logo.png" alt="Tahseen AI" class="h-8 object-contain">
+      <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-[#00E5BE]/15 text-[#00E5BE] font-bold border border-[#00E5BE]/30">3D TUNER LIVE</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="copyBtn" class="px-4 py-1.5 rounded-lg bg-[#00E5BE] text-[#060913] text-xs font-bold font-mono tracking-wider hover:bg-[#26FFDF] transition-all shadow-[0_0_15px_rgba(0,229,190,0.4)] cursor-pointer">
+        📋 COPY CONFIG
+      </button>
+      <button id="applyNextBtn" class="px-4 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-bold font-mono border border-white/20 transition-all cursor-pointer">
+        ⚡ APPLY TO NEXT.JS
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section Container -->
+  <main id="home" class="relative z-10 pt-4 sm:pt-6 pb-4 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full flex-1 flex flex-col justify-center">
+    
+    <!-- 3D WebGL Canvas Layer -->
+    <div id="three-container" class="absolute inset-0 w-full h-full pointer-events-none z-0"></div>
+
+    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[440px] pointer-events-none">
+      
+      <!-- Left Hero Column -->
+      <div class="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-start pointer-events-auto">
+        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-[1.2]">
+          AI Solutions That <br>
+          <span class="text-[#00E5BE]">Enhance</span> Your Work
+        </h1>
+        <p class="text-sm text-gray-300 leading-relaxed font-normal max-w-lg">
+          We build agents and automation systems that help businesses work smarter, faster, and more efficiently.
+        </p>
+        <div class="pt-2">
+          <button class="inline-flex items-center gap-2.5 px-7 py-3.5 text-xs font-extrabold tracking-widest uppercase rounded-lg btn-teal-outline">
+            <span>LET'S BUILD TOGETHER →</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Spacing for 3D Ring -->
+      <div class="hidden lg:block lg:col-span-6 xl:col-span-7 h-[420px]"></div>
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-2.5 rounded-xl bg-[#00E5BE] text-[#060913] font-bold text-xs font-mono shadow-2xl transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
+    Configuration copied to clipboard!
+  </div>
+
+  <script>
+    // --- 1. Tuner Config State ---
+    const savedConfig = localStorage.getItem("tahseen_3d_tuner");
+    const config = savedConfig ? JSON.parse(savedConfig) : {
+      // 3D Emblem Positions
+      emblemPosY: 1.45,
+      emblemPosX: 2.3,
+      emblemPosZ: 0.0,
+      emblemScale: 0.70,
+      emblemRotX: -0.59,
+      emblemRotY: -0.66,
+      emblemRotZ: -0.99,
+
+      // Wave Particle Settings
+      waveElevationY: 0.1,
+      waveAmplitude: 0.95,
+      waveSpeed: 0.9,
+      waveBaseSize: 0.26,
+      gridWidth: 58.0,
+      gridDepth: 22.0,
+
+      // Material Colors & Polish
+      illuminatedColor: "#16796d",
+      shadedColor: "#05ad9a",
+      outerColor: "#05d6cb",
+      roughness: 0.11,
+      metalness: 0.47,
+      clearcoat: 1.0,
+      glowIntensity: 0.15,
+    };
+
+    function saveConfig() {
+      localStorage.setItem("tahseen_3d_tuner", JSON.stringify(config));
+    }
+
+    // --- 2. Three.js Scene Setup ---
+    const container = document.getElementById("three-container");
+    const width = container.clientWidth || window.innerWidth;
+    const height = container.clientHeight || 550;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
+    camera.position.set(0, 0, 10.5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.45;
+    container.appendChild(renderer.domElement);
+
+    // --- 3. Lighting ---
+    const ambientLight = new THREE.AmbientLight(0x020712, 1.2);
+    scene.add(ambientLight);
+
+    const textKeyLight = new THREE.PointLight(0x00f5d4, 15.0, 50, 1.1);
+    textKeyLight.position.set(-6.0, -3.0, 1.2);
+    scene.add(textKeyLight);
+
+    const textDirLight = new THREE.DirectionalLight(0x38bdf8, 3.8);
+    textDirLight.position.set(-6.0, -1.5, 1.5);
+    scene.add(textDirLight);
+
+    const rightRimLight = new THREE.PointLight(0x06b6d4, 8.5, 35);
+    rightRimLight.position.set(6.0, 5.0, 2.0);
+    scene.add(rightRimLight);
+
+    const topHighlight = new THREE.DirectionalLight(0xe0ffff, 2.2);
+    topHighlight.position.set(4.0, 8.0, 6.0);
+    scene.add(topHighlight);
+
+    // --- 4. 3D Emblem Construction ---
+    const heroGroup = new THREE.Group();
+    heroGroup.position.set(config.emblemPosX, config.emblemPosY, config.emblemPosZ);
+    heroGroup.scale.setScalar(config.emblemScale);
+    heroGroup.rotation.set(config.emblemRotX, config.emblemRotY, config.emblemRotZ);
+    scene.add(heroGroup);
+
+    // Materials
+    const ribbonMaterial = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(config.illuminatedColor),
+      emissive: new THREE.Color(0x003b30),
+      emissiveIntensity: 0.16,
+      roughness: config.roughness,
+      metalness: config.metalness,
+      clearcoat: config.clearcoat,
+      clearcoatRoughness: 0.1,
+      reflectivity: 0.9,
+      side: THREE.DoubleSide,
+    });
+
+    const shadedFaceMaterial = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(config.shadedColor),
+      emissive: new THREE.Color(0x00241f),
+      emissiveIntensity: 0.12,
+      roughness: config.roughness + 0.04,
+      metalness: config.metalness - 0.05,
+      clearcoat: config.clearcoat,
+      clearcoatRoughness: 0.12,
+      reflectivity: 0.85,
+      side: THREE.DoubleSide,
+    });
+
+    const outerSideMaterial = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(config.outerColor),
+      emissive: new THREE.Color(0x004d40),
+      emissiveIntensity: 0.18,
+      roughness: config.roughness,
+      metalness: config.metalness,
+      clearcoat: config.clearcoat,
+      clearcoatRoughness: 0.08,
+      reflectivity: 0.95,
+      side: THREE.DoubleSide,
+    });
+
+    // Outer & Inner Torus Rings
+    const rOuter = 2.15;
+    const rInner = 1.30;
+    const thickness = 0.52;
+    const arcLength = Math.PI * 1.62;
+
+    const outerLoop = new THREE.Mesh(
+      new THREE.TorusGeometry(rOuter, thickness, 36, 120, arcLength),
+      outerSideMaterial
+    );
+    outerLoop.rotation.z = 0.32;
+    heroGroup.add(outerLoop);
+
+    const innerLoop = new THREE.Mesh(
+      new THREE.TorusGeometry(rInner, thickness, 36, 120, arcLength),
+      ribbonMaterial
+    );
+    innerLoop.rotation.z = Math.PI + 0.32;
+    heroGroup.add(innerLoop);
+
+    // Front/Back Flat Faces
+    const ringFaceShape = new THREE.Shape();
+    ringFaceShape.absarc(0, 0, rOuter + thickness * 0.9, 0, Math.PI * 2, false);
+    const ringHolePath = new THREE.Path();
+    ringHolePath.absarc(0, 0, rInner - thickness * 0.9, 0, Math.PI * 2, true);
+    ringFaceShape.holes.push(ringHolePath);
+
+    const faceGeom = new THREE.ShapeGeometry(ringFaceShape, 72);
+    const frontFaceMesh = new THREE.Mesh(faceGeom, ribbonMaterial);
+    frontFaceMesh.position.z = thickness * 0.42;
+    heroGroup.add(frontFaceMesh);
+
+    const backFaceMesh = new THREE.Mesh(faceGeom, shadedFaceMaterial);
+    backFaceMesh.position.z = -thickness * 0.42;
+    heroGroup.add(backFaceMesh);
+
+    // Diagonal Cross Slits
+    const slitMaterial = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color(0x00f5d4),
+      emissive: new THREE.Color(0x00f5d4),
+      emissiveIntensity: 0.8,
+      roughness: 0.1,
+      metalness: 0.2,
+      side: THREE.DoubleSide,
+    });
+
+    const slitGeom = new THREE.BoxGeometry(0.12, thickness * 2.8, thickness * 1.6);
+    const slit1 = new THREE.Mesh(slitGeom, slitMaterial);
+    slit1.position.set(rOuter * 0.72, rOuter * 0.72, 0);
+    slit1.rotation.z = -Math.PI / 4;
+    heroGroup.add(slit1);
+
+    const slit2 = new THREE.Mesh(slitGeom, slitMaterial);
+    slit2.position.set(-rOuter * 0.72, -rOuter * 0.72, 0);
+    slit2.rotation.z = -Math.PI / 4;
+    heroGroup.add(slit2);
+
+    // --- 5. Particle Wave Construction ---
+    let wavePoints;
+    let waveShaderMaterial;
+
+    function buildWave() {
+      if (wavePoints) scene.remove(wavePoints);
+
+      const cols = 140;
+      const rows = 48;
+      const totalParticles = cols * rows;
+      const waveGeom = new THREE.BufferGeometry();
+      const positions = new Float32Array(totalParticles * 3);
+      const alphas = new Float32Array(totalParticles);
+      const sizes = new Float32Array(totalParticles);
+
+      let pIdx = 0;
+      for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+          const uNorm = (j / (cols - 1)) * 2.0 - 1.0;
+          const vNorm = (i / (rows - 1)) * 2.0 - 1.0;
+
+          const x = uNorm * (config.gridWidth * 0.5);
+          const z = vNorm * (config.gridDepth * 0.5) - 3.8;
+
+          const fadeX = Math.cos(uNorm * Math.PI * 0.5);
+          const fadeZ = Math.cos(vNorm * Math.PI * 0.5);
+          const edgeFade = Math.pow(Math.max(0.0, fadeX), 1.6) * Math.pow(Math.max(0.0, fadeZ), 1.6);
+
+          const baseY = (Math.sin(j * 0.18) * config.waveAmplitude + Math.cos(i * 0.25) * 0.85 + config.waveElevationY) * edgeFade;
+
+          positions[pIdx * 3] = x;
+          positions[pIdx * 3 + 1] = baseY;
+          positions[pIdx * 3 + 2] = z;
+
+          alphas[pIdx] = edgeFade;
+          sizes[pIdx] = Math.max(0.03, edgeFade * config.waveBaseSize);
+          pIdx++;
+        }
+      }
+
+      waveGeom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      waveGeom.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
+      waveGeom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+
+      const pCanvas = document.createElement("canvas");
+      pCanvas.width = 64; pCanvas.height = 64;
+      const pCtx = pCanvas.getContext("2d");
+      if (pCtx) {
+        const pGrad = pCtx.createRadialGradient(32, 32, 0, 32, 32, 30);
+        pGrad.addColorStop(0, "rgba(255, 255, 255, 1.0)");
+        pGrad.addColorStop(0.2, "rgba(0, 245, 212, 1.0)");
+        pGrad.addColorStop(0.5, "rgba(6, 182, 212, 0.85)");
+        pGrad.addColorStop(0.8, "rgba(0, 180, 216, 0.3)");
+        pGrad.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+        pCtx.fillStyle = pGrad;
+        pCtx.fillRect(0, 0, 64, 64);
+      }
+      const pTexture = new THREE.CanvasTexture(pCanvas);
+
+      waveShaderMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          pointTexture: { value: pTexture },
+          uTime: { value: 0.0 },
+          uWaveSpeed: { value: config.waveSpeed },
+        },
+        vertexShader: `
+          attribute float alpha;
+          attribute float size;
+          varying float vAlpha;
+          uniform float uTime;
+          uniform float uWaveSpeed;
+          void main() {
+            vAlpha = alpha;
+            vec3 pos = position;
+            float wave = sin(pos.x * 0.22 + uTime * uWaveSpeed * 1.2) * 0.35 + cos(pos.z * 0.18 + uTime * uWaveSpeed * 0.8) * 0.25;
+            pos.y += wave * alpha;
+            vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+            gl_PointSize = size * (380.0 / -mvPosition.z);
+            gl_Position = projectionMatrix * mvPosition;
+          }
+        `,
+        fragmentShader: `
+          uniform sampler2D pointTexture;
+          varying float vAlpha;
+          void main() {
+            vec4 texColor = texture2D(pointTexture, gl_PointCoord);
+            if (texColor.a < 0.05) discard;
+            gl_FragColor = vec4(texColor.rgb, texColor.a * vAlpha * 0.95);
+          }
+        `,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+
+      wavePoints = new THREE.Points(waveGeom, waveShaderMaterial);
+      scene.add(wavePoints);
+    }
+
+    buildWave();
+
+    // --- 6. lil-GUI Interactive Sliders ---
+    const gui = new lil.GUI({ title: "💎 TAHSEEN 3D HERO TUNER" });
+
+    const fWave = gui.addFolder("🌊 Wave Particles");
+    fWave.add(config, "waveElevationY", -3.0, 3.0, 0.05).name("Wave Elevation Y").onChange(() => { buildWave(); saveConfig(); });
+    fWave.add(config, "waveAmplitude", 0.1, 2.5, 0.05).name("Wave Height / Amp").onChange(() => { buildWave(); saveConfig(); });
+    fWave.add(config, "waveSpeed", 0.1, 3.0, 0.05).name("Wave Speed").onChange(() => {
+      if (waveShaderMaterial) waveShaderMaterial.uniforms.uWaveSpeed.value = config.waveSpeed;
+      saveConfig();
+    });
+    fWave.add(config, "waveBaseSize", 0.05, 0.8, 0.02).name("Particle Size").onChange(() => { buildWave(); saveConfig(); });
+    fWave.add(config, "gridDepth", 10.0, 40.0, 1.0).name("Grid Depth").onChange(() => { buildWave(); saveConfig(); });
+    fWave.open();
+
+    const fEmblem = gui.addFolder("🪐 3D Emblem Ring");
+    fEmblem.add(config, "emblemPosY", -2.5, 3.5, 0.05).name("Emblem Pos Y").onChange(() => { heroGroup.position.y = config.emblemPosY; saveConfig(); });
+    fEmblem.add(config, "emblemPosX", -4.0, 4.0, 0.05).name("Emblem Pos X").onChange(() => { heroGroup.position.x = config.emblemPosX; saveConfig(); });
+    fEmblem.add(config, "emblemPosZ", -4.0, 4.0, 0.05).name("Emblem Pos Z").onChange(() => { heroGroup.position.z = config.emblemPosZ; saveConfig(); });
+    fEmblem.add(config, "emblemScale", 0.3, 1.5, 0.02).name("Emblem Scale").onChange(() => { heroGroup.scale.setScalar(config.emblemScale); saveConfig(); });
+    fEmblem.add(config, "emblemRotX", -3.14, 3.14, 0.02).name("Rotation X").onChange(() => { heroGroup.rotation.x = config.emblemRotX; saveConfig(); });
+    fEmblem.add(config, "emblemRotY", -3.14, 3.14, 0.02).name("Rotation Y").onChange(() => { heroGroup.rotation.y = config.emblemRotY; saveConfig(); });
+    fEmblem.add(config, "emblemRotZ", -3.14, 3.14, 0.02).name("Rotation Z").onChange(() => { heroGroup.rotation.z = config.emblemRotZ; saveConfig(); });
+    fEmblem.open();
+
+    const fMat = gui.addFolder("✨ Materials & Colors");
+    fMat.addColor(config, "illuminatedColor").name("Front Face").onChange(() => {
+      ribbonMaterial.color.set(config.illuminatedColor); saveConfig();
+    });
+    fMat.addColor(config, "shadedColor").name("Back Face").onChange(() => {
+      shadedFaceMaterial.color.set(config.shadedColor); saveConfig();
+    });
+    fMat.addColor(config, "outerColor").name("Outer Ring").onChange(() => {
+      outerSideMaterial.color.set(config.outerColor); saveConfig();
+    });
+    fMat.add(config, "roughness", 0.0, 1.0, 0.02).name("Roughness").onChange(() => {
+      ribbonMaterial.roughness = config.roughness;
+      shadedFaceMaterial.roughness = config.roughness + 0.04;
+      outerSideMaterial.roughness = config.roughness;
+      saveConfig();
+    });
+    fMat.add(config, "metalness", 0.0, 1.0, 0.02).name("Metalness").onChange(() => {
+      ribbonMaterial.metalness = config.metalness;
+      outerSideMaterial.metalness = config.metalness;
+      saveConfig();
+    });
+
+    // --- 7. Animation Loop with In-Place Floating ---
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+      if (waveShaderMaterial) waveShaderMaterial.uniforms.uTime.value = elapsedTime;
+
+      // Gentle floating levitation around base Y
+      const floatY = Math.sin(elapsedTime * 1.4) * 0.12;
+      heroGroup.position.y = config.emblemPosY + floatY;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // --- 8. Copy Config Functionality ---
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.remove("opacity-0", "translate-y-4");
+      toast.classList.add("opacity-100", "translate-y-0");
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "translate-y-4");
+        toast.classList.remove("opacity-100", "translate-y-0");
+      }, 2500);
+    }
+
+    document.getElementById("copyBtn").addEventListener("click", () => {
+      const jsonStr = JSON.stringify(config, null, 2);
+      navigator.clipboard.writeText(jsonStr).then(() => {
+        showToast("Config JSON copied to clipboard!");
+      });
+    });
+
+    document.getElementById("applyNextBtn").addEventListener("click", () => {
+      const prompt = `Apply the following 3D config to Next.js codebase:
+- Emblem Pos Y: ${config.emblemPosY}
+- Wave Elevation Y: ${config.waveElevationY}
+- Emblem Pos X: ${config.emblemPosX}
+- Emblem Scale: ${config.emblemScale}`;
+      navigator.clipboard.writeText(prompt).then(() => {
+        showToast("Prompt copied! Paste it in our chat to apply.");
+      });
+    });
+
+    // Responsive resize
+    window.addEventListener("resize", () => {
+      const w = container.clientWidth || window.innerWidth;
+      const h = container.clientHeight || 550;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+  </script>
+</body>
+</html>
