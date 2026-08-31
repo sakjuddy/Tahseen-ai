@@ -70,17 +70,17 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
     const isDesktop = width >= 1024;
     const isTablet = width >= 640 && width < 1024;
     
-    const ringBaseX = mirrored ? -2.3 : 2.3;
-    const ringBaseY = 1.45;
+    const ringBaseX = mirrored ? -2.05 : 2.05;
+    const ringBaseY = 0.90;
     const ringBaseZ = 0.0;
-    const ringBaseScale = 0.70;
+    const ringBaseScale = 0.78;
 
     heroGroup.position.set(
       isDesktop ? ringBaseX : 0,
-      isDesktop ? ringBaseY : isTablet ? 1.15 : 0.95,
+      isDesktop ? ringBaseY : isTablet ? 0.75 : 0.65,
       ringBaseZ
     );
-    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : isTablet ? 0.56 : 0.44);
+    heroGroup.scale.setScalar(isDesktop ? ringBaseScale : isTablet ? 0.62 : 0.50);
     scene.add(heroGroup);
 
     const baseRotX = -0.59;
@@ -264,11 +264,11 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
     let pIdx = 0;
     const gridWidth = 58.0;
-    const gridDepth = 22.0;
-    const waveElevationY = 0.1;
-    const waveAmplitude = 0.95;
+    const gridDepth = 27.0;
+    const waveElevationY = -1.55;
+    const waveAmplitude = 1.5;
     const waveAlphaMax = 1.0;
-    const waveBaseSize = 0.26;
+    const waveBaseSize = 0.4;
     const waveSpeed = 0.9;
 
     for (let i = 0; i < rows; i++) {
@@ -475,7 +475,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
 
       // 3. Position: Base Position + In-Place Circular Movement + Cursor Parallax (NO Z pushback)
       const baseX = isCurrentDesktop ? ringBaseX : 0;
-      const baseY = isCurrentDesktop ? ringBaseY : isCurrentTablet ? 1.15 : 0.95;
+      const baseY = isCurrentDesktop ? ringBaseY : isCurrentTablet ? 0.75 : 0.65;
       
       const targetPosX = baseX + inPlaceCircleX + (mouseX * 0.30);
       const targetPosY = baseY + inPlaceCircleY + (-mouseY * 0.22);
@@ -491,7 +491,7 @@ export default function HeroRing3D({ mirrored = false }: HeroRing3DProps) {
       heroGroup.position.z += (targetPosZ - heroGroup.position.z) * 0.06;
 
       // Apply dynamic scale with spring
-      const currentBaseScale = isCurrentDesktop ? ringBaseScale : isCurrentTablet ? 0.56 : 0.44;
+      const currentBaseScale = isCurrentDesktop ? ringBaseScale : isCurrentTablet ? 0.62 : 0.50;
       heroGroup.scale.setScalar(currentBaseScale * clickScaleSpring);
 
       renderer.render(scene, camera);
