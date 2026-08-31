@@ -759,35 +759,35 @@ export default function Home() {
         {/* Sharp White/Teal Container Box */}
         <div className="rounded-md bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-lg flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
           
-          {/* Logo 1: Imam Abdulrahman Bin Faisal University */}
-          <div className="relative h-12 w-28 sm:h-16 sm:w-40 transition-transform duration-300 hover:scale-105">
+          {/* Logo 1: Zana */}
+          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-1.png"
-              alt="Imam Abdulrahman Bin Faisal University"
+              alt="Zana - Empowering Startups"
               fill
-              sizes="(max-width: 640px) 112px, 160px"
+              sizes="(max-width: 640px) 112px, 144px"
               className="object-contain"
             />
           </div>
 
-          {/* Logo 2: Zana */}
-          <div className="relative h-10 w-24 sm:h-14 sm:w-32 transition-transform duration-300 hover:scale-105">
+          {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
+          <div className="relative h-12 w-36 sm:h-16 sm:w-52 transition-transform duration-300 hover:scale-105">
             <Image
-              src="/partners/partner-2.png"
-              alt="Zana - Empowering Startups"
+              src="/partners/partner-2.svg"
+              alt="Imam Abdulrahman Bin Faisal University"
               fill
-              sizes="(max-width: 640px) 96px, 128px"
+              sizes="(max-width: 640px) 144px, 208px"
               className="object-contain"
             />
           </div>
 
           {/* Logo 3: ITQAN */}
-          <div className="relative h-10 w-24 sm:h-14 sm:w-32 transition-transform duration-300 hover:scale-105">
+          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
             <Image
               src="/partners/partner-3.png"
               alt="ITQAN - Driven by Knowledge"
               fill
-              sizes="(max-width: 640px) 96px, 128px"
+              sizes="(max-width: 640px) 112px, 144px"
               className="object-contain"
             />
           </div>
