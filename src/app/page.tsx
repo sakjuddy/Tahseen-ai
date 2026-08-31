@@ -632,12 +632,12 @@ export default function Home() {
       </header>
 
       {/* 2. Hero Section (Kept Untouched as Requested) */}
-      <main id="home" className="relative z-10 pt-4 sm:pt-6 pb-10 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full">
+      <main id="home" className="relative z-10 pt-3 sm:pt-5 pb-2 sm:pb-4 px-4 sm:px-8 lg:px-16 max-w-[1680px] mx-auto w-full">
         
         {/* 3D Canvas Layer */}
         <HeroRing3D mirrored={isAr} />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[460px] sm:min-h-[480px] lg:min-h-[520px] pointer-events-none">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center min-h-[400px] sm:min-h-[440px] lg:min-h-[470px] pointer-events-none">
           
           {/* Left Hero Column */}
           <div className="lg:col-span-6 xl:col-span-5 space-y-4 sm:space-y-5 text-start pointer-events-auto">
@@ -678,14 +678,14 @@ export default function Home() {
           </div>
 
           {/* Right Empty Spacing for 3D Ring */}
-          <div className="hidden lg:block lg:col-span-6 xl:col-span-7 h-[420px]" />
+          <div className="hidden lg:block lg:col-span-6 xl:col-span-7 h-[380px] sm:h-[420px]" />
 
         </div>
 
       </main>
 
       {/* 3. Core 4 Services (Dedicated Separate Section under Hero) */}
-      <section id="services" className="relative z-10 py-16 sm:py-24 px-4 sm:px-8 lg:px-16 max-w-[1500px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-dashed border-white/20">
+      <section id="services" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-16 max-w-[1500px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-dashed border-white/20">
         
         {/* Section Heading */}
         <div className="text-center space-y-3 max-w-2xl mx-auto mb-10 sm:mb-14">
