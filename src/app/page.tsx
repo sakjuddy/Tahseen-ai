@@ -1436,38 +1436,38 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. Final CTA Banner with Solid Clean Architectural Styling */}
-      <section className="relative z-10 py-8 sm:py-12 lg:py-14 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full">
-        <div className="relative rounded-md p-6 sm:p-10 lg:p-12 overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.18)] text-white">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+      {/* 12. Final CTA Banner - Full Screen Width & Compact Vertical Height */}
+      <section className="relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#00E5BE]/35 shadow-[0_10px_60px_rgba(0,229,190,0.15)] text-white py-4 sm:py-6 lg:py-7 px-4 sm:px-8 lg:px-16 xl:px-24">
+        <div className="max-w-[1700px] mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             
             {/* Left Column: Heading & CTA */}
-            <div className="lg:col-span-6 space-y-5 text-start">
+            <div className="lg:col-span-6 space-y-3 sm:space-y-3.5 text-start">
               <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block">
                 {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
                 {isAr ? (
                   <>
-                    ابنِ حلول الذكاء الاصطناعي <br />
+                    ابنِ حلول الذكاء الاصطناعي <br className="hidden sm:inline" />
                     <span className="text-[#00E5BE]">لمنشأتك الآن!</span>
                   </>
                 ) : (
                   <>
-                    Build Your AI-Powered <br />
+                    Build Your AI-Powered <br className="hidden sm:inline" />
                     <span className="text-[#00E5BE]">Solution Now!</span>
                   </>
                 )}
               </h2>
-              <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal max-w-xl">
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal max-w-lg">
                 {isAr
                   ? "تواصل مع فريقنا الهندسي اليوم لتقييم فرص الأتمتة ونشر أنظمة ووكلاء الذكاء الاصطناعي المخصصة لأعمالك."
                   : "Connect directly with our engineering team to assess automation opportunities and deploy custom intelligent agents."}
               </p>
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              <div className="pt-1 flex flex-wrap items-center gap-4">
                 <Link
                   href={contactHref}
-                  className="inline-flex items-center gap-2.5 px-8 py-4 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer group"
+                  className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer group"
                 >
                   <span>{isAr ? "احجز استشارتك المجانية" : "SCHEDULE FREE CONSULTATION"}</span>
                   <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
@@ -1477,14 +1477,14 @@ export default function Home() {
 
             {/* Right Column: Animated Large Elaborate AI Solution Graphic (Floating & Borderless) */}
             <div className="lg:col-span-6 flex items-center justify-center w-full">
-              <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] max-w-[660px] flex items-center justify-center group animate-cta-float">
-                <div className="absolute inset-0 bg-[#00E5BE]/10 rounded-full blur-[80px] pointer-events-none animate-cta-glow -z-10" />
+              <div className="relative w-full h-[220px] sm:h-[270px] lg:h-[310px] max-w-[620px] flex items-center justify-center group animate-cta-float">
+                <div className="absolute inset-0 bg-[#00E5BE]/10 rounded-full blur-[60px] pointer-events-none animate-cta-glow -z-10" />
                 <Image
                   src="/cta-ai-solution.png"
                   alt="Build Your AI-Powered Solution"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 660px"
-                  className="object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_20px_50px_rgba(0,229,190,0.35)]"
+                  sizes="(max-width: 1024px) 100vw, 620px"
+                  className="object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_15px_35px_rgba(0,229,190,0.35)]"
                   priority
                 />
               </div>
