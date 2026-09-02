@@ -45,8 +45,9 @@ export default function AmbientWaveParticles({ theme = "dark" }: AmbientWavePart
     ];
 
     const paletteLight = [
-      { core: "rgba(13, 148, 136, ", glow: "rgba(20, 184, 166, " },
-      { core: "rgba(8, 145, 178, ", glow: "rgba(6, 182, 212, " },
+      { core: "rgba(0, 185, 150, ", glow: "rgba(0, 229, 190, " },    // Vivid Brand Teal
+      { core: "rgba(2, 132, 199, ", glow: "rgba(56, 189, 248, " },    // Radiant Cyan
+      { core: "rgba(13, 148, 136, ", glow: "rgba(45, 212, 191, " },  // Emerald Cyan
     ];
 
     const palette = isLight ? paletteLight : paletteDark;
@@ -60,14 +61,14 @@ export default function AmbientWaveParticles({ theme = "dark" }: AmbientWavePart
         y: baseY,
         baseX,
         baseY,
-        size: Math.random() * 1.6 + 1.1,
+        size: isLight ? (Math.random() * 2.2 + 1.8) : (Math.random() * 1.6 + 1.1),
         color: pColor.core,
         glowColor: pColor.glow,
         speedX: (Math.random() - 0.5) * 0.25,
         speedY: (Math.random() - 0.5) * 0.20,
         amplitude: Math.random() * 22 + 10,
         phase: Math.random() * Math.PI * 2,
-        alpha: Math.random() * 0.15 + (isLight ? 0.12 : 0.18),
+        alpha: isLight ? (Math.random() * 0.30 + 0.45) : (Math.random() * 0.15 + 0.15),
       });
     }
 
@@ -86,17 +87,17 @@ export default function AmbientWaveParticles({ theme = "dark" }: AmbientWavePart
 
       ctx.clearRect(0, 0, width, height);
 
-      // 1. Subtle, low-opacity connective filaments
-      ctx.lineWidth = 0.5;
+      // 1. Connective filaments (more visible in Light Mode)
+      ctx.lineWidth = isLight ? 0.8 : 0.5;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 100) {
-            const lineAlpha = (1 - dist / 100) * (isLight ? 0.05 : 0.08);
-            ctx.strokeStyle = `rgba(0, 229, 190, ${lineAlpha})`;
+          if (dist < 110) {
+            const lineAlpha = (1 - dist / 110) * (isLight ? 0.22 : 0.08);
+            ctx.strokeStyle = isLight ? `rgba(0, 180, 150, ${lineAlpha})` : `rgba(0, 229, 190, ${lineAlpha})`;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -105,7 +106,7 @@ export default function AmbientWaveParticles({ theme = "dark" }: AmbientWavePart
         }
       }
 
-      // 2. Soft, ambient glowing particles
+      // 2. Glowing particles (Vibrant & crisp in Light Mode)
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
@@ -126,19 +127,19 @@ export default function AmbientWaveParticles({ theme = "dark" }: AmbientWavePart
 
         // Soft Ambient Glow
         ctx.beginPath();
-        const radGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3.0);
-        radGrad.addColorStop(0, `${p.glowColor}${currentAlpha * 0.6})`);
-        radGrad.addColorStop(0.5, `${p.glowColor}${currentAlpha * 0.2})`);
+        const radGrad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * (isLight ? 3.5 : 3.0));
+        radGrad.addColorStop(0, `${p.glowColor}${currentAlpha * (isLight ? 0.75 : 0.6)})`);
+        radGrad.addColorStop(0.5, `${p.glowColor}${currentAlpha * (isLight ? 0.35 : 0.2)})`);
         radGrad.addColorStop(1, `${p.glowColor}0)`);
 
         ctx.fillStyle = radGrad;
-        ctx.arc(p.x, p.y, p.size * 3.0, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * (isLight ? 3.5 : 3.0), 0, Math.PI * 2);
         ctx.fill();
 
         // Core micro-dot
         ctx.beginPath();
-        ctx.fillStyle = `${p.color}${Math.min(1.0, currentAlpha * 1.2)})`;
-        ctx.arc(p.x, p.y, p.size * 0.75, 0, Math.PI * 2);
+        ctx.fillStyle = `${p.color}${Math.min(1.0, currentAlpha * (isLight ? 1.6 : 1.2))})`;
+        ctx.arc(p.x, p.y, p.size * 0.8, 0, Math.PI * 2);
         ctx.fill();
       }
 
