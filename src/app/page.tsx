@@ -424,8 +424,26 @@ export default function Home() {
         "Automated Workflows",
       ];
 
-  const pillsRow1 = [...basePillsRow1, ...basePillsRow1];
-  const pillsRow2 = [...basePillsRow2, ...basePillsRow2];
+  const pillsRow1 = [
+    ...basePillsRow1,
+    ...basePillsRow1,
+    ...basePillsRow1,
+    ...basePillsRow1,
+    ...basePillsRow1,
+    ...basePillsRow1,
+    ...basePillsRow1,
+    ...basePillsRow1,
+  ];
+  const pillsRow2 = [
+    ...basePillsRow2,
+    ...basePillsRow2,
+    ...basePillsRow2,
+    ...basePillsRow2,
+    ...basePillsRow2,
+    ...basePillsRow2,
+    ...basePillsRow2,
+    ...basePillsRow2,
+  ];
 
   return (
     <div
@@ -1067,7 +1085,7 @@ export default function Home() {
       </section>
 
       {/* 7. Value Marquee */}
-      <section className="relative z-10 py-12 sm:py-16 overflow-hidden border-t border-b border-white/[0.08] bg-[#050814]/60">
+      <section dir="ltr" className="relative z-10 py-12 sm:py-16 overflow-hidden border-t border-b border-white/[0.08] bg-[#050814]/60 select-none">
         <div className="space-y-4">
           <div className="flex gap-4 animate-marquee-left">
             {pillsRow1.map((pill, idx) => (
