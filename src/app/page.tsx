@@ -1476,14 +1476,14 @@ export default function Home() {
             </div>
 
             {/* Right Column: AI Solution Engine Graphic */}
-            <div className="lg:col-span-5 flex items-center justify-center">
-              <div className="relative w-full max-w-[420px] aspect-[4/3] rounded-md overflow-hidden border border-white/10 shadow-2xl bg-black/40 group hover:border-[#00E5BE]/40 transition-all duration-300">
+            <div className="lg:col-span-5 flex items-center justify-center w-full">
+              <div className="relative w-full h-[280px] sm:h-[340px] max-w-[480px] rounded-md overflow-hidden border-2 border-dashed border-[#00E5BE]/50 shadow-[0_0_30px_rgba(0,229,190,0.18)] bg-[#07131e]/90 flex items-center justify-center p-3 group hover:border-[#00E5BE] transition-all duration-300">
                 <Image
                   src="/cta-ai-solution.png"
                   alt="Build Your AI-Powered Solution"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 420px"
-                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-contain p-3 group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
