@@ -796,69 +796,7 @@ export default function Home() {
 
       </section>
 
-      {/* 4. Enterprise Social Proof & Partner Logos */}
-      <section id="about" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28">
-        
-        {/* Centered Heading */}
-        <div className="flex items-center justify-center gap-3 sm:gap-8 w-full mb-8 sm:mb-10">
-          <div className="hidden sm:block flex-1 border-t border-white/10" />
-          <h4 className="text-xs sm:text-base md:text-lg font-bold text-gray-300 text-center tracking-tight leading-relaxed max-w-xl">
-            {isAr ? (
-              <>
-                معتمد وموثوق من قِبل كبرى المؤسسات الرائدة <br className="hidden sm:inline" />
-                في المملكة العربية السعودية
-              </>
-            ) : (
-              <>
-                Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
-                in Saudi Arabia
-              </>
-            )}
-          </h4>
-          <div className="hidden sm:block flex-1 border-t border-white/10" />
-        </div>
-
-        {/* Sharp White/Teal Container Box */}
-        <div className="rounded-md bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-lg flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
-          
-          {/* Logo 1: Zana */}
-          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
-            <Image
-              src="/partners/partner-1.png"
-              alt="Zana - Empowering Startups"
-              fill
-              sizes="(max-width: 640px) 112px, 144px"
-              className="object-contain"
-            />
-          </div>
-
-          {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
-          <div className="relative h-12 w-36 sm:h-16 sm:w-52 transition-transform duration-300 hover:scale-105">
-            <Image
-              src="/partners/partner-2.svg"
-              alt="Imam Abdulrahman Bin Faisal University"
-              fill
-              sizes="(max-width: 640px) 144px, 208px"
-              className="object-contain"
-            />
-          </div>
-
-          {/* Logo 3: ITQAN */}
-          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
-            <Image
-              src="/partners/partner-3.png"
-              alt="ITQAN - Driven by Knowledge"
-              fill
-              sizes="(max-width: 640px) 112px, 144px"
-              className="object-contain"
-            />
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* 5. Comprehensive Insights Section */}
+      {/* 4. Comprehensive Insights Section */}
       <section id="insights" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08]">
         
         {/* Header */}
@@ -1304,6 +1242,68 @@ export default function Home() {
             </div>
             <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-[#A855F7] flex-shrink-0 transition-colors" />
           </a>
+
+        </div>
+
+      </section>
+
+      {/* 8. Enterprise Social Proof & Partner Logos (Positioned after Tahseen Education) */}
+      <section id="about" className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full scroll-mt-24 sm:scroll-mt-28 border-t border-white/[0.08]">
+        
+        {/* Centered Heading */}
+        <div className="flex items-center justify-center gap-3 sm:gap-8 w-full mb-8 sm:mb-10">
+          <div className="hidden sm:block flex-1 border-t border-white/10" />
+          <h4 className="text-xs sm:text-base md:text-lg font-bold text-gray-300 text-center tracking-tight leading-relaxed max-w-xl">
+            {isAr ? (
+              <>
+                معتمد وموثوق من قِبل كبرى المؤسسات الرائدة <br className="hidden sm:inline" />
+                في المملكة العربية السعودية
+              </>
+            ) : (
+              <>
+                Adopted by renowned, trusted, and leading enterprises <br className="hidden sm:inline" />
+                in Saudi Arabia
+              </>
+            )}
+          </h4>
+          <div className="hidden sm:block flex-1 border-t border-white/10" />
+        </div>
+
+        {/* Sharp White/Teal Container Box */}
+        <div className="rounded-md bg-white/[0.96] backdrop-blur-2xl border border-white/20 p-6 sm:p-8 md:p-10 shadow-lg flex flex-wrap items-center justify-center gap-8 sm:gap-14 lg:gap-20 transition-all duration-300">
+          
+          {/* Logo 1: Zana */}
+          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
+            <Image
+              src="/partners/partner-1.png"
+              alt="Zana - Empowering Startups"
+              fill
+              sizes="(max-width: 640px) 112px, 144px"
+              className="object-contain"
+            />
+          </div>
+
+          {/* Logo 2: Imam Abdulrahman Bin Faisal University */}
+          <div className="relative h-12 w-36 sm:h-16 sm:w-52 transition-transform duration-300 hover:scale-105">
+            <Image
+              src="/partners/partner-2.svg"
+              alt="Imam Abdulrahman Bin Faisal University"
+              fill
+              sizes="(max-width: 640px) 144px, 208px"
+              className="object-contain"
+            />
+          </div>
+
+          {/* Logo 3: ITQAN */}
+          <div className="relative h-12 w-28 sm:h-14 sm:w-36 transition-transform duration-300 hover:scale-105">
+            <Image
+              src="/partners/partner-3.png"
+              alt="ITQAN - Driven by Knowledge"
+              fill
+              sizes="(max-width: 640px) 112px, 144px"
+              className="object-contain"
+            />
+          </div>
 
         </div>
 
