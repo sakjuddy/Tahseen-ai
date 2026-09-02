@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   title: "Tahseen AI - AI Solutions That Enhance Your Work",
   description: "We build AI agents and automation systems that help businesses work smarter, faster, and more efficiently.",
   icons: {
-    icon: "/icon.png",
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/icon.png",
   },
 };
 
