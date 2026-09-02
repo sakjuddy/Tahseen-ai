@@ -1437,8 +1437,8 @@ export default function Home() {
       </section>
 
       {/* 12. Final CTA Banner with Solid Clean Architectural Styling */}
-      <section className="relative z-10 py-16 sm:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 max-w-[1350px] mx-auto w-full">
-        <div className="relative rounded-md p-8 sm:p-12 lg:p-16 overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.18)] text-white">
+      <section className="relative z-10 py-8 sm:py-12 lg:py-14 px-4 sm:px-8 lg:px-12 max-w-[1350px] mx-auto w-full">
+        <div className="relative rounded-md p-6 sm:p-10 lg:p-12 overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.18)] text-white">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
             {/* Left Column: Heading & CTA */}
@@ -1464,7 +1464,7 @@ export default function Home() {
                   ? "تواصل مع فريقنا الهندسي اليوم لتقييم فرص الأتمتة ونشر أنظمة ووكلاء الذكاء الاصطناعي المخصصة لأعمالك."
                   : "Connect directly with our engineering team to assess automation opportunities and deploy custom intelligent agents."}
               </p>
-              <div className="pt-3 flex flex-wrap items-center gap-4">
+              <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Link
                   href={contactHref}
                   className="inline-flex items-center gap-2.5 px-8 py-4 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer group"
@@ -1475,14 +1475,15 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Large Elaborate AI Solution Engine Graphic (Seamless & Borderless) */}
+            {/* Right Column: Animated Large Elaborate AI Solution Graphic (Floating & Borderless) */}
             <div className="lg:col-span-6 flex items-center justify-center w-full">
-              <div className="relative w-full h-[360px] sm:h-[460px] lg:h-[520px] max-w-[680px] flex items-center justify-center group">
+              <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px] max-w-[660px] flex items-center justify-center group animate-cta-float">
+                <div className="absolute inset-0 bg-[#00E5BE]/10 rounded-full blur-[80px] pointer-events-none animate-cta-glow -z-10" />
                 <Image
                   src="/cta-ai-solution.png"
                   alt="Build Your AI-Powered Solution"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 680px"
+                  sizes="(max-width: 1024px) 100vw, 660px"
                   className="object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_20px_50px_rgba(0,229,190,0.35)]"
                   priority
                 />

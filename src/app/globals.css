@@ -124,6 +124,35 @@ html.light .section-dashed-divider {
   border-top: 1px dashed rgba(15, 23, 42, 0.18);
 }
 
+/* Floating animation for CTA illustration */
+@keyframes cta-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.012);
+  }
+}
+
+.animate-cta-float {
+  animation: cta-float 5s ease-in-out infinite;
+}
+
+@keyframes cta-glow-pulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+.animate-cta-glow {
+  animation: cta-glow-pulse 4.5s ease-in-out infinite;
+}
+
 /* Truly Continuous Infinite Marquee Animation for Value Pills */
 @keyframes continuous-marquee-left {
   0% {
