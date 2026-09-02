@@ -1433,7 +1433,7 @@ export default function Home() {
       </section>
 
       {/* 12. Final CTA Banner - Full Screen Width & Center-Docked Layout */}
-      <section className="relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#00E5BE]/35 shadow-[0_10px_60px_rgba(0,229,190,0.15)] text-white py-4 sm:py-6 lg:py-7 px-4 sm:px-8">
+      <section id="cta" className="cta-dark-band relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#00E5BE]/35 shadow-[0_10px_60px_rgba(0,229,190,0.15)] text-white py-4 sm:py-6 lg:py-7 px-4 sm:px-8">
         <div className="max-w-[1120px] mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             
@@ -1442,20 +1442,20 @@ export default function Home() {
               <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block">
                 {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight !text-white">
                 {isAr ? (
                   <>
-                    ابنِ حلول الذكاء الاصطناعي <br className="hidden sm:inline" />
+                    <span className="!text-white">ابنِ حلول الذكاء الاصطناعي</span> <br className="hidden sm:inline" />
                     <span className="text-[#00E5BE]">لمنشأتك الآن!</span>
                   </>
                 ) : (
                   <>
-                    Build Your AI-Powered <br className="hidden sm:inline" />
+                    <span className="!text-white">Build Your AI-Powered</span> <br className="hidden sm:inline" />
                     <span className="text-[#00E5BE]">Solution Now!</span>
                   </>
                 )}
               </h2>
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal max-w-md">
+              <p className="text-xs sm:text-sm !text-gray-300 leading-relaxed font-normal max-w-md">
                 {isAr
                   ? "تواصل مع فريقنا الهندسي اليوم لتقييم فرص الأتمتة ونشر أنظمة ووكلاء الذكاء الاصطناعي المخصصة لأعمالك."
                   : "Connect directly with our engineering team to assess automation opportunities and deploy custom intelligent agents."}

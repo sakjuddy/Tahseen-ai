@@ -283,9 +283,13 @@ html.light footer {
   border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
-/* HERO SECTION REMAINS OBSIDIAN DARK IN BOTH MODES */
+/* HERO & CTA SECTIONS REMAIN OBSIDIAN DARK WITH WHITE TEXT IN BOTH MODES */
 html.light #home,
-#home {
+#home,
+html.light #cta,
+#cta,
+html.light .cta-dark-band,
+.cta-dark-band {
   background-color: #060913 !important;
   color: #ffffff !important;
 }
@@ -293,17 +297,33 @@ html.light #home,
 html.light #home h1,
 html.light #home h2,
 html.light #home h3,
-html.light #home .text-white {
+html.light #home .text-white,
+html.light #cta h1,
+html.light #cta h2,
+html.light #cta h3,
+html.light #cta .text-white,
+html.light .cta-dark-band h1,
+html.light .cta-dark-band h2,
+html.light .cta-dark-band h3,
+html.light .cta-dark-band .text-white {
   color: #ffffff !important;
 }
 
 html.light #home p,
-html.light #home .text-gray-300 {
+html.light #home .text-gray-300,
+html.light #cta p,
+html.light #cta .text-gray-300,
+html.light .cta-dark-band p,
+html.light .cta-dark-band .text-gray-300 {
   color: #d1d5db !important;
 }
 
 html.light #home .text-gray-400,
-html.light #home .text-gray-500 {
+html.light #home .text-gray-500,
+html.light #cta .text-gray-400,
+html.light #cta .text-gray-500,
+html.light .cta-dark-band .text-gray-400,
+html.light .cta-dark-band .text-gray-500 {
   color: #9ca3af !important;
 }
 
@@ -316,13 +336,17 @@ html.light #home .bg-white\/\[0\.04\] {
   color: #e2e8f0 !important;
 }
 
-html.light #home .btn-teal-outline {
+html.light #home .btn-teal-outline,
+html.light #cta .btn-teal-outline,
+html.light .cta-dark-band .btn-teal-outline {
   background-color: #060913 !important;
   border: 1px solid #00e5be !important;
   color: #ffffff !important;
 }
 
-html.light #home .btn-teal-outline:hover {
+html.light #home .btn-teal-outline:hover,
+html.light #cta .btn-teal-outline:hover,
+html.light .cta-dark-band .btn-teal-outline:hover {
   background-color: rgba(0, 229, 190, 0.12) !important;
   color: #ffffff !important;
 }
