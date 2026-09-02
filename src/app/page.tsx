@@ -1475,15 +1475,15 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column: Elaborate AI Solution Engine Graphic */}
+            {/* Right Column: Elaborate AI Solution Engine Graphic (Seamless & Borderless) */}
             <div className="lg:col-span-5 flex items-center justify-center w-full">
-              <div className="relative w-full h-[280px] sm:h-[360px] max-w-[500px] rounded-md overflow-hidden border border-white/10 shadow-2xl bg-black/40 flex items-center justify-center p-2 group hover:border-[#00E5BE]/50 transition-all duration-300">
+              <div className="relative w-full h-[300px] sm:h-[400px] max-w-[560px] flex items-center justify-center group">
                 <Image
                   src="/cta-ai-solution.png"
                   alt="Build Your AI-Powered Solution"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 1024px) 100vw, 560px"
+                  className="object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_15px_35px_rgba(0,229,190,0.25)]"
                 />
               </div>
             </div>
