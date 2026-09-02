@@ -1073,7 +1073,7 @@ export default function Home() {
             {pillsRow1.map((pill, idx) => (
               <div
                 key={`p1-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/10 bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+                className="marquee-teal-pill flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-bold tracking-wide border border-[#00E5BE] bg-[#00E5BE] text-[#060913] shadow-[0_4px_15px_rgba(0,229,190,0.25)] hover:scale-105 transition-all select-none cursor-default"
               >
                 {pill}
               </div>
@@ -1083,7 +1083,7 @@ export default function Home() {
             {pillsRow2.map((pill, idx) => (
               <div
                 key={`p2-${idx}`}
-                className="flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-semibold tracking-wide border border-white/10 bg-[#09161f] text-gray-200 hover:border-[#00E5BE]/40 transition-all select-none cursor-default"
+                className="marquee-teal-pill flex-shrink-0 px-4 sm:px-6 py-2.5 sm:py-3 rounded-md text-xs sm:text-sm font-bold tracking-wide border border-[#00E5BE] bg-[#00E5BE] text-[#060913] shadow-[0_4px_15px_rgba(0,229,190,0.25)] hover:scale-105 transition-all select-none cursor-default"
               >
                 {pill}
               </div>
