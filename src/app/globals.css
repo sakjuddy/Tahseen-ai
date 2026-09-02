@@ -283,15 +283,28 @@ html.light footer {
   border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
-/* HERO & CTA SECTIONS REMAIN OBSIDIAN DARK WITH WHITE TEXT IN BOTH MODES */
+/* HERO, CTA & EHSAN PLEDGE SECTIONS REMAIN OBSIDIAN DARK WITH WHITE TEXT IN BOTH MODES */
+html.light #home,
+#home,
+html.light #cta,
+#cta,
+html.light .cta-dark-band,
+.cta-dark-band,
+html.light .ehsan-pledge-card,
+.ehsan-pledge-card {
+  background: linear-gradient(135deg, #071f1b 0%, #060913 50%, #071f1b 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #00e5be !important;
+  box-shadow: 0 16px 50px -10px rgba(0, 229, 190, 0.28) !important;
+}
+
 html.light #home,
 #home,
 html.light #cta,
 #cta,
 html.light .cta-dark-band,
 .cta-dark-band {
-  background-color: #060913 !important;
-  color: #ffffff !important;
+  background: #060913 !important;
 }
 
 html.light #home h1,
@@ -305,7 +318,11 @@ html.light #cta .text-white,
 html.light .cta-dark-band h1,
 html.light .cta-dark-band h2,
 html.light .cta-dark-band h3,
-html.light .cta-dark-band .text-white {
+html.light .cta-dark-band .text-white,
+html.light .ehsan-pledge-card h3,
+html.light .ehsan-pledge-card .text-white,
+.ehsan-pledge-card h3,
+.ehsan-pledge-card .text-white {
   color: #ffffff !important;
 }
 
@@ -314,7 +331,13 @@ html.light #home .text-gray-300,
 html.light #cta p,
 html.light #cta .text-gray-300,
 html.light .cta-dark-band p,
-html.light .cta-dark-band .text-gray-300 {
+html.light .cta-dark-band .text-gray-300,
+html.light .ehsan-pledge-card p,
+html.light .ehsan-pledge-card .text-gray-300,
+html.light .ehsan-pledge-card .text-gray-400,
+.ehsan-pledge-card p,
+.ehsan-pledge-card .text-gray-300,
+.ehsan-pledge-card .text-gray-400 {
   color: #d1d5db !important;
 }
 
@@ -325,6 +348,18 @@ html.light #cta .text-gray-500,
 html.light .cta-dark-band .text-gray-400,
 html.light .cta-dark-band .text-gray-500 {
   color: #9ca3af !important;
+}
+
+html.light .ehsan-pledge-card .btn-teal-outline {
+  background-color: #00e5be !important;
+  color: #060913 !important;
+  border: 1px solid #00e5be !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 20px rgba(0, 229, 190, 0.4) !important;
+}
+
+html.light .ehsan-pledge-card .btn-teal-outline:hover {
+  background-color: #26ffdf !important;
 }
 
 html.light #home .bg-white\/\[0\.015\],

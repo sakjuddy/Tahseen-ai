@@ -1349,19 +1349,19 @@ export default function Home() {
 
       {/* 10. Saudi Ehsan Platform 1% Social Pledge Banner */}
       <section className="relative z-10 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1200px] mx-auto w-full">
-        <div className="p-8 sm:p-12 rounded-md sharp-bento bg-gradient-to-r from-[#061e1b]/80 via-[#060913] to-[#061e1b]/80 border border-[#00E5BE]/30 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
+        <div className="ehsan-pledge-card p-8 sm:p-12 rounded-md bg-gradient-to-r from-[#071f1b] via-[#060913] to-[#071f1b] border-2 border-[#00E5BE] shadow-[0_16px_50px_-10px_rgba(0,229,190,0.28)] flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-md bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] flex-shrink-0">
-              <HeartHandshake className="w-7 h-7" />
+            <div className="w-14 h-14 rounded-md bg-[#00E5BE]/15 border border-[#00E5BE]/40 flex items-center justify-center text-[#00E5BE] flex-shrink-0 shadow-[0_0_15px_rgba(0,229,190,0.3)]">
+              <HeartHandshake className="w-7 h-7 text-[#00E5BE]" />
             </div>
             <div className="space-y-1">
               <div className="text-xs font-mono text-[#00E5BE] font-bold uppercase tracking-wider">
                 {isAr ? "الأثر المجتمعي المستدام" : "SOCIAL IMPACT PLEDGE"}
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-white">
+              <h3 className="text-lg sm:text-xl font-bold !text-white">
                 {isAr ? "نتبرع بنسبة ١٪ من أرباح أعمالنا لمنصة إحسان" : "We Donate 1% of Proceeds to the Ehsan Platform"}
               </h3>
-              <p className="text-xs sm:text-sm text-gray-400 font-normal">
+              <p className="text-xs sm:text-sm !text-gray-300 font-normal">
                 {isAr ? "التزاماً منا بالمسؤولية الاجتماعية ودعماً للقطاع الخيري وغير الربحي في المملكة العربية السعودية." : "Committed to sustainable social responsibility and empowering non-profit growth across Saudi Arabia."}
               </p>
             </div>
@@ -1369,7 +1369,7 @@ export default function Home() {
 
           <Link
             href={contactHref}
-            className="inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-lg btn-teal-outline flex-shrink-0 cursor-pointer"
+            className="inline-flex items-center justify-center px-6 py-3 text-xs font-bold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] font-sans font-extrabold shadow-[0_4px_20px_rgba(0,229,190,0.4)] flex-shrink-0 cursor-pointer transition-all hover:scale-105"
           >
             <span>{isAr ? "تواصل معنا" : "GET IN TOUCH"}</span>
           </Link>
