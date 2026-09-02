@@ -175,13 +175,13 @@ html.light .section-dashed-divider {
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: continuous-marquee-left 35s linear infinite;
+  animation: continuous-marquee-left 80s linear infinite;
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: continuous-marquee-right 35s linear infinite;
+  animation: continuous-marquee-right 80s linear infinite;
 }
 
 .animate-marquee-left:hover,
