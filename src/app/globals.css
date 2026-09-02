@@ -199,9 +199,34 @@ html.light body {
   color: #0f172a;
 }
 
-html.light header {
-  background-color: rgba(255, 255, 255, 0.94) !important;
-  border-color: rgba(15, 23, 42, 0.08) !important;
+/* NAVBAR REMAINS DARK IN BOTH MODES */
+html.light header,
+header {
+  background-color: rgba(6, 9, 19, 0.94) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
+}
+
+html.light header a,
+html.light header nav a,
+html.light header nav span {
+  color: #e2e8f0 !important;
+}
+
+html.light header a:hover,
+html.light header nav a:hover {
+  color: #00e5be !important;
+}
+
+html.light header .btn-teal-outline {
+  background-color: #060913 !important;
+  border: 1px solid #00e5be !important;
+  color: #ffffff !important;
+}
+
+html.light header .btn-teal-outline:hover {
+  background-color: rgba(0, 229, 190, 0.12) !important;
+  color: #ffffff !important;
 }
 
 html.light .text-white {

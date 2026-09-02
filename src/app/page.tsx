@@ -448,10 +448,8 @@ export default function Home() {
       {/* Ambient Wave Particles Scattered Across Webpage */}
       <AmbientWaveParticles theme={theme} />
 
-      {/* 1. Sticky Header / Navbar (Kept Untouched as Requested) */}
-      <header className={`sticky top-0 z-50 w-full backdrop-blur-xl border-b transition-all duration-300 ${
-        isLight ? "bg-white/90 border-slate-200/80 shadow-xs" : "bg-[#060913]/90 border-white/[0.04]"
-      }`}>
+      {/* 1. Sticky Header / Navbar (Locked to Dark Aesthetic in Both Modes) */}
+      <header className="sticky top-0 z-50 w-full backdrop-blur-xl border-b border-white/[0.06] bg-[#060913]/92 text-white transition-all duration-300">
         <div className="py-2.5 sm:py-3 px-4 sm:px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto w-full flex items-center justify-between">
           
           {/* Logo */}
@@ -462,7 +460,7 @@ export default function Home() {
           >
             <div className="relative h-8 w-36 sm:h-9 sm:w-44 lg:h-10 lg:w-48 transition-transform duration-300 group-hover:scale-105">
               <Image
-                src={isLight ? "/tahseen-logo-light.png" : "/tahseen-logo.png"}
+                src="/tahseen-logo.png"
                 alt="Tahseen AI"
                 fill
                 sizes="(max-width: 640px) 144px, 192px"
@@ -474,9 +472,7 @@ export default function Home() {
 
           {/* Desktop Nav Links & Controls */}
           <div className="hidden md:flex items-center gap-4 lg:gap-6">
-            <nav className={`flex items-center gap-4 lg:gap-6 text-xs font-semibold tracking-wider ${
-              isLight ? "text-slate-700" : "text-gray-300"
-            }`}>
+            <nav className="flex items-center gap-4 lg:gap-6 text-xs font-semibold tracking-wider text-gray-300">
               {navLinks.map((link) =>
                 link.href.startsWith("/") ? (
                   <Link
