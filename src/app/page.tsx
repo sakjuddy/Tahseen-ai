@@ -1093,7 +1093,7 @@ export default function Home() {
       </section>
 
       {/* 8. Tahseen Education (Flagship Ecosystem Highlight) */}
-      <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-gradient-to-b from-[#061219]/40 via-[#050814] to-[#061219]/40">
+      <section id="education" className="relative z-10 py-16 sm:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 max-w-[1400px] mx-auto w-full border-t border-white/[0.08] bg-transparent">
         
         {/* Section Tag */}
         <div className="text-center space-y-3 max-w-3xl mx-auto mb-10 sm:mb-12">
@@ -1182,15 +1182,15 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-md bg-[#060913]/90 border border-white/10 text-center">
+            <div className="lg:col-span-4 dark-subcard flex flex-col justify-center items-stretch gap-4 p-6 sm:p-8 rounded-md bg-[#060913] border border-white/15 text-center shadow-lg">
               <div className="space-y-1.5">
                 <span className="text-[10px] font-mono text-[#00E5BE] uppercase tracking-widest block font-bold">
                   {isAr ? "منظومة موحدة" : "UNIFIED PLATFORM"}
                 </span>
-                <div className="text-xl sm:text-2xl font-extrabold text-white">
+                <div className="text-xl sm:text-2xl font-extrabold !text-white">
                   {isAr ? "حساب واحد لجميع الاختبارات" : "One Account for All Exams"}
                 </div>
-                <p className="text-[11px] text-gray-400">
+                <p className="text-[11px] !text-gray-300">
                   {isAr ? "وصول كامل للقدرات والتحصيلي وبوصلتي" : "Full access to Qudurat, Tahsili & Bausalty"}
                 </p>
               </div>

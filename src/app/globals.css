@@ -283,7 +283,7 @@ html.light footer {
   border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
-/* HERO, CTA & EHSAN PLEDGE SECTIONS REMAIN OBSIDIAN DARK WITH WHITE TEXT IN BOTH MODES */
+/* HERO, CTA, EHSAN PLEDGE & DARK SUBCARDS REMAIN OBSIDIAN DARK WITH WHITE TEXT IN BOTH MODES */
 html.light #home,
 #home,
 html.light #cta,
@@ -291,11 +291,35 @@ html.light #cta,
 html.light .cta-dark-band,
 .cta-dark-band,
 html.light .ehsan-pledge-card,
-.ehsan-pledge-card {
-  background: linear-gradient(135deg, #071f1b 0%, #060913 50%, #071f1b 100%) !important;
+.ehsan-pledge-card,
+html.light .dark-subcard,
+.dark-subcard {
   color: #ffffff !important;
-  border: 1.5px solid #00e5be !important;
-  box-shadow: 0 16px 50px -10px rgba(0, 229, 190, 0.28) !important;
+}
+
+html.light .dark-subcard,
+.dark-subcard {
+  background-color: #060913 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+html.light .dark-subcard .text-white,
+html.light .dark-subcard h3,
+html.light .dark-subcard div,
+.dark-subcard .text-white,
+.dark-subcard h3,
+.dark-subcard div {
+  color: #ffffff !important;
+}
+
+html.light .dark-subcard p,
+html.light .dark-subcard .text-gray-400,
+html.light .dark-subcard .text-gray-300,
+.dark-subcard p,
+.dark-subcard .text-gray-400,
+.dark-subcard .text-gray-300 {
+  color: #cbd5e1 !important;
 }
 
 html.light #home,
