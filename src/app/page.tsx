@@ -1436,40 +1436,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. Final CTA Banner with DOTTED / DASHED ARCHITECTURAL BENTO BOX */}
-      <section className="relative z-10 py-16 sm:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 max-w-[1300px] mx-auto w-full">
-        <div className="relative rounded-md p-8 sm:p-14 lg:p-20 text-center overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-dashed border-[#00E5BE]/50 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
-          <div className="space-y-4 max-w-2xl mx-auto">
-            <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase">
-              {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-              {isAr ? (
-                <>
-                  ابنِ حلول الذكاء الاصطناعي <br />
-                  <span className="text-[#00E5BE]">لمنشأتك الآن!</span>
-                </>
-              ) : (
-                <>
-                  Build Your AI-Powered <br />
-                  <span className="text-[#00E5BE]">Solution Now!</span>
-                </>
-              )}
-            </h2>
-            <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal max-w-xl mx-auto">
-              {isAr
-                ? "تواصل مع فريقنا الهندسي اليوم لتقييم فرص الأتمتة ونشر أنظمة الذكاء الاصطناعي المخصصة لأعمالك."
-                : "Connect directly with our engineering team to assess automation opportunities and deploy custom intelligent agents."}
-            </p>
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href={contactHref}
-                className="inline-flex items-center gap-2 px-8 py-4 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer"
-              >
-                <span>{isAr ? "احجز استشارتك المجانية" : "SCHEDULE FREE CONSULTATION"}</span>
-                <ArrowRight className={`w-4 h-4 ${isAr ? "rotate-180" : ""}`} />
-              </Link>
+      {/* 12. Final CTA Banner with DOTTED / DASHED ARCHITECTURAL BENTO BOX & AI SOLUTION VISUAL */}
+      <section className="relative z-10 py-16 sm:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 max-w-[1350px] mx-auto w-full">
+        <div className="relative rounded-md p-8 sm:p-12 lg:p-16 overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border-2 border-dashed border-[#00E5BE]/50 shadow-[0_20px_80px_rgba(0,229,190,0.2)] text-white">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Heading & CTA */}
+            <div className="lg:col-span-7 space-y-5 text-start">
+              <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block">
+                {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                {isAr ? (
+                  <>
+                    ابنِ حلول الذكاء الاصطناعي <br />
+                    <span className="text-[#00E5BE]">لمنشأتك الآن!</span>
+                  </>
+                ) : (
+                  <>
+                    Build Your AI-Powered <br />
+                    <span className="text-[#00E5BE]">Solution Now!</span>
+                  </>
+                )}
+              </h2>
+              <p className="text-xs sm:text-base text-gray-300 leading-relaxed font-normal max-w-xl">
+                {isAr
+                  ? "تواصل مع فريقنا الهندسي اليوم لتقييم فرص الأتمتة ونشر أنظمة ووكلاء الذكاء الاصطناعي المخصصة لأعمالك."
+                  : "Connect directly with our engineering team to assess automation opportunities and deploy custom intelligent agents."}
+              </p>
+              <div className="pt-3 flex flex-wrap items-center gap-4">
+                <Link
+                  href={contactHref}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 text-xs sm:text-sm font-extrabold tracking-widest uppercase rounded-lg bg-[#00E5BE] text-[#060913] hover:bg-[#26FFDF] shadow-[0_4px_25px_rgba(0,229,190,0.6)] transition-all cursor-pointer group"
+                >
+                  <span>{isAr ? "احجز استشارتك المجانية" : "SCHEDULE FREE CONSULTATION"}</span>
+                  <ArrowRight className={`w-4 h-4 transition-transform group-hover:translate-x-1 ${isAr ? "rotate-180 group-hover:-translate-x-1" : ""}`} />
+                </Link>
+              </div>
             </div>
+
+            {/* Right Column: AI Solution Engine Graphic */}
+            <div className="lg:col-span-5 flex items-center justify-center">
+              <div className="relative w-full max-w-[420px] aspect-[4/3] rounded-md overflow-hidden border border-white/10 shadow-2xl bg-black/40 group hover:border-[#00E5BE]/40 transition-all duration-300">
+                <Image
+                  src="/cta-ai-solution.png"
+                  alt="Build Your AI-Powered Solution"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 420px"
+                  className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
