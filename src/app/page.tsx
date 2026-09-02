@@ -1437,7 +1437,7 @@ export default function Home() {
       </section>
 
       {/* 12. Final CTA Banner with Solid Clean Architectural Styling */}
-      <section className="relative z-10 py-8 sm:py-12 lg:py-14 px-4 sm:px-8 lg:px-12 max-w-[1350px] mx-auto w-full">
+      <section className="relative z-10 py-8 sm:py-12 lg:py-14 px-6 sm:px-10 lg:px-12 xl:px-16 max-w-[1400px] mx-auto w-full">
         <div className="relative rounded-md p-6 sm:p-10 lg:p-12 overflow-hidden bg-gradient-to-b from-[#081720]/90 to-[#060913] border border-[#00E5BE]/40 shadow-[0_20px_80px_rgba(0,229,190,0.18)] text-white">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
