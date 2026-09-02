@@ -1436,13 +1436,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 12. Final CTA Banner - Full Screen Width & Compact Vertical Height */}
-      <section className="relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#00E5BE]/35 shadow-[0_10px_60px_rgba(0,229,190,0.15)] text-white py-4 sm:py-6 lg:py-7 px-4 sm:px-8 lg:px-16 xl:px-24">
-        <div className="max-w-[1700px] mx-auto w-full">
+      {/* 12. Final CTA Banner - Full Screen Width & Center-Focused Layout */}
+      <section className="relative z-10 w-full overflow-hidden bg-gradient-to-r from-[#060913] via-[#091822] to-[#060913] border-y border-[#00E5BE]/35 shadow-[0_10px_60px_rgba(0,229,190,0.15)] text-white py-4 sm:py-6 lg:py-7 px-4 sm:px-8">
+        <div className="max-w-[1240px] mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
             
-            {/* Left Column: Heading & CTA */}
-            <div className="lg:col-span-6 space-y-3 sm:space-y-3.5 text-start">
+            {/* Left Column: Heading & CTA (Centered / Pulled Inward) */}
+            <div className={`lg:col-span-6 space-y-3 sm:space-y-3.5 text-start ${isAr ? "lg:pr-4 xl:pr-8" : "lg:pl-4 xl:pl-8"}`}>
               <span className="text-[#00E5BE] text-[10px] sm:text-xs font-mono font-bold tracking-widest uppercase block">
                 {isAr ? "ابدأ رحلة التحول الذكي اليوم" : "START YOUR INTELLIGENT TRANSFORMATION"}
               </span>
@@ -1459,7 +1459,7 @@ export default function Home() {
                   </>
                 )}
               </h2>
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal max-w-lg">
+              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-normal max-w-md">
                 {isAr
                   ? "تواصل مع فريقنا الهندسي اليوم لتقييم فرص الأتمتة ونشر أنظمة ووكلاء الذكاء الاصطناعي المخصصة لأعمالك."
                   : "Connect directly with our engineering team to assess automation opportunities and deploy custom intelligent agents."}
@@ -1477,13 +1477,13 @@ export default function Home() {
 
             {/* Right Column: Animated Large Elaborate AI Solution Graphic (Floating & Borderless) */}
             <div className="lg:col-span-6 flex items-center justify-center w-full">
-              <div className="relative w-full h-[220px] sm:h-[270px] lg:h-[310px] max-w-[620px] flex items-center justify-center group animate-cta-float">
+              <div className="relative w-full h-[220px] sm:h-[270px] lg:h-[310px] max-w-[580px] flex items-center justify-center group animate-cta-float">
                 <div className="absolute inset-0 bg-[#00E5BE]/10 rounded-full blur-[60px] pointer-events-none animate-cta-glow -z-10" />
                 <Image
                   src="/cta-ai-solution.png"
                   alt="Build Your AI-Powered Solution"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 620px"
+                  sizes="(max-width: 1024px) 100vw, 580px"
                   className="object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_15px_35px_rgba(0,229,190,0.35)]"
                   priority
                 />
