@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -50,6 +51,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[#0d1426] text-gray-100 min-h-full flex flex-col selection:bg-[#008688]/30 selection:text-[#008688]">
+        <LoadingScreen />
         {children}
       </body>
     </html>
