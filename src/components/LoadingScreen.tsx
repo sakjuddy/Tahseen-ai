@@ -86,7 +86,7 @@ export default function LoadingScreen() {
           </div>
         </div>
 
-        {/* Minimal Loading Bar with Percentage Number */}
+        {/* Minimal Loading Bar with Word 'LOADING' & Number */}
         <div className="w-36 sm:w-44 flex flex-col items-center space-y-2">
           {/* Progress Bar Track */}
           <div className="relative h-[2.5px] sm:h-[3px] w-full bg-white/[0.08] rounded-full overflow-hidden border border-white/[0.05]">
@@ -96,9 +96,10 @@ export default function LoadingScreen() {
             />
           </div>
 
-          {/* Numeric Percentage */}
-          <div className="text-[11px] sm:text-xs font-mono font-medium tracking-widest text-[#00E5BE]/90">
-            {progress}%
+          {/* 'LOADING' Word + Percentage Number */}
+          <div className="flex items-center justify-between w-full text-[10px] sm:text-[11px] font-mono tracking-widest text-[#00E5BE]/90 px-0.5">
+            <span className="uppercase text-gray-400 font-medium tracking-[0.15em]">LOADING</span>
+            <span className="font-semibold text-[#00E5BE]">{progress}%</span>
           </div>
         </div>
       </div>
