@@ -2,12 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-interface PathSample {
-  d: number;
-  x: number;
-  y: number;
-}
-
 export default function CurvedRibbonBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -25,11 +19,16 @@ export default function CurvedRibbonBackground() {
     const parent = container.parentElement || container;
 
     let pathLength = 0;
-    const lookup: PathSample[] = [];
+    let targetDist = 0;
+    let currentDist = 0;
+    let isAnimating = false;
+    let rafId: number | null = null;
 
     const buildPath = () => {
       const w = parent.clientWidth || window.innerWidth;
       const h = parent.clientHeight || 5000;
+      const isMobile = w < 640;
+      const isTablet = w >= 640 && w < 1024;
 
       if (svgRef.current) {
         svgRef.current.setAttribute("viewBox", `0 0 ${w} ${h}`);
@@ -58,7 +57,9 @@ export default function CurvedRibbonBackground() {
       const firstY = servicesEl
         ? servicesEl.getBoundingClientRect().top - pRect.top + 20
         : 35;
-      points.push([w * 0.08, Math.max(25, firstY)]);
+      
+      const startX = isMobile ? w * 0.12 : w * 0.08;
+      points.push([startX, Math.max(25, firstY)]);
 
       sectionIds.forEach((id, idx) => {
         const el = document.getElementById(id);
@@ -67,14 +68,22 @@ export default function CurvedRibbonBackground() {
           const topRel = rect.top - pRect.top;
           const midY = topRel + rect.height * 0.50;
 
-          // Snake between right (0.92) and left (0.08) around content boundaries
+          // Snake between right and left margins with mobile-optimized bounds
           const isRight = idx % 2 === 0;
-          const xMargin = isRight ? w * 0.92 : w * 0.08;
+          const xMargin = isMobile
+            ? isRight ? w * 0.88 : w * 0.12
+            : isTablet
+            ? isRight ? w * 0.90 : w * 0.10
+            : isRight ? w * 0.92 : w * 0.08;
+
           points.push([xMargin, midY]);
         } else {
           const frac = (idx + 1) / (sectionIds.length + 1);
           const isRight = idx % 2 === 0;
-          points.push([isRight ? w * 0.90 : w * 0.10, h * frac]);
+          const xMargin = isMobile
+            ? isRight ? w * 0.85 : w * 0.15
+            : isRight ? w * 0.90 : w * 0.10;
+          points.push([xMargin, h * frac]);
         }
       });
 
@@ -84,10 +93,10 @@ export default function CurvedRibbonBackground() {
       // Catmull-Rom to Cubic Bezier spline for flowing curvature
       const n = points.length;
       let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
-      const baseCompanionOffsetX = w < 640 ? 14 : w < 1024 ? 22 : 32;
+      const baseCompanionOffsetX = isMobile ? 12 : isTablet ? 20 : 32;
       let compD = `M ${(points[0][0] + baseCompanionOffsetX).toFixed(1)} ${(points[0][1] - 18).toFixed(1)}`;
 
-      const tension = 0.24;
+      const tension = isMobile ? 0.18 : 0.24;
 
       for (let i = 0; i < n - 1; i++) {
         const p0 = points[Math.max(0, i - 1)];
@@ -103,8 +112,8 @@ export default function CurvedRibbonBackground() {
 
         d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
 
-        // Offset companion path for architectural ribbon contour (scaled for mobile/tablet)
-        const baseOffset = w < 640 ? 16 : w < 1024 ? 30 : 48;
+        // Offset companion path for architectural ribbon contour
+        const baseOffset = isMobile ? 12 : isTablet ? 24 : 44;
         const offset = i % 2 === 0 ? -baseOffset : baseOffset;
         const c_cp1x = cp1x + offset;
         const c_cp2x = cp2x + offset;
@@ -123,103 +132,51 @@ export default function CurvedRibbonBackground() {
       if (companionPathRef.current) {
         companionPathRef.current.setAttribute("d", compD);
       }
-
-      // Precalculate high-density lookup table along the path (500 samples)
-      lookup.length = 0;
-      if (pathRef.current && pathLength > 0) {
-        const sampleCount = 500;
-        for (let i = 0; i <= sampleCount; i++) {
-          const dist = (i / sampleCount) * pathLength;
-          const pt = pathRef.current.getPointAtLength(dist);
-          lookup.push({ d: dist, x: pt.x, y: pt.y });
-        }
-      }
     };
 
     buildPath();
 
-    // ResizeObserver for dynamic layout updates
-    const resizeObserver = new ResizeObserver(() => {
-      buildPath();
-      updateParticle();
-    });
-    resizeObserver.observe(parent);
-
-    // Scroll tracking: Starts at the very top of the line, and moves continuously
-    // so it is ALWAYS visible on screen as the user scrolls through the sections
-    const updateParticle = () => {
-      if (
-        !pathRef.current ||
-        !particleGroupRef.current ||
-        pathLength <= 0 ||
-        lookup.length === 0
-      )
+    // Smooth physics loop for fluid particle movement on scroll/touch
+    const renderParticle = () => {
+      if (!pathRef.current || !particleGroupRef.current || pathLength <= 0) {
+        isAnimating = false;
         return;
+      }
 
-      const pRect = parent.getBoundingClientRect();
-      const scrollDown = -pRect.top; // Pixels user has scrolled into this container
-      const hWindow = window.innerHeight || 800;
-
-      // 1. Target Y calculation:
-      // When above services or in Hero (scrollDown <= 0):
-      // Target Y is strictly the very first point (top of the line).
-      // As the user scrolls down, targetY smoothly transitions to optical screen center
-      // (hWindow * 0.45), guaranteeing the particle stays VISIBLE on screen the whole journey!
-      let targetY: number;
-      if (scrollDown <= 0) {
-        targetY = lookup[0].y;
+      // Smooth interpolation towards target distance
+      const diff = targetDist - currentDist;
+      if (Math.abs(diff) > 0.1) {
+        currentDist += diff * 0.18;
       } else {
-        const screenOffset = Math.min(hWindow * 0.45, scrollDown * 0.75);
-        targetY = Math.min(lookup[lookup.length - 1].y, scrollDown + screenOffset);
+        currentDist = targetDist;
       }
 
-      // 2. Find closest sample along the curve with sub-pixel interpolation
-      let bestIdx = 0;
-      let minDiff = Infinity;
-      for (let i = 0; i < lookup.length; i++) {
-        const diff = Math.abs(lookup[i].y - targetY);
-        if (diff < minDiff) {
-          minDiff = diff;
-          bestIdx = i;
-        }
-      }
-
-      let bestDist = lookup[bestIdx].d;
-      if (bestIdx > 0 && bestIdx < lookup.length - 1) {
-        const nextIdx = lookup[bestIdx].y < targetY ? bestIdx + 1 : bestIdx - 1;
-        const p1 = lookup[Math.min(bestIdx, nextIdx)];
-        const p2 = lookup[Math.max(bestIdx, nextIdx)];
-        const dy = p2.y - p1.y;
-        if (Math.abs(dy) > 0.1) {
-          const t = Math.max(0, Math.min(1, (targetY - p1.y) / dy));
-          bestDist = p1.d + t * (p2.d - p1.d);
-        }
-      }
-
-      const pt = pathRef.current.getPointAtLength(bestDist);
+      const clampedDist = Math.max(0, Math.min(pathLength, currentDist));
+      const pt = pathRef.current.getPointAtLength(clampedDist);
 
       particleGroupRef.current.setAttribute(
         "transform",
         `translate(${pt.x.toFixed(1)}, ${pt.y.toFixed(1)})`
       );
 
-      // Trailing subtle dark teal sparkles (follow behind along the curve when moving)
-      const isMoving = scrollDown > 20;
+      // Trailing sparkles along the exact curve
+      const isMoving = clampedDist > 20;
+      const trailSpacing = window.innerWidth < 640 ? 18 : 32;
 
       if (trail1Ref.current) {
         if (isMoving) {
-          const pt1 = pathRef.current.getPointAtLength(Math.max(0, bestDist - 32));
+          const pt1 = pathRef.current.getPointAtLength(Math.max(0, clampedDist - trailSpacing));
           trail1Ref.current.setAttribute("cx", pt1.x.toFixed(1));
           trail1Ref.current.setAttribute("cy", pt1.y.toFixed(1));
-          trail1Ref.current.style.opacity = "0.55";
+          trail1Ref.current.style.opacity = "0.6";
         } else {
           trail1Ref.current.style.opacity = "0";
         }
       }
 
       if (trail2Ref.current) {
-        if (isMoving && scrollDown > 60) {
-          const pt2 = pathRef.current.getPointAtLength(Math.max(0, bestDist - 64));
+        if (isMoving && clampedDist > trailSpacing * 2) {
+          const pt2 = pathRef.current.getPointAtLength(Math.max(0, clampedDist - trailSpacing * 2));
           trail2Ref.current.setAttribute("cx", pt2.x.toFixed(1));
           trail2Ref.current.setAttribute("cy", pt2.y.toFixed(1));
           trail2Ref.current.style.opacity = "0.35";
@@ -227,26 +184,59 @@ export default function CurvedRibbonBackground() {
           trail2Ref.current.style.opacity = "0";
         }
       }
+
+      if (Math.abs(diff) > 0.1) {
+        rafId = requestAnimationFrame(renderParticle);
+        isAnimating = true;
+      } else {
+        isAnimating = false;
+      }
     };
 
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateParticle();
-          ticking = false;
-        });
-        ticking = true;
+    const updateTargetFromScroll = () => {
+      if (!parent || pathLength <= 0) return;
+
+      const pRect = parent.getBoundingClientRect();
+      const hWindow = window.innerHeight || 800;
+      const totalH = parent.clientHeight || 5000;
+      
+      // Calculate how far down the user has scrolled through the page body
+      const scrollDown = -pRect.top;
+      const maxScroll = Math.max(1, totalH - hWindow * 0.5);
+
+      // Smooth monotonic progress along the curve (0.0 to 1.0)
+      const rawProgress = (scrollDown + hWindow * 0.3) / maxScroll;
+      const progress = Math.max(0, Math.min(1, rawProgress));
+
+      targetDist = progress * pathLength;
+
+      if (!isAnimating) {
+        isAnimating = true;
+        rafId = requestAnimationFrame(renderParticle);
       }
+    };
+
+    // ResizeObserver for dynamic page reflows
+    const resizeObserver = new ResizeObserver(() => {
+      buildPath();
+      updateTargetFromScroll();
+    });
+    resizeObserver.observe(parent);
+
+    const handleScroll = () => {
+      updateTargetFromScroll();
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
 
-    // Initial position: placed directly at the top of the line
-    updateParticle();
+    // Initial position on load
+    updateTargetFromScroll();
+    currentDist = targetDist;
+    renderParticle();
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
       resizeObserver.disconnect();
@@ -259,11 +249,12 @@ export default function CurvedRibbonBackground() {
       aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden"
     >
-      {/* Faint Big Architectural Gridlines (Rest of Webpage Background, Excludes Hero) */}
+      {/* Faint Architectural Gridlines */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0"
         style={{
-          backgroundImage: "linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px)",
+          backgroundImage:
+            "linear-gradient(to right, rgba(255, 255, 255, 0.032) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.032) 1px, transparent 1px)",
           backgroundSize: "96px 96px",
         }}
       />
@@ -276,7 +267,6 @@ export default function CurvedRibbonBackground() {
         preserveAspectRatio="none"
       >
         <defs>
-          {/* Luminous Line Glow Filter */}
           <filter id="routeGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
             <feGaussianBlur stdDeviation="8" result="blur" />
             <feMerge>
@@ -285,7 +275,6 @@ export default function CurvedRibbonBackground() {
             </feMerge>
           </filter>
 
-          {/* Continuous Luminous Gradient across the Journey */}
           <linearGradient id="routeGradientStroke" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#008688" stopOpacity="0.4" />
             <stop offset="15%" stopColor="#008688" stopOpacity="0.8" />
@@ -297,7 +286,7 @@ export default function CurvedRibbonBackground() {
           </linearGradient>
         </defs>
 
-        {/* Subtle Ambient Glow Halo along the journey */}
+        {/* Ambient Halo */}
         <path
           ref={pathGlowRef}
           fill="none"
@@ -307,7 +296,7 @@ export default function CurvedRibbonBackground() {
           filter="url(#routeGlowFilter)"
         />
 
-        {/* Core Luminous Journey Line flowing top to bottom through sections */}
+        {/* Core Luminous Journey Line */}
         <path
           ref={pathRef}
           fill="none"
@@ -326,7 +315,7 @@ export default function CurvedRibbonBackground() {
         />
       </svg>
 
-      {/* 2. Elevated Floating Dark Teal Particle (Z-20, Starts at top of line & stays visible on screen) */}
+      {/* 2. Elevated Floating Dark Teal Particle */}
       <svg
         ref={particleSvgRef}
         className="absolute inset-0 w-full h-full z-20 pointer-events-none"
@@ -334,7 +323,6 @@ export default function CurvedRibbonBackground() {
         preserveAspectRatio="none"
       >
         <defs>
-          {/* Subtle Dark Teal Ambient Glow */}
           <filter id="darkTealGlowFilter" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b1" />
             <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b2" />
@@ -345,7 +333,6 @@ export default function CurvedRibbonBackground() {
             </feMerge>
           </filter>
 
-          {/* Reduced Brightness Dark Teal Radial Gradient */}
           <radialGradient id="darkTealParticleAura">
             <stop offset="0%" stopColor="#00a8aa" stopOpacity="0.80" />
             <stop offset="35%" stopColor="#008688" stopOpacity="0.55" />
@@ -354,34 +341,31 @@ export default function CurvedRibbonBackground() {
           </radialGradient>
         </defs>
 
-        {/* Trailing subtle dark teal sparkles */}
+        {/* Trailing sparkles along the exact curve */}
         <circle
           ref={trail1Ref}
           r="3.5"
           fill="#008688"
           opacity="0"
-          className="transition-opacity duration-300"
+          className="transition-opacity duration-200"
         />
         <circle
           ref={trail2Ref}
           r="2.5"
           fill="#008688"
           opacity="0"
-          className="transition-opacity duration-300"
+          className="transition-opacity duration-200"
         />
 
-        {/* The Traveling Dark Teal Particle (Starts at top of line) */}
-        <g ref={particleGroupRef} className="transition-opacity duration-300">
-          {/* Soft Dark Teal Ambient Halo */}
+        {/* Traveling Dark Teal Particle */}
+        <g ref={particleGroupRef} className="transition-opacity duration-200">
           <circle r="22" fill="url(#darkTealParticleAura)" opacity="0.6" />
-          {/* Subtle Dark Teal Glow Corona */}
           <circle
             r="8.5"
             fill="#008688"
             opacity="0.8"
             filter="url(#darkTealGlowFilter)"
           />
-          {/* Solid Dark Teal Core with Gentle Highlight */}
           <circle r="5" fill="#008688" />
           <circle r="2" fill="#00b4b6" opacity="0.9" />
         </g>
