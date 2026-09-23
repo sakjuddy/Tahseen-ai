@@ -143,10 +143,10 @@ export default function CurvedRibbonBackground() {
         return;
       }
 
-      // Smooth interpolation towards target distance
+      // Smooth interpolation matching physical scrolling speed without rushing ahead
       const diff = targetDist - currentDist;
-      if (Math.abs(diff) > 0.1) {
-        currentDist += diff * 0.18;
+      if (Math.abs(diff) > 0.05) {
+        currentDist += diff * 0.08;
       } else {
         currentDist = targetDist;
       }
@@ -202,13 +202,12 @@ export default function CurvedRibbonBackground() {
       
       // Calculate how far down the user has scrolled through the page body
       const scrollDown = -pRect.top;
-      const maxScroll = Math.max(1, totalH - hWindow * 0.5);
+      const maxScroll = Math.max(1, totalH - hWindow);
 
-      // Smooth monotonic progress along the curve (0.0 to 1.0)
-      const rawProgress = (scrollDown + hWindow * 0.3) / maxScroll;
-      const progress = Math.max(0, Math.min(1, rawProgress));
+      // Direct 1:1 progression from top to bottom synced to scroll velocity
+      const scrollRatio = Math.max(0, Math.min(1, scrollDown / maxScroll));
 
-      targetDist = progress * pathLength;
+      targetDist = scrollRatio * pathLength;
 
       if (!isAnimating) {
         isAnimating = true;
